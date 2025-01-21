@@ -1,33 +1,38 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './ProjectsTile.module.scss';
 
-import picture_1 from '../../assets/images/project-tile-1.png';
-import picture_2 from '../../assets/images/project-tile-2.png';
-import picture_3 from '../../assets/images/project-tile-3.png';
-import picture_4 from '../../assets/images/project-tile-4.png';
+import picture_1 from '../../assets/images/project-tile-1.jpg';
+import picture_2 from '../../assets/images/project-tile-2.jpg';
+import picture_3 from '../../assets/images/project-tile-3.jpg';
+import picture_4 from '../../assets/images/project-tile-4.jpg';
+
+import picture_1x2 from '../../assets/images/project-tile-1-x2.jpg';
+import picture_2x2 from '../../assets/images/project-tile-2-x2.jpg';
+import picture_3x2 from '../../assets/images/project-tile-3-x2.jpg';
+import picture_4x2 from '../../assets/images/project-tile-4-x2.jpg';
 
 const items = [
   {
     id: 1,
-    picture: picture_1,
+    picture: [picture_1, picture_1x2],
     src: '#',
     title: 'WEB приложения / <br>Сайты',
   },
   {
     id: 2,
-    picture: picture_2,
+    picture: [picture_2, picture_2x2],
     src: '#',
     title: 'IOS / ANDROID / <br>PC',
   },
   {
     id: 3,
-    picture: picture_3,
+    picture: [picture_3, picture_3x2],
     src: '#',
     title: 'VR / AR / <br>360° ПАНОРАМЫ',
   },
   {
     id: 4,
-    picture: picture_4,
+    picture: [picture_4, picture_4x2],
     src: '#',
     title: 'ВИЗУАЛИЗАЦИИ / <br>АНИМАЦИИ',
   },
@@ -36,6 +41,7 @@ const items = [
 function ProjectsTile() {
   const animationRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1440);
 
   const handleMouseEnter = (index) => {
     setHoveredIndex(index); // Устанавливаем индекс при наведении мыши
@@ -43,6 +49,10 @@ function ProjectsTile() {
 
   const handleMouseLeave = (index) => {
     setHoveredIndex(null); // Убираем активный индекс
+  };
+
+  const updateScreenSize = () => {
+    setIsDesktop(window.innerWidth > 1440);
   };
 
   // Функция сброса и перезапуска анимации перелистывания
@@ -78,13 +88,20 @@ function ProjectsTile() {
     };
   }, []);
 
+  useEffect(() => {
+    window.addEventListener('resize', updateScreenSize);
+    return () => {
+      window.removeEventListener('resize', updateScreenSize);
+    };
+  }, []);
+
   return (
     <section className={styles.ProjectsTile}>
       <div className={styles.ProjectsTile__container}>
         <div className={`${styles.ProjectsTile__layer} ${styles.ProjectsTile__layer_bot}`}>
           <div ref={animationRef} className={`${styles.ProjectsTile__items} ${styles.animate}`}>
             {items.map(({ id, picture, src, title }) => (
-              <div className={styles.ProjectsTile__item} style={{ backgroundImage: `url(${picture})` }} key={id}>
+              <div className={styles.ProjectsTile__item} style={{ backgroundImage: `url(${isDesktop ? picture[1] : picture[0]})` }} key={id}>
                 <a className={styles.ProjectsTile__link} href={src}>
                   <div className={styles.ProjectsTile__text}>
                     <div className={styles.ProjectsTile__num}>{String(id).padStart(2, '0')}</div>
@@ -97,7 +114,7 @@ function ProjectsTile() {
         </div>
         <div className={`${styles.ProjectsTile__images} ${hoveredIndex !== null ? `${styles[`active${hoveredIndex + 1}`]}` : ''}`}>
           {items.map(({ id }, index) => (
-            <div className={styles.ProjectsTile__image} key={id} style={{ backgroundImage: `url(${items[index].picture})` }}></div>
+            <div className={styles.ProjectsTile__image} key={id} style={{ backgroundImage: `url(${isDesktop ? items[index].picture[1] : items[index].picture[0]})` }}></div>
           ))}
         </div>
 
