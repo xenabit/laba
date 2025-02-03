@@ -48,8 +48,9 @@ const App = () => {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Footer />
-          <CookieAgreement />
         </div>
+
+        <CookieAgreement />
       </div>
     </>
   );
