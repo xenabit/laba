@@ -3,9 +3,9 @@
 .Text {
   $s: &;
   @include containerMob;
+  margin-top: rem(80);
+  margin-bottom: rem(80);
   background-color: var(--prime-1);
-  padding-top: rem(80);
-  padding-bottom: rem(80);
   font-weight: var(--fw-light);
   font-family: var(--font-sec);
 
@@ -37,8 +37,8 @@
   }
 
   @media all and (min-width: $bp0) {
-    padding-top: rem(160);
-    padding-bottom: rem(160);
+    margin-top: rem(160);
+    margin-bottom: rem(160);
 
     &__title {
       font-size: clamp(rem(16), 1vw, rem(32));
