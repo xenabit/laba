@@ -58,18 +58,23 @@
     display: none;
   }
 
+  &__render {
+    position: relative;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAgMAAAAOFJJnAAAACVBMVEX6+vrn5+f09PSMzk0VAAAAGklEQVQY02MIYAADVoYECIOTYSQDWCDAgwUA204BfdYq8A4AAAAASUVORK5CYII=);
+    background-size: 15px;
+    overflow: hidden;
+  }
+
   &__map {
+    opacity: 1;
     filter: grayscale(90%) contrast(80%) invert(100%) hue-rotate(20deg);
+    transition: 0.2s opacity;
+    width: 100%;
     height: 60vh;
     max-height: rem(482);
-    overflow: hidden;
 
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
+    &.hide {
+      opacity: 0;
     }
   }
 
