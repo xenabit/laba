@@ -78,19 +78,23 @@ class YandexMap extends Component {
 
             // Добавляем метки на карту
             this.props.points.forEach((point) => {
-              pointsCol.add(new ymaps.Placemark(point.coords, point.options));
+              // Настройка пользовательской иконки из props.icon
+              const customIconOptions = {
+                iconLayout: 'default#image',
+                iconImageHref: this.props.icon, // Используем переданный через props путь к иконке
+                iconImageSize: [48, 48], // Размер иконки (ширина, высота)
+                iconImageOffset: [-24, -48], // Смещение иконки относительно координат
+              };
+
+              // Создаем Placemark с настроенными опциями
+              pointsCol.add(new ymaps.Placemark(point.coords, point.options, customIconOptions));
             });
 
             // Добавляем коллекцию меток на карту
             this._ymap.geoObjects.add(pointsCol);
 
-            // Устанавливаем границы карты на основе меток
-            // Используем checkZoomRange: false, чтобы не менять заданный zoom
-            this._ymap.setBounds(pointsCol.getBounds(), {
-              checkZoomRange: false, // Отключаем автоматическую корректировку zoom
-            });
-
             // Явно устанавливаем переданный zoom
+            this._ymap.setBounds(pointsCol.getBounds(), { checkZoomRange: false });
             this._ymap.setZoom(this.props.zoom);
 
             // Убираем класс "hide" после загрузки карты
@@ -102,7 +106,7 @@ class YandexMap extends Component {
         } else if (iterations-- === 0) {
           clearInterval(interval); // Прекращаем попытки загрузки, если достигнут лимит
         }
-      }, 100); // Проверяем каждые 100 миллисекунд
+      }, 100);
     };
 
     // Добавляем скрипт в DOM
@@ -110,7 +114,7 @@ class YandexMap extends Component {
   }
 
   render() {
-    return <div id="b-map" className={`hide ${this.props.additionalClass || ''}`} ref={this.mapRef} style={{ width: '100%', height: '500px' }}></div>;
+    return <div className={`hide ${this.props.additionalClass || ''}`} ref={this.mapRef}></div>;
   }
 }
 

@@ -1,5 +1,5 @@
 import styles from './Contacts.module.scss';
-import map from '../../assets/images/contacts.png';
+import geoPoint from '../../assets/images/geo-point.svg';
 import YandexMap from './YandexMap';
 
 // // Пример использования компонента
@@ -35,7 +35,13 @@ export default function Contacts() {
       </div>
       <div className={styles.Contacts__render}>
         <div>
-          <YandexMap center={[55.753544, 37.621211]} zoom={11.5} points={mapPoints} additionalClass={styles.Contacts__map} />
+          <YandexMap
+            center={[55.753544, 37.621211]}
+            zoom={11}
+            points={mapPoints}
+            additionalClass={styles.Contacts__map}
+            icon={geoPoint} // Передаем SVG-иконку
+          />
         </div>
       </div>
     </section>
