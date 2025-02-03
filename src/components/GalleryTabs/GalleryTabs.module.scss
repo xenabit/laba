@@ -195,11 +195,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: rem(110) 0 rem(93) 0;
+      padding: rem(50) 0 rem(73) 0;
     }
 
     &__filters ul {
       @include containerDesk;
+
+      button {
+        padding: rem(16) rem(40);
+      }
     }
 
     &__title {
@@ -215,8 +219,10 @@
 
       a {
         transition: 0.3s;
-        font-size: rem(24);
+        font-weight: var(--fw-light);
+        font-size: rem(27);
         line-height: rem(24);
+        font-family: var(--font-sec);
         text-align: right;
 
         &:hover {
