@@ -2,9 +2,10 @@
 
 .AboutList {
   $s: &;
+  margin-bottom: rem(135);
 
   &__title {
-    padding: rem(80) rem(16) rem(48) rem(24);
+    padding: rem(80) rem(16) rem(24) rem(24);
     font-size: rem(40);
     line-height: rem(48);
   }
@@ -46,7 +47,9 @@
     margin-bottom: rem(24);
     transform: translateX(-100%);
     opacity: 0;
-    transition: opacity 0.6s ease-in-out 0.5s, transform 2s ease-in-out;
+    transition:
+      opacity 0.6s ease-in-out 0.5s,
+      transform 2s ease-in-out;
 
     &.animate {
       opacity: 1;

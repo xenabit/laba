@@ -7,6 +7,5 @@
   "bracketSpacing": true,
   "arrowParens": "always",
   "bracketSameLine": false,
-  "printWidth": 200,
-  "plugins": ["prettier-plugin-css-order"]
+  "printWidth": 200
 }
