@@ -20,10 +20,10 @@ function Header() {
   }, [location.pathname]);
 
   // // Хук для блокировки/разблокировки скролла страницы
-  // useEffect(() => {
-  //   document.body.style.overflow = isActive ? 'hidden' : '';
-  //   return () => (document.body.style.overflow = '');
-  // }, [isActive]);
+  useEffect(() => {
+    document.body.style.overflow = isActive ? 'hidden' : '';
+    return () => (document.body.style.overflow = '');
+  }, [isActive]);
 
   useEffect(() => {
     const showAnim = gsap.fromTo(
