@@ -8,7 +8,9 @@ function Intro2() {
         <div className={styles.Intro2__laba}>
           <img loading="lazy" src={labaBlack}></img>
         </div>
-        <div className={styles.Intro2__desc}>Создаем уникальные цифровые продукты</div>
+        <div className={styles.Intro2__desc}>
+          Создаем&nbsp;уникальные<br></br>цифровые продукты
+        </div>
       </div>
     </section>
   );
