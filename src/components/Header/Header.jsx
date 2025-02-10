@@ -106,9 +106,9 @@ function Header() {
             </ul>
           </nav>
           <ul className={styles.Header__links}>
-            {/* <li>
-            <a href="#">Реквизиты</a>
-          </li> */}
+            <li>
+              <a href="#">Реквизиты</a>
+            </li>
             <li>
               <a href="#">Презентация</a>
             </li>
@@ -118,7 +118,7 @@ function Header() {
               mail@marksgroup.ru
             </a>
             <a href="tel:+74951201226" className={styles.Header__tel}>
-              +7 (495) 120-12-26
+              тел. +7 (495) 120-12-26
             </a>
             <a href="https://yandex.ru/profile/1116551737" target="_black">
               г. Москва ул. 3-я Ямского Поля д. 20 с1

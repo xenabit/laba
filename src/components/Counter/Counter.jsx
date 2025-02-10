@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useInView } from 'react-intersection-observer';
+
 import PropTypes from 'prop-types';
 import video from '../../assets/videos/intro-cover.mp4';
+import img from '../../assets/images/counter-img.jpg';
 import styles from './Counter.module.scss';
 
 // Анимация числа
@@ -116,12 +118,17 @@ const Counter = () => {
             <p>Лет на&nbsp;рынке 3D&nbsp;графики</p>
           </div>
         </div>
-        <div className={styles.Counter__video}>
+        <div className={styles.Counter__picture}>
+          <picture>
+            <img src={img}></img>
+          </picture>
+        </div>
+        {/* <div className={styles.Counter__video}>
           <video preload="auto" autoPlay loop muted>
             <source src={video} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-        </div>
+        </div> */}
       </div>
     </section>
   );
