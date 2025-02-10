@@ -32,7 +32,7 @@
     font-weight: bold;
     user-select: none;
     pointer-events: none;
-    animation: animate 7.5s linear infinite;
+    animation: circle-text-animate 7.5s linear infinite;
 
     $move: rem(95);
 
@@ -47,7 +47,7 @@
     }
   }
 
-  @keyframes animate {
+  @keyframes circle-text-animate {
     0% {
       transform: rotate(360deg);
     }

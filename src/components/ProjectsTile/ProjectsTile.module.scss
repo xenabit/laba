@@ -30,25 +30,25 @@
       #{$s}__item {
         &:nth-child(2) {
           animation:
-            slide-2-left $animation-duration ease-in-out 0s 1 forwards,
-            slide-2-right 4.2s ease-in-out 9.9s 1 forwards;
+            projects-slide-2-left 1.2s ease-in-out 0s 1 forwards,
+            projects-slide-2-right 1.68s ease-in-out 3.96s 1 forwards;
         }
 
         &:nth-child(3) {
           animation:
-            slide-3-prepare 1.5s ease-out 1.5s 1 forwards,
-            slide-3-left $animation-duration ease-in-out 3s 1 forwards,
-            slide-3-right 3.8s ease-in-out 9.6s 1 forwards;
+            projects-slide-3-prepare 0.6s ease-out 0.6s 1 forwards,
+            projects-slide-3-left 1.2s ease-in-out 1.2s 1 forwards,
+            projects-slide-3-right 1.52s ease-in-out 3.84s 1 forwards;
         }
 
         &:nth-child(4) {
           animation:
-            slide-4-prepare 1.5s ease-out 4.5s 1 forwards,
-            slide-4-left $animation-duration ease-in-out 6s 1 forwards,
-            slide-4-right 3.3s ease-in-out 9.3s 1 forwards;
+            projects-slide-4-prepare 0.6s ease-out 1.8s 1 forwards,
+            projects-slide-4-left 1.2s ease-in-out 2.4s 1 forwards,
+            projects-slide-4-right 1.32s ease-in-out 3.72s 1 forwards;
         }
 
-        @keyframes slide-2-left {
+        @keyframes projects-slide-2-left {
           0% {
             left: $slide-width;
             z-index: 30;
@@ -59,7 +59,7 @@
           }
         }
 
-        @keyframes slide-2-right {
+        @keyframes projects-slide-2-right {
           0% {
             left: 0;
             z-index: 30;
@@ -70,7 +70,7 @@
           }
         }
 
-        @keyframes slide-3-prepare {
+        @keyframes projects-slide-3-prepare {
           0% {
             left: 100vw;
             z-index: 40;
@@ -81,7 +81,7 @@
           }
         }
 
-        @keyframes slide-3-left {
+        @keyframes projects-slide-3-left {
           0% {
             left: $slide-width;
             z-index: 40;
@@ -92,7 +92,7 @@
           }
         }
 
-        @keyframes slide-3-right {
+        @keyframes projects-slide-3-right {
           0% {
             left: 0;
             z-index: 40;
@@ -103,7 +103,7 @@
           }
         }
 
-        @keyframes slide-4-prepare {
+        @keyframes projects-slide-4-prepare {
           0% {
             left: 100vw;
             z-index: 50;
@@ -114,7 +114,7 @@
           }
         }
 
-        @keyframes slide-4-left {
+        @keyframes projects-slide-4-left {
           0% {
             left: $slide-width;
             z-index: 50;
@@ -125,7 +125,7 @@
           }
         }
 
-        @keyframes slide-4-right {
+        @keyframes projects-slide-4-right {
           0% {
             left: 0;
             z-index: 50;
@@ -210,30 +210,30 @@
 
   @media all and (min-width: $bp3) {
     $slide-width: 61vw;
-    $animation-duration: 3.5s;
+    $animation-duration: 2s;
 
     &__items {
       &.animate {
         #{$s}__item {
           &:nth-child(2) {
             animation:
-              slide-2-left $animation-duration ease-in-out 0s 1 forwards,
-              slide-2-right 3.5s ease-in-out 10.5s 1 forwards;
+              projects-slide-2-left $animation-duration ease-in-out 0s 1 forwards,
+              projects-slide-2-right 1s ease-in-out 4.5s 1 forwards;
           }
 
           &:nth-child(3) {
             animation:
-              slide-3-left $animation-duration ease-in-out 3.5s 1 forwards,
-              slide-3-right 3.5s ease-in-out 10.5s 1 forwards;
+              projects-slide-3-left $animation-duration ease-in-out 1s 1 forwards,
+              projects-slide-3-right 1s ease-in-out 4.5s 1 forwards;
           }
 
           &:nth-child(4) {
             animation:
-              slide-4-left $animation-duration ease-in-out 7s 1 forwards,
-              slide-4-right 3.5s ease-in-out 10.5s 1 forwards;
+              projects-slide-4-left $animation-duration ease-in-out 2s 1 forwards,
+              projects-slide-4-right 1s ease-in-out 4.5s 1 forwards;
           }
 
-          @keyframes slide-2-left {
+          @keyframes projects-slide-2-left {
             0% {
               left: $slide-width;
             }
@@ -242,7 +242,7 @@
             }
           }
 
-          @keyframes slide-2-right {
+          @keyframes projects-slide-2-right {
             0% {
               left: 0;
               z-index: 30;
@@ -253,7 +253,7 @@
             }
           }
 
-          @keyframes slide-3-left {
+          @keyframes projects-slide-3-left {
             0% {
               left: calc($slide-width + 13vw);
             }
@@ -262,7 +262,7 @@
             }
           }
 
-          @keyframes slide-3-right {
+          @keyframes projects-slide-3-right {
             0% {
               left: 0;
             }
@@ -271,7 +271,7 @@
             }
           }
 
-          @keyframes slide-4-left {
+          @keyframes projects-slide-4-left {
             0% {
               left: calc($slide-width + 26vw);
             }
@@ -280,7 +280,7 @@
             }
           }
 
-          @keyframes slide-4-right {
+          @keyframes projects-slide-4-right {
             0% {
               left: 0;
             }
@@ -376,7 +376,7 @@
       opacity: 1;
       z-index: 5;
       transition:
-        clip-path 0.8s ease,
+        clip-path 0.3s 0.1s ease,
         z-index 1s 0.2s ease;
       will-change: clip-path;
       background-size: cover;
@@ -409,7 +409,7 @@
         z-index: 10;
         clip-path: inset(0 0 0 0);
         transition:
-          clip-path 0.8s,
+          clip-path 0.3s,
           z-index 0s 0.1s;
       }
     }

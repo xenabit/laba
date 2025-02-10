@@ -76,7 +76,7 @@ function ProjectsTile() {
 
     let timer;
     if (window.innerWidth <= 1280) {
-      timer = setInterval(resetAnimation, 14200);
+      timer = setInterval(resetAnimation, 6000);
     }
 
     return () => {

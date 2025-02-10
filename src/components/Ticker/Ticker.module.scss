@@ -20,10 +20,10 @@
     text-transform: uppercase;
     white-space: nowrap;
     list-style-type: disc;
-    animation: TickerMarquee 35s linear infinite;
+    animation: ticker-marquee 20s linear infinite;
   }
 
-  @keyframes TickerMarquee {
+  @keyframes ticker-marquee {
     from {
       transform: translateX(0);
     }

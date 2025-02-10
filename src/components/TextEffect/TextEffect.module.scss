@@ -73,7 +73,7 @@
     div {
       display: flex;
       opacity: 0;
-      transition-duration: 3s;
+      transition-duration: 1s;
       width: 100%;
 
       span {
@@ -100,7 +100,7 @@
         transform: translateX(-100%);
 
         span {
-          transform: translateX(rem(42));
+          transform: translateX(rem(10));
           margin-left: auto;
         }
       }
@@ -118,7 +118,7 @@
   &__footnote {
     transform: translateX(100%);
     opacity: 0;
-    transition-duration: 3s;
+    transition-duration: 1.5s;
     margin-left: auto;
     width: 73%;
     font-weight: 300;
@@ -132,7 +132,7 @@
     position: absolute;
     opacity: 0;
     z-index: 30;
-    transition-duration: 1s;
+    transition-duration: 1.5s;
 
     img {
       display: block;
@@ -179,13 +179,13 @@
       div {
         transform: none;
         opacity: 1;
-        transition-duration: 3s;
+        transition-duration: 1.5s;
       }
     }
 
     #{$s}__icon {
       opacity: 1;
-      transition-duration: 3s;
+      transition-duration: 1s;
 
       &:nth-child(1) {
         top: -18%;
@@ -197,8 +197,8 @@
       &:nth-child(2) {
         top: 72%;
         left: 4vw;
-        transition-delay: 0.5s;
-        transition-duration: 2.5s;
+        transition-delay: 0.2s;
+        transition-duration: 1.5s;
         width: var(--circle-2-big);
         height: var(--circle-2-big);
       }
@@ -206,8 +206,8 @@
       &:nth-child(3) {
         top: 100%;
         left: 17vw;
-        transition-delay: 1s;
-        transition-duration: 2s;
+        transition-delay: 0.5s;
+        transition-duration: 1.3s;
         width: var(--circle-3-big);
         height: var(--circle-3-big);
       }

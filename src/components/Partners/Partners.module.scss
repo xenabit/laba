@@ -26,7 +26,7 @@
 
       span {
         display: inline-block;
-        transition: transform 2.5s ease-in-out;
+        transition: transform 1.5s ease-in-out;
       }
 
       &:nth-child(1) {
@@ -54,7 +54,7 @@
     top: 0;
     left: 0;
     transform: scale(1);
-    transition: 2.5s;
+    transition: 1.5s;
 
     &:nth-child(1) {
       top: 10%;
@@ -147,13 +147,13 @@
 
     &:nth-child(odd) #{$s}__track {
       transform: translateX(-80%);
-      transition: transform 2.5s ease-in-out;
+      transition: transform 1.5s ease-in-out;
       direction: rtl;
     }
 
     &:nth-child(even) #{$s}__track {
       transform: translateX(80%);
-      transition: transform 2.5s ease-in-out;
+      transition: transform 1.5s ease-in-out;
     }
   }
 
@@ -240,11 +240,11 @@
   &.animate {
     #{$s}__icon {
       &:first-child {
-        animation: partners-circle-scale 2.5s ease-in-out forwards;
+        animation: partners-circle-scale 1s ease-in-out forwards;
       }
 
       &:last-child {
-        animation: partners-circle-scale 1.5s ease-in-out 1s forwards;
+        animation: partners-circle-scale 1s ease-in-out 0.5s forwards;
       }
     }
 
@@ -254,25 +254,25 @@
       width: 100%;
 
       &:nth-child(1) {
-        animation: partners-entry-first 2.5s ease-in-out forwards;
+        animation: partners-entry-first 1.5s ease-in-out forwards;
       }
 
       &:nth-child(2) {
-        animation: partners-entry-second 2.5s ease-in-out forwards;
+        animation: partners-entry-second 1.5s ease-in-out forwards;
       }
     }
 
     #{$s}__row {
       &:nth-child(odd) #{$s}__track {
         animation:
-          partners-entry-first 2.5s ease-in-out forwards,
-          partners-scroll-first 40s linear 2.5s infinite;
+          partners-entry-first 1.5s ease-in-out backwards,
+          partners-scroll-first 10s linear 1.5s infinite;
       }
 
       &:nth-child(even) #{$s}__track {
         animation:
-          partners-entry-second 2.5s ease-in-out forwards,
-          partners-scroll-second 40s linear 2.5s infinite;
+          partners-entry-second 1.5s ease-in-out backwards,
+          partners-scroll-second 10s linear 1.5s infinite;
       }
     }
   }
