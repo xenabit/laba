@@ -64,6 +64,7 @@ const Counter = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1025);
+  const [showTextEffect, setShowTextEffect] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -101,13 +102,14 @@ const Counter = () => {
         },
       });
 
-      tl.to(modelsRef.current, { y: -330, duration: 1 }, 0);
+      tl.to(modelsRef.current, { y: -530, duration: 0.4 }, 0);
 
       tl.fromTo(pictureRef.current, { scale: 1 }, { scale: 2, duration: 0.4, ease: 'none' }, 0);
 
       tl.fromTo(pictureRef.current, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: 'none' }, 0.3);
 
       tl.fromTo(textRef.current, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power1.inOut' }, 0.3);
+
     }, sectionRef);
 
     return () => ctx.revert();
