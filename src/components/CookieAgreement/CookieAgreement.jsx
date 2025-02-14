@@ -3,12 +3,19 @@ import styles from './CookieAgreement.module.scss';
 
 function CookieAgreement() {
   const [isAgreed, setIsAgreed] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // Проверяем, есть ли уже согласие в localStorage
-    const agreement = localStorage.getItem('cookieAgreement');
-    if (agreement === 'true') {
-      setIsAgreed(true);
+    try {
+      // Проверяем, есть ли уже согласие в localStorage
+      const agreement = localStorage.getItem('cookieAgreement');
+      if (agreement === 'true') {
+        setIsAgreed(true);
+      }
+    } catch (error) {
+      console.error('Ошибка при доступе к localStorage:', error);
+    } finally {
+      setIsMounted(true);
     }
   }, []);
 
@@ -22,20 +29,29 @@ function CookieAgreement() {
   };
 
   const handleAgreement = () => {
-    // Сохраняем согласие в localStorage
-    localStorage.setItem('cookieAgreement', 'true');
-    setIsAgreed(true);
+    try {
+      // Сохраняем согласие в localStorage
+      localStorage.setItem('cookieAgreement', 'true');
+      setIsAgreed(true);
+    } catch (error) {
+      console.error('Ошибка при сохранении в localStorage:', error);
+    }
   };
 
+  if (!isMounted) {
+    return null;
+  }
+
   if (isAgreed) {
-    // Если согласие уже дано, не показываем компонент
     return null;
   }
 
   return (
     <section className={styles.CookieAgreement}>
       <div className={styles.CookieAgreement__container}>
-        <div className={styles.CookieAgreement__text}>OOO «Media» использует файлы cookie и инструменты аналитики на сайте</div>
+        <div className={styles.CookieAgreement__text}>
+          OOO «Media» использует файлы cookie и инструменты аналитики на сайте
+        </div>
         <div onMouseMove={handleMouseMove} onClick={handleAgreement} className={styles.CookieAgreement__button}>
           <span>Понятно</span>
         </div>
