@@ -37,7 +37,7 @@
     &_first {
       position: relative;
       z-index: 20;
-      background-color: var(--prime-1);
+      background-color: transparent;
     }
 
     &_secondary {
@@ -49,7 +49,6 @@
       #{$s}__text {
         div {
           opacity: 1;
-
           span {
             background: linear-gradient(134.58deg, #73ccd2 14.79%, #9fcaf1 44.57%, #f8b7fa 100.22%, #deafdf 124.62%);
             -webkit-background-clip: text;
@@ -73,7 +72,7 @@
     div {
       display: flex;
       opacity: 0;
-      transition-duration: 1s;
+      transition: transform 1s ease, opacity 1s ease;
       width: 100%;
 
       span {

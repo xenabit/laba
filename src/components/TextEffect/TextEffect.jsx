@@ -10,13 +10,39 @@ const TextEffect = () => {
   const heroRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
+  useEffect(() => {
+    if (!heroRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.4 }
+    );
+    const element = heroRef.current;
+    observer.observe(element);
+    return () => {
+      observer.unobserve(element);
+    };
+  }, []);
+
+ useEffect(() => {
+    if (!heroRef.current) return;
+    if (isVisible) {
+      heroRef.current.classList.remove(styles.animate);
+      void heroRef.current.offsetWidth;
+      setTimeout(() => {
+        heroRef.current.classList.add(styles.animate);
+      }, 150);
+    } else {
+      heroRef.current.classList.remove(styles.animate);
+    }
+  }, [isVisible]);
+
   const onMouseMove = (e) => {
     if (!isVisible) return;
-
     const { clientX, clientY } = e;
     const x = Math.round((clientX / window.innerWidth) * 100);
     const y = Math.round((clientY / window.innerHeight) * 100);
-
     if (heroRef.current) {
       heroRef.current.style.setProperty('--x', `${x}%`);
       heroRef.current.style.setProperty('--y', `${y}%`);
@@ -24,63 +50,30 @@ const TextEffect = () => {
   };
 
   useEffect(() => {
-    if (!heroRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.4,
-      }
-    );
-
-    observer.observe(heroRef.current);
-
     const handleMouseMove = _.throttle(onMouseMove, 50);
     window.addEventListener('mousemove', handleMouseMove);
-
     return () => {
-      if (heroRef.current) {
-        observer.unobserve(heroRef.current);
-      }
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [isVisible]);
+  }, []);
 
   return (
-    <section ref={heroRef} className={`${styles.TextEffect} ${isVisible ? styles.animate : ''}`}>
+    <section ref={heroRef} className={styles.TextEffect}>
       <div className={styles.TextEffect__wrapper}>
         <div className={`${styles.TextEffect__layer} ${styles.TextEffect__layer_first}`}>
           <div className={styles.TextEffect__text}>
-            <div>
-              <span>Вдохновляющие</span>
-            </div>
-            <div>
-              <span>проекты для</span>
-            </div>
-            <div>
-              <span>амбициозных</span>
-            </div>
-            <div>
-              <span>заказчиков</span>
-            </div>
+            <div><span>Вдохновляющие</span></div>
+            <div><span>проекты для</span></div>
+            <div><span>амбициозных</span></div>
+            <div><span>заказчиков</span></div>
           </div>
         </div>
         <div className={`${styles.TextEffect__layer} ${styles.TextEffect__layer_secondary}`} aria-hidden="true">
           <div className={styles.TextEffect__text}>
-            <div>
-              <span>Вдохновляющие</span>
-            </div>
-            <div>
-              <span>проекты для</span>
-            </div>
-            <div>
-              <span>амбициозных</span>
-            </div>
-            <div>
-              <span>заказчиков</span>
-            </div>
+            <div><span>Вдохновляющие</span></div>
+            <div><span>проекты для</span></div>
+            <div><span>амбициозных</span></div>
+            <div><span>заказчиков</span></div>
           </div>
         </div>
         <div className={styles.TextEffect__footnote}>
@@ -88,13 +81,13 @@ const TextEffect = () => {
         </div>
         <div className={styles.TextEffect__icons}>
           <div className={styles.TextEffect__icon}>
-            <img loading="lazy" src={icon1} />
+            <img loading="lazy" src={icon1} alt="Icon 1" />
           </div>
           <div className={styles.TextEffect__icon}>
-            <img loading="lazy" src={icon2} />
+            <img loading="lazy" src={icon2} alt="Icon 2" />
           </div>
           <div className={styles.TextEffect__icon}>
-            <img loading="lazy" src={icon3} />
+            <img loading="lazy" src={icon3} alt="Icon 3" />
           </div>
         </div>
       </div>
