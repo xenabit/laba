@@ -1,5 +1,3 @@
-@import '../../variables.scss';
-
 .ProjectsGrid {
   $s: &;
   z-index: 101;
@@ -188,7 +186,9 @@
       mask-repeat: no-repeat;
       mask-size: rem(150);
       color: var(--prime-4);
-      cursor: url('../../assets/images/projects-ico-2.svg') 13 20, auto;
+      cursor:
+        url('../../assets/images/projects-ico-2.svg') 13 20,
+        auto;
       mix-blend-mode: difference;
       transition: mask-size 1s;
       z-index: 10;
@@ -206,10 +206,14 @@
 
       #{$s}__item {
         #{$s}__title {
-          transition: transform 1s ease-in-out, opacity 2s ease;
+          transition:
+            transform 1s ease-in-out,
+            opacity 2s ease;
         }
         #{$s}__preview {
-          transition: transform 1s ease-in-out, opacity 2s ease;
+          transition:
+            transform 1s ease-in-out,
+            opacity 2s ease;
         }
 
         &:first-child {
@@ -271,10 +275,14 @@
       &.animate {
         #{$s}__item {
           #{$s}__title {
-            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+            transition:
+              transform 0.8s ease-in-out,
+              opacity 0.8s ease-in-out;
           }
           #{$s}__preview {
-            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+            transition:
+              transform 0.8s ease-in-out,
+              opacity 0.8s ease-in-out;
           }
 
           &:first-child {
