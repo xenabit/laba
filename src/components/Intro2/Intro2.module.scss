@@ -77,7 +77,7 @@
     &__container {
       flex-direction: row;
       align-items: flex-end;
-      gap: 142px;
+      gap: rem(142);
       width: 100%;
     }
 
@@ -87,7 +87,7 @@
     }
 
     &__desc {
-      transform: translateY(10px);
+      transform: translateY(rem(10));
       width: 51%;
       font-size: rem(48);
       line-height: rem(56);

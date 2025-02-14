@@ -24,7 +24,7 @@
     filter: brightness(0.6);
     transition: filter 0.3s ease; // Плавное затемнение
     margin: 0 auto;
-    border-radius: 16px;
+    border-radius: rem(16);
     aspect-ratio: 1 / 1.87;
     width: 70vw;
     height: auto;
@@ -40,14 +40,14 @@
     transition:
       opacity 0.5s ease,
       height 0.2s 0.5s ease;
-    border-radius: 33px;
+    border-radius: rem(33);
     background-color: var(--prime-2);
-    padding: 20px 30px;
+    padding: rem(20) rem(30);
     width: max-content;
-    height: 58px;
+    height: rem(58);
     color: white;
     font-weight: var(--fw-light);
-    font-size: 16px;
+    font-size: rem(16);
     line-height: 1.1;
     font-family: var(--font-sec);
 

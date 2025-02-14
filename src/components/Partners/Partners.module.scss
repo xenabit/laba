@@ -2,8 +2,8 @@
 
 .Partners {
   $s: &;
-  --circle-1: 42px;
-  --circle-2: 23px;
+  --circle-1: 2.265rem;
+  --circle-2: 1.437rem;
   position: relative;
   margin: rem(32) 0 rem(80) 0;
 
@@ -13,11 +13,11 @@
     flex-direction: column;
     z-index: 10;
     margin: 0 auto;
-    margin-bottom: 85px;
-    padding: 0 16px;
+    margin-bottom: rem(85);
+    padding: 0 rem(16);
     width: max-content;
     font-weight: var(--fw-medium);
-    font-size: clamp(48px, 12.8vw, 84px);
+    font-size: clamp(rem(48), 12.8vw, rem(84));
     line-height: 1;
     text-align: left;
 
@@ -34,7 +34,7 @@
         transform: translateX(-80%);
 
         span {
-          transform: translateX(-24px);
+          transform: translateX(rem(-24));
         }
       }
 
@@ -43,7 +43,7 @@
         transform: translateX(80%);
 
         span {
-          transform: translateX(20px);
+          transform: translateX(rem(20));
         }
       }
     }
@@ -306,18 +306,18 @@
     margin: rem(180) 0 rem(54) 0;
 
     &__text {
-      margin-bottom: 50px;
+      margin-bottom: rem(50);
       padding: 0;
-      font-size: clamp(84px, 8vw, 128px);
+      font-size: clamp(rem(84), 8vw, rem(128));
       text-transform: uppercase;
 
       div {
         &:nth-child(1) span {
-          transform: translateX(-60px);
+          transform: translateX(rem(-60));
         }
 
         &:nth-child(2) span {
-          transform: translateX(30px);
+          transform: translateX(rem(30));
         }
       }
     }
@@ -348,13 +348,13 @@
     margin: rem(220) 0 rem(54) 0;
 
     &__text {
-      margin-bottom: 130px;
-      font-size: clamp(128px, 8vw, 211px);
+      margin-bottom: rem(130);
+      font-size: clamp(rem(128), 8vw, rem(211));
       line-height: 1.1;
 
       div {
         &:nth-child(2) span {
-          transform: translateX(80px);
+          transform: translateX(rem(80));
         }
       }
     }

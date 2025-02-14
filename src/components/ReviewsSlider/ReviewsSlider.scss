@@ -23,7 +23,7 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    padding: 40px 24px;
+    padding: rem(40) rem(24);
     height: 100%;
   }
 
@@ -67,8 +67,8 @@
 
   &__picture {
     flex-shrink: 0;
-    width: 80px;
-    height: 80px;
+    width: rem(80);
+    height: rem(80);
 
     &:nth-child(n + 3) {
       display: none;
@@ -79,20 +79,20 @@
     }
 
     &:nth-child(2) {
-      transform: translateX(-24px);
+      transform: translateX(rem(-24));
       z-index: 40;
     }
 
     &:nth-child(3) {
-      transform: translateX(-48px);
+      transform: translateX(rem(-48));
       z-index: 30;
     }
     &:nth-child(4) {
-      transform: translateX(-72px);
+      transform: translateX(rem(-72));
       z-index: 20;
     }
     &:nth-child(5) {
-      transform: translateX(-96px);
+      transform: translateX(rem(-96));
       z-index: 10;
     }
 
@@ -145,7 +145,7 @@
     }
 
     &__box {
-      padding: 80px 130px;
+      padding: rem(80) rem(130);
     }
 
     &__pagination {
@@ -216,7 +216,7 @@
     &__footer {
       display: flex;
       justify-content: space-between;
-      gap: 40px;
+      gap: rem(40);
     }
   }
 }

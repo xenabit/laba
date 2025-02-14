@@ -15,9 +15,9 @@
 .TextEffect {
   $s: &;
 
-  --circle-1-big: 44px;
-  --circle-2-big: 36px;
-  --circle-3-big: 22px;
+  --circle-1-big: 2.75rem;
+  --circle-2-big: 2.25rem;
+  --circle-3-big: 1.375rem;
   --circle-1-small: calc(var(--circle-1-big) * 0.3);
   --circle-2-small: calc(var(--circle-2-big) * 0.3);
   --circle-3-small: calc(var(--circle-3-big) * 0.3);
@@ -72,7 +72,9 @@
     div {
       display: flex;
       opacity: 0;
-      transition: transform 1s ease, opacity 1s ease;
+      transition:
+        transform 1s ease,
+        opacity 1s ease;
       width: 100%;
 
       span {
@@ -219,10 +221,9 @@
   }
 
   @media all and (min-width: $bp4) {
-    --circle-1-big: 80px;
-    --circle-2-big: 65px;
-    --circle-3-big: 40px;
-
+    --circle-1-big: 5rem;
+    --circle-2-big: 4.0625rem;
+    --circle-3-big: 2.5rem;
     &__wrapper {
       margin: rem(156) 0 rem(150) 0;
     }
@@ -260,9 +261,9 @@
   }
 
   @media all and (min-width: $bp1) {
-    --circle-1-big: clamp(122px, 7.6vw, 244px);
-    --circle-2-big: clamp(100px, 6.25vw, 200px);
-    --circle-3-big: clamp(60px, 3.75vw, 120px);
+    --circle-1-big: clamp(7.625rem, 7.6vw, 15.25rem);
+    --circle-2-big: clamp(6.25rem, 6.25vw, 12.5rem);
+    --circle-3-big: clamp(3.75rem, 3.75vw, 7.5rem);
 
     &__wrapper {
       margin: rem(228) 0 rem(200) 0;
