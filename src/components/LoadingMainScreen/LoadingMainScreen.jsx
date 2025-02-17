@@ -1,29 +1,111 @@
+import { useEffect } from 'react';
 import styles from './LoadingMainScreen.module.scss';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
+
+const Spot = () => (
+  <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <motion.path
+      initial={{ fill: '#FFFFFF' }}
+      animate={{ fill: '#2f3137' }}
+      exit={{ fill: '#27292F' }}
+      transition={{
+        type: 'spring',
+        stiffness: 384,
+        damping: 12,
+        mass: 1,
+      }}
+      d="M30.1097 15.548C30.1097 23.5924 23.5885 30.1136 15.5441 30.1136C7.49977 30.1136 0.978516 23.5924 0.978516 15.548C0.978516 7.50367 7.49977 0.982422 15.5441 0.982422C23.5885 0.982422 30.1097 7.50367 30.1097 15.548Z"
+    />
+  </svg>
+);
 
 const LetterL = () => (
   <svg width="137" height="155" viewBox="0 0 137 155" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M22.5532 0V131.56H136.259V154.113H0V0H22.5532Z" fill="#27292F" />
+    <motion.path
+      initial={{ fill: '#FFFFFF' }}
+      animate={{ fill: '#2f3137' }}
+      exit={{ fill: '#27292F' }}
+      transition={{
+        type: 'spring',
+        stiffness: 384,
+        damping: 12,
+        mass: 1,
+      }}
+      d="M22.5532 0V131.56H136.259V154.113H0V0H22.5532Z"
+    />
   </svg>
 );
+
 const LetterA = () => (
   <svg width="186" height="155" viewBox="0 0 186 155" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M185.177 154.113H160.273L139.777 114.044H45.2318L24.7359 154.113H0.0527344L77.6285 0H107.601L185.177 154.113ZM92.6147 22.6767L46.3337 111.842H138.675L92.6147 22.6767Z" fill="#27292F" />
+    <motion.path
+      initial={{ fill: '#FFFFFF' }}
+      animate={{ fill: '#2f3137' }}
+      exit={{ fill: '#27292F' }}
+      transition={{
+        type: 'spring',
+        stiffness: 384,
+        damping: 12,
+        mass: 1,
+      }}
+      d="M185.177 154.113H160.273L139.777 114.044H45.2318L24.7359 154.113H0.0527344L77.6285 0H107.601L185.177 154.113ZM92.6147 22.6767L46.3337 111.842H138.675L92.6147 22.6767Z"
+    />
   </svg>
 );
+
 const LetterB = () => (
   <svg width="162" height="155" viewBox="0 0 162 155" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
+    <motion.path
+      initial={{ fill: '#FFFFFF' }}
+      animate={{ fill: '#2f3137' }}
+      exit={{ fill: '#27292F' }}
+      transition={{
+        type: 'spring',
+        stiffness: 384,
+        damping: 12,
+        mass: 1,
+      }}
       d="M122.207 75.5156C147.997 78.818 161.663 94.2294 161.663 114.484C161.663 137.601 143.368 154.113 111.185 154.113H0.97168V0H106.336C138.298 0 155.05 16.0718 155.05 38.5284C155.05 57.022 143.809 71.1124 122.207 75.5156ZM101.487 21.3557H24.4646V74.8551H101.487C123.089 74.8551 133.889 63.847 133.889 48.2155C133.889 32.3638 123.089 21.3557 101.487 21.3557ZM24.4646 132.758H105.013C127.938 132.758 139.62 121.309 139.62 104.797C139.62 88.5052 127.938 77.0567 105.013 77.0567H24.4646V132.758Z"
-      fill="#27292F"
     />
   </svg>
 );
 
 function LoadingMainScreen() {
+  const sectionControls = useAnimation();
+
+  useEffect(() => {
+    const backgroundSequence = async () => {
+      // Первый этап: белый -> темный
+      await sectionControls.start({
+        background: '#27292F',
+        transition: {
+          type: 'spring',
+          stiffness: 384,
+          damping: 12,
+          mass: 1,
+          delay: 0.3,
+        },
+      });
+
+      // Второй этап: темный -> белый
+      await sectionControls.start({
+        background: '#FFFFFF',
+        transition: {
+          type: 'spring',
+          stiffness: 600,
+          damping: 15,
+          mass: 1,
+          delay: 0.001,
+        },
+      });
+    };
+
+    backgroundSequence();
+  }, [sectionControls]);
+
   return (
     <section className={styles.LoadingMainScreen}>
-      <div className={styles.LoadingMainScreen__container}>
+      <motion.div className={styles.LoadingMainScreen__container} style={{ background: '#FFFFFF' }} animate={sectionControls}>
         <div className={styles.LoadingMainScreen__laba}>
           <motion.div
             className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_l}`}
@@ -34,7 +116,7 @@ function LoadingMainScreen() {
               scale: 3.11,
             }}
             animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1 }}
+            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 2 }}
           >
             <LetterL />
           </motion.div>
@@ -48,7 +130,7 @@ function LoadingMainScreen() {
               scale: 1.116,
             }}
             animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1 }}
+            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 2 }}
           >
             <LetterA />
           </motion.div>
@@ -62,7 +144,7 @@ function LoadingMainScreen() {
               scale: 0.52,
             }}
             animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1 }}
+            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 2 }}
           >
             <LetterB />
           </motion.div>
@@ -76,21 +158,18 @@ function LoadingMainScreen() {
               scale: 1.83,
             }}
             animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1 }}
+            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 2 }}
           >
             <LetterA />
           </motion.div>
 
-          <motion.div
-            className={styles.LoadingMainScreen__spot}
-            initial={{ scale: 17 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1 }}
-          ></motion.div>
+          <motion.div className={styles.LoadingMainScreen__spot} initial={{ scale: 17 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 2 }}>
+            <Spot />
+          </motion.div>
         </div>
 
         <div className={styles.LoadingMainScreen__desc}>Создаем уникальные цифровые продукты</div>
-      </div>
+      </motion.div>
     </section>
   );
 }

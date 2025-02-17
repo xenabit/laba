@@ -1,9 +1,4 @@
 .LoadingMainScreen {
-  height: 100vh;
-  z-index: 300;
-  position: relative;
-  background-color: white;
-
   &__container {
     height: 100%;
     display: flex;
@@ -11,6 +6,10 @@
     justify-content: center;
     align-items: center;
     gap: 50px;
+    height: 100vh;
+    z-index: 300;
+    position: relative;
+    background-color: white;
   }
 
   &__laba {
@@ -22,6 +21,7 @@
   &__letter {
     svg {
       display: block;
+      fill: #ffffff;
     }
 
     &_l {
@@ -40,8 +40,6 @@
     width: 30px;
     height: 30px;
     display: block;
-    background-color: var(--prime-2);
-    border-radius: 100%;
     margin-left: 24px;
   }
 }
