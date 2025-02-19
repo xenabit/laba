@@ -50,32 +50,28 @@ const TextEffect = () => {
       },
     });
 
-    // Устанавливаем начальные состояния для обоих наборов элементов
-    tl.set([...firstLayerLines, ...secondLayerLines], {
+   tl.set([...firstLayerLines, ...secondLayerLines], {
       opacity: 0,
       x: (index) => (index % 2 === 0 ? '-100%' : '100%'),
     });
 
-    // Запускаем анимацию для первого слоя
     tl.to(firstLayerLines, {
       x: 0,
       opacity: 1,
       duration: 1.5,
       ease: 'power2.out',
       stagger: 0.2,
-    }, 0); // запуск с временной меткой 0
+    }, 0);
 
-    // Одновременно запускаем анимацию для второго слоя (без изменения transform, если он не нужен, можно убрать x)
     tl.to(secondLayerLines, {
-      x: 0, // если не нужно сдвига, можно опустить или установить 0
+      x: 0,
       opacity: 1,
       duration: 1.5,
       ease: 'power2.out',
       stagger: 0.2,
-    }, 0); // старт с той же временной меткой
+    }, 0);
   }, []);
 
-  // Запуск анимации при изменении видимости
   useEffect(() => {
     if (!heroRef.current) return;
     if (isVisible) {
@@ -91,25 +87,20 @@ const TextEffect = () => {
     if (!isVisible || !heroRef.current) return;
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      // Если скроллим вниз (текущая позиция > предыдущей)
       if (currentScrollY > prevScrollY.current) {
-        // Перезапускаем анимацию
         heroRef.current.classList.remove(styles.animate);
         void heroRef.current.offsetWidth;
         animateText();
       }
-      // Обновляем предыдущую позицию
       prevScrollY.current = currentScrollY;
     };
 
-    // Можно использовать throttle для оптимизации
     const throttledHandleScroll = _.throttle(handleScroll, 200);
     window.addEventListener('scroll', throttledHandleScroll);
     return () => window.removeEventListener('scroll', throttledHandleScroll);
   }, [isVisible, animateText]);
 
 
-  // Обработка движения мыши (с throttle)
   const onMouseMove = useCallback((e) => {
     if (!heroRef.current || !isVisible) return;
     const { clientX, clientY } = e;
@@ -128,8 +119,7 @@ const TextEffect = () => {
   return (
     <section ref={heroRef} className={styles.TextEffect}>
       <div className={styles.TextEffect__wrapper}>
-        {/* Первый слой */}
-        <div className={`${styles.TextEffect__layer} ${styles.TextEffect__layer_first}`}>
+         <div className={`${styles.TextEffect__layer} ${styles.TextEffect__layer_first}`}>
           <div className={styles.TextEffect__text}>
             <div><span>Вдохновляющие</span></div>
             <div><span>проекты для</span></div>
@@ -137,7 +127,6 @@ const TextEffect = () => {
             <div><span>заказчиков</span></div>
           </div>
         </div>
-        {/* Второй слой (оверлей) */}
         <div className={`${styles.TextEffect__layer} ${styles.TextEffect__layer_secondary}`} aria-hidden="true">
           <div className={styles.TextEffect__text}>
             <div><span>Вдохновляющие</span></div>
