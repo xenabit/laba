@@ -1,12 +1,11 @@
 .LoadingMainScreen {
   &__container {
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 50px;
-    height: 100vh;
     z-index: 300;
     position: relative;
     background-color: white;
@@ -41,5 +40,93 @@
     height: 30px;
     display: block;
     margin-left: 24px;
+  }
+
+  &__baloon {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    // &_rb1 {
+    //   top: 106px;
+    //   left: 106px;
+    // }
+    // &_rb2 {
+    //   top: 305px;
+    //   left: 305px;
+    // }
+    // &_rb3 {
+    //   top: 188px;
+    //   left: 188px;
+    // }
+
+    // &_lt1 {
+    //   top: 55px;
+    //   left: -210px;
+
+    //   width: 446px;
+    //   height: 446px;
+    // }
+    // &_lt2 {
+    //   width: 280px;
+    //   height: 280px;
+    // }
+    // &_lb1 {
+    //   top: 106px;
+    //   left: 106px;
+    // }
+    // &_lb1 {
+    //   top: 267px;
+    //   left: 267px;
+    // }
+    // &_ct1 {
+    //   top: 131px;
+    //   left: 131px;
+    // }
+    // &_ct2 {
+    //   top: 101px;
+    //   left: 101px;
+    // }
+    // &_ct3 {
+    //   top: 65px;
+    //   left: 65px;
+    // }
+    // &_rt1 {
+    //   top: 149px;
+    //   left: 149px;
+    // }
+    // &_rt2 {
+    //   top: 90px;
+    //   left: 90px;
+    // }
+    // &_rt3 {
+    //   top: 188px;
+    //   left: 188px;
+    // }
+    // &_r {
+    //   top: 86px;
+    //   left: 86px;
+    // }
+    // &_c {
+    //   top: 60px;
+    //   left: 60px;
+    // }
+
+    // &_rb2 {
+    //   top: 305px;
+    //   left: 305px;
+    // }
+    // &_rb3 {
+    //   top: 188px;
+    //   left: 188px;
+    // }
+    // &_cb1 {
+    //   top: 103px;
+    //   left: 103px;
+    // }
+    // &_cb2 {
+    //   top: 488px;
+    //   left: 488px;
+    // }
   }
 }

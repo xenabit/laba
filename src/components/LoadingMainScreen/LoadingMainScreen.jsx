@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import styles from './LoadingMainScreen.module.scss';
 import { motion, useAnimation } from 'framer-motion';
+import { Baloon_ct1, Baloon_ct2, Baloon_ct3, Baloon_rt1, Baloon_rt2, Baloon_rt3, Baloon_r, Baloon_c, Baloon_rb1, Baloon_rb2, Baloon_rb3, Baloon_cb1, Baloon_cb2 } from './Baloons';
 
 function LoadingMainScreen() {
   const sectionControls = useAnimation();
@@ -200,6 +201,47 @@ function LoadingMainScreen() {
           <motion.div className={styles.LoadingMainScreen__spot} initial={{ scale: 17 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 4 }}>
             <Spot />
           </motion.div>
+        </div>
+        <div className={styles.LoadingMainScreen__baloons}>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct1}`}>
+            <Baloon_ct1 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct2}`}>
+            <Baloon_ct2 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct3}`}>
+            <Baloon_ct3 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt1}`}>
+            <Baloon_rt1 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt2}`}>
+            <Baloon_rt2 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt3}`}>
+            <Baloon_rt3 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_r}`}>
+            <Baloon_r />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_c}`}>
+            <Baloon_c />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb1}`}>
+            <Baloon_rb1 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb2}`}>
+            <Baloon_rb2 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb3}`}>
+            <Baloon_rb3 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb1}`}>
+            <Baloon_cb1 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb2}`}>
+            <Baloon_cb2 />
+          </div>
         </div>
       </motion.div>
     </section>
