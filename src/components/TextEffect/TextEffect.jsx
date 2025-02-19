@@ -12,7 +12,6 @@ const TextEffect = () => {
   const [isVisible, setIsVisible] = useState(false);
   const prevScrollY = useRef(window.scrollY);
 
-  // Отслеживаем видимость с помощью IntersectionObserver
   useEffect(() => {
     const currentHero = heroRef.current;
     if (!currentHero) return;
@@ -26,22 +25,17 @@ const TextEffect = () => {
     };
   }, []);
 
-  // Объединённая анимация для первого и второго слоев одновременно
   const animateText = useCallback(() => {
     if (!heroRef.current) return;
-    // Выбираем текстовые блоки первого слоя
     const firstLayerLines = heroRef.current.querySelectorAll(
       `.${styles.TextEffect__layer_first} .${styles.TextEffect__text} > div`
     );
-    // Выбираем текстовые блоки второго слоя (оверлея)
     const secondLayerLines = heroRef.current.querySelectorAll(
       `.${styles.TextEffect__layer_secondary} .${styles.TextEffect__text} > div`
     );
 
-    // Создаем таймлайн, чтобы запустить обе анимации одновременно
     const tl = gsap.timeline({
       onComplete: () => {
-        // После завершения анимаций добавляем класс, который может активировать дополнительные эффекты
         setTimeout(() => {
           if (heroRef.current) {
             heroRef.current.classList.add(styles.animate);
