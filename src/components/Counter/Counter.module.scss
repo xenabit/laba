@@ -53,7 +53,7 @@
   .switcherWrapper {
     position: relative;
     width: 100%;
-    min-height: 130vh;
+    min-height: 140vh;
     height: 100%;
     overflow: hidden;
 
@@ -146,6 +146,10 @@
   }
 
   @media all and (min-width: $bp1) {
+    .switcherWrapper {
+      min-height: 150vh;
+    }
+
     &__items {
       height: rem(327);
       grid-template-rows: rem(327) rem(327);
