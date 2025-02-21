@@ -2,16 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useInView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
-
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import video from '../../assets/videos/intro-cover.mp4';
+import TextEffect from '../TextEffect/TextEffect';
+import TextEffect1 from '../TextEffect/TextEffect1';
+
+// import video from '../../assets/videos/intro-cover.mp4';
 import img from '../../assets/images/counter-img1.png';
 import styles from './Counter.module.scss';
-import TextEffect from '../TextEffect/TextEffect';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Number = ({ n }) => {
   const { ref, inView } = useInView({
@@ -64,7 +62,6 @@ const Counter = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1025);
-  const [showTextEffect, setShowTextEffect] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -84,35 +81,57 @@ const Counter = () => {
       { threshold: 0.1 }
     );
     observer.observe(NumbersBoxRef.current);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    if (!isDesktop) {
-      return;
-    }
+    if (!isDesktop) return;
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
+    const ctxModels = gsap.context(() => {
+      gsap.timeline({
         scrollTrigger: {
           trigger: modelsRef.current,
-          start: 'top top', // когда верх этого блока касается верха окна
-          end: '+=300', //  виртуальная длина скролла
-          pin: sectionRef.current, // "прилипает" вся секция
-          scrub: true, // анимация привязана к прокрутке
+          start: 'top top',
+          end: '+=120',
+          pin: sectionRef.current,
+          scrub: true,
         },
-      });
-
-      tl.to(modelsRef.current, { y: -530, duration: 0.4 }, 0);
-
-      tl.fromTo(pictureRef.current, { scale: 1 }, { scale: 2, duration: 0.4, ease: 'none' }, 0);
-
-      tl.fromTo(pictureRef.current, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: 'none' }, 0.3);
-
-      tl.fromTo(textRef.current, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power1.inOut' }, 0.3);
-
+      }).to(modelsRef.current, { y: -100, duration: 0.2 }, 0);
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => ctxModels.revert();
+  }, [isDesktop]);
+
+  useEffect(() => {
+    if (!isDesktop) return;
+    const ctxSwitcher = gsap.context(() => {
+       gsap.timeline({
+          scrollTrigger: {
+            trigger: modelsRef.current,
+            start: 'bottom top',
+            toggleActions: 'play none reverse none',
+          },
+        })
+        .fromTo(
+          pictureRef.current,
+          { scale: 1 },
+          { scale: 2, duration: 0.3, ease: 'none' },
+          0
+        )
+        .fromTo(
+          pictureRef.current,
+          { opacity: 1 },
+          { opacity: 0, duration: 0.1, ease: 'none' },
+          0.4
+        )
+        .fromTo(
+          textRef.current,
+          { opacity: 0, marginTop: '100px' },
+          { opacity: 1, marginTop: '100px', duration: 0.2, ease: 'linear' },
+          0.3
+        );
+    }, sectionRef);
+    return () => ctxSwitcher.revert();
   }, [isDesktop]);
 
 
@@ -162,6 +181,7 @@ const Counter = () => {
             />
             <div ref={textRef} className={styles.switcherWrapper__textEffectContainer}>
               <TextEffect />
+              {/* <TextEffect1 /> */}
             </div>
           </div>
         ) : (

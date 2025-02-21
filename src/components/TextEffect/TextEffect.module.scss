@@ -12,6 +12,8 @@
 
 .TextEffect {
   $s: &;
+  position: relative;
+  overflow: hidden;
 
   --circle-1-big: 2.75rem;
   --circle-2-big: 2.25rem;
@@ -44,9 +46,9 @@
       left: 0;
       z-index: 10;
 
+
       #{$s}__text {
         div {
-          opacity: 1;
           span {
             background: linear-gradient(134.58deg, #73ccd2 14.79%, #9fcaf1 44.57%, #f8b7fa 100.22%, #deafdf 124.62%);
             -webkit-background-clip: text;
@@ -131,7 +133,7 @@
     position: absolute;
     opacity: 0;
     z-index: 30;
-    transition-duration: 1.5s;
+    transition-duration: 1s;
 
     img {
       display: block;
@@ -184,7 +186,7 @@
 
     #{$s}__icon {
       opacity: 1;
-      transition-duration: 1s;
+      transition-duration: 2s;
 
       &:nth-child(1) {
         top: -18%;
@@ -197,7 +199,7 @@
         top: 72%;
         left: 4vw;
         transition-delay: 0.2s;
-        transition-duration: 1.5s;
+        transition-duration: 2s;
         width: var(--circle-2-big);
         height: var(--circle-2-big);
       }
@@ -206,7 +208,7 @@
         top: 100%;
         left: 17vw;
         transition-delay: 0.5s;
-        transition-duration: 1.3s;
+        transition-duration: 2s;
         width: var(--circle-3-big);
         height: var(--circle-3-big);
       }
