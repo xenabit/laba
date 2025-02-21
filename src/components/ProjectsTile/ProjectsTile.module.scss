@@ -374,8 +374,8 @@
       opacity: 1;
       z-index: 5;
       transition:
-        clip-path 0.3s 0.1s ease,
-        z-index 1s 0.2s ease;
+        clip-path 0.5s 0.1s ease,
+        z-index 0.3s 0.3s ease;
       will-change: clip-path;
       background-size: cover;
       background-repeat: no-repeat;
@@ -418,7 +418,7 @@
       &::before {
         position: absolute;
         backdrop-filter: blur(0px);
-        animation: projects-tile-blur-out 1s forwards;
+        animation: projects-tile-blur-out 0.5s forwards;
         transition: none;
         width: 100%;
         height: 100%;
@@ -426,7 +426,7 @@
       }
 
       &:hover::before {
-        animation: projects-tile-blur-in 1s forwards;
+        animation: projects-tile-blur-in 0.5s forwards;
       }
     }
 
