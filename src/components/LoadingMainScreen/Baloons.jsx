@@ -1,3 +1,87 @@
+export const Baloon_lt1 = () => (
+  <svg width="521" height="540" viewBox="0 0 521 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      style={{ mixBlendMode: 'color-burn' }}
+      d="M520.292 279.205C520.292 422.753 403.804 539.242 260.256 539.242C116.708 539.242 0.21875 422.753 0.21875 279.205C0.21875 135.657 116.708 19.1687 260.256 19.1687C403.804 19.1687 520.292 135.657 520.292 279.205Z"
+      fill="url(#paint0_radial_4533_12143)"
+    />
+    <path
+      d="M480.951 213.756C480.951 320.841 394.208 407.776 286.931 407.776C179.654 407.776 92.9111 321.033 92.9111 213.756C92.9111 106.479 179.846 19.7361 286.931 19.7361C394.017 19.7361 480.951 106.671 480.951 213.756Z"
+      fill="url(#paint1_radial_4533_12143)"
+    />
+    <path
+      style={{ mixBlendMode: 'screen' }}
+      d="M413.018 118.004C413.018 166.173 356.597 205.322 286.934 205.322C217.271 205.322 160.85 166.173 160.85 118.004C160.85 69.8344 217.271 30.6849 286.934 30.6849C356.597 30.6849 413.018 69.8344 413.018 118.004Z"
+      fill="url(#paint2_linear_4533_12143)"
+    />
+    <defs>
+      <radialGradient id="paint0_radial_4533_12143" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(260.447 279.206) scale(260.037 260.037)">
+        <stop stopColor="#656A6E" />
+        <stop offset="0.35" stopColor="#A6A9AB" />
+        <stop offset="0.65" stopColor="#D6D7D8" />
+        <stop offset="0.87" stopColor="#F3F4F4" />
+        <stop offset="1" stopColor="white" />
+      </radialGradient>
+      <radialGradient id="paint1_radial_4533_12143" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(285.78 246.381) scale(232.786)">
+        <stop offset="0.28" />
+        <stop offset="0.68" stopColor="#323232" />
+        <stop offset="1" stopColor="#9E9E9E" />
+      </radialGradient>
+      <linearGradient id="paint2_linear_4533_12143" x1="137.245" y1="340.234" x2="414.17" y2="-70.4512" gradientUnits="userSpaceOnUse">
+        <stop offset="0.08" />
+        <stop offset="0.21" />
+        <stop offset="0.36" stopColor="#070707" />
+        <stop offset="0.51" stopColor="#1C1C1C" />
+        <stop offset="0.67" stopColor="#272727" />
+        <stop offset="0.83" stopColor="#4D4D4D" />
+        <stop offset="0.99" stopColor="#7C7C7C" />
+        <stop offset="1" stopColor="#808080" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+export const Baloon_lt2 = () => (
+  <svg width="377" height="371" viewBox="0 0 377 371" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      style={{ mixBlendMode: 'color-burn' }}
+      d="M307.044 283.441C265.237 362.87 166.854 393.4 87.4246 351.593C7.99542 309.785 -22.5346 211.402 19.2728 131.973C61.0803 52.5435 159.463 22.0136 238.893 63.821C318.322 105.628 348.852 204.012 307.044 283.441Z"
+      fill="url(#paint0_radial_4533_12147)"
+    />
+    <path
+      d="M304.337 235.769C273.15 295.022 199.833 317.862 140.474 286.618C81.114 255.375 58.38 182.114 89.6238 122.754C120.868 63.3948 194.234 40.7167 253.488 71.9046C312.741 103.092 335.525 176.515 304.337 235.769Z"
+      fill="url(#paint1_radial_4533_12147)"
+    />
+    <path
+      style={{ mixBlendMode: 'screen' }}
+      d="M294.635 163C280.606 189.654 237.985 194.884 199.438 174.595C160.892 154.306 141.074 116.211 155.103 89.5579C169.132 62.9045 211.754 57.6743 250.3 77.9632C288.847 98.2521 308.664 136.347 294.635 163Z"
+      fill="url(#paint2_linear_4533_12147)"
+    />
+    <defs>
+      <radialGradient id="paint0_radial_4533_12147" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(163.265 207.763) rotate(27.76) scale(162.6)">
+        <stop stopColor="#656A6E" />
+        <stop offset="0.35" stopColor="#A6A9AB" />
+        <stop offset="0.65" stopColor="#D6D7D8" />
+        <stop offset="0.87" stopColor="#F3F4F4" />
+        <stop offset="1" stopColor="white" />
+      </radialGradient>
+      <radialGradient id="paint1_radial_4533_12147" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(186.842 196.978) rotate(27.76) scale(145.56)">
+        <stop offset="0.28" />
+        <stop offset="0.68" stopColor="#323232" />
+        <stop offset="1" stopColor="#9E9E9E" />
+      </radialGradient>
+      <linearGradient id="paint2_linear_4533_12147" x1="77.3187" y1="205.65" x2="350.159" y2="59.0582" gradientUnits="userSpaceOnUse">
+        <stop offset="0.08" />
+        <stop offset="0.21" />
+        <stop offset="0.36" stopColor="#070707" />
+        <stop offset="0.51" stopColor="#1C1C1C" />
+        <stop offset="0.67" stopColor="#272727" />
+        <stop offset="0.83" stopColor="#4D4D4D" />
+        <stop offset="0.99" stopColor="#7C7C7C" />
+        <stop offset="1" stopColor="#808080" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
 export const Baloon_ct1 = () => (
   <svg width="195" height="195" viewBox="0 0 195 195" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -460,6 +544,93 @@ export const Baloon_rb3 = () => (
     </defs>
   </svg>
 );
+
+export const Baloon_lb1 = () => (
+  <svg width="333" height="369" viewBox="0 0 333 369" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      style={{ mixBlendMode: 'color-burn' }}
+      d="M326.178 169.838C345.241 258.594 288.685 346.089 199.929 365.152C111.173 384.214 23.6785 327.658 4.61589 238.902C-14.4467 150.146 42.1093 62.6517 130.865 43.5891C219.621 24.5265 307.116 81.0824 326.178 169.838Z"
+      fill="url(#paint0_radial_4533_12183)"
+    />
+    <path
+      d="M293.164 134.598C307.384 200.809 265.296 266.08 198.966 280.326C132.636 294.572 67.4838 252.458 53.2378 186.129C38.9918 119.799 81.2246 54.621 147.436 40.4004C213.647 26.1799 278.943 68.3873 293.164 134.598Z"
+      fill="url(#paint1_radial_4533_12183)"
+    />
+    <path
+      style={{ mixBlendMode: 'screen' }}
+      d="M238.443 84.4105C244.839 114.194 215.153 145.892 172.08 155.143C129.007 164.394 88.923 147.681 82.5263 117.898C76.1296 88.1145 105.816 56.4157 148.889 47.1647C191.962 37.9137 232.046 54.6274 238.443 84.4105Z"
+      fill="url(#paint2_linear_4533_12183)"
+    />
+    <defs>
+      <radialGradient id="paint0_radial_4533_12183" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(165.516 204.345) rotate(-12.1216) scale(164.448 164.448)">
+        <stop stopColor="#656A6E" />
+        <stop offset="0.35" stopColor="#A6A9AB" />
+        <stop offset="0.65" stopColor="#D6D7D8" />
+        <stop offset="0.87" stopColor="#F3F4F4" />
+        <stop offset="1" stopColor="white" />
+      </radialGradient>
+      <radialGradient id="paint1_radial_4533_12183" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(176.821 180.688) rotate(-12.1216) scale(147.214)">
+        <stop offset="0.28" />
+        <stop offset="0.68" stopColor="#323232" />
+        <stop offset="1" stopColor="#9E9E9E" />
+      </radialGradient>
+      <linearGradient id="paint2_linear_4533_12183" x1="97.4428" y1="258.438" x2="214.128" y2="-32.2643" gradientUnits="userSpaceOnUse">
+        <stop offset="0.08" />
+        <stop offset="0.21" />
+        <stop offset="0.36" stopColor="#070707" />
+        <stop offset="0.51" stopColor="#1C1C1C" />
+        <stop offset="0.67" stopColor="#272727" />
+        <stop offset="0.83" stopColor="#4D4D4D" />
+        <stop offset="0.99" stopColor="#7C7C7C" />
+        <stop offset="1" stopColor="#808080" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+export const Baloon_lb2 = () => (
+  <svg width="346" height="358" viewBox="0 0 346 358" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      style={{ mixBlendMode: 'color-burn' }}
+      d="M345.03 184.888C345.03 279.918 267.914 357.035 172.884 357.035C77.8539 357.035 0.737305 279.918 0.737305 184.888C0.737305 89.8584 77.8539 12.7418 172.884 12.7418C267.914 12.7418 345.03 89.8584 345.03 184.888Z"
+      fill="url(#paint0_radial_4533_12171)"
+    />
+    <path
+      d="M318.988 141.567C318.988 212.459 261.564 270.01 190.546 270.01C119.527 270.01 62.1025 212.586 62.1025 141.567C62.1025 70.5488 119.654 13.1243 190.546 13.1243C261.437 13.1243 318.988 70.6759 318.988 141.567Z"
+      fill="url(#paint1_radial_4533_12171)"
+    />
+    <path
+      style={{ mixBlendMode: 'screen' }}
+      d="M274.015 78.1697C274.015 110.058 236.664 135.975 190.546 135.975C144.429 135.975 107.077 110.058 107.077 78.1697C107.077 46.2813 144.429 20.364 190.546 20.364C236.664 20.364 274.015 46.2813 274.015 78.1697Z"
+      fill="url(#paint2_linear_4533_12171)"
+    />
+    <defs>
+      <radialGradient id="paint0_radial_4533_12171" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(173.011 184.888) scale(172.147 172.147)">
+        <stop stopColor="#656A6E" />
+        <stop offset="0.35" stopColor="#A6A9AB" />
+        <stop offset="0.65" stopColor="#D6D7D8" />
+        <stop offset="0.87" stopColor="#F3F4F4" />
+        <stop offset="1" stopColor="white" />
+      </radialGradient>
+      <radialGradient id="paint1_radial_4533_12171" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(189.783 163.165) scale(154.106)">
+        <stop offset="0.28" />
+        <stop offset="0.68" stopColor="#323232" />
+        <stop offset="1" stopColor="#9E9E9E" />
+      </radialGradient>
+      <linearGradient id="paint2_linear_4533_12171" x1="91.4506" y1="225.288" x2="274.777" y2="-46.5889" gradientUnits="userSpaceOnUse">
+        <stop offset="0.08" />
+        <stop offset="0.21" />
+        <stop offset="0.36" stopColor="#070707" />
+        <stop offset="0.51" stopColor="#1C1C1C" />
+        <stop offset="0.67" stopColor="#272727" />
+        <stop offset="0.83" stopColor="#4D4D4D" />
+        <stop offset="0.99" stopColor="#7C7C7C" />
+        <stop offset="1" stopColor="#808080" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
 export const Baloon_cb1 = () => (
   <svg width="112" height="116" viewBox="0 0 112 116" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path

@@ -1,7 +1,25 @@
 import { useEffect } from 'react';
 import styles from './LoadingMainScreen.module.scss';
 import { motion, useAnimation } from 'framer-motion';
-import { Baloon_ct1, Baloon_ct2, Baloon_ct3, Baloon_rt1, Baloon_rt2, Baloon_rt3, Baloon_r, Baloon_c, Baloon_rb1, Baloon_rb2, Baloon_rb3, Baloon_cb1, Baloon_cb2 } from './Baloons';
+import {
+  Baloon_lt2,
+  Baloon_lt1,
+  Baloon_ct1,
+  Baloon_ct2,
+  Baloon_ct3,
+  Baloon_rt1,
+  Baloon_rt2,
+  Baloon_rt3,
+  Baloon_r,
+  Baloon_c,
+  Baloon_rb1,
+  Baloon_rb2,
+  Baloon_rb3,
+  Baloon_lb1,
+  Baloon_lb2,
+  Baloon_cb1,
+  Baloon_cb2,
+} from './Baloons';
 
 function LoadingMainScreen() {
   const sectionControls = useAnimation();
@@ -202,7 +220,14 @@ function LoadingMainScreen() {
             <Spot />
           </motion.div>
         </div>
+
         <div className={styles.LoadingMainScreen__baloons}>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lt1}`}>
+            <Baloon_lt1 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lt2}`}>
+            <Baloon_lt2 />
+          </div>
           <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct1}`}>
             <Baloon_ct1 />
           </div>
@@ -235,6 +260,12 @@ function LoadingMainScreen() {
           </div>
           <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb3}`}>
             <Baloon_rb3 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lb1}`}>
+            <Baloon_lb1 />
+          </div>
+          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lb2}`}>
+            <Baloon_lb2 />
           </div>
           <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb1}`}>
             <Baloon_cb1 />

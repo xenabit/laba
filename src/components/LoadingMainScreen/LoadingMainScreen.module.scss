@@ -42,91 +42,100 @@
     margin-left: 24px;
   }
 
+  &__baloons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
   &__baloon {
     position: absolute;
     top: 0;
     left: 0;
 
-    // &_rb1 {
-    //   top: 106px;
-    //   left: 106px;
-    // }
-    // &_rb2 {
-    //   top: 305px;
-    //   left: 305px;
-    // }
-    // &_rb3 {
-    //   top: 188px;
-    //   left: 188px;
-    // }
+    &_lt1 {
+      top: 7.11%;
+      left: -16.69%;
+    }
 
-    // &_lt1 {
-    //   top: 55px;
-    //   left: -210px;
+    &_lt2 {
+      top: 22.44%;
+      left: -5.94%;
+    }
 
-    //   width: 446px;
-    //   height: 446px;
-    // }
-    // &_lt2 {
-    //   width: 280px;
-    //   height: 280px;
-    // }
-    // &_lb1 {
-    //   top: 106px;
-    //   left: 106px;
-    // }
-    // &_lb1 {
-    //   top: 267px;
-    //   left: 267px;
-    // }
-    // &_ct1 {
-    //   top: 131px;
-    //   left: 131px;
-    // }
-    // &_ct2 {
-    //   top: 101px;
-    //   left: 101px;
-    // }
-    // &_ct3 {
-    //   top: 65px;
-    //   left: 65px;
-    // }
-    // &_rt1 {
-    //   top: 149px;
-    //   left: 149px;
-    // }
-    // &_rt2 {
-    //   top: 90px;
-    //   left: 90px;
-    // }
-    // &_rt3 {
-    //   top: 188px;
-    //   left: 188px;
-    // }
-    // &_r {
-    //   top: 86px;
-    //   left: 86px;
-    // }
-    // &_c {
-    //   top: 60px;
-    //   left: 60px;
-    // }
+    &_ct1 {
+      top: 7.67%;
+      left: 28.69%;
+    }
 
-    // &_rb2 {
-    //   top: 305px;
-    //   left: 305px;
-    // }
-    // &_rb3 {
-    //   top: 188px;
-    //   left: 188px;
-    // }
-    // &_cb1 {
-    //   top: 103px;
-    //   left: 103px;
-    // }
-    // &_cb2 {
-    //   top: 488px;
-    //   left: 488px;
-    // }
+    &_ct2 {
+      top: 16.89%;
+      left: 35.69%;
+    }
+
+    &_ct3 {
+      top: 24.11%;
+      left: 33.88%;
+    }
+
+    &_rt1 {
+      top: 19.67%;
+      left: 71.63%;
+    }
+
+    &_rt2 {
+      top: 24.89%;
+      left: 84.88%;
+    }
+
+    &_rt3 {
+      top: 3.89%;
+      left: 75.63%;
+    }
+
+    &_r {
+      top: 45.44%;
+      left: 91.56%;
+    }
+
+    &_c {
+      top: 41%;
+      left: 31.13%;
+    }
+
+    &_rb1 {
+      top: 73%;
+      left: 78.88%;
+    }
+
+    &_rb2 {
+      top: 63.78%;
+      left: 79.25%;
+    }
+
+    &_rb3 {
+      top: 64.11%;
+      left: 89.25%;
+    }
+
+    &_lb1 {
+      top: 67.78%;
+      left: -2.44%;
+    }
+
+    &_lb2 {
+      top: 75.33%;
+      left: 6.75%;
+    }
+
+    &_cb1 {
+      top: 85.22%;
+      left: 48.88%;
+    }
+
+    &_cb2 {
+      top: 82.44%;
+      left: 38.38%;
+    }
   }
 }
