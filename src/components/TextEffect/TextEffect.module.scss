@@ -48,6 +48,7 @@
       left: 0;
       z-index: 10;
 
+
       #{$s}__text {
         div {
           span {
@@ -185,7 +186,7 @@
 
     #{$s}__icon {
       opacity: 1;
-      transition-duration: 0.8s;
+      transition-duration: 2s;
 
       &:nth-child(1) {
         top: -18%;
@@ -198,7 +199,7 @@
         top: 72%;
         left: 4vw;
         transition-delay: 0.2s;
-        transition-duration: 1.5s;
+        transition-duration: 2s;
         width: var(--circle-2-big);
         height: var(--circle-2-big);
       }
@@ -207,7 +208,7 @@
         top: 100%;
         left: 17vw;
         transition-delay: 0.5s;
-        transition-duration: 1.3s;
+        transition-duration: 2s;
         width: var(--circle-3-big);
         height: var(--circle-3-big);
       }

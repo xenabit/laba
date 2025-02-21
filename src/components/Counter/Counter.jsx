@@ -2,16 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useInView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
-
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import video from '../../assets/videos/intro-cover.mp4';
+import TextEffect from '../TextEffect/TextEffect';
+import TextEffect1 from '../TextEffect/TextEffect1';
+
+// import video from '../../assets/videos/intro-cover.mp4';
 import img from '../../assets/images/counter-img1.png';
 import styles from './Counter.module.scss';
-import TextEffect from '../TextEffect/TextEffect';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Number = ({ n }) => {
   const { ref, inView } = useInView({
@@ -129,8 +127,8 @@ const Counter = () => {
         .fromTo(
           textRef.current,
           { opacity: 0, marginTop: '100px' },
-          { opacity: 1, marginTop: '100px', duration: 0.4, ease: 'power1.inOut' },
-          0.2
+          { opacity: 1, marginTop: '100px', duration: 0.2, ease: 'linear' },
+          0.3
         );
     }, sectionRef);
     return () => ctxSwitcher.revert();
@@ -183,6 +181,7 @@ const Counter = () => {
             />
             <div ref={textRef} className={styles.switcherWrapper__textEffectContainer}>
               <TextEffect />
+              {/* <TextEffect1 /> */}
             </div>
           </div>
         ) : (

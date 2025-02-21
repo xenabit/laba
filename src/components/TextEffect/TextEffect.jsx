@@ -33,6 +33,9 @@ const TextEffect = () => {
     const secondLayerLines = heroRef.current.querySelectorAll(
       `.${styles.TextEffect__layer_secondary} .${styles.TextEffect__text} > div`
     );
+    const thirdLayerLines = heroRef.current.querySelectorAll(
+      `.${styles.TextEffect__icons} > div`
+    );
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -44,29 +47,29 @@ const TextEffect = () => {
       },
     });
 
-   tl.set([...firstLayerLines, ...secondLayerLines], {
+   tl.set([...firstLayerLines, ...secondLayerLines, ...thirdLayerLines], {
       opacity: 0,
-      x: (index) => (index % 2 === 0 ? '-100%' : '100%'),
+      x: (index) => (index % 2 === 1 ? '-100%' : '100%'),
     });
 
     tl.to(firstLayerLines, {
       x: 0,
       opacity: 1,
       duration: 1.5,
-      ease: 'power2.out',
-      stagger: 0.2,
+      ease: 'linear',
+      stagger: 0.1,
     }, 0);
 
     tl.to(secondLayerLines, {
       x: 0,
       opacity: 1,
       duration: 1.5,
-      ease: 'power2.out',
-      stagger: 0.2,
+      ease: 'linear',
+      stagger: 0.1,
     }, 0);
   }, []);
 
-  useEffect(() => {
+ useEffect(() => {
     if (!heroRef.current) return;
     if (isVisible) {
       heroRef.current.classList.remove(styles.animate);
@@ -81,7 +84,7 @@ const TextEffect = () => {
     if (!isVisible || !heroRef.current) return;
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY > prevScrollY.current) {
+      if (currentScrollY < prevScrollY.current) {
         heroRef.current.classList.remove(styles.animate);
         void heroRef.current.offsetWidth;
         animateText();
