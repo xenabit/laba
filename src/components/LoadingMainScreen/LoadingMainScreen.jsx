@@ -1,25 +1,24 @@
 import { useEffect } from 'react';
 import styles from './LoadingMainScreen.module.scss';
 import { motion, useAnimation } from 'framer-motion';
-import {
-  Baloon_lt2,
-  Baloon_lt1,
-  Baloon_ct1,
-  Baloon_ct2,
-  Baloon_ct3,
-  Baloon_rt1,
-  Baloon_rt2,
-  Baloon_rt3,
-  Baloon_r,
-  Baloon_c,
-  Baloon_rb1,
-  Baloon_rb2,
-  Baloon_rb3,
-  Baloon_lb1,
-  Baloon_lb2,
-  Baloon_cb1,
-  Baloon_cb2,
-} from './Baloons';
+
+import Baloon_lt2 from '../../assets/images/loading-main-baloon-lt2.svg?react';
+import Baloon_lt1 from '../../assets/images/loading-main-baloon-lt1.svg?react';
+import Baloon_ct1 from '../../assets/images/loading-main-baloon-ct1.svg?react';
+import Baloon_ct2 from '../../assets/images/loading-main-baloon-ct2.svg?react';
+import Baloon_ct3 from '../../assets/images/loading-main-baloon-ct3.svg?react';
+import Baloon_rt1 from '../../assets/images/loading-main-baloon-rt1.svg?react';
+import Baloon_rt2 from '../../assets/images/loading-main-baloon-rt2.svg?react';
+import Baloon_rt3 from '../../assets/images/loading-main-baloon-rt3.svg?react';
+import Baloon_rb1 from '../../assets/images/loading-main-baloon-rb1.svg?react';
+import Baloon_rb2 from '../../assets/images/loading-main-baloon-rb2.svg?react';
+import Baloon_rb3 from '../../assets/images/loading-main-baloon-rb3.svg?react';
+import Baloon_lb1 from '../../assets/images/loading-main-baloon-lb1.svg?react';
+import Baloon_lb2 from '../../assets/images/loading-main-baloon-lb2.svg?react';
+import Baloon_cb1 from '../../assets/images/loading-main-baloon-cb1.svg?react';
+import Baloon_cb2 from '../../assets/images/loading-main-baloon-cb2.svg?react';
+import Baloon_r from '../../assets/images/loading-main-baloon-r.svg?react';
+import Baloon_c from '../../assets/images/loading-main-baloon-c.svg?react';
 
 function LoadingMainScreen() {
   const sectionControls = useAnimation();
@@ -27,92 +26,41 @@ function LoadingMainScreen() {
 
   useEffect(() => {
     const animateSequence = async () => {
-      // Первый этап: белый -> темный
+      await new Promise((resolve) => setTimeout(resolve, 300));
       await Promise.all([
         sectionControls.start({
           background: '#27292F',
-          transition: {
-            type: 'spring',
-            stiffness: 384,
-            damping: 12,
-            mass: 1,
-          },
+          transition: { type: 'spring', stiffness: 384, damping: 12, mass: 1 },
         }),
         letterControls.start({
           fill: '#2f3137',
-          transition: {
-            type: 'spring',
-            stiffness: 384,
-            damping: 12,
-            mass: 1,
-          },
+          transition: { type: 'spring', stiffness: 384, damping: 12, mass: 1 },
         }),
       ]);
+
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Второй этап: темный -> белый
       await Promise.all([
         sectionControls.start({
           background: '#27292F',
-          transition: {
-            type: 'spring',
-            stiffness: 600,
-            damping: 15,
-            mass: 1,
-          },
+          transition: { type: 'spring', stiffness: 600, damping: 15, mass: 1 },
         }),
         letterControls.start({
           fill: '#ffffff',
-          transition: {
-            type: 'spring',
-            stiffness: 600,
-            damping: 15,
-            mass: 1,
-          },
+          transition: { type: 'spring', stiffness: 600, damping: 15, mass: 1 },
         }),
       ]);
 
-      // Второй этап: темный -> белый
-      await Promise.all([
-        sectionControls.start({
-          background: '#ffffff',
-          transition: {
-            type: 'spring',
-            stiffness: 800,
-            damping: 15,
-            mass: 1,
-          },
-        }),
-        letterControls.start({
-          fill: '#ffffff',
-          transition: {
-            type: 'spring',
-            stiffness: 800,
-            damping: 15,
-            mass: 1,
-          },
-        }),
-      ]);
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
-      // Третий этап: фон белый, буквы темные
       await Promise.all([
         sectionControls.start({
           background: '#ffffff',
-          transition: {
-            type: 'spring',
-            stiffness: 600,
-            damping: 15,
-            mass: 1,
-          },
+          transition: { type: 'spring', stiffness: 600, damping: 15, mass: 1 },
         }),
         letterControls.start({
           fill: '#27292F',
-          transition: {
-            type: 'spring',
-            stiffness: 600,
-            damping: 15,
-            mass: 1,
-          },
+          transition: { type: 'spring', stiffness: 600, damping: 15, mass: 1 },
         }),
       ]);
     };
@@ -156,123 +104,212 @@ function LoadingMainScreen() {
     </svg>
   );
 
+  // Общий transition для шаров
+  const balloonTransition = {
+    type: 'tween',
+    ease: 'easeOut',
+    duration: 1.5, // 1500ms
+    delay: 5.401, // 5 секунд (буквы) + 0.4s (предыдущие этапы) + 1ms
+  };
+
   return (
     <section className={styles.LoadingMainScreen}>
       <motion.div className={styles.LoadingMainScreen__container} initial={{ background: '#ffffff' }} animate={sectionControls}>
         <div className={styles.LoadingMainScreen__laba}>
           <motion.div
             className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_l}`}
-            initial={{
-              x: '-17.69vw',
-              y: '38.89vh',
-              rotate: -38,
-              scale: 3.11,
-            }}
+            initial={{ x: '-17.69vw', y: '38.89vh', rotate: -38, scale: 3.11 }}
             animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 4 }}
+            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 5 }}
           >
             <LetterL />
           </motion.div>
 
           <motion.div
             className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_a}`}
-            initial={{
-              x: '-24.25vw',
-              y: '-54.55vh',
-              rotate: 77,
-              scale: 1.116,
-            }}
+            initial={{ x: '-24.25vw', y: '-54.55vh', rotate: 77, scale: 1.116 }}
             animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 4 }}
+            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 5 }}
           >
             <LetterA />
           </motion.div>
 
           <motion.div
             className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_b}`}
-            initial={{
-              x: '-4vw',
-              y: '32.2vh',
-              rotate: 130,
-              scale: 0.52,
-            }}
+            initial={{ x: '-4vw', y: '32.2vh', rotate: 130, scale: 0.52 }}
             animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 4 }}
+            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 5 }}
           >
             <LetterB />
           </motion.div>
 
           <motion.div
             className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_a}`}
-            initial={{
-              x: '34.5vw',
-              y: '41vh',
-              rotate: -35,
-              scale: 1.83,
-            }}
+            initial={{ x: '34.5vw', y: '41vh', rotate: -35, scale: 1.83 }}
             animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 4 }}
+            transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 5 }}
           >
             <LetterA />
           </motion.div>
 
-          <motion.div className={styles.LoadingMainScreen__spot} initial={{ scale: 17 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 4 }}>
+          <motion.div className={styles.LoadingMainScreen__spot} initial={{ scale: 17 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 384, damping: 12, mass: 1, delay: 5 }}>
             <Spot />
           </motion.div>
         </div>
 
         <div className={styles.LoadingMainScreen__baloons}>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lt1}`}>
-            <Baloon_lt1 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lt2}`}>
-            <Baloon_lt2 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct1}`}>
-            <Baloon_ct1 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct2}`}>
-            <Baloon_ct2 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct3}`}>
-            <Baloon_ct3 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt1}`}>
-            <Baloon_rt1 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt2}`}>
-            <Baloon_rt2 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt3}`}>
-            <Baloon_rt3 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_r}`}>
-            <Baloon_r />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_c}`}>
-            <Baloon_c />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb1}`}>
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb1}`}
+            initial={{ top: '95.42%', left: '124.50%' }}
+            animate={{ top: '73%', left: '78.88%' }}
+            transition={balloonTransition}
+          >
             <Baloon_rb1 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb2}`}>
-            <Baloon_rb2 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb3}`}>
-            <Baloon_rb3 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lb1}`}>
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_c}`}
+            initial={{ top: '-8.89%', left: '47.94%' }}
+            animate={{ top: '41%', left: '31.13%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_c />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lb1}`}
+            initial={{ top: '226.67%', left: '-20.13%' }}
+            animate={{ top: '67.78%', left: '-2.44%' }}
+            transition={balloonTransition}
+          >
             <Baloon_lb1 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lb2}`}>
-            <Baloon_lb2 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb1}`}>
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb1}`}
+            initial={{ top: '128.89%', left: '49.88%' }}
+            animate={{ top: '85.22%', left: '48.88%' }}
+            transition={balloonTransition}
+          >
             <Baloon_cb1 />
-          </div>
-          <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb2}`}>
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb2}`}
+            initial={{ top: '155.41%', left: '42.78%' }}
+            animate={{ top: '82.44%', left: '38.38%' }}
+            transition={balloonTransition}
+          >
             <Baloon_cb2 />
-          </div>
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lb2}`}
+            initial={{ top: '164.65%', left: '20.75%' }}
+            animate={{ top: '75.33%', left: '6.75%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_lb2 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_r}`}
+            initial={{ top: '5.28%', left: '134.35%' }}
+            animate={{ top: '45.44%', left: '91.56%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_r />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct3}`}
+            initial={{ top: '-26.67%', left: '30.31%' }}
+            animate={{ top: '24.11%', left: '33.88%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_ct3 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct2}`}
+            initial={{ top: '-48.78%', left: '32.25%' }}
+            animate={{ top: '16.89%', left: '35.69%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_ct2 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt1}`}
+            initial={{ top: '-39.99%', left: '107.73%' }}
+            animate={{ top: '19.67%', left: '71.63%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_rt1 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb3}`}
+            initial={{ top: '92.07%', left: '137.38%' }}
+            animate={{ top: '64.11%', left: '89.25%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_rb3 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lt2}`}
+            initial={{ top: '29.22%', left: '-34.83%' }}
+            animate={{ top: '22.44%', left: '-5.94%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_lt2 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lt1}`}
+            initial={{ top: '-56.11%', left: '-77.13%' }}
+            animate={{ top: '7.11%', left: '-16.69%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_lt1 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb2}`}
+            initial={{ top: '134.28%', left: '134.44%' }}
+            animate={{ top: '63.78%', left: '79.25%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_rb2 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt2}`}
+            initial={{ top: '-58.11%', left: '122.38%' }}
+            animate={{ top: '24.89%', left: '84.88%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_rt2 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt3}`}
+            initial={{ top: '-96.44%', left: '120.81%' }}
+            animate={{ top: '3.89%', left: '75.63%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_rt3 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct1}`}
+            initial={{ top: '-100.33%', left: '33.44%' }}
+            animate={{ top: '7.67%', left: '28.69%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_ct1 />
+          </motion.div>
         </div>
       </motion.div>
     </section>
