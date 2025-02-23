@@ -159,39 +159,12 @@ function LoadingMainScreen() {
 
         <div className={styles.LoadingMainScreen__baloons}>
           <motion.div
-            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb1}`}
-            initial={{ top: '95.42%', left: '124.50%' }}
-            animate={{ top: '73%', left: '78.88%' }}
-            transition={balloonTransition}
-          >
-            <Baloon_rb1 />
-          </motion.div>
-
-          <motion.div
             className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_c}`}
             initial={{ top: '-8.89%', left: '47.94%' }}
             animate={{ top: '41%', left: '31.13%' }}
             transition={balloonTransition}
           >
             <Baloon_c />
-          </motion.div>
-
-          <motion.div
-            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lb1}`}
-            initial={{ top: '226.67%', left: '-20.13%' }}
-            animate={{ top: '67.78%', left: '-2.44%' }}
-            transition={balloonTransition}
-          >
-            <Baloon_lb1 />
-          </motion.div>
-
-          <motion.div
-            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb1}`}
-            initial={{ top: '128.89%', left: '49.88%' }}
-            animate={{ top: '85.22%', left: '48.88%' }}
-            transition={balloonTransition}
-          >
-            <Baloon_cb1 />
           </motion.div>
 
           <motion.div
@@ -222,51 +195,6 @@ function LoadingMainScreen() {
           </motion.div>
 
           <motion.div
-            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct3}`}
-            initial={{ top: '-26.67%', left: '30.31%' }}
-            animate={{ top: '24.11%', left: '33.88%' }}
-            transition={balloonTransition}
-          >
-            <Baloon_ct3 />
-          </motion.div>
-
-          <motion.div
-            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct2}`}
-            initial={{ top: '-48.78%', left: '32.25%' }}
-            animate={{ top: '16.89%', left: '35.69%' }}
-            transition={balloonTransition}
-          >
-            <Baloon_ct2 />
-          </motion.div>
-
-          <motion.div
-            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt1}`}
-            initial={{ top: '-39.99%', left: '107.73%' }}
-            animate={{ top: '19.67%', left: '71.63%' }}
-            transition={balloonTransition}
-          >
-            <Baloon_rt1 />
-          </motion.div>
-
-          <motion.div
-            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb3}`}
-            initial={{ top: '92.07%', left: '137.38%' }}
-            animate={{ top: '64.11%', left: '89.25%' }}
-            transition={balloonTransition}
-          >
-            <Baloon_rb3 />
-          </motion.div>
-
-          <motion.div
-            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lt2}`}
-            initial={{ top: '29.22%', left: '-34.83%' }}
-            animate={{ top: '22.44%', left: '-5.94%' }}
-            transition={balloonTransition}
-          >
-            <Baloon_lt2 />
-          </motion.div>
-
-          <motion.div
             className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lt1}`}
             initial={{ top: '-56.11%', left: '-77.13%' }}
             animate={{ top: '7.11%', left: '-16.69%' }}
@@ -285,15 +213,6 @@ function LoadingMainScreen() {
           </motion.div>
 
           <motion.div
-            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt2}`}
-            initial={{ top: '-58.11%', left: '122.38%' }}
-            animate={{ top: '24.89%', left: '84.88%' }}
-            transition={balloonTransition}
-          >
-            <Baloon_rt2 />
-          </motion.div>
-
-          <motion.div
             className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt3}`}
             initial={{ top: '-96.44%', left: '120.81%' }}
             animate={{ top: '3.89%', left: '75.63%' }}
@@ -309,6 +228,82 @@ function LoadingMainScreen() {
             transition={balloonTransition}
           >
             <Baloon_ct1 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt2}`}
+            initial={{ top: '-58.11%', left: '122.38%' }}
+            animate={{ top: '24.89%', left: '84.88%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_rt2 />
+          </motion.div>
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rt1}`}
+            initial={{ top: '-39.99%', left: '107.73%' }}
+            animate={{ top: '19.67%', left: '71.63%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_rt1 />
+          </motion.div>
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb1}`}
+            initial={{ top: '95.42%', left: '124.50%' }}
+            animate={{ top: '73%', left: '78.88%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_rb1 />
+          </motion.div>
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_rb3}`}
+            initial={{ top: '92.07%', left: '137.38%' }}
+            animate={{ top: '64.11%', left: '89.25%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_rb3 />
+          </motion.div>
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct2}`}
+            initial={{ top: '-48.78%', left: '32.25%' }}
+            animate={{ top: '16.89%', left: '35.69%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_ct2 />
+          </motion.div>
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_ct3}`}
+            initial={{ top: '-26.67%', left: '30.31%' }}
+            animate={{ top: '24.11%', left: '33.88%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_ct3 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lb1}`}
+            initial={{ top: '226.67%', left: '-20.13%' }}
+            animate={{ top: '67.78%', left: '-2.44%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_lb1 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_lt2}`}
+            initial={{ top: '29.22%', left: '-34.83%' }}
+            animate={{ top: '22.44%', left: '-5.94%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_lt2 />
+          </motion.div>
+
+          <motion.div
+            className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb1}`}
+            initial={{ top: '128.89%', left: '49.88%' }}
+            animate={{ top: '85.22%', left: '48.88%' }}
+            transition={balloonTransition}
+          >
+            <Baloon_cb1 />
           </motion.div>
         </div>
       </motion.div>
