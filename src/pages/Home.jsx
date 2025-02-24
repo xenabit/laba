@@ -25,9 +25,9 @@ export default function Home() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  
+
   return (
-    <main>
+    <main style={{ backgroundColor: 'white' }}>
       <Intro2 />
       <ProjectsTile />
       <Ticker />

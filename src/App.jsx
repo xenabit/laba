@@ -13,7 +13,7 @@ import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother.min';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.jsx';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -38,8 +38,8 @@ const App = () => {
   return (
     <>
       <div id="smooth-wrapper">
-        <LoadingMainScreen />
         <Header />
+        <LoadingMainScreen />
         <div id="smooth-content">
           <Routes>
             <Route path="/" element={<Home />} />
