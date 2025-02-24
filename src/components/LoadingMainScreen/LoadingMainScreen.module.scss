@@ -6,7 +6,6 @@
     justify-content: center;
     align-items: center;
     gap: 50px;
-    z-index: 300;
     position: relative;
     background-color: white;
   }
@@ -42,100 +41,433 @@
     margin-left: 24px;
   }
 
+  &__desc {
+    font-size: 30px;
+  }
+
   &__baloons {
     position: absolute;
     width: 100%;
     height: 100%;
   }
 
+  $delay1: 5.5s;
+  $delay2: 7s;
+
   &__baloon {
     position: absolute;
     top: 0;
     left: 0;
-
-    &_lt1 {
-      top: 7.11%;
-      left: -16.69%;
-    }
-
-    &_lt2 {
-      top: 22.44%;
-      left: -5.94%;
-    }
-
-    &_ct1 {
-      top: 7.67%;
-      left: 28.69%;
-    }
-
-    &_ct2 {
-      top: 16.89%;
-      left: 35.69%;
-    }
-
-    &_ct3 {
-      top: 24.11%;
-      left: 33.88%;
-    }
-
-    &_rt1 {
-      top: 19.67%;
-      left: 71.63%;
-    }
-
-    &_rt2 {
-      top: 24.89%;
-      left: 84.88%;
-    }
-
-    &_rt3 {
-      top: 3.89%;
-      left: 75.63%;
-    }
-
-    &_r {
-      top: 45.44%;
-      left: 91.56%;
-    }
+    isolation: isolate;
 
     &_c {
-      top: 41%;
-      left: 31.13%;
+      top: -8.89%;
+      left: 47.94%;
+      scale: 1;
+      animation:
+        loadingBaloonTransitionC 1.5s ease-out $delay1 forwards,
+        loadingBaloonChangeC 1.5s linear $delay2 infinite alternate;
     }
 
-    &_rb1 {
-      top: 73%;
-      left: 78.88%;
+    @keyframes loadingBaloonTransitionC {
+      0% {
+        top: -8.89%;
+        left: 47.94%;
+      }
+      100% {
+        top: 41%;
+        left: 31.13%;
+      }
     }
 
-    &_rb2 {
-      top: 63.78%;
-      left: 79.25%;
-    }
-
-    &_rb3 {
-      top: 64.11%;
-      left: 89.25%;
-    }
-
-    &_lb1 {
-      top: 67.78%;
-      left: -2.44%;
-    }
-
-    &_lb2 {
-      top: 75.33%;
-      left: 6.75%;
-    }
-
-    &_cb1 {
-      top: 85.22%;
-      left: 48.88%;
+    @keyframes loadingBaloonChangeC {
+      0% {
+        scale: 1;
+      }
+      100% {
+        scale: 0.7;
+      }
     }
 
     &_cb2 {
-      top: 82.44%;
-      left: 38.38%;
+      top: 155.41%;
+      scale: 1;
+      left: 42.78%;
+      animation:
+        loadingBaloonTransitionCb2 1.5s ease-out $delay1 forwards,
+        loadingBaloonChangeCb2 1.5s linear $delay2 infinite alternate;
+    }
+
+    @keyframes loadingBaloonTransitionCb2 {
+      0% {
+        top: 155.41%;
+        left: 42.78%;
+      }
+      100% {
+        top: 82.44%;
+        left: 38.38%;
+      }
+    }
+
+    @keyframes loadingBaloonChangeCb2 {
+      0% {
+        scale: 1;
+        top: 82.44%;
+      }
+      100% {
+        scale: 1.01;
+        top: 83.44%;
+      }
+    }
+
+    &_lb2 {
+      top: 164.65%;
+      scale: 1;
+      left: 20.75%;
+      animation:
+        loadingBaloonTransitionLb2 1.5s ease-out $delay1 forwards,
+        loadingBaloonChangeLb2 1.5s linear $delay2 infinite alternate;
+    }
+
+    @keyframes loadingBaloonTransitionLb2 {
+      0% {
+        top: 164.65%;
+        left: 20.75%;
+      }
+      100% {
+        top: 75.33%;
+        left: 6.75%;
+      }
+    }
+
+    @keyframes loadingBaloonChangeLb2 {
+      0% {
+        scale: 1;
+        top: 75.33%;
+        left: 6.75%;
+      }
+      100% {
+        scale: 1.09;
+        top: 75.93%;
+        left: 7.15%;
+      }
+    }
+
+    &_r {
+      top: 5.28%;
+      scale: 1;
+      left: 134.35%;
+      animation:
+        loadingBaloonTransitionR 1.5s ease-out $delay1 forwards,
+        loadingBaloonChangeR 1.5s linear $delay2 infinite alternate;
+    }
+
+    @keyframes loadingBaloonTransitionR {
+      0% {
+        top: 5.28%;
+        left: 134.35%;
+      }
+      100% {
+        top: 45.44%;
+        left: 91.56%;
+      }
+    }
+
+    @keyframes loadingBaloonChangeR {
+      0% {
+        scale: 1;
+        top: 45.44%;
+        left: 91.56%;
+      }
+      100% {
+        scale: 1.09;
+        top: 45.94%;
+        left: 91.96%;
+      }
+    }
+
+    &_lt1 {
+      top: -56.11%;
+      scale: 1;
+      left: -77.13%;
+      animation:
+        loadingBaloonTransitionLt1 1.5s ease-out $delay1 forwards,
+        loadingBaloonChangeLt1 1.5s linear $delay2 infinite alternate;
+    }
+
+    @keyframes loadingBaloonTransitionLt1 {
+      0% {
+        top: -56.11%;
+        left: -77.13%;
+      }
+      100% {
+        top: 7.11%;
+        left: -16.69%;
+      }
+    }
+
+    @keyframes loadingBaloonChangeLt1 {
+      0% {
+        scale: 1;
+        top: 7.11%;
+        left: -16.69%;
+      }
+      100% {
+        scale: 1.05;
+        top: 8.11%;
+        left: -15.69%;
+      }
+    }
+
+    &_rb2 {
+      top: 134.28%;
+      scale: 1;
+      left: 134.44%;
+      animation:
+        loadingBaloonTransitionRb2 1.5s ease-out $delay1 forwards,
+        loadingBaloonChangeRb2 1.5s linear $delay2 infinite alternate;
+    }
+
+    @keyframes loadingBaloonTransitionRb2 {
+      0% {
+        top: 134.28%;
+        left: 134.44%;
+      }
+      100% {
+        top: 63.78%;
+        left: 79.25%;
+      }
+    }
+
+    @keyframes loadingBaloonChangeRb2 {
+      0% {
+        scale: 1;
+        top: 63.78%;
+        left: 79.25%;
+      }
+      100% {
+        scale: 1.08;
+        top: 64.78%;
+        left: 80.25%;
+      }
+    }
+
+    &_rt3 {
+      top: -96.44%;
+      scale: 1;
+      left: 120.81%;
+      animation:
+        loadingBaloonTransitionRt3 1.5s ease-out $delay1 forwards,
+        loadingBaloonChangeRt3 1.5s linear $delay2 infinite alternate;
+    }
+
+    @keyframes loadingBaloonTransitionRt3 {
+      0% {
+        top: -96.44%;
+        left: 120.81%;
+      }
+      100% {
+        top: 3.89%;
+        left: 75.63%;
+      }
+    }
+
+    @keyframes loadingBaloonChangeRt3 {
+      0% {
+        scale: 1;
+        top: 3.89%;
+        left: 75.63%;
+      }
+      100% {
+        scale: 1.02;
+        top: 4.89%;
+        left: 74.63%;
+      }
+    }
+
+    &_ct1 {
+      top: -100.33%;
+      scale: 1;
+      left: 33.44%;
+      animation: loadingBaloonTransitionCt1 1.5s ease-out $delay1 forwards;
+    }
+    @keyframes loadingBaloonTransitionCt1 {
+      0% {
+        top: -100.33%;
+        left: 33.44%;
+      }
+      100% {
+        top: 7.67%;
+        left: 28.69%;
+      }
+    }
+
+    &_rt2 {
+      top: -58.11%;
+      scale: 1;
+      left: 122.38%;
+      animation: loadingBaloonTransitionRt2 1.5s ease-out $delay1 forwards;
+    }
+    @keyframes loadingBaloonTransitionRt2 {
+      0% {
+        top: -58.11%;
+        left: 122.38%;
+      }
+      100% {
+        top: 24.89%;
+        left: 84.88%;
+      }
+    }
+
+    &_rt1 {
+      top: -39.99%;
+      scale: 1;
+      left: 107.73%;
+      animation: loadingBaloonTransitionRt1 1.5s ease-out $delay1 forwards;
+    }
+    @keyframes loadingBaloonTransitionRt1 {
+      0% {
+        top: -39.99%;
+        left: 107.73%;
+      }
+      100% {
+        top: 19.67%;
+        left: 71.63%;
+      }
+    }
+
+    &_rb1 {
+      top: 95.42%;
+      scale: 1;
+      left: 124.5%;
+      animation: loadingBaloonTransitionRb1 1.5s ease-out $delay1 forwards;
+    }
+    @keyframes loadingBaloonTransitionRb1 {
+      0% {
+        top: 95.42%;
+        left: 124.5%;
+      }
+      100% {
+        top: 73%;
+        left: 78.88%;
+      }
+    }
+
+    &_rb3 {
+      top: 92.07%;
+      scale: 1;
+      left: 137.38%;
+      animation:
+        loadingBaloonTransitionRb3 1.5s ease-out $delay1 forwards,
+        loadingBaloonChangeRb3 1.5s linear $delay2 infinite alternate;
+    }
+    @keyframes loadingBaloonTransitionRb3 {
+      0% {
+        top: 92.07%;
+        left: 137.38%;
+      }
+      100% {
+        top: 64.11%;
+        left: 89.25%;
+      }
+    }
+
+    @keyframes loadingBaloonChangeRb3 {
+      0% {
+        scale: 1;
+        top: 64.11%;
+        left: 89.25%;
+      }
+      100% {
+        scale: 1.08;
+        top: 63.11%;
+        left: 87.25%;
+      }
+    }
+
+    &_ct2 {
+      top: -48.78%;
+      scale: 1;
+      left: 32.25%;
+      animation: loadingBaloonTransitionCt2 1.5s ease-out $delay1 forwards;
+    }
+    @keyframes loadingBaloonTransitionCt2 {
+      0% {
+        top: -48.78%;
+        left: 32.25%;
+      }
+      100% {
+        top: 16.89%;
+        left: 35.69%;
+      }
+    }
+
+    &_ct3 {
+      top: -26.67%;
+      scale: 1;
+      left: 30.31%;
+      animation: loadingBaloonTransitionCt3 1.5s ease-out $delay1 forwards;
+    }
+    @keyframes loadingBaloonTransitionCt3 {
+      0% {
+        top: -26.67%;
+        left: 30.31%;
+      }
+      100% {
+        top: 24.11%;
+        left: 33.88%;
+      }
+    }
+
+    &_lb1 {
+      top: 226.67%;
+      scale: 1;
+      left: -20.13%;
+      animation: loadingBaloonTransitionLb1 1.5s ease-out $delay1 forwards;
+    }
+    @keyframes loadingBaloonTransitionLb1 {
+      0% {
+        top: 226.67%;
+        left: -20.13%;
+      }
+      100% {
+        top: 67.78%;
+        left: -2.44%;
+      }
+    }
+
+    &_lt2 {
+      top: 29.22%;
+      scale: 1;
+      left: -34.83%;
+      animation: loadingBaloonTransitionLt2 1.5s ease-out $delay1 forwards;
+    }
+    @keyframes loadingBaloonTransitionLt2 {
+      0% {
+        top: 29.22%;
+        left: -34.83%;
+      }
+      100% {
+        top: 22.44%;
+        left: -5.94%;
+      }
+    }
+
+    &_cb1 {
+      top: 128.89%;
+      scale: 1;
+      left: 49.88%;
+      animation: loadingBaloonTransitionCb1 1.5s ease-out $delay1 forwards;
+    }
+    @keyframes loadingBaloonTransitionCb1 {
+      0% {
+        top: 128.89%;
+        left: 49.88%;
+      }
+      100% {
+        top: 85.22%;
+        left: 48.88%;
+      }
     }
   }
 }
