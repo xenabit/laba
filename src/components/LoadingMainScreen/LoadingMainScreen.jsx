@@ -19,6 +19,7 @@ import Baloon_cb1 from '../../assets/images/loading-main-baloon-cb1.svg?react';
 import Baloon_cb2 from '../../assets/images/loading-main-baloon-cb2.svg?react';
 import Baloon_r from '../../assets/images/loading-main-baloon-r.svg?react';
 import Baloon_c from '../../assets/images/loading-main-baloon-c.svg?react';
+import Flare from '../../assets/images/loading-main-flare.svg?react';
 
 function LoadingMainScreen() {
   const sectionControls = useAnimation();
@@ -211,6 +212,9 @@ function LoadingMainScreen() {
           <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_cb1}`}>
             <Baloon_cb1 />
           </div>
+        </div>
+        <div className={styles.LoadingMainScreen__flare}>
+          <Flare />
         </div>
       </motion.div>
     </section>
