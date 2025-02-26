@@ -3,6 +3,7 @@ import styles from './LoadingMainScreen.module.scss';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 
+// Импорты шаров
 import Baloon_lt2 from '../../assets/images/loading-main-baloon-lt2.svg?react';
 import Baloon_lt1 from '../../assets/images/loading-main-baloon-lt1.svg?react';
 import Baloon_ct1 from '../../assets/images/loading-main-baloon-ct1.svg?react';
@@ -21,24 +22,23 @@ import Baloon_cb2 from '../../assets/images/loading-main-baloon-cb2.svg?react';
 import Baloon_r from '../../assets/images/loading-main-baloon-r.svg?react';
 import Baloon_c from '../../assets/images/loading-main-baloon-c.svg?react';
 import Flare from '../../assets/images/loading-main-flare.svg?react';
+
 const ANIMATION_DELAY_LETTER = 4.2;
 
 function LoadingMainScreen() {
   const containerRef = useRef(null);
   const letterRefs = useRef([]);
+  const balloonsRef = useRef(null); // Ref для .LoadingMainScreen__baloons
 
   useEffect(() => {
     const container = containerRef.current;
     const letters = letterRefs.current;
 
-    // ease: 'elastic.out(1.3, 0.35)',
-    // amplitude — сила отскока (обычно от 1 до 2).
-    // period — длительность одного колебания (обычно от 0.3 до 0.7).
+    gsap.set(letters, { fill: '#ffffff' });
 
     const animateSequence = () => {
       const tl = gsap.timeline();
 
-      // Первая фаза: фон → #27292F, буквы → #2f3137
       tl.to(container, {
         background: '#27292F',
         duration: 1.6,
@@ -54,7 +54,6 @@ function LoadingMainScreen() {
         0.4
       );
 
-      // Вторая фаза: фон → #2f3137, буквы → #ffffff
       tl.to(container, {
         background: '#2f3137',
         duration: 0.3,
@@ -69,7 +68,6 @@ function LoadingMainScreen() {
         '-=1'
       );
 
-      // Третья фаза: фон → #ffffff, буквы → #ffffff
       tl.to(container, {
         background: '#ffffff',
         duration: 0.5,
@@ -84,7 +82,6 @@ function LoadingMainScreen() {
         '-=1'
       );
 
-      // Четвёртая фаза: фон → #ffffff, буквы → #27292F
       tl.to(container, {
         background: '#ffffff',
         duration: 0.3,
@@ -103,10 +100,16 @@ function LoadingMainScreen() {
     animateSequence();
   }, []);
 
-  // Функция для добавления ref к массиву
   const addToRefs = (el) => {
     if (el && !letterRefs.current.includes(el)) {
       letterRefs.current.push(el);
+    }
+  };
+
+  // Функция для добавления класса scroll
+  const handleBalloonsClick = () => {
+    if (balloonsRef.current) {
+      balloonsRef.current.classList.toggle(styles.scroll);
     }
   };
 
@@ -114,7 +117,6 @@ function LoadingMainScreen() {
     <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         ref={addToRefs}
-        fill="#ffffff"
         d="M30.1097 15.548C30.1097 23.5924 23.5885 30.1136 15.5441 30.1136C7.49977 30.1136 0.978516 23.5924 0.978516 15.548C0.978516 7.50367 7.49977 0.982422 15.5441 0.982422C23.5885 0.982422 30.1097 7.50367 30.1097 15.548Z"
       />
     </svg>
@@ -122,7 +124,7 @@ function LoadingMainScreen() {
 
   const LetterL = () => (
     <svg width="137" height="155" viewBox="0 0 137 155" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path ref={addToRefs} fill="#ffffff" d="M22.5532 0V131.56H136.259V154.113H0V0H22.5532Z" />
+      <path ref={addToRefs} d="M22.5532 0V131.56H136.259V154.113H0V0H22.5532Z" />
     </svg>
   );
 
@@ -130,7 +132,6 @@ function LoadingMainScreen() {
     <svg width="186" height="155" viewBox="0 0 186 155" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         ref={addToRefs}
-        fill="#ffffff"
         d="M185.177 154.113H160.273L139.777 114.044H45.2318L24.7359 154.113H0.0527344L77.6285 0H107.601L185.177 154.113ZM92.6147 22.6767L46.3337 111.842H138.675L92.6147 22.6767Z"
       />
     </svg>
@@ -140,13 +141,11 @@ function LoadingMainScreen() {
     <svg width="162" height="155" viewBox="0 0 162 155" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         ref={addToRefs}
-        fill="#ffffff"
         d="M122.207 75.5156C147.997 78.818 161.663 94.2294 161.663 114.484C161.663 137.601 143.368 154.113 111.185 154.113H0.97168V0H106.336C138.298 0 155.05 16.0718 155.05 38.5284C155.05 57.022 143.809 71.1124 122.207 75.5156ZM101.487 21.3557H24.4646V74.8551H101.487C123.089 74.8551 133.889 63.847 133.889 48.2155C133.889 32.3638 123.089 21.3557 101.487 21.3557ZM24.4646 132.758H105.013C127.938 132.758 139.62 121.309 139.62 104.797C139.62 88.5052 127.938 77.0567 105.013 77.0567H24.4646V132.758Z"
       />
     </svg>
   );
 
-  // Объект transition без delay
   const baseTransition = {
     type: 'spring',
     stiffness: 384,
@@ -200,7 +199,11 @@ function LoadingMainScreen() {
         </div>
 
         <div className={styles.LoadingMainScreen__desc}>Создаем уникальные цифровые продукты</div>
-        <div className={styles.LoadingMainScreen__baloons}>
+        <div
+          ref={balloonsRef}
+          className={styles.LoadingMainScreen__baloons}
+          onClick={handleBalloonsClick} // Обработчик клика
+        >
           <div className={`${styles.LoadingMainScreen__baloon} ${styles.LoadingMainScreen__baloon_c}`}>
             <Baloon_c />
           </div>
