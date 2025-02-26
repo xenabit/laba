@@ -11,6 +11,7 @@ const TextEffect = () => {
   const heroRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const prevScrollY = useRef(window.scrollY);
+  // const animationFrame = useRef(null);
 
   useEffect(() => {
     const currentHero = heroRef.current;
@@ -152,3 +153,30 @@ const TextEffect = () => {
 };
 
 export default TextEffect;
+
+
+
+
+  // useEffect(() => {
+  //     if (!isVisible || !heroRef.current) return;
+
+  //     const layerFirst = heroRef.current.querySelector(`.${styles.TextEffect__layer_first}`);
+
+  //     const updateMask = (e) => {
+  //       if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
+  //       animationFrame.current = requestAnimationFrame(() => {
+  //         const { clientX, clientY } = e;
+  //         const x = Math.round((clientX / window.innerWidth) * 100);
+  //         const y = Math.round((clientY / window.innerHeight) * 100);
+  //         const clipValue = `circle(75px at ${x}% ${y}%)`;
+  //         // Обновляем значение сразу, без GSAP-твина
+  //         layerFirst.style.clipPath = clipValue;
+  //       });
+  //     };
+
+  //     window.addEventListener('mousemove', updateMask);
+  //     return () => {
+  //       window.removeEventListener('mousemove', updateMask);
+  //       if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
+  //     };
+  //   }, [isVisible]);

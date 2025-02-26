@@ -3,9 +3,12 @@ import { useSpring, animated } from 'react-spring';
 import { useInView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 import TextEffect from '../TextEffect/TextEffect';
-import TextEffect1 from '../TextEffect/TextEffect1';
+// import TextEffect1 from '../TextEffect/TextEffect1';
 
 // import video from '../../assets/videos/intro-cover.mp4';
 import img from '../../assets/images/counter-img1.png';
@@ -115,7 +118,7 @@ const Counter = () => {
         .fromTo(
           pictureRef.current,
           { scale: 1 },
-          { scale: 2, duration: 0.3, ease: 'none' },
+          { scale: 2, duration: 0.2, ease: 'none' },
           0
         )
         .fromTo(
@@ -127,12 +130,52 @@ const Counter = () => {
         .fromTo(
           textRef.current,
           { opacity: 0, marginTop: '100px' },
-          { opacity: 1, marginTop: '100px', duration: 0.2, ease: 'linear' },
+          { opacity: 1, marginTop: '100px', duration: 0.6, ease: 'linear' },
           0.3
         );
     }, sectionRef);
     return () => ctxSwitcher.revert();
   }, [isDesktop]);
+
+
+  useEffect(() => {
+  if (!isDesktop || !switcherRef.current) return;
+
+  const stSwitcher = ScrollTrigger.create({
+    trigger: switcherRef.current,
+    start: "center center",
+    end: "center center",
+    pin: textRef.current,
+    pinSpacing: false,
+    scrub: false,
+    pinReparent: true,
+    snap: {
+      snapTo: "center",
+      duration: 0.5,
+      delay: 0.1,
+      ease: "power1.inOut",
+    },
+    toggleActions: "play none reverse none",
+    fastScrollEnd: false,
+    onEnter: () => {
+      document.body.style.overflow = "hidden";
+
+      setTimeout(() => {
+        document.body.style.overflow = "";
+      }, 2000);
+    },
+    onLeaveBack: () => {
+      gsap.to(switcherRef.current, { y: 0, duration: 0.2, ease: "power1.out" });
+      document.body.style.overflow = "hidden";
+      setTimeout(() => {
+        document.body.style.overflow = "";
+      }, 0);
+    },
+    // markers: true,
+  });
+
+  return () => stSwitcher.kill();
+}, [isDesktop]);
 
 
   return (
@@ -170,7 +213,6 @@ const Counter = () => {
             <p>Лет на&nbsp;рынке 3D&nbsp;графики</p>
           </div>
         </div>
-
         {isDesktop ? (
           <div ref={switcherRef} className={styles.switcherWrapper}>
             <img
@@ -203,6 +245,6 @@ const Counter = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Counter;
