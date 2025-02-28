@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useInView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
@@ -8,7 +8,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 import TextEffect from '../TextEffect/TextEffect';
-// import TextEffect1 from '../TextEffect/TextEffect1';
 
 // import video from '../../assets/videos/intro-cover.mp4';
 import img from '../../assets/images/counter-img1.png';
@@ -124,13 +123,13 @@ const Counter = () => {
         .fromTo(
           pictureRef.current,
           { opacity: 1 },
-          { opacity: 0, duration: 0.1, ease: 'none' },
+          { opacity: 0, duration: 0.2, ease: 'none' },
           0.4
         )
         .fromTo(
           textRef.current,
           { opacity: 0, marginTop: '100px' },
-          { opacity: 1, marginTop: '100px', duration: 0.6, ease: 'linear' },
+          { opacity: 1, marginTop: '100px', duration: 0.3, ease: 'linear' },
           0.3
         );
     }, sectionRef);
@@ -139,44 +138,42 @@ const Counter = () => {
 
 
   useEffect(() => {
-  if (!isDesktop || !switcherRef.current) return;
+    if (!isDesktop || !textRef.current) return;
 
-  const stSwitcher = ScrollTrigger.create({
-    trigger: switcherRef.current,
-    start: "center center",
-    end: "center center",
-    pin: textRef.current,
-    pinSpacing: false,
-    scrub: false,
-    pinReparent: true,
-    snap: {
-      snapTo: "center",
-      duration: 0.5,
-      delay: 0.1,
-      ease: "power1.inOut",
-    },
-    toggleActions: "play none reverse none",
-    fastScrollEnd: false,
-    onEnter: () => {
-      document.body.style.overflow = "hidden";
-
-      setTimeout(() => {
-        document.body.style.overflow = "";
-      }, 2000);
-    },
-    onLeaveBack: () => {
-      gsap.to(switcherRef.current, { y: 0, duration: 0.2, ease: "power1.out" });
+    const blockScroll = () => {
       document.body.style.overflow = "hidden";
       setTimeout(() => {
         document.body.style.overflow = "";
-      }, 0);
-    },
-    // markers: true,
-  });
+      }, 3000);
+    };
 
-  return () => stSwitcher.kill();
-}, [isDesktop]);
+    // ScrollTrigger для скролла вниз
+    const stDown = ScrollTrigger.create({
+      trigger: textRef.current,
+      start: "center center",
+      end: "center center",
+      // pin: true,
+      onEnter: () => {
+        blockScroll();
+      },
+    });
 
+    // ScrollTrigger для скролла вверх
+    // const stUp = ScrollTrigger.create({
+    //   trigger: textRef.current,
+    //   start: "center center",
+    //   end: "center center",
+    //   // pin: true,
+    //   onEnterBack: () => {
+    //     blockScroll();
+    //   },
+    // });
+
+    return () => {
+      stDown.kill();
+      // stUp.kill();
+    };
+  }, [isDesktop]);
 
   return (
     <section ref={sectionRef} className={styles.Counter}>
@@ -223,7 +220,6 @@ const Counter = () => {
             />
             <div ref={textRef} className={styles.switcherWrapper__textEffectContainer}>
               <TextEffect />
-              {/* <TextEffect1 /> */}
             </div>
           </div>
         ) : (
