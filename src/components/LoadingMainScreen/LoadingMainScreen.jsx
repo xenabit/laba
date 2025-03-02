@@ -38,6 +38,8 @@ function LoadingMainScreen() {
 
     gsap.set(letters, { fill: '#ffffff' });
 
+    let isMagnetActive = false; // Флаг для магнитного эффекта
+
     const animateSequence = () => {
       const tl = gsap.timeline();
       tl.to(container, { background: '#27292F', duration: 1.6, ease: 'elastic.out(1.3, 0.35)', delay: 0.4 })
@@ -53,10 +55,7 @@ function LoadingMainScreen() {
     const animateBalloonsToPosition = () => {
       if (hasScrolled.current) return;
       hasScrolled.current = true;
-
-      const balloons = balloonsRef.current.querySelectorAll(`.${styles.LoadingMainScreen__baloon}`);
-      const container = containerRef.current;
-      const balloonC = balloonsRef.current.querySelector(`.${styles.LoadingMainScreen__baloon_c}`);
+      isMagnetActive = false; // Отключаем магнит при скролле
 
       const containerWidth = container.offsetWidth;
       const containerHeight = container.offsetHeight;
@@ -114,16 +113,16 @@ function LoadingMainScreen() {
         );
       });
 
+      const balloonC = balloonsRef.current.querySelector(`.${styles.LoadingMainScreen__baloon_c}`);
       if (balloonC) {
         gsap.set(balloonC, {
           top: `39.8%`,
           left: `30.7%`,
           transformOrigin: 'center',
-          width: '68px', // Начальный размер
+          width: '68px',
           height: '68px',
         });
 
-        // Массив шагов с пересчитанным scale
         const scaleSteps = [
           { scale: 1, top: '39.8%', left: '30.7%' },
           { scale: 1, top: '39.8%', left: '30.7%' },
@@ -158,12 +157,61 @@ function LoadingMainScreen() {
       }
     };
 
+    // Магнитный эффект
+    const handleMouseMove = (e) => {
+      if (!isMagnetActive || hasScrolled.current) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const mouseX = e.clientX - containerRect.left;
+      const mouseY = e.clientY - containerRect.top;
+
+      balloons.forEach((balloon) => {
+        const balloonRect = balloon.getBoundingClientRect();
+        const balloonX = balloonRect.left - containerRect.left + balloonRect.width / 2;
+        const balloonY = balloonRect.top - containerRect.top + balloonRect.height / 2;
+
+        const distance = Math.sqrt((mouseX - balloonX) ** 2 + (mouseY - balloonY) ** 2);
+        const maxDistance = 200; // Радиус действия магнита
+        const magnetStrength = 40; // Максимальное смещение в пикселях
+
+        if (distance < maxDistance) {
+          const angle = Math.atan2(mouseY - balloonY, mouseX - balloonX);
+          const force = (1 - distance / maxDistance) * magnetStrength;
+          const offsetX = Math.cos(angle) * force;
+          const offsetY = Math.sin(angle) * force;
+
+          gsap.to(balloon, {
+            x: offsetX,
+            y: offsetY,
+            duration: 0.3,
+            ease: 'power2.out',
+            overwrite: 'auto',
+            onComplete: () => {
+              if (!isMagnetActive || hasScrolled.current) {
+                gsap.to(balloon, { x: 0, y: 0, duration: 0.3, ease: 'power2.out' });
+              }
+            },
+          });
+        } else {
+          gsap.to(balloon, { x: 0, y: 0, duration: 0.3, ease: 'power2.out' });
+        }
+      });
+    };
+
+    // Активация магнитного эффекта после завершения начальной анимации
+    setTimeout(() => {
+      if (!hasScrolled.current) {
+        isMagnetActive = true;
+        container.addEventListener('mousemove', handleMouseMove);
+      }
+    }, 6500); // 5s (delay) + 1.5s (duration)
+
     const handleScrollAttempt = (event) => {
       event.preventDefault();
       animateBalloonsToPosition();
+      container.removeEventListener('mousemove', handleMouseMove); // Убираем магнит при скролле
     };
 
-    // Добавляем слушатели только после разблокировки
     setTimeout(() => {
       window.addEventListener('wheel', handleScrollAttempt, { passive: false });
       window.addEventListener('touchmove', handleScrollAttempt, { passive: false });
@@ -174,6 +222,7 @@ function LoadingMainScreen() {
     return () => {
       window.removeEventListener('wheel', handleScrollAttempt);
       window.removeEventListener('touchmove', handleScrollAttempt);
+      container.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
