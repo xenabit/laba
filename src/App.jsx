@@ -40,7 +40,7 @@ const App = () => {
       <div id="smooth-wrapper">
         <Header />
         <LoadingMainScreen />
-        <div id="smooth-content">
+        {/* <div id="smooth-content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/portfolio" element={<GalleryTabs />} />
@@ -52,7 +52,7 @@ const App = () => {
           <Footer />
         </div>
 
-        <CookieAgreement />
+        <CookieAgreement /> */}
       </div>
     </>
   );

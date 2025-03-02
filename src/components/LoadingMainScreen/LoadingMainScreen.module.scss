@@ -10,6 +10,7 @@
     gap: 50px;
     position: relative;
     background-color: white;
+    overflow: hidden;
   }
 
   &__laba {
@@ -56,48 +57,53 @@
     height: 100%;
   }
 
+  $BaloonMoveDuration: 1.5s;
   $BaloonTransitionDelay: 5s;
-  $BaloonChangeDelay: 6.5s;
-  $BaloonRotateDelay: 8s;
   $flare-duration: 1.5s;
   $flare-start-delay: 6.5s;
 
   &__baloon {
     position: absolute;
-    top: 0;
-    left: 0;
     overflow: hidden;
+    transform-origin: center;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
     &_c {
+      z-index: 10;
       top: -8.89%;
       left: 47.94%;
       scale: 1;
       animation:
-        loadingBaloonTransitionC 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeC 1.5s linear $BaloonChangeDelay infinite alternate;
-    }
+        loadingBaloonTransitionC $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeC $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionC {
-      0% {
-        top: -8.89%;
-        left: 47.94%;
+      @keyframes loadingBaloonTransitionC {
+        0% {
+          top: -8.89%;
+          left: 47.94%;
+        }
+        100% {
+          top: 39.8%;
+          left: 30.7%;
+        }
       }
-      100% {
-        top: 39.8%;
-        left: 30.7%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeC {
-      0% {
-        scale: 1;
-        top: 39.8%;
-        left: 30.7%;
-      }
-      100% {
-        scale: 0.7;
-        top: 39%;
-        left: 30.8%;
+      @keyframes loadingBaloonChangeC {
+        0% {
+          scale: 1;
+          top: 39.8%;
+          left: 30.7%;
+        }
+        100% {
+          scale: 0.7;
+          top: 39%;
+          left: 30.8%;
+        }
       }
     }
 
@@ -106,29 +112,29 @@
       scale: 1;
       left: 42%;
       animation:
-        loadingBaloonTransitionCb2 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeCb2 1.5s linear $BaloonChangeDelay infinite alternate;
-    }
+        loadingBaloonTransitionCb2 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeCb2 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionCb2 {
-      0% {
-        top: 155%;
-        left: 42%;
+      @keyframes loadingBaloonTransitionCb2 {
+        0% {
+          top: 155%;
+          left: 42%;
+        }
+        100% {
+          top: 83%;
+          left: 39%;
+        }
       }
-      100% {
-        top: 83%;
-        left: 39%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeCb2 {
-      0% {
-        scale: 1;
-        top: 83%;
-      }
-      100% {
-        scale: 1.01;
-        top: 84%;
+      @keyframes loadingBaloonChangeCb2 {
+        0% {
+          scale: 1;
+          top: 83%;
+        }
+        100% {
+          scale: 1.01;
+          top: 84%;
+        }
       }
     }
 
@@ -137,38 +143,29 @@
       scale: 1;
       left: 20.75%;
       animation:
-        loadingBaloonTransitionLb2 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeLb2 1.5s linear $BaloonChangeDelay infinite alternate,
-        loadingBaloonRotateLb2 1.5s linear $BaloonRotateDelay infinite alternate;
-    }
+        loadingBaloonTransitionLb2 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeLb2 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionLb2 {
-      0% {
-        top: 164.65%;
-        left: 20.75%;
+      @keyframes loadingBaloonTransitionLb2 {
+        0% {
+          top: 164.65%;
+          left: 20.75%;
+        }
+        100% {
+          top: 74%;
+          left: 5%;
+        }
       }
-      100% {
-        top: 74%;
-        left: 5%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeLb2 {
-      0% {
-        scale: 1;
-      }
-      100% {
-        scale: 0.89;
-      }
-    }
-
-    @keyframes loadingBaloonRotateLb2 {
-      0% {
-        scale: 0.89;
-      }
-      100% {
-        scale: 1;
-        rotate: 21.79deg;
+      @keyframes loadingBaloonChangeLb2 {
+        0% {
+          scale: 1;
+          rotate: 0deg;
+        }
+        100% {
+          scale: 0.89;
+          rotate: 21.79deg;
+        }
       }
     }
 
@@ -177,31 +174,31 @@
       scale: 1;
       left: 134.35%;
       animation:
-        loadingBaloonTransitionR 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeR 1.5s linear $BaloonChangeDelay infinite alternate;
-    }
+        loadingBaloonTransitionR $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeR $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionR {
-      0% {
-        top: 5.28%;
-        left: 134.35%;
+      @keyframes loadingBaloonTransitionR {
+        0% {
+          top: 5.28%;
+          left: 134.35%;
+        }
+        100% {
+          top: 46%;
+          left: 92.5%;
+        }
       }
-      100% {
-        top: 46%;
-        left: 92.5%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeR {
-      0% {
-        scale: 1;
-        top: 46%;
-        left: 92.5%;
-      }
-      100% {
-        scale: 1.09;
-        top: 48%;
-        left: 92.5%;
+      @keyframes loadingBaloonChangeR {
+        0% {
+          scale: 1;
+          top: 46%;
+          left: 92.5%;
+        }
+        100% {
+          scale: 1.09;
+          top: 48%;
+          left: 92.5%;
+        }
       }
     }
 
@@ -210,31 +207,31 @@
       scale: 1;
       left: -77.13%;
       animation:
-        loadingBaloonTransitionLt1 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeLt1 1.5s linear $BaloonChangeDelay infinite alternate;
-    }
+        loadingBaloonTransitionLt1 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeLt1 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionLt1 {
-      0% {
-        top: -56%;
-        left: -77%;
+      @keyframes loadingBaloonTransitionLt1 {
+        0% {
+          top: -56%;
+          left: -77%;
+        }
+        100% {
+          top: 7%;
+          left: -18%;
+        }
       }
-      100% {
-        top: 7%;
-        left: -18%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeLt1 {
-      0% {
-        scale: 1;
-        top: 7%;
-        left: -18%;
-      }
-      100% {
-        scale: 0.95;
-        top: 7%;
-        left: -20%;
+      @keyframes loadingBaloonChangeLt1 {
+        0% {
+          scale: 1;
+          top: 7%;
+          left: -18%;
+        }
+        100% {
+          scale: 0.95;
+          top: 7%;
+          left: -20%;
+        }
       }
     }
 
@@ -243,31 +240,31 @@
       scale: 1;
       left: 134.44%;
       animation:
-        loadingBaloonTransitionRb2 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeRb2 1.5s linear $BaloonChangeDelay infinite alternate;
-    }
+        loadingBaloonTransitionRb2 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeRb2 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionRb2 {
-      0% {
-        top: 134.28%;
-        left: 134.44%;
+      @keyframes loadingBaloonTransitionRb2 {
+        0% {
+          top: 134.28%;
+          left: 134.44%;
+        }
+        100% {
+          top: 63%;
+          left: 79%;
+        }
       }
-      100% {
-        top: 63%;
-        left: 79%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeRb2 {
-      0% {
-        scale: 1;
-        top: 63%;
-        left: 79%;
-      }
-      100% {
-        top: 64%;
-        left: 79%;
-        scale: 0.9;
+      @keyframes loadingBaloonChangeRb2 {
+        0% {
+          scale: 1;
+          top: 63%;
+          left: 79%;
+        }
+        100% {
+          top: 64%;
+          left: 79%;
+          scale: 0.9;
+        }
       }
     }
 
@@ -276,46 +273,33 @@
       scale: 1;
       left: 120.81%;
       animation:
-        loadingBaloonTransitionRt3 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeRt3 1.5s linear $BaloonChangeDelay forwards,
-        loadingBaloonRotateRt3 1.5s linear $BaloonRotateDelay infinite alternate;
-    }
+        loadingBaloonTransitionRt3 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeRt3 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionRt3 {
-      0% {
-        top: -96.44%;
-        left: 120.81%;
+      @keyframes loadingBaloonTransitionRt3 {
+        0% {
+          top: -96.44%;
+          left: 120.81%;
+        }
+        100% {
+          top: 5%;
+          left: 76%;
+        }
       }
-      100% {
-        top: 5%;
-        left: 76%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeRt3 {
-      0% {
-        top: 5%;
-        left: 76%;
-        scale: 1;
-      }
-      100% {
-        scale: 1.02;
-        top: 7%;
-        left: 76%;
-      }
-    }
-
-    @keyframes loadingBaloonRotateRt3 {
-      0% {
-        scale: 1;
-        top: 7%;
-        left: 76%;
-      }
-      100% {
-        scale: 1.02;
-        top: 7%;
-        left: 76%;
-        rotate: -21.5deg;
+      @keyframes loadingBaloonChangeRt3 {
+        0% {
+          scale: 1;
+          top: 5%;
+          left: 76%;
+          scale: 1;
+        }
+        100% {
+          scale: 1.02;
+          top: 7%;
+          left: 76%;
+          rotate: -21.5deg;
+        }
       }
     }
 
@@ -324,30 +308,30 @@
       scale: 1;
       left: 33.44%;
       animation:
-        loadingBaloonTransitionCt1 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeCt1 1.5s linear $BaloonChangeDelay infinite alternate;
-    }
+        loadingBaloonTransitionCt1 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeCt1 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionCt1 {
-      0% {
-        top: -100%;
-        left: 33%;
+      @keyframes loadingBaloonTransitionCt1 {
+        0% {
+          top: -100%;
+          left: 33%;
+        }
+        100% {
+          top: 9%;
+          left: 29.5%;
+        }
       }
-      100% {
-        top: 9%;
-        left: 29.5%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeCt1 {
-      0% {
-        top: 9%;
-        left: 29.5%;
-      }
-      100% {
-        scale: 1.15;
-        top: 9%;
-        left: 29.2%;
+      @keyframes loadingBaloonChangeCt1 {
+        0% {
+          top: 9%;
+          left: 29.5%;
+        }
+        100% {
+          scale: 1.15;
+          top: 9%;
+          left: 29.2%;
+        }
       }
     }
 
@@ -356,30 +340,30 @@
       scale: 1;
       left: 122.38%;
       animation:
-        loadingBaloonTransitionRt2 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeRt2 1.5s linear $BaloonChangeDelay infinite alternate;
-    }
+        loadingBaloonTransitionRt2 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeRt2 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionRt2 {
-      0% {
-        top: -58.11%;
-        left: 122.38%;
+      @keyframes loadingBaloonTransitionRt2 {
+        0% {
+          top: -58.11%;
+          left: 122.38%;
+        }
+        100% {
+          top: 26%;
+          left: 86%;
+        }
       }
-      100% {
-        top: 26%;
-        left: 86%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeRt2 {
-      0% {
-        top: 26%;
-        left: 86%;
-      }
-      100% {
-        top: 25%;
-        left: 86%;
-        scale: 1.1;
+      @keyframes loadingBaloonChangeRt2 {
+        0% {
+          top: 26%;
+          left: 86%;
+        }
+        100% {
+          top: 25%;
+          left: 86%;
+          scale: 1.1;
+        }
       }
     }
 
@@ -388,31 +372,31 @@
       scale: 1;
       left: 107%;
       animation:
-        loadingBaloonTransitionRt1 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeRt1 1.5s linear $BaloonChangeDelay infinite alternate;
-    }
+        loadingBaloonTransitionRt1 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeRt1 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
 
-    @keyframes loadingBaloonTransitionRt1 {
-      0% {
-        top: -39.99%;
-        left: 107.73%;
+      @keyframes loadingBaloonTransitionRt1 {
+        0% {
+          top: -39.99%;
+          left: 107.73%;
+        }
+        100% {
+          top: 19.5%;
+          left: 72%;
+        }
       }
-      100% {
-        top: 19.5%;
-        left: 72%;
-      }
-    }
 
-    @keyframes loadingBaloonChangeRt1 {
-      0% {
-        scale: 1;
-        top: 19.67%;
-        left: 71.63%;
-      }
-      100% {
-        scale: 0.95;
-        top: 18%;
-        left: 72%;
+      @keyframes loadingBaloonChangeRt1 {
+        0% {
+          scale: 1;
+          top: 19.67%;
+          left: 71.63%;
+        }
+        100% {
+          scale: 0.95;
+          top: 18%;
+          left: 72%;
+        }
       }
     }
 
@@ -421,8 +405,8 @@
       scale: 1;
       left: 124.5%;
       animation:
-        loadingBaloonTransitionRb1 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeRb1 1.5s linear $BaloonChangeDelay infinite alternate;
+        loadingBaloonTransitionRb1 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeRb1 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
     }
 
     @keyframes loadingBaloonTransitionRb1 {
@@ -454,9 +438,10 @@
       scale: 1;
       left: 137.38%;
       animation:
-        loadingBaloonTransitionRb3 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeRb3 1.5s linear $BaloonChangeDelay infinite alternate;
+        loadingBaloonTransitionRb3 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeRb3 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
     }
+
     @keyframes loadingBaloonTransitionRb3 {
       0% {
         top: 92.07%;
@@ -483,11 +468,10 @@
 
     &_ct2 {
       top: -48.78%;
-      scale: 1;
       left: 32.25%;
       animation:
-        loadingBaloonTransitionCt2 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeCt2 1.5s linear $BaloonChangeDelay infinite alternate;
+        loadingBaloonTransitionCt2 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeCt2 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
     }
 
     @keyframes loadingBaloonTransitionCt2 {
@@ -503,8 +487,9 @@
 
     @keyframes loadingBaloonChangeCt2 {
       0% {
-        top: 16%;
-        left: 35%;
+        scale: 1;
+        top: 16.5%;
+        left: 35.5%;
       }
       100% {
         scale: 0.8;
@@ -518,8 +503,8 @@
       scale: 1;
       left: 30.31%;
       animation:
-        loadingBaloonTransitionCt3 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeCt3 1.5s linear $BaloonChangeDelay infinite alternate;
+        loadingBaloonTransitionCt3 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeCt3 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
     }
 
     @keyframes loadingBaloonTransitionCt3 {
@@ -535,6 +520,7 @@
 
     @keyframes loadingBaloonChangeCt3 {
       0% {
+        scale: 1;
         top: 24.5%;
         left: 34%;
       }
@@ -550,8 +536,8 @@
       scale: 1;
       left: -20.13%;
       animation:
-        loadingBaloonTransitionLb1 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeLb1 1.5s linear $BaloonChangeDelay infinite alternate;
+        loadingBaloonTransitionLb1 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeLb1 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
     }
 
     @keyframes loadingBaloonTransitionLb1 {
@@ -581,8 +567,8 @@
       scale: 1;
       left: -34.83%;
       animation:
-        loadingBaloonTransitionLt2 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeLt2 1.5s linear $BaloonChangeDelay infinite alternate;
+        loadingBaloonTransitionLt2 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeLt2 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
     }
     @keyframes loadingBaloonTransitionLt2 {
       0% {
@@ -612,8 +598,8 @@
       scale: 1;
       left: 49.88%;
       animation:
-        loadingBaloonTransitionCb1 1.5s ease-out $BaloonTransitionDelay forwards,
-        loadingBaloonChangeCb1 1.5s linear $BaloonChangeDelay infinite alternate;
+        loadingBaloonTransitionCb1 $BaloonMoveDuration linear $BaloonTransitionDelay 1 normal forwards,
+        loadingBaloonChangeCb1 $BaloonMoveDuration linear ($BaloonTransitionDelay + $BaloonMoveDuration) infinite alternate forwards;
     }
 
     @keyframes loadingBaloonTransitionCb1 {
@@ -720,41 +706,6 @@
       100% {
         top: 40%;
         left: 96%;
-      }
-    }
-  }
-
-  &__baloons.scroll {
-    background-color: rgba($color: #000000, $alpha: 0.2);
-
-    #{$s}__baloon_ct3 {
-      animation:
-        loadingBaloonReturnCt3 1.5s linear,
-        loadingBaloonReunionCt3 0.2s linear forwards;
-    }
-
-    @keyframes loadingBaloonReturnCt3 {
-      0% {
-        scale: 0.87;
-        top: 25%;
-        left: 33.8%;
-      }
-      100% {
-        scale: 1;
-        top: 24.5%;
-        left: 34%;
-      }
-    }
-
-    @keyframes loadingBaloonReunionCt3 {
-      0% {
-        top: 24.5%;
-        left: 34%;
-      }
-      100% {
-        scale: 1.01;
-        top: 39.8%;
-        left: 30.7%;
       }
     }
   }
