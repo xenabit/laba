@@ -9,16 +9,18 @@ import Home from './pages/Home.jsx';
 import Case from './pages/Case.jsx';
 import FormBrief from './components/FormBrief/FormBrief.jsx';
 import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
+import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.jsx';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother.min';
-import { useEffect, useState } from 'react';
-import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.jsx';
+import { useEffect, useRef } from 'react';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const App = () => {
+  const headerRef = useRef(null);
+
   useEffect(() => {
     const smoother = ScrollSmoother.create({
       wrapper: '#smooth-wrapper',
@@ -27,7 +29,6 @@ const App = () => {
       effects: true,
     });
 
-    // Обновить триггеры после загрузки контента
     ScrollTrigger.refresh();
 
     return () => {
@@ -36,25 +37,22 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <div id="smooth-wrapper">
-        <Header />
-        <LoadingMainScreen />
-        {/* <div id="smooth-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/portfolio" element={<GalleryTabs />} />
-            <Route path="/contact" element={<Contacts />} />
-            <Route path="/form" element={<FormBrief />} />
-            <Route path="/case" element={<Case />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          <Footer />
-        </div>
-
-        <CookieAgreement /> */}
+    <div id="smooth-wrapper">
+      <Header ref={headerRef} />
+      {/* <LoadingMainScreen headerRef={headerRef} /> */}
+      <div id="smooth-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/portfolio" element={<GalleryTabs />} />
+          <Route path="/contact" element={<Contacts />} />
+          <Route path="/form" element={<FormBrief />} />
+          <Route path="/case" element={<Case />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        <Footer />
       </div>
-    </>
+      <CookieAgreement />
+    </div>
   );
 };
 

@@ -1,33 +1,35 @@
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Header.module.scss';
-
 import logo from '/src/assets/images/header-logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Header() {
+const Header = forwardRef((props, ref) => {
   const [isActive, setIsActive] = useState(false);
   const [activeTab, setActiveTab] = useState('/');
   const location = useLocation();
 
-  // Хук для установки активной вкладки
   useEffect(() => {
     const savedTab = localStorage.getItem('activeTab') || location.pathname;
     setActiveTab(savedTab);
   }, [location.pathname]);
 
-  // // Хук для блокировки/разблокировки скролла страницы
+  // Хук для блокировки/разблокировки скролла страницы при открытии меню
   useEffect(() => {
     document.body.style.overflow = isActive ? 'hidden' : '';
     return () => (document.body.style.overflow = '');
   }, [isActive]);
 
+  // Хук для настройки анимации шапки и управления border-bottom
   useEffect(() => {
+    const header = ref.current;
+    const headerTop = header.querySelector(`.${styles.Header__top}`);
+
     const showAnim = gsap.fromTo(
-      '#main-tool-bar',
+      header,
       { yPercent: 0 },
       {
         yPercent: -100,
@@ -37,23 +39,68 @@ function Header() {
       }
     );
 
+    const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
+    const borderWidth = isDesktop ? 3 : 2;
+
+    // Устанавливаем начальные значения border-bottom
+    gsap.set(headerTop, { borderBottomWidth: borderWidth, borderBottomStyle: 'solid', borderBottomColor: 'var(--prime-2)' });
+
+    // Анимация border-bottom для плавного появления/исчезновения
+    const borderAnim = gsap.to(headerTop, {
+      borderBottomWidth: 0,
+      duration: 0.2,
+      ease: 'power1.out',
+      paused: true,
+      onUpdate: () => {
+        if (isActive) {
+          // Если меню активно, принудительно устанавливаем border-bottom белого цвета
+          gsap.set(headerTop, { borderBottomWidth: borderWidth, borderBottomColor: 'var(--prime-1)' });
+        }
+      },
+    });
+
     ScrollTrigger.create({
-      trigger: '#smooth-content', // Используй правильный триггер для ScrollSmoother
-      start: 'top top',
+      trigger: '#smooth-content',
+      start: 'top top+=50',
       end: 'bottom top',
       onUpdate: (self) => {
-        if (self.direction === -1) {
-          showAnim.reverse();
+        if (isActive) {
+          // Если меню активно, шапка остается видимой, border-bottom белый
+          showAnim.pause();
+          gsap.set(header, { yPercent: 0 });
+          gsap.set(headerTop, { borderBottomWidth: borderWidth, borderBottomColor: 'var(--prime-1)' });
+        } else if (self.scroll() <= 50) {
+          // В начале страницы шапка видна, border-bottom обычный
+          showAnim.pause();
+          gsap.set(header, { yPercent: 0 });
+          borderAnim.reverse();
+          gsap.set(headerTop, { borderBottomColor: 'var(--prime-2)' });
         } else {
-          showAnim.play();
+          // Поведение при скролле после 50px
+          if (self.direction === -1) {
+            showAnim.reverse();
+            if (self.progress < 0.02) {
+              borderAnim.reverse();
+              gsap.set(headerTop, { borderBottomColor: 'var(--prime-2)' });
+            } else {
+              borderAnim.play();
+            }
+          } else {
+            showAnim.play();
+            borderAnim.play();
+          }
         }
       },
       scrub: true,
     });
-  }, []);
 
+    ScrollTrigger.refresh();
+  }, [ref, isActive]); // Добавляем isActive как зависимость
+
+  // Функция для переключения состояния меню (открыто/закрыто)
   const toggleActiveClass = () => setIsActive((prev) => !prev);
 
+  // Функция для обработки клика по вкладке
   const handleTabClick = (path) => {
     if (path !== activeTab) {
       setActiveTab(path);
@@ -62,8 +109,9 @@ function Header() {
     setIsActive(false);
   };
 
+  // JSX разметка шапки
   return (
-    <header id="main-tool-bar" className={styles.Header}>
+    <header ref={ref} id="main-tool-bar" className={styles.Header}>
       <div className={`${styles.Header__container} ${isActive ? styles.active : ''}`}>
         <div className={styles.Header__top}>
           <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
@@ -71,7 +119,7 @@ function Header() {
           </Link>
           <Link to="/" className={styles.Header__logo} onClick={() => handleTabClick('/')}>
             <picture>
-              <img loading="lazy" src={logo} alt="Логотип Laba" />
+              <img loading="lazy" src={logo} alt="Логотип Laba" /> {/* Логотип */}
             </picture>
           </Link>
           <button className={styles.Header__toggle} onClick={toggleActiveClass}>
@@ -120,7 +168,7 @@ function Header() {
             <a href="tel:+74951201226" className={styles.Header__tel}>
               тел. +7 (495) 120-12-26
             </a>
-            <a href="https://yandex.ru/profile/1116551737" target="_black">
+            <a href="https://yandex.ru/profile/1116551737" target="_blank">
               г. Москва ул. 3-я Ямского Поля д. 20 с1
             </a>
           </div>
@@ -128,6 +176,6 @@ function Header() {
       </div>
     </header>
   );
-}
+});
 
 export default Header;

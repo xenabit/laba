@@ -27,7 +27,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main style={{ backgroundColor: 'white' }}>
+    <main>
       <Intro2 />
       <ProjectsTile />
       <Ticker />
