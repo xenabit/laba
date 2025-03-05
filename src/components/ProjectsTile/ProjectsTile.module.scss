@@ -441,6 +441,22 @@
       height: $slide-height;
     }
   }
+
+  @media all and (min-width: $bp1) {
+    &.animate {
+      transform: translateY(100%);
+      animation: projects-bottom-rise 2s linear 1s forwards;
+    }
+
+    @keyframes projects-bottom-rise {
+      0% {
+        transform: translateY(100%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+  }
 }
 // Блюр по ховеру через анимацию, поскольку браузеры не поддерживают transition для backdrop-filter
 @keyframes projects-tile-blur-in {

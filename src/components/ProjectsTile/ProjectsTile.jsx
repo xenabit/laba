@@ -96,7 +96,7 @@ function ProjectsTile() {
   }, []);
 
   return (
-    <section className={styles.ProjectsTile}>
+    <section className={`${styles.ProjectsTile} ${styles.animate}`}>
       <div className={styles.ProjectsTile__container}>
         <div className={`${styles.ProjectsTile__layer} ${styles.ProjectsTile__layer_bot}`}>
           <div ref={animationRef} className={`${styles.ProjectsTile__items} ${styles.animate}`}>

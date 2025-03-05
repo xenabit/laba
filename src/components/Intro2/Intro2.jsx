@@ -3,7 +3,7 @@ import labaBlack from '../../assets/images/intro-2-laba-black.svg';
 
 function Intro2() {
   return (
-    <section className={`${styles.Intro2}`}>
+    <section className={`${styles.Intro2} ${styles.animate} `}>
       <div className={styles.Intro2__container}>
         <div className={styles.Intro2__laba}>
           <img loading="lazy" src={labaBlack}></img>
