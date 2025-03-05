@@ -76,7 +76,7 @@ const BALLOON_ANIMATIONS = {
   cb1: { from: { top: '128.89%', left: '49.88%', scale: 1 }, to: { top: '84%', left: '48.5%', scale: 1.2 }, change: { scale: 1.15, top: '84%', left: '47%' } },
 };
 
-function LoadingMainScreen({ headerRef }) {
+function LoadingMainScreen({ headerRef, onComplete }) {
   const containerRef = useRef(null);
   const letterRefs = useRef([]);
   const hasScrolled = useRef(false);
@@ -150,12 +150,16 @@ function LoadingMainScreen({ headerRef }) {
     gsap.to(headerRef.current, {
       // Скрываем шапку при начале скролла
       opacity: 0,
-      backgroundColor: 'initial',
       duration: ANIMATION_CONFIG.HEADER_FADE_DURATION, // Длительность исчезновения
       ease: ANIMATION_CONFIG.DEFAULT_EASE,
     });
 
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      onComplete: () => {
+        if (onComplete) onComplete(); // Вызываем onComplete, когда анимация завершена
+      },
+    });
+
     const otherBalloons = balloons.filter((balloon) => !balloon.classList.contains(styles.LoadingMainScreen__baloon_c));
 
     otherBalloons.forEach((balloon, index) => {
@@ -235,7 +239,7 @@ function LoadingMainScreen({ headerRef }) {
       let isMagnetActive = false;
 
       // Устанавливаем начальные состояния элементов через GSAP
-      gsap.set(headerRef.current, { opacity: 0, backgroundColor: 'inherit' }); // Шапка изначально прозрачна с исходным фоном
+      gsap.set(headerRef.current, { opacity: 0 }); // Шапка изначально прозрачна
       gsap.set(letters, { fill: '#F0F2F5' }); // Буквы изначально светлые
       gsap.set(descLetters, { y: '100%', opacity: 0 }); // Текст описания изначально скрыт внизу
 
@@ -318,7 +322,7 @@ function LoadingMainScreen({ headerRef }) {
         window.removeEventListener('touchmove', handleScrollAttempt);
         container.removeEventListener('mousemove', handleMouseMove);
         gsap.killTweensOf(balloons);
-        gsap.set(headerRef.current, { opacity: 1, backgroundColor: 'inherit' });
+        gsap.set(headerRef.current, { opacity: 1 });
       };
     }, []);
   };

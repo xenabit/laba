@@ -30,14 +30,13 @@ export default function Home() {
     <main>
       <Intro2 />
       <ProjectsTile />
-      <Ticker />
-      <Counter />
-      {isMobile && <TextEffect />}
+      {/* <Ticker /> */}
+      {/* <Counter />
+      {isMobile && <TextEffect />} */}
       <Gallery />
-      <Ticker />
+      {/* <Ticker />
       <AboutList />
-      <Partners />
+      <Partners /> */}
     </main>
   );
 }
-

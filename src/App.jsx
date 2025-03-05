@@ -14,43 +14,53 @@ import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother.min';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const App = () => {
   const headerRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const smoother = ScrollSmoother.create({
-      wrapper: '#smooth-wrapper',
-      content: '#smooth-content',
-      smooth: 1.5,
-      effects: true,
-    });
-
-    ScrollTrigger.refresh();
+    let smoother;
+    if (!isLoading) {
+      smoother = ScrollSmoother.create({
+        wrapper: '#smooth-wrapper',
+        content: '#smooth-content',
+        smooth: 1.5,
+        effects: true,
+      });
+      ScrollTrigger.refresh();
+    }
 
     return () => {
-      smoother?.kill();
+      smoother?.kill(); // Очищаем только если smoother был создан
     };
-  }, []);
+  }, [isLoading]); // Зависимость от isLoading
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
 
   return (
     <div id="smooth-wrapper">
       <Header ref={headerRef} />
-      {/* <LoadingMainScreen headerRef={headerRef} /> */}
-      <div id="smooth-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/portfolio" element={<GalleryTabs />} />
-          <Route path="/contact" element={<Contacts />} />
-          <Route path="/form" element={<FormBrief />} />
-          <Route path="/case" element={<Case />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-        <Footer />
-      </div>
+      {isLoading ? (
+        <LoadingMainScreen headerRef={headerRef} onComplete={handleLoadingComplete} />
+      ) : (
+        <div id="smooth-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/portfolio" element={<GalleryTabs />} />
+            <Route path="/contact" element={<Contacts />} />
+            <Route path="/form" element={<FormBrief />} />
+            <Route path="/case" element={<Case />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+          <Footer />
+        </div>
+      )}
       <CookieAgreement />
     </div>
   );
