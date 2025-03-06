@@ -1,0 +1,19 @@
+.Balloons {
+  &__container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__item {
+    position: absolute;
+    overflow: hidden;
+    transform-origin: center;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+}

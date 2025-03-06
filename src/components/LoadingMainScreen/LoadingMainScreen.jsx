@@ -1,92 +1,21 @@
 import { useEffect, useRef } from 'react';
-import throttle from 'lodash/throttle';
 import styles from './LoadingMainScreen.module.scss';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
-
-// Импорты шаров
-import Baloon_lt2 from '../../assets/images/loading-main-baloon-lt2.svg';
-import Baloon_lt1 from '../../assets/images/loading-main-baloon-lt1.svg';
-import Baloon_ct1 from '../../assets/images/loading-main-baloon-ct1.svg';
-import Baloon_ct2 from '../../assets/images/loading-main-baloon-ct2.svg';
-import Baloon_ct3 from '../../assets/images/loading-main-baloon-ct3.svg';
-import Baloon_rt1 from '../../assets/images/loading-main-baloon-rt1.svg';
-import Baloon_rt2 from '../../assets/images/loading-main-baloon-rt2.svg';
-import Baloon_rt3 from '../../assets/images/loading-main-baloon-rt3.svg';
-import Baloon_rb1 from '../../assets/images/loading-main-baloon-rb1.svg';
-import Baloon_rb2 from '../../assets/images/loading-main-baloon-rb2.svg';
-import Baloon_rb3 from '../../assets/images/loading-main-baloon-rb3.svg';
-import Baloon_lb1 from '../../assets/images/loading-main-baloon-lb1.svg';
-import Baloon_lb2 from '../../assets/images/loading-main-baloon-lb2.svg';
-import Baloon_cb1 from '../../assets/images/loading-main-baloon-cb1.svg';
-import Baloon_cb2 from '../../assets/images/loading-main-baloon-cb2.svg';
-import Baloon_r from '../../assets/images/loading-main-baloon-r.svg';
-import Baloon_c from '../../assets/images/loading-main-baloon-c.svg';
+import Subtitle from './Subtitle';
+import Balloons from './Balloons/Balloons';
 import Flare from '../../assets/images/loading-main-flare.svg?react';
 
 const ANIMATION_CONFIG = {
-  LETTER_DELAY: 4.2, // Задержка перед началом анимации букв (в секундах)
-  BALOON_MOVE_DURATION: 1.5, // Длительность движения шаров до их позиций (в секундах)
-  BALOON_TRANSITION_DELAY: 5, // Задержка перед стартом анимации шаров (в секундах)
-  MAGNET_MAX_DISTANCE: 400, // Максимальное расстояние для активации магнитного эффекта (в пикселях)
-  MAGNET_STRENGTH: 25, // Сила притяжения шаров к курсору (в пикселях)
-  DEFAULT_DURATION: 0.3, // Стандартная длительность анимаций (в секундах)
-  DEFAULT_EASE: 'power2.out', // Стандартная функция плавности (плавное завершение)
-  HEADER_FADE_DURATION: 0.5, // Длительность появления/исчезновения шапки (в секундах)
-};
-
-const BALLOONS_DATA = [
-  { key: 'c', src: Baloon_c, className: styles.LoadingMainScreen__baloon_c },
-  { key: 'cb2', src: Baloon_cb2, className: styles.LoadingMainScreen__baloon_cb2 },
-  { key: 'lb2', src: Baloon_lb2, className: styles.LoadingMainScreen__baloon_lb2 },
-  { key: 'r', src: Baloon_r, className: styles.LoadingMainScreen__baloon_r },
-  { key: 'lt1', src: Baloon_lt1, className: styles.LoadingMainScreen__baloon_lt1 },
-  { key: 'rb2', src: Baloon_rb2, className: styles.LoadingMainScreen__baloon_rb2 },
-  { key: 'rt3', src: Baloon_rt3, className: styles.LoadingMainScreen__baloon_rt3 },
-  { key: 'ct1', src: Baloon_ct1, className: styles.LoadingMainScreen__baloon_ct1 },
-  { key: 'rt2', src: Baloon_rt2, className: styles.LoadingMainScreen__baloon_rt2 },
-  { key: 'rt1', src: Baloon_rt1, className: styles.LoadingMainScreen__baloon_rt1 },
-  { key: 'rb1', src: Baloon_rb1, className: styles.LoadingMainScreen__baloon_rb1 },
-  { key: 'rb3', src: Baloon_rb3, className: styles.LoadingMainScreen__baloon_rb3 },
-  { key: 'ct2', src: Baloon_ct2, className: styles.LoadingMainScreen__baloon_ct2 },
-  { key: 'ct3', src: Baloon_ct3, className: styles.LoadingMainScreen__baloon_ct3 },
-  { key: 'lb1', src: Baloon_lb1, className: styles.LoadingMainScreen__baloon_lb1 },
-  { key: 'lt2', src: Baloon_lt2, className: styles.LoadingMainScreen__baloon_lt2 },
-  { key: 'cb1', src: Baloon_cb1, className: styles.LoadingMainScreen__baloon_cb1 },
-];
-
-// Объект с параметрами анимации шаров: начальная позиция (from), конечная позиция (to), параметры колебания (change)
-const BALLOON_ANIMATIONS = {
-  c: { from: { top: '-8.89%', left: '47.94%', scale: 1 }, to: { top: '39.8%', left: '30.7%' }, change: { scale: 0.7, top: '39%', left: '30.8%' } },
-  cb2: { from: { top: '155%', left: '42%', scale: 1 }, to: { top: '83%', left: '39%' }, change: { scale: 1.01, top: '84%' } },
-  lb2: { from: { top: '164.65%', left: '20.75%', scale: 1 }, to: { top: '74%', left: '5%' }, change: { scale: 0.89, rotate: 21.79 } },
-  r: { from: { top: '5.28%', left: '134.35%', scale: 1 }, to: { top: '46%', left: '92.5%' }, change: { scale: 1.09, top: '48%' } },
-  lt1: { from: { top: '-56%', left: '-77%', scale: 1 }, to: { top: '7%', left: '-18%' }, change: { scale: 0.95, left: '-20%' } },
-  rb2: { from: { top: '134.28%', left: '134.44%', scale: 1 }, to: { top: '63%', left: '79%' }, change: { scale: 0.9, top: '64%' } },
-  rt3: { from: { top: '-96.44%', left: '120.81%', scale: 1 }, to: { top: '6%', left: '76%' }, change: { scale: 1.02, top: '8%', rotate: -21.5 } },
-  ct1: { from: { top: '-100%', left: '33%', scale: 1 }, to: { top: '9%', left: '29.5%' }, change: { scale: 1.15, left: '29.2%' } },
-  rt2: { from: { top: '-58.11%', left: '122.38%', scale: 1 }, to: { top: '26%', left: '86%' }, change: { scale: 1.1, top: '25%' } },
-  rt1: { from: { top: '-39.99%', left: '107.73%', scale: 1 }, to: { top: '19.5%', left: '72%' }, change: { scale: 0.95, top: '18%' } },
-  rb1: { from: { top: '95.42%', left: '124.5%', scale: 1 }, to: { top: '73%', left: '78.5%' }, change: { scale: 0.9, top: '70%', left: '78.8%' } },
-  rb3: { from: { top: '92.07%', left: '137.38%', scale: 1 }, to: { top: '64.11%', left: '89.25%' }, change: { scale: 1.08, top: '64%', left: '91%' } },
-  ct2: { from: { top: '-48.78%', left: '32.25%', scale: 1 }, to: { top: '16.5%', left: '35.5%' }, change: { scale: 0.8, top: '15.7%', left: '35.4%' } },
-  ct3: { from: { top: '-26.67%', left: '30.31%', scale: 1 }, to: { top: '24.5%', left: '34%' }, change: { scale: 0.87, top: '25%', left: '33.8%' } },
-  lb1: { from: { top: '226.67%', left: '-20.13%', scale: 1 }, to: { top: '67%', left: '-3%' }, change: { top: '65%' } },
-  lt2: { from: { top: '29.22%', left: '-34.83%', scale: 1 }, to: { top: '21%', left: '-7%' }, change: { scale: 0.95, top: '23%' } },
-  cb1: { from: { top: '128.89%', left: '49.88%', scale: 1 }, to: { top: '84%', left: '48.5%', scale: 1.2 }, change: { scale: 1.15, top: '84%', left: '47%' } },
+  LETTER_DELAY: 4.2,
 };
 
 function LoadingMainScreen({ headerRef, onComplete }) {
   const containerRef = useRef(null);
   const letterRefs = useRef([]);
-  const hasScrolled = useRef(false);
-  const descRefs = useRef([]);
-  const balloonRefs = useRef({});
 
-  // Функция для анимации фона и цвета букв
   const animateSequence = (container, letters) => {
     const tl = gsap.timeline();
-
     tl.to(container, { background: '#27292F', duration: 1.6, ease: 'elastic.out(1.3, 0.35)', delay: 0.4 })
       .to(letters, { fill: '#2f3137', duration: 1, ease: 'elastic.out(1.3, 0.35)' }, 0.4)
       .to(container, { background: '#2f3137', duration: 0.1, ease: 'elastic.out(1.3, 0.35)' })
@@ -97,244 +26,20 @@ function LoadingMainScreen({ headerRef, onComplete }) {
       .to(letters, { fill: '#27292F', duration: 1, ease: 'elastic.out(1.2, 0.3)' }, '-=1');
   };
 
-  // Функция для анимации появления и колебания шаров
-  const animateBalloons = (balloons) => {
-    const tl = gsap.timeline({ delay: ANIMATION_CONFIG.BALOON_TRANSITION_DELAY });
-    Object.entries(BALLOON_ANIMATIONS).forEach(([key, { from, to, change }]) => {
-      const balloon = balloonRefs.current[key].current;
-      if (!balloon) return;
-      gsap.set(balloon, from);
-      tl.to(balloon, { ...to, duration: ANIMATION_CONFIG.BALOON_MOVE_DURATION, ease: 'linear' }, 0) // Все шары одновременно движутся к своим позициям за 1.5 сек
-        .to(
-          balloon,
-          {
-            ...change, // Параметры колебания (масштаб, позиция, вращение)
-            duration: ANIMATION_CONFIG.BALOON_MOVE_DURATION, // Длительность колебания
-            ease: 'linear',
-            repeat: -1,
-            yoyo: true,
-          },
-          '>'
-        );
-    });
-    tl.to(
-      headerRef.current,
-      {
-        // Появление шапки после движения шаров
-        opacity: 1,
-        duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
-        ease: ANIMATION_CONFIG.DEFAULT_EASE,
-      },
-      '<'
-    );
-  };
+  useEffect(() => {
+    const container = containerRef.current;
+    const letters = letterRefs.current;
 
-  // Функция для анимации текста описания
-  const animateDescription = (descLetters) => {
-    gsap.to(descLetters, {
-      y: 0,
-      opacity: 1,
-      duration: 0.2, // Длительность анимации каждой буквы (0.2 сек)
-      ease: ANIMATION_CONFIG.DEFAULT_EASE,
-      stagger: 0.04, // Задержка между анимацией каждой буквы (эффект печати)
-      delay: ANIMATION_CONFIG.BALOON_TRANSITION_DELAY, // Задержка перед началом (синхронно с шарами)
-    });
-  };
+    gsap.set(headerRef.current, { opacity: 0 });
+    gsap.set(letters, { fill: '#F0F2F5' });
 
-  // Функция для анимации перемещения шаров в центр после скролла
-  const animateBalloonsToPosition = (balloons) => {
-    if (hasScrolled.current) return;
-    hasScrolled.current = true;
+    animateSequence(container, letters);
+  }, [headerRef]);
 
-    gsap.killTweensOf(balloons);
-    gsap.to(headerRef.current, {
-      // Скрываем шапку при начале скролла
-      opacity: 0,
-      duration: ANIMATION_CONFIG.HEADER_FADE_DURATION, // Длительность исчезновения
-      ease: ANIMATION_CONFIG.DEFAULT_EASE,
-    });
-
-    const tl = gsap.timeline({
-      onComplete: () => {
-        if (onComplete) onComplete(); // Вызываем onComplete, когда анимация завершена
-      },
-    });
-
-    const otherBalloons = balloons.filter((balloon) => !balloon.classList.contains(styles.LoadingMainScreen__baloon_c));
-
-    otherBalloons.forEach((balloon, index) => {
-      // Перемещаем все шары (кроме центрального) в центр
-      tl.to(
-        balloon,
-        {
-          width: '68px',
-          height: '68px',
-          top: '39.8%',
-          left: '30.7%',
-          scale: 1,
-          rotation: 0,
-          duration: 0.2, // Длительность движения каждого шара (0.2 сек)
-          ease: 'linear',
-          overwrite: 'all',
-        },
-        index * 0.2
-      ); // Смещение по времени для каждого шара (0.2 сек между ними)
-    });
-
-    // Анимация центрального шара
-    const balloonC = balloonRefs.current.c.current;
-    if (balloonC) {
-      gsap.set(balloonC, {
-        top: '39.8%',
-        left: '30.7%',
-        transformOrigin: 'center',
-        width: '68px',
-        height: '68px',
-      });
-
-      const scaleSteps = [
-        { scale: 1, top: '39.8%', left: '30.7%' },
-        { scale: 1, top: '39.8%', left: '30.7%' },
-        { scale: 1.7, top: '41%', left: '30.7%' },
-        { scale: 3.1, top: '42%', left: '30.7%' },
-        { scale: 4.2, top: '42.1%', left: '30.1%' },
-        { scale: 9.4, top: '46.2%', left: '29.2%' },
-        { scale: 10.6, top: '47.3%', left: '29.1%' },
-        { scale: 12, top: '47.3%', left: '28%' },
-        { scale: 12.5, top: '47.3%', left: '28%' },
-        { scale: 14, top: '49.3%', left: '28%' },
-        { scale: 14.5, top: '49.3%', left: '28%' },
-        { scale: 16.5, top: '51.3%', left: '27%' },
-        { scale: 20.3, top: '51.3%', left: '27%' },
-        { scale: 23.8, top: '56.3%', left: '25%' },
-        { scale: 27.2, top: '58.3%', left: '25%' },
-      ];
-      scaleSteps.forEach((step, index) => {
-        tl.to(
-          balloonC,
-          {
-            scale: step.scale,
-            top: step.top,
-            left: step.left,
-            duration: 0.6, // Длительность каждого шага (0.6 сек)
-            ease: 'linear',
-            overwrite: 'all',
-          },
-          index * 0.2
-        ); // Смещение по времени для каждого шага (0.2 сек между шагами)
-      });
-    }
-  };
-
-  // Хук для управления всеми анимациями и взаимодействиями
-  const useLoadingAnimations = () => {
-    useEffect(() => {
-      const container = containerRef.current;
-      const letters = letterRefs.current;
-      const descLetters = descRefs.current;
-      const balloons = Object.values(balloonRefs.current)
-        .map((ref) => ref.current)
-        .filter(Boolean);
-
-      let isMagnetActive = false;
-
-      // Устанавливаем начальные состояния элементов через GSAP
-      gsap.set(headerRef.current, { opacity: 0 }); // Шапка изначально прозрачна
-      gsap.set(letters, { fill: '#F0F2F5' }); // Буквы изначально светлые
-      gsap.set(descLetters, { y: '100%', opacity: 0 }); // Текст описания изначально скрыт внизу
-
-      // Функция для инициализации взаимодействий (магнитный эффект и скролл) с задержкой
-      const initInteractions = async () => {
-        await new Promise((resolve) => setTimeout(resolve, 6500)); // Ждем 6.5 сек (5 сек задержки шаров + 1.5 сек движения)
-        if (!hasScrolled.current) {
-          // Если пользователь еще не скроллил
-          isMagnetActive = true; // Включаем магнитный эффект
-          container.addEventListener('mousemove', handleMouseMove); // Добавляем слушатель движения мыши
-          window.addEventListener('wheel', handleScrollAttempt, { passive: false }); // Слушатель скролла колесом (без пассивного режима)
-          window.addEventListener('touchmove', handleScrollAttempt, { passive: false }); // Слушатель сенсорного скролла
-        }
-      };
-
-      animateSequence(container, letters);
-      animateBalloons(balloons);
-      animateDescription(descLetters);
-      initInteractions();
-
-      // Обработчик попытки скролла (колесо или сенсор)
-      const handleScrollAttempt = (event) => {
-        event.preventDefault();
-        animateBalloonsToPosition(balloons);
-        container.removeEventListener('mousemove', handleMouseMove);
-      };
-
-      // Обработчик магнитного эффекта (срабатывает при движении мыши)
-      const handleMouseMove = throttle((e) => {
-        if (!isMagnetActive || hasScrolled.current) return;
-        const containerRect = container.getBoundingClientRect();
-        const mouseX = e.clientX - containerRect.left;
-        const mouseY = e.clientY - containerRect.top;
-
-        balloons.forEach((balloon) => {
-          const balloonRect = balloon.getBoundingClientRect();
-          const balloonX = balloonRect.left - containerRect.left + balloonRect.width / 2;
-          const balloonY = balloonRect.top - containerRect.top + balloonRect.height / 2;
-          const distance = Math.sqrt((mouseX - balloonX) ** 2 + (mouseY - balloonY) ** 2);
-
-          if (distance < ANIMATION_CONFIG.MAGNET_MAX_DISTANCE) {
-            const angle = Math.atan2(mouseY - balloonY, mouseX - balloonX);
-            const force = (1 - distance / ANIMATION_CONFIG.MAGNET_MAX_DISTANCE) * ANIMATION_CONFIG.MAGNET_STRENGTH;
-            const offsetX = Math.cos(angle) * force;
-            const offsetY = Math.sin(angle) * force;
-            gsap.to(balloon, {
-              // Анимация смещения шара к мыши
-              x: offsetX,
-              y: offsetY,
-              duration: ANIMATION_CONFIG.DEFAULT_DURATION, // Длительность (0.3 сек)
-              ease: ANIMATION_CONFIG.DEFAULT_EASE, // Плавность (power2.out)
-              overwrite: 'auto', // Перезаписываем текущую анимацию
-              onComplete: () => {
-                // После завершения анимации возвращаем шар в исходное положение
-                if (!isMagnetActive || hasScrolled.current) {
-                  gsap.to(balloon, {
-                    x: 0,
-                    y: 0,
-                    duration: ANIMATION_CONFIG.DEFAULT_DURATION,
-                    ease: ANIMATION_CONFIG.DEFAULT_EASE,
-                  });
-                }
-              },
-            });
-          } else {
-            // Если мышь слишком далеко
-            gsap.to(balloon, {
-              // Возвращаем шар в исходное положение
-              x: 0,
-              y: 0,
-              duration: ANIMATION_CONFIG.DEFAULT_DURATION,
-              ease: ANIMATION_CONFIG.DEFAULT_EASE,
-            });
-          }
-        });
-      }, 16);
-
-      return () => {
-        window.removeEventListener('wheel', handleScrollAttempt);
-        window.removeEventListener('touchmove', handleScrollAttempt);
-        container.removeEventListener('mousemove', handleMouseMove);
-        gsap.killTweensOf(balloons);
-        gsap.set(headerRef.current, { opacity: 1 });
-      };
-    }, []);
-  };
-
-  useLoadingAnimations();
+  const baseTransition = { type: 'spring', stiffness: 384, damping: 12, mass: 1 };
 
   const addToRefs = (el) => {
     if (el && !letterRefs.current.includes(el)) letterRefs.current.push(el);
-  };
-
-  const addToDescRefs = (el) => {
-    if (el && !descRefs.current.includes(el)) descRefs.current.push(el);
   };
 
   const Spot = () => (
@@ -370,33 +75,6 @@ function LoadingMainScreen({ headerRef, onComplete }) {
     </svg>
   );
 
-  const baseTransition = { type: 'spring', stiffness: 384, damping: 12, mass: 1 }; // Параметры пружины: тип, жесткость, затухание, масса
-
-  // Компонент текста описания
-  const Description = () => {
-    const text = 'Создаем уникальные цифровые продукты';
-    return (
-      <div className={styles.LoadingMainScreen__desc}>
-        {text.split('').map((char, index) => (
-          <span key={index} ref={addToDescRefs} style={{ display: 'inline-block' }}>
-            {char === ' ' ? '\u00A0' : char}
-          </span>
-        ))}
-      </div>
-    );
-  };
-
-  // Функция для рендеринга шаров
-  const renderBalloons = () => (
-    <div className={styles.LoadingMainScreen__baloons}>
-      {BALLOONS_DATA.map(({ key, src, className }) => (
-        <div key={key} ref={(el) => (balloonRefs.current[key] = { current: el })} className={`${styles.LoadingMainScreen__baloon} ${className}`}>
-          <img src={src} alt={`balloon-${key}`} />
-        </div>
-      ))}
-    </div>
-  );
-
   return (
     <section className={styles.LoadingMainScreen}>
       <div ref={containerRef} className={styles.LoadingMainScreen__container} style={{ background: '#F0F2F5' }}>
@@ -405,7 +83,7 @@ function LoadingMainScreen({ headerRef, onComplete }) {
             className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_l}`}
             initial={{ x: '-17.69vw', y: '38.89vh', rotate: -38, scale: 3.11 }}
             animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }} // Пружинная анимация с задержкой (4.2 сек)
+            transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}
           >
             <LetterL />
           </motion.div>
@@ -437,8 +115,8 @@ function LoadingMainScreen({ headerRef, onComplete }) {
             <Spot />
           </motion.div>
         </div>
-        <Description />
-        {renderBalloons()}
+        <Subtitle />
+        <Balloons headerRef={headerRef} onComplete={onComplete} containerRef={containerRef} />
         <div className={styles.LoadingMainScreen__flare}>
           <Flare />
         </div>

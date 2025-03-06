@@ -46,16 +46,6 @@
     margin-left: 24px;
   }
 
-  &__desc {
-    font-size: 30px;
-    overflow: hidden; // Скрываем буквы, пока они поднимаются снизу
-    white-space: nowrap; // Сохраняем строку в одну линию
-
-    span {
-      position: relative;
-    }
-  }
-
   &__baloons {
     position: absolute;
     width: 100%;

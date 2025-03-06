@@ -15,6 +15,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother.min';
 import { useEffect, useRef, useState } from 'react';
+import Balloons from './components/LoadingMainScreen/Balloons/Balloons.jsx';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
