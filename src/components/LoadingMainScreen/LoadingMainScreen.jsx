@@ -1,125 +1,64 @@
 import { useEffect, useRef } from 'react';
-import styles from './LoadingMainScreen.module.scss';
-import { motion } from 'framer-motion';
-import { gsap } from 'gsap';
-import Subtitle from './Subtitle';
+import BackgroundLetters from './BackgroundLetters/BackgroundLetters';
 import Balloons from './Balloons/Balloons';
-import Flare from '../../assets/images/loading-main-flare.svg?react';
+import FlareComponent from './FlareComponent/FlareComponent';
+import { gsap } from 'gsap';
 
-const ANIMATION_CONFIG = {
-  LETTER_DELAY: 4.2,
-};
-
-function LoadingMainScreen({ headerRef, onComplete }) {
+function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage }) {
   const containerRef = useRef(null);
-  const letterRefs = useRef([]);
-
-  const animateSequence = (container, letters) => {
-    const tl = gsap.timeline();
-    tl.to(container, { background: '#27292F', duration: 1.6, ease: 'elastic.out(1.3, 0.35)', delay: 0.4 })
-      .to(letters, { fill: '#2f3137', duration: 1, ease: 'elastic.out(1.3, 0.35)' }, 0.4)
-      .to(container, { background: '#2f3137', duration: 0.1, ease: 'elastic.out(1.3, 0.35)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.1, ease: 'elastic.out(1.3, 0.35)' }, '-=1')
-      .to(container, { background: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.2, 0.3)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.2, 0.3)' }, '-=1')
-      .to(container, { background: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.2, 0.3)' })
-      .to(letters, { fill: '#27292F', duration: 1, ease: 'elastic.out(1.2, 0.3)' }, '-=1');
-  };
 
   useEffect(() => {
-    const container = containerRef.current;
-    const letters = letterRefs.current;
-
     gsap.set(headerRef.current, { opacity: 0 });
-    gsap.set(letters, { fill: '#F0F2F5' });
 
-    animateSequence(container, letters);
-  }, [headerRef]);
+    const handleScroll = (event) => {
+      event.preventDefault();
+      if (loadingStage === 'initial') {
+        onStageChange('scrolling');
+      }
+    };
 
-  const baseTransition = { type: 'spring', stiffness: 384, damping: 12, mass: 1 };
+    window.addEventListener('wheel', handleScroll, { passive: false });
+    window.addEventListener('touchmove', handleScroll, { passive: false });
 
-  const addToRefs = (el) => {
-    if (el && !letterRefs.current.includes(el)) letterRefs.current.push(el);
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+    };
+  }, [headerRef, loadingStage, onStageChange]);
+
+  const handleBalloonsToCenterComplete = () => {
+    onStageChange('transition');
+    setTimeout(() => onStageChange('complete'), 1000);
   };
 
-  const Spot = () => (
-    <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        ref={addToRefs}
-        d="M30.1097 15.548C30.1097 23.5924 23.5885 30.1136 15.5441 30.1136C7.49977 30.1136 0.978516 23.5924 0.978516 15.548C0.978516 7.50367 7.49977 0.982422 15.5441 0.982422C23.5885 0.982422 30.1097 7.50367 30.1097 15.548Z"
-      />
-    </svg>
-  );
-
-  const LetterL = () => (
-    <svg width="137" height="155" viewBox="0 0 137 155" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path ref={addToRefs} d="M22.5532 0V131.56H136.259V154.113H0V0H22.5532Z" />
-    </svg>
-  );
-
-  const LetterA = () => (
-    <svg width="186" height="155" viewBox="0 0 186 155" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        ref={addToRefs}
-        d="M185.177 154.113H160.273L139.777 114.044H45.2318L24.7359 154.113H0.0527344L77.6285 0H107.601L185.177 154.113ZM92.6147 22.6767L46.3337 111.842H138.675L92.6147 22.6767Z"
-      />
-    </svg>
-  );
-
-  const LetterB = () => (
-    <svg width="162" height="155" viewBox="0 0 162 155" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        ref={addToRefs}
-        d="M122.207 75.5156C147.997 78.818 161.663 94.2294 161.663 114.484C161.663 137.601 143.368 154.113 111.185 154.113H0.97168V0H106.336C138.298 0 155.05 16.0718 155.05 38.5284C155.05 57.022 143.809 71.1124 122.207 75.5156ZM101.487 21.3557H24.4646V74.8551H101.487C123.089 74.8551 133.889 63.847 133.889 48.2155C133.889 32.3638 123.089 21.3557 101.487 21.3557ZM24.4646 132.758H105.013C127.938 132.758 139.62 121.309 139.62 104.797C139.62 88.5052 127.938 77.0567 105.013 77.0567H24.4646V132.758Z"
-      />
-    </svg>
-  );
+  const styles = {
+    LoadingMainScreen: {
+      display: loadingStage === 'complete' ? 'none' : 'block',
+    },
+    LoadingMainScreen__container: {
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+      backgroundColor: 'white',
+      overflow: 'hidden',
+    },
+  };
 
   return (
-    <section className={styles.LoadingMainScreen}>
-      <div ref={containerRef} className={styles.LoadingMainScreen__container} style={{ background: '#F0F2F5' }}>
-        <div className={styles.LoadingMainScreen__laba}>
-          <motion.div
-            className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_l}`}
-            initial={{ x: '-17.69vw', y: '38.89vh', rotate: -38, scale: 3.11 }}
-            animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}
-          >
-            <LetterL />
-          </motion.div>
-          <motion.div
-            className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_a}`}
-            initial={{ x: '-24.25vw', y: '-54.55vh', rotate: 77, scale: 1.116 }}
-            animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}
-          >
-            <LetterA />
-          </motion.div>
-          <motion.div
-            className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_b}`}
-            initial={{ x: '-4vw', y: '32.2vh', rotate: 130, scale: 0.52 }}
-            animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}
-          >
-            <LetterB />
-          </motion.div>
-          <motion.div
-            className={`${styles.LoadingMainScreen__letter} ${styles.LoadingMainScreen__letter_a}`}
-            initial={{ x: '34.5vw', y: '41vh', rotate: -35, scale: 1.83 }}
-            animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}
-          >
-            <LetterA />
-          </motion.div>
-          <motion.div className={styles.LoadingMainScreen__spot} initial={{ scale: 17 }} animate={{ scale: 1 }} transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}>
-            <Spot />
-          </motion.div>
-        </div>
-        <Subtitle />
-        <Balloons headerRef={headerRef} onComplete={onComplete} containerRef={containerRef} />
-        <div className={styles.LoadingMainScreen__flare}>
-          <Flare />
-        </div>
+    <section style={styles.LoadingMainScreen}>
+      <div ref={containerRef} style={styles.LoadingMainScreen__container}>
+        {(loadingStage === 'initial' || loadingStage === 'scrolling') && <BackgroundLetters containerRef={containerRef} />}
+        {(loadingStage === 'initial' || loadingStage === 'scrolling') && <FlareComponent />}
+        <Balloons
+          headerRef={headerRef}
+          containerRef={containerRef}
+          startBalloonsToCenter={loadingStage === 'scrolling'}
+          onBalloonsToCenterComplete={handleBalloonsToCenterComplete}
+          wrapperRef={wrapperRef}
+          loadingStage={loadingStage}
+        />
       </div>
     </section>
   );
