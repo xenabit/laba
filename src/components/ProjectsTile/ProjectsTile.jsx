@@ -38,28 +38,26 @@ const items = [
   },
 ];
 
-function ProjectsTile() {
+function ProjectsTile({ shouldAnimate }) {
   const animationRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1440);
 
   const handleMouseEnter = (index) => {
-    setHoveredIndex(index); // Устанавливаем индекс при наведении мыши
+    setHoveredIndex(index);
   };
 
-  const handleMouseLeave = (index) => {
-    setHoveredIndex(null); // Убираем активный индекс
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
   };
 
   const updateScreenSize = () => {
     setIsDesktop(window.innerWidth > 1440);
   };
 
-  // Функция сброса и перезапуска анимации перелистывания
   const resetAnimation = () => {
     if (animationRef.current) {
       if (window.innerWidth <= 1280) {
-        // Удаление и повторное добавление класса анимации для перезапуска
         animationRef.current.classList.remove(styles.animate);
         setTimeout(() => {
           animationRef.current.classList.add(styles.animate);
@@ -81,7 +79,6 @@ function ProjectsTile() {
 
     return () => {
       window.removeEventListener('resize', resetAnimation);
-
       if (timer) {
         clearInterval(timer);
       }
@@ -96,7 +93,7 @@ function ProjectsTile() {
   }, []);
 
   return (
-    <section className={`${styles.ProjectsTile} ${styles.animate}`}>
+    <section className={`${styles.ProjectsTile} ${shouldAnimate ? styles.animate : ''}`}>
       <div className={styles.ProjectsTile__container}>
         <div className={`${styles.ProjectsTile__layer} ${styles.ProjectsTile__layer_bot}`}>
           <div ref={animationRef} className={`${styles.ProjectsTile__items} ${styles.animate}`}>

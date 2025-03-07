@@ -20,7 +20,8 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 const App = () => {
   const headerRef = useRef(null);
   const wrapperRef = useRef(null);
-  const [loadingStage, setLoadingStage] = useState('initial'); // 'initial', 'scrolling', 'transition', 'complete'
+  const [loadingStage, setLoadingStage] = useState('initial');
+  const [shouldAnimateHome, setShouldAnimateHome] = useState(false);
 
   useEffect(() => {
     let smoother;
@@ -40,13 +41,24 @@ const App = () => {
     setLoadingStage(stage);
   };
 
+  const handleMaxBalloonSize = () => {
+    setShouldAnimateHome(true);
+  };
+
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
-      <Header ref={headerRef} />
-      <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} />
-      <div id="smooth-content" style={{ opacity: loadingStage === 'complete' ? 1 : 0, pointerEvents: loadingStage === 'complete' ? 'auto' : 'none' }}>
+      <Header ref={headerRef} shouldAnimate={shouldAnimateHome} /> {/* Передаем shouldAnimate */}
+      <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} onMaxBalloonSize={handleMaxBalloonSize} />
+      <div
+        id="smooth-content"
+        style={{
+          opacity: loadingStage === 'complete' ? 1 : 0,
+          pointerEvents: loadingStage === 'complete' ? 'auto' : 'none',
+          transition: 'opacity 0.5s ease',
+        }}
+      >
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home shouldAnimate={shouldAnimateHome} />} />
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />

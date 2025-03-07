@@ -469,6 +469,28 @@
 
   // Адаптация для desktop
   @media all and (min-width: $bp1) {
+    &.animate {
+      #{$s}__logo {
+        animation: header-logo-scale 2s linear 1s forwards;
+      }
+
+      @keyframes header-logo-scale {
+        0% {
+          scale: 6.66;
+          position: absolute;
+          top: 700%;
+          left: 50%;
+        }
+        100% {
+          scale: 1;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+
     &__top {
       padding: rem(20) 0 rem(16) 0;
       border-bottom: 3px solid var(--prime-2);

@@ -4,7 +4,7 @@ import Balloons from './Balloons/Balloons';
 import FlareComponent from './FlareComponent/FlareComponent';
 import { gsap } from 'gsap';
 
-function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage }) {
+function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage, onMaxBalloonSize }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -28,7 +28,10 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage 
 
   const handleBalloonsToCenterComplete = () => {
     onStageChange('transition');
-    setTimeout(() => onStageChange('complete'), 1000);
+  };
+
+  const handleBalloonsShrinkComplete = () => {
+    onStageChange('complete');
   };
 
   const styles = {
@@ -49,13 +52,19 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage 
   return (
     <section style={styles.LoadingMainScreen}>
       <div ref={containerRef} style={styles.LoadingMainScreen__container}>
-        {(loadingStage === 'initial' || loadingStage === 'scrolling') && <BackgroundLetters containerRef={containerRef} />}
-        {(loadingStage === 'initial' || loadingStage === 'scrolling') && <FlareComponent />}
+        {(loadingStage === 'initial' || loadingStage === 'scrolling') && (
+          <>
+            <BackgroundLetters containerRef={containerRef} />
+            <FlareComponent />
+          </>
+        )}
         <Balloons
           headerRef={headerRef}
           containerRef={containerRef}
           startBalloonsToCenter={loadingStage === 'scrolling'}
           onBalloonsToCenterComplete={handleBalloonsToCenterComplete}
+          onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
+          onMaxBalloonSize={onMaxBalloonSize} // Прокидываем дальше
           wrapperRef={wrapperRef}
           loadingStage={loadingStage}
         />

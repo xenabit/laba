@@ -7,7 +7,7 @@ import logo from '/src/assets/images/header-logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Header = forwardRef((props, ref) => {
+const Header = forwardRef(({ shouldAnimate }, ref) => {
   const [isActive, setIsActive] = useState(false);
   const [activeTab, setActiveTab] = useState('/');
   const location = useLocation();
@@ -17,13 +17,11 @@ const Header = forwardRef((props, ref) => {
     setActiveTab(savedTab);
   }, [location.pathname]);
 
-  // Хук для блокировки/разблокировки скролла страницы при открытии меню
   useEffect(() => {
     document.body.style.overflow = isActive ? 'hidden' : '';
     return () => (document.body.style.overflow = '');
   }, [isActive]);
 
-  // Хук для настройки анимации шапки и управления border-bottom
   useEffect(() => {
     const header = ref.current;
     const headerTop = header.querySelector(`.${styles.Header__top}`);
@@ -42,10 +40,8 @@ const Header = forwardRef((props, ref) => {
     const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
     const borderWidth = isDesktop ? 3 : 2;
 
-    // Устанавливаем начальные значения border-bottom
     gsap.set(headerTop, { borderBottomWidth: borderWidth, borderBottomStyle: 'solid', borderBottomColor: 'var(--prime-2)' });
 
-    // Анимация border-bottom для плавного появления/исчезновения
     const borderAnim = gsap.to(headerTop, {
       borderBottomWidth: 0,
       duration: 0.2,
@@ -53,11 +49,14 @@ const Header = forwardRef((props, ref) => {
       paused: true,
       onUpdate: () => {
         if (isActive) {
-          // Если меню активно, принудительно устанавливаем border-bottom белого цвета
           gsap.set(headerTop, { borderBottomWidth: borderWidth, borderBottomColor: 'var(--prime-1)' });
         }
       },
     });
+
+    if (shouldAnimate) {
+      header.classList.add(styles.animate); // Добавляем класс animate
+    }
 
     ScrollTrigger.create({
       trigger: '#smooth-content',
@@ -65,18 +64,15 @@ const Header = forwardRef((props, ref) => {
       end: 'bottom top',
       onUpdate: (self) => {
         if (isActive) {
-          // Если меню активно, шапка остается видимой, border-bottom белый
           showAnim.pause();
           gsap.set(header, { yPercent: 0 });
           gsap.set(headerTop, { borderBottomWidth: borderWidth, borderBottomColor: 'var(--prime-1)' });
         } else if (self.scroll() <= 50) {
-          // В начале страницы шапка видна, border-bottom обычный
           showAnim.pause();
           gsap.set(header, { yPercent: 0 });
           borderAnim.reverse();
           gsap.set(headerTop, { borderBottomColor: 'var(--prime-2)' });
         } else {
-          // Поведение при скролле после 50px
           if (self.direction === -1) {
             showAnim.reverse();
             if (self.progress < 0.02) {
@@ -95,12 +91,10 @@ const Header = forwardRef((props, ref) => {
     });
 
     ScrollTrigger.refresh();
-  }, [ref, isActive]); // Добавляем isActive как зависимость
+  }, [ref, isActive, shouldAnimate]); // Добавляем shouldAnimate как зависимость
 
-  // Функция для переключения состояния меню (открыто/закрыто)
   const toggleActiveClass = () => setIsActive((prev) => !prev);
 
-  // Функция для обработки клика по вкладке
   const handleTabClick = (path) => {
     if (path !== activeTab) {
       setActiveTab(path);
@@ -109,9 +103,8 @@ const Header = forwardRef((props, ref) => {
     setIsActive(false);
   };
 
-  // JSX разметка шапки
   return (
-    <header ref={ref} id="main-tool-bar" className={styles.Header}>
+    <header ref={ref} id="main-tool-bar" className={`${styles.Header}`}>
       <div className={`${styles.Header__container} ${isActive ? styles.active : ''}`}>
         <div className={styles.Header__top}>
           <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>

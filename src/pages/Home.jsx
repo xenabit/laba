@@ -10,7 +10,7 @@ import Gallery from '../components/Gallery/Gallery';
 import AboutList from '../components/AboutList/AboutList';
 import Partners from '../components/Partners/Partners';
 
-export default function Home() {
+export default function Home({ shouldAnimate }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -28,8 +28,8 @@ export default function Home() {
 
   return (
     <main>
-      <Intro2 />
-      <ProjectsTile />
+      <Intro2 shouldAnimate={shouldAnimate} />
+      <ProjectsTile shouldAnimate={shouldAnimate} />
       {/* <Ticker /> */}
       {/* <Counter />
       {isMobile && <TextEffect />} */}

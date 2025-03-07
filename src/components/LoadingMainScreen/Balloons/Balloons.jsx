@@ -95,7 +95,16 @@ const BALLOONS_CONFIG = [
   },
 ];
 
-function Balloons({ headerRef, onComplete, containerRef }) {
+function Balloons({
+  headerRef,
+  containerRef,
+  startBalloonsToCenter,
+  onBalloonsToCenterComplete,
+  onBalloonsShrinkComplete,
+  onMaxBalloonSize, // Новый коллбэк
+  wrapperRef,
+  loadingStage,
+}) {
   const balloonRefs = useRef({});
   const hasScrolled = useRef(false);
 
@@ -121,7 +130,12 @@ function Balloons({ headerRef, onComplete, containerRef }) {
     gsap.killTweensOf(balloons);
     gsap.to(headerRef.current, { opacity: 0, duration: ANIMATION_CONFIG.HEADER_FADE_DURATION, ease: 'power2.out' });
 
-    const tl = gsap.timeline({ onComplete });
+    const tl = gsap.timeline({
+      onComplete: () => {
+        onBalloonsToCenterComplete();
+        onMaxBalloonSize(); // Вызываем, когда шар достиг максимального размера
+      },
+    });
     const otherBalloons = balloons.filter((balloon) => !balloon.classList.contains(styles.Balloons__item_c));
     otherBalloons.forEach((balloon, index) => {
       tl.to(balloon, { width: '0px', height: '0px', top: '39.8%', left: '30.7%', scale: 1, rotation: 0, duration: 0.2, opacity: 0, ease: 'linear', overwrite: 'all' }, index * 0.2);
@@ -153,6 +167,20 @@ function Balloons({ headerRef, onComplete, containerRef }) {
     }
   };
 
+  const shrinkCentralBalloon = (balloonCenter) => {
+    if (!balloonCenter) return;
+
+    const tl = gsap.timeline({ onComplete: onBalloonsShrinkComplete });
+    tl.to(balloonCenter, {
+      scale: 0.1,
+      top: '50%',
+      left: '50%',
+      duration: 1.5,
+      ease: 'power2.inOut',
+      overwrite: 'all',
+    });
+  };
+
   const applyMagnetEffect = (balloon, mouseX, mouseY, containerRect) => {
     const balloonRect = balloon.getBoundingClientRect();
     const balloonX = balloonRect.left - containerRect.left + balloonRect.width / 2;
@@ -180,12 +208,6 @@ function Balloons({ headerRef, onComplete, containerRef }) {
     const container = containerRef.current;
     let isMagnetActive = false;
 
-    const handleScrollAttempt = (event) => {
-      event.preventDefault();
-      balloonsToCenterAnimate(balloons);
-      container.removeEventListener('mousemove', handleMouseMove);
-    };
-
     const handleMouseMove = throttle((e) => {
       if (!isMagnetActive || hasScrolled.current) return;
       const containerRect = container.getBoundingClientRect();
@@ -194,26 +216,35 @@ function Balloons({ headerRef, onComplete, containerRef }) {
       balloons.forEach((balloon) => applyMagnetEffect(balloon, mouseX, mouseY, containerRect));
     }, 16);
 
-    const cleanupListeners = () => {
-      window.removeEventListener('wheel', handleScrollAttempt);
-      window.removeEventListener('touchmove', handleScrollAttempt);
+    if (loadingStage === 'initial') {
+      balloonsEntryAnimate(balloons);
+      setTimeout(
+        () => {
+          if (!hasScrolled.current) {
+            isMagnetActive = true;
+            container.addEventListener('mousemove', handleMouseMove);
+          }
+        },
+        ANIMATION_CONFIG.BALOON_TRANSITION_DELAY * 1000 + ANIMATION_CONFIG.BALOON_MOVE_DURATION * 1000
+      );
+    }
+
+    if (startBalloonsToCenter) {
+      balloonsToCenterAnimate(balloons);
+      isMagnetActive = false;
       container.removeEventListener('mousemove', handleMouseMove);
+    }
+
+    if (loadingStage === 'transition') {
+      const balloonCenter = balloonRefs.current.c?.current;
+      shrinkCentralBalloon(balloonCenter);
+    }
+
+    return () => {
       gsap.killTweensOf(balloons);
+      container.removeEventListener('mousemove', handleMouseMove);
     };
-
-    balloonsEntryAnimate(balloons);
-
-    setTimeout(() => {
-      if (!hasScrolled.current) {
-        isMagnetActive = true;
-        container.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('wheel', handleScrollAttempt, { passive: false });
-        window.addEventListener('touchmove', handleScrollAttempt, { passive: false });
-      }
-    }, 6500);
-
-    return cleanupListeners;
-  }, [headerRef, onComplete, containerRef]);
+  }, [loadingStage, startBalloonsToCenter, onBalloonsToCenterComplete, onBalloonsShrinkComplete, onMaxBalloonSize, containerRef, headerRef]);
 
   return (
     <div className={styles.Balloons__container}>
