@@ -95,7 +95,7 @@
     &.animate {
       #{$s}__laba {
         position: relative;
-        animation: intro-left-rise 2s linear 3s forwards;
+        animation: intro-left-rise 1s linear 3s forwards;
         left: -100%;
       }
 
@@ -111,7 +111,7 @@
       #{$s}__desc {
         position: relative;
         right: -100%;
-        animation: intro-right-rise 2s linear 3s forwards;
+        animation: intro-right-rise 1s linear 3s forwards;
       }
 
       @keyframes intro-right-rise {

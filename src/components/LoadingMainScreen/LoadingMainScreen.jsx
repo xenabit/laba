@@ -45,20 +45,18 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
         overwrite: 'auto',
       });
     } else if (loadingStage === 'transition') {
-      // Шар стал большим: логотип виден, остальные элементы прозрачны
       gsap.set(logo, {
         scale: 6.66,
         position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 1000,
+        left: '50.5%',
+        top: '41.5%',
+        transform: 'translate(-31%, 1700%)',
+        zIndex: 10,
         opacity: 1,
       });
       gsap.set(headerRef.current, { opacity: 1 });
-      gsap.set([toggle, desc, border], { opacity: 0 }); // Бордер становится прозрачным
+      gsap.set([toggle, desc, border], { opacity: 0 });
     } else if (loadingStage === 'complete') {
-      // Шар исчез, используем таймлайн для синхронной анимации
       tl = gsap.timeline();
       tl.to(headerRef.current, {
         opacity: 1,
@@ -76,9 +74,6 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
             duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
             ease: 'linear',
             overwrite: 'auto',
-            onComplete: () => {
-              gsap.set(logo, { clearProps: 'all' });
-            },
           },
           ANIMATION_CONFIG.LOGO_ANIMATION_DELAY // Задержка 1s
         )

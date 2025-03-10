@@ -445,7 +445,7 @@
   @media all and (min-width: $bp1) {
     &.animate {
       transform: translateY(100%);
-      animation: projects-bottom-rise 2s linear 3s forwards;
+      animation: projects-bottom-rise 1s linear 3s forwards;
     }
 
     @keyframes projects-bottom-rise {

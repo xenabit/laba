@@ -123,7 +123,7 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
 
     const balloonCenter = balloonRefs.current.c?.current;
     if (balloonCenter) {
-      gsap.set(balloonCenter, { top: '39.8%', left: '30.7%', transformOrigin: 'center', width: '68px', height: '68px', zIndex: 10 });
+      gsap.set(balloonCenter, { top: '39.8%', left: '30.7%', transformOrigin: 'center', width: '68px', height: '68px', zIndex: 1000 });
       const scaleSteps = [
         { scale: 1.2, top: '39.8%', left: '30.7%' },
         { scale: 1.5, top: '39.8%', left: '30.7%' },
@@ -153,8 +153,8 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
     const tl = gsap.timeline({ onComplete: onBalloonsShrinkComplete });
     tl.to(balloonCenter, {
       scale: 0.1,
-      top: '50%',
-      left: '50%',
+      left: '51%',
+      top: '41.5%',
       duration: 1.5,
       ease: 'power2.inOut',
       overwrite: 'all',
