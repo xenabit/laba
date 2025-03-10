@@ -26,16 +26,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     const logo = headerRef.current.querySelector(`.${headerStyles.Header__logo}`);
     const toggle = headerRef.current.querySelector(`.${headerStyles.Header__toggle}`);
     const desc = headerRef.current.querySelector(`.${headerStyles.Header__desc}`);
-    const headerTop = headerRef.current.querySelector(`.${headerStyles.Header__top}`);
-
-    // Устанавливаем начальные стили для border-bottom
-    const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
-    const borderWidth = isDesktop ? 3 : 2;
-    gsap.set(headerTop, {
-      borderBottomWidth: borderWidth,
-      borderBottomStyle: 'solid',
-      borderBottomColor: 'var(--prime-2)', // Исходный цвет
-    });
+    const border = headerRef.current.querySelector(`.${headerStyles.Header__border}`);
 
     let tl;
     if (loadingStage === 'initial') {
@@ -65,46 +56,42 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
         opacity: 1,
       });
       gsap.set(headerRef.current, { opacity: 1 });
-      gsap.set([toggle, desc], { opacity: 0 });
-      gsap.set(headerTop, { borderBottomColor: 'rgba(34, 34, 34, 0)' }); // Прозрачный (предполагаем var(--prime-2) как #222222)
+      gsap.set([toggle, desc, border], { opacity: 0 }); // Бордер становится прозрачным
     } else if (loadingStage === 'complete') {
-      // Шар исчез, логотип возвращается, остальные элементы появляются
-      gsap.to(headerRef.current, {
+      // Шар исчез, используем таймлайн для синхронной анимации
+      tl = gsap.timeline();
+      tl.to(headerRef.current, {
         opacity: 1,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
         ease: 'power2.out',
-        overwrite: 'auto',
-      });
-      gsap.to(logo, {
-        scale: 1,
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-        delay: ANIMATION_CONFIG.LOGO_ANIMATION_DELAY,
-        ease: 'linear',
-        overwrite: 'auto',
-        onComplete: () => {
-          gsap.set(logo, { clearProps: 'all' });
-        },
-      });
-      // Восстановление прозрачности toggle и desc
-      gsap.to([toggle, desc], {
-        opacity: 1,
-        duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-        delay: ANIMATION_CONFIG.LOGO_ANIMATION_DELAY,
-        ease: 'linear',
-        overwrite: 'auto',
-      });
-      // Плавное восстановление border-bottom через rgba
-      gsap.to(headerTop, {
-        borderBottomColor: 'rgba(34, 34, 34, 1)', // Полная непрозрачность (var(--prime-2))
-        duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-        delay: ANIMATION_CONFIG.LOGO_ANIMATION_DELAY,
-        ease: 'linear',
-        overwrite: 'auto',
-      });
+      })
+        .to(
+          logo,
+          {
+            scale: 1,
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+            overwrite: 'auto',
+            onComplete: () => {
+              gsap.set(logo, { clearProps: 'all' });
+            },
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY // Задержка 1s
+        )
+        .to(
+          [toggle, desc, border],
+          {
+            opacity: 1, // Плавное появление бордера вместе с toggle и desc
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+            overwrite: 'auto',
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY // Синхронно с логотипом
+        );
     }
 
     const handleScroll = (event) => {
@@ -122,7 +109,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       window.removeEventListener('touchmove', handleScroll);
       if (tl) tl.kill();
       gsap.killTweensOf(headerRef.current);
-      gsap.killTweensOf([logo, toggle, desc, headerTop]);
+      gsap.killTweensOf([logo, toggle, desc, border]);
     };
   }, [headerRef, loadingStage, onStageChange]);
 

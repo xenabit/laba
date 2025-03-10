@@ -47,7 +47,6 @@
     align-items: stretch;
     transition: 0.3s;
     height: 100%;
-    overflow: hidden;
   }
 
   &__top {
@@ -57,7 +56,16 @@
     align-items: center;
     z-index: 30;
     padding: rem(8) 0 rem(16) 0;
-    border-bottom: 2px solid var(--prime-2);
+    position: relative;
+  }
+
+  &__border {
+    position: absolute;
+    height: 2px;
+    background-color: var(--prime-2);
+    width: 100%;
+    bottom: 0;
+    left: 0;
   }
 
   &__desc {
@@ -350,7 +358,9 @@
     color: var(--prime-1);
 
     #{$s}__top {
-      border-bottom: 2px solid var(--prime-1);
+      #{$s}__border {
+        background-color: var(--prime-1);
+      }
     }
 
     #{$s}__logo img {
@@ -471,7 +481,10 @@
   @media all and (min-width: $bp1) {
     &__top {
       padding: rem(20) 0 rem(16) 0;
-      border-bottom: 3px solid var(--prime-2);
+
+      #{$s}__border {
+        height: 3px;
+      }
     }
 
     &__inner {
@@ -487,7 +500,9 @@
 
     &__container.active {
       #{$s}__top {
-        border-bottom: 3px solid var(--prime-1);
+        #{$s}__border {
+          height: 3px;
+        }
       }
     }
     nav {

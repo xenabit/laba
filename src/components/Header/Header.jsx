@@ -25,6 +25,12 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
   useEffect(() => {
     const header = ref.current;
     const headerTop = header.querySelector(`.${styles.Header__top}`);
+    const border = headerTop.querySelector(`.${styles.Header__border}`);
+
+    if (!border) {
+      console.warn('Элемент .Header__border не найден');
+      return;
+    }
 
     const showAnim = gsap.fromTo(
       header,
@@ -38,18 +44,20 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
     );
 
     const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
-    const borderWidth = isDesktop ? 3 : 2;
+    const borderHeight = isDesktop ? 3 : 2;
 
-    gsap.set(headerTop, { borderBottomWidth: borderWidth, borderBottomStyle: 'solid', borderBottomColor: 'var(--prime-2)' });
+    // Устанавливаем начальные стили для .Header__border
+    gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-2)' });
 
-    const borderAnim = gsap.to(headerTop, {
-      borderBottomWidth: 0,
+    // Анимация высоты .Header__border
+    const borderAnim = gsap.to(border, {
+      height: 0,
       duration: 0.2,
       ease: 'power1.out',
       paused: true,
       onUpdate: () => {
         if (isActive) {
-          gsap.set(headerTop, { borderBottomWidth: borderWidth, borderBottomColor: 'var(--prime-1)' });
+          gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
         }
       },
     });
@@ -66,18 +74,18 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
         if (isActive) {
           showAnim.pause();
           gsap.set(header, { yPercent: 0 });
-          gsap.set(headerTop, { borderBottomWidth: borderWidth, borderBottomColor: 'var(--prime-1)' });
+          gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
         } else if (self.scroll() <= 50) {
           showAnim.pause();
           gsap.set(header, { yPercent: 0 });
           borderAnim.reverse();
-          gsap.set(headerTop, { borderBottomColor: 'var(--prime-2)' });
+          gsap.set(border, { backgroundColor: 'var(--prime-2)' });
         } else {
           if (self.direction === -1) {
             showAnim.reverse();
             if (self.progress < 0.02) {
               borderAnim.reverse();
-              gsap.set(headerTop, { borderBottomColor: 'var(--prime-2)' });
+              gsap.set(border, { backgroundColor: 'var(--prime-2)' });
             } else {
               borderAnim.play();
             }
@@ -91,6 +99,10 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
     });
 
     ScrollTrigger.refresh();
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, [ref, isActive, shouldAnimate]); // Добавляем shouldAnimate как зависимость
 
   const toggleActiveClass = () => setIsActive((prev) => !prev);
@@ -120,6 +132,7 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
             <span></span>
             <span></span>
           </button>
+          <div className={styles.Header__border}></div>
         </div>
         <div className={styles.Header__inner}>
           <nav>
