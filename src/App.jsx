@@ -20,13 +20,13 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 const App = () => {
   const headerRef = useRef(null);
   const wrapperRef = useRef(null);
+  const introRef = useRef(null);
   const [loadingStage, setLoadingStage] = useState('initial');
   const [shouldAnimateHome, setShouldAnimateHome] = useState(false);
 
   useEffect(() => {
     let smoother;
     if (loadingStage === 'complete') {
-      // Инициализация ScrollSmoother
       smoother = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
@@ -34,12 +34,11 @@ const App = () => {
         effects: true,
       });
       ScrollTrigger.refresh();
-      // Убедимся, что скролл разблокирован
       document.body.style.overflow = '';
     }
     return () => {
       if (smoother) smoother.kill();
-      document.body.style.overflow = ''; // Сбрасываем при размонтировании
+      document.body.style.overflow = '';
     };
   }, [loadingStage]);
 
@@ -54,7 +53,7 @@ const App = () => {
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
       <Header ref={headerRef} shouldAnimate={shouldAnimateHome} />
-      <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} onMaxBalloonSize={handleMaxBalloonSize} />
+      <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} onMaxBalloonSize={handleMaxBalloonSize} introRef={introRef} />
       <div
         id="smooth-content"
         style={{
@@ -64,7 +63,7 @@ const App = () => {
         }}
       >
         <Routes>
-          <Route path="/" element={<Home shouldAnimate={shouldAnimateHome} />} />
+          <Route path="/" element={<Home introRef={introRef} shouldAnimate={shouldAnimateHome} />} />
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />

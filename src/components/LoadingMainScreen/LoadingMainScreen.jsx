@@ -16,7 +16,7 @@ const ANIMATION_CONFIG = {
   LOGO_ANIMATION_DELAY: 1,
 };
 
-function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage, onMaxBalloonSize }) {
+function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage, onMaxBalloonSize, introRef }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -92,7 +92,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       });
       gsap.set(header, { opacity: 1 });
       gsap.set([toggle, desc, border], { opacity: 0 });
-    } else if (loadingStage === 'complete') {
+    } else if (loadingStage === 'complete' && introRef.current) {
       tl = gsap.timeline({
         onComplete: () => {
           window.removeEventListener('wheel', blockScroll);
@@ -132,6 +132,32 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
           },
           ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
         );
+
+      const introLaba = introRef.current.querySelector(`.${styles.Intro2__laba}`);
+      const introDesc = introRef.current.querySelector(`.${styles.Intro2__desc}`);
+
+      if (introLaba && introDesc) {
+        gsap.set(introLaba, { xPercent: -100 });
+        gsap.set(introDesc, { xPercent: 100 });
+
+        tl.to(
+          introLaba,
+          {
+            xPercent: 0,
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
+        ).to(
+          introDesc,
+          {
+            xPercent: 0,
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
+        );
+      }
     }
 
     return () => {
@@ -142,8 +168,13 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       if (tl) tl.kill();
       gsap.killTweensOf(header);
       gsap.killTweensOf([logo, toggle, desc, border]);
+      if (introRef.current) {
+        const introLaba = introRef.current.querySelector(`.${styles.Intro2__laba}`);
+        const introDesc = introRef.current.querySelector(`.${styles.Intro2__desc}`);
+        gsap.killTweensOf([introLaba, introDesc]);
+      }
     };
-  }, [headerRef, loadingStage, onStageChange]);
+  }, [headerRef, loadingStage, onStageChange, introRef]);
 
   const handleBalloonsToCenterComplete = () => {
     onStageChange('transition');

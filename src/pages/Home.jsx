@@ -10,7 +10,7 @@ import Gallery from '../components/Gallery/Gallery';
 import AboutList from '../components/AboutList/AboutList';
 import Partners from '../components/Partners/Partners';
 
-export default function Home({ shouldAnimate }) {
+export default function Home({ introRef, shouldAnimate }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Home({ shouldAnimate }) {
 
   return (
     <main>
-      <Intro2 shouldAnimate={shouldAnimate} />
+      <Intro2 introRef={introRef} />
       <ProjectsTile shouldAnimate={shouldAnimate} />
       {/* <Ticker /> */}
       {/* <Counter />

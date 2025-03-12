@@ -90,38 +90,4 @@
       line-height: rem(56);
     }
   }
-
-  @media all and (min-width: $bp1) {
-    &.animate {
-      #{$s}__laba {
-        position: relative;
-        animation: intro-left-rise 1s linear 3s forwards;
-        left: -100%;
-      }
-
-      @keyframes intro-left-rise {
-        0% {
-          left: -100%;
-        }
-        100% {
-          left: 0;
-        }
-      }
-
-      #{$s}__desc {
-        position: relative;
-        right: -100%;
-        animation: intro-right-rise 1s linear 3s forwards;
-      }
-
-      @keyframes intro-right-rise {
-        0% {
-          right: -100%;
-        }
-        100% {
-          right: 0;
-        }
-      }
-    }
-  }
 }

@@ -1,12 +1,12 @@
 import styles from './Intro2.module.scss';
 import labaBlack from '../../assets/images/intro-2-laba-black.svg';
 
-function Intro2({ shouldAnimate }) {
+function Intro2({ introRef }) {
   return (
-    <section className={`${styles.Intro2} ${shouldAnimate ? styles.animate : ''}`}>
+    <section className={styles.Intro2} ref={introRef}>
       <div className={styles.Intro2__container}>
         <div className={styles.Intro2__laba}>
-          <img loading="lazy" src={labaBlack} alt="Laba logo" />
+          <img loading="lazy" src={labaBlack} />
         </div>
         <div className={styles.Intro2__desc}>
           Создаем уникальные
