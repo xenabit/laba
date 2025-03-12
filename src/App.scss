@@ -89,6 +89,8 @@ html {
   /* Убирает подсветку при таче */
   -webkit-tap-highlight-color: transparent;
 
+  // overflow: hidden;
+
   @media all and (min-width: $bp) {
     font-size: 20px;
   }
@@ -130,6 +132,16 @@ body {
   color: var(--prime-2);
   font-family: var(--font-prime);
 }
+
+// #smooth-wrapper {
+//   height: 100vh;
+//   overflow: hidden; /* Убираем полосу прокрутки на wrapper */
+// }
+
+// #smooth-content {
+//   width: 100%;
+//   /* ScrollSmoother управляет скроллом, поэтому overflow не нужен */
+// }
 
 /* Сброс стилей */
 html *,

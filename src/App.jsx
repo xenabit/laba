@@ -26,6 +26,7 @@ const App = () => {
   useEffect(() => {
     let smoother;
     if (loadingStage === 'complete') {
+      // Инициализация ScrollSmoother
       smoother = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
@@ -33,8 +34,13 @@ const App = () => {
         effects: true,
       });
       ScrollTrigger.refresh();
+      // Убедимся, что скролл разблокирован
+      document.body.style.overflow = '';
     }
-    return () => smoother?.kill();
+    return () => {
+      if (smoother) smoother.kill();
+      document.body.style.overflow = ''; // Сбрасываем при размонтировании
+    };
   }, [loadingStage]);
 
   const handleStageChange = (stage) => {
@@ -47,7 +53,7 @@ const App = () => {
 
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
-      <Header ref={headerRef} shouldAnimate={shouldAnimateHome} /> {/* Передаем shouldAnimate */}
+      <Header ref={headerRef} shouldAnimate={shouldAnimateHome} />
       <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} onMaxBalloonSize={handleMaxBalloonSize} />
       <div
         id="smooth-content"

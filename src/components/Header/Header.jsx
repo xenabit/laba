@@ -23,15 +23,18 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
   }, [isActive]);
 
   useEffect(() => {
+    if (!ref || !ref.current) {
+      console.warn('Header ref is not ready');
+      return;
+    }
+
     const header = ref.current;
     const headerTop = header.querySelector(`.${styles.Header__top}`);
     const border = headerTop.querySelector(`.${styles.Header__border}`);
 
-    if (!border) {
-      console.warn('Элемент .Header__border не найден');
-      return;
-    }
+    if (!headerTop || !border) return;
 
+    // Анимация шапки (скрытие/показ)
     const showAnim = gsap.fromTo(
       header,
       { yPercent: 0 },
@@ -43,67 +46,78 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
       }
     );
 
+    // Определяем высоту бордера в зависимости от ширины экрана
     const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
     const borderHeight = isDesktop ? 3 : 2;
 
-    // Устанавливаем начальные стили для .Header__border
-    gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-2)' });
+    // Начальные стили для бордера
+    gsap.set(border, {
+      height: borderHeight,
+      backgroundColor: isActive ? 'var(--prime-1)' : 'var(--prime-2)',
+    });
 
-    // Анимация высоты .Header__border
+    // Анимация исчезновения бордера
     const borderAnim = gsap.to(border, {
       height: 0,
       duration: 0.2,
       ease: 'power1.out',
       paused: true,
-      onUpdate: () => {
-        if (isActive) {
-          gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
-        }
-      },
     });
 
+    // Применяем класс для анимации после загрузки, если нужно
     if (shouldAnimate) {
-      header.classList.add(styles.animate); // Добавляем класс animate
+      header.classList.add(styles.animate);
     }
 
     ScrollTrigger.create({
       trigger: '#smooth-content',
-      start: 'top top+=50',
+      start: 'top top+=50', // Начинаем отслеживать после 50px
       end: 'bottom top',
       onUpdate: (self) => {
         if (isActive) {
+          // Если меню активно, шапка всегда видна с бордером prime-1
           showAnim.pause();
           gsap.set(header, { yPercent: 0 });
           gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
         } else if (self.scroll() <= 50) {
+          // На верхних 50px шапка видна, бордер есть
           showAnim.pause();
           gsap.set(header, { yPercent: 0 });
           borderAnim.reverse();
           gsap.set(border, { backgroundColor: 'var(--prime-2)' });
         } else {
+          // Скролл вниз: шапка уходит, бордер исчезает
+          // Скролл вверх: шапка возвращается, бордер зависит от положения
           if (self.direction === -1) {
-            showAnim.reverse();
-            if (self.progress < 0.02) {
-              borderAnim.reverse();
+            showAnim.reverse(); // Шапка появляется
+            if (self.scroll() <= 50) {
+              borderAnim.reverse(); // Бордер возвращается
               gsap.set(border, { backgroundColor: 'var(--prime-2)' });
             } else {
-              borderAnim.play();
+              borderAnim.play(); // Бордер исчезает
             }
           } else {
-            showAnim.play();
-            borderAnim.play();
+            showAnim.play(); // Шапка скрывается
+            borderAnim.play(); // Бордер исчезает
           }
         }
       },
       scrub: true,
     });
 
+    // Обновляем цвет бордера при изменении isActive
+    gsap.set(border, {
+      backgroundColor: isActive ? 'var(--prime-1)' : 'var(--prime-2)',
+      overwrite: 'auto',
+    });
+
     ScrollTrigger.refresh();
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      gsap.killTweensOf([header, border]);
     };
-  }, [ref, isActive, shouldAnimate]); // Добавляем shouldAnimate как зависимость
+  }, [ref, isActive, shouldAnimate]);
 
   const toggleActiveClass = () => setIsActive((prev) => !prev);
 
@@ -124,7 +138,7 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
           </Link>
           <Link to="/" className={styles.Header__logo} onClick={() => handleTabClick('/')}>
             <picture>
-              <img loading="lazy" src={logo} alt="Логотип Laba" /> {/* Логотип */}
+              <img loading="lazy" src={logo} alt="Логотип Laba" />
             </picture>
           </Link>
           <button className={styles.Header__toggle} onClick={toggleActiveClass}>
@@ -174,7 +188,7 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
             <a href="tel:+74951201226" className={styles.Header__tel}>
               тел. +7 (495) 120-12-26
             </a>
-            <a href="https://yandex.ru/profile/1116551737" target="_blank">
+            <a href="https://yandex.ru/profile/1116551737" target="_blank" rel="noopener noreferrer">
               г. Москва ул. 3-я Ямского Поля д. 20 с1
             </a>
           </div>

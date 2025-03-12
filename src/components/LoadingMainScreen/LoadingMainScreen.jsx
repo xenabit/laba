@@ -5,7 +5,6 @@ import FlareComponent from './FlareComponent/FlareComponent';
 import { gsap } from 'gsap';
 import headerStyles from '../Header/Header.module.scss';
 
-// Централизованные конфиги анимации
 const ANIMATION_CONFIG = {
   BALOON_MOVE_DURATION: 1.5,
   BALOON_TRANSITION_DELAY: 5,
@@ -20,25 +19,55 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
   const containerRef = useRef(null);
 
   useEffect(() => {
-    // Инициализация: шапка скрыта
-    gsap.set(headerRef.current, { opacity: 0, backgroundColor: 'transparent' });
+    const header = headerRef.current;
+    if (!header) return;
 
-    const logo = headerRef.current.querySelector(`.${headerStyles.Header__logo}`);
-    const toggle = headerRef.current.querySelector(`.${headerStyles.Header__toggle}`);
-    const desc = headerRef.current.querySelector(`.${headerStyles.Header__desc}`);
-    const border = headerRef.current.querySelector(`.${headerStyles.Header__border}`);
+    // Инициализация: шапка скрыта, прозрачный фон
+    gsap.set(header, { opacity: 0, backgroundColor: 'transparent' });
+
+    const logo = header.querySelector(`.${headerStyles.Header__logo}`);
+    const toggle = header.querySelector(`.${headerStyles.Header__toggle}`);
+    const desc = header.querySelector(`.${headerStyles.Header__desc}`);
+    const border = header.querySelector(`.${headerStyles.Header__border}`);
+
+    if (!logo || !toggle || !desc || !border) {
+      console.warn('Один из элементов шапки не найден:', { logo, toggle, desc, border });
+      return;
+    }
 
     let tl;
+    const blockScroll = (event) => {
+      event.preventDefault();
+    };
+
+    window.addEventListener('wheel', blockScroll, { passive: false });
+    window.addEventListener('touchmove', blockScroll, { passive: false });
+
+    const handleScroll = (event) => {
+      event.preventDefault();
+      if (loadingStage === 'initial') {
+        onStageChange('scrolling');
+      }
+    };
+
     if (loadingStage === 'initial') {
-      tl = gsap.timeline({ delay: ANIMATION_CONFIG.BALOON_TRANSITION_DELAY });
-      tl.to(headerRef.current, {
+      tl = gsap.timeline({
+        delay: ANIMATION_CONFIG.BALOON_TRANSITION_DELAY,
+        onComplete: () => {
+          window.removeEventListener('wheel', blockScroll);
+          window.removeEventListener('touchmove', blockScroll);
+          window.addEventListener('wheel', handleScroll, { passive: false });
+          window.addEventListener('touchmove', handleScroll, { passive: false });
+        },
+      });
+      tl.to(header, {
         opacity: 1,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
         ease: 'power2.out',
         delay: ANIMATION_CONFIG.BALOON_MOVE_DURATION,
       });
     } else if (loadingStage === 'scrolling') {
-      gsap.to(headerRef.current, {
+      gsap.to(header, {
         opacity: 0,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
         ease: 'power2.out',
@@ -54,11 +83,21 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
         zIndex: 10,
         opacity: 1,
       });
-      gsap.set(headerRef.current, { opacity: 1 });
+      gsap.set(header, { opacity: 1 });
       gsap.set([toggle, desc, border], { opacity: 0 });
     } else if (loadingStage === 'complete') {
-      tl = gsap.timeline();
-      tl.to(headerRef.current, {
+      tl = gsap.timeline({
+        onComplete: () => {
+          window.removeEventListener('wheel', blockScroll);
+          window.removeEventListener('touchmove', blockScroll);
+          window.removeEventListener('wheel', handleScroll);
+          window.removeEventListener('touchmove', handleScroll);
+          document.body.style.overflow = '';
+          // Устанавливаем цвет фона шапки после анимации
+          gsap.set(header, { backgroundColor: 'var(--prime-1)' });
+        },
+      });
+      tl.to(header, {
         opacity: 1,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
         ease: 'power2.out',
@@ -75,35 +114,27 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
             ease: 'linear',
             overwrite: 'auto',
           },
-          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY // Задержка 1s
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
         )
         .to(
           [toggle, desc, border],
           {
-            opacity: 1, // Плавное появление бордера вместе с toggle и desc
+            opacity: 1,
             duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
             ease: 'linear',
             overwrite: 'auto',
           },
-          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY // Синхронно с логотипом
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
         );
     }
 
-    const handleScroll = (event) => {
-      event.preventDefault();
-      if (loadingStage === 'initial') {
-        onStageChange('scrolling');
-      }
-    };
-
-    window.addEventListener('wheel', handleScroll, { passive: false });
-    window.addEventListener('touchmove', handleScroll, { passive: false });
-
     return () => {
+      window.removeEventListener('wheel', blockScroll);
+      window.removeEventListener('touchmove', blockScroll);
       window.removeEventListener('wheel', handleScroll);
       window.removeEventListener('touchmove', handleScroll);
       if (tl) tl.kill();
-      gsap.killTweensOf(headerRef.current);
+      gsap.killTweensOf(header);
       gsap.killTweensOf([logo, toggle, desc, border]);
     };
   }, [headerRef, loadingStage, onStageChange]);
