@@ -23,10 +23,8 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     const header = headerRef.current;
     if (!header) return;
 
-    // Инициализация: шапка скрыта через CSS (opacity: 0), прозрачный фон
     gsap.set(header, { backgroundColor: 'transparent' });
 
-    // Сразу устанавливаем opacity: 1 для контейнера, чтобы он стал видимым до анимаций
     if (containerRef.current) {
       gsap.set(containerRef.current, { opacity: 1 });
     } else {
