@@ -46,17 +46,14 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
       }
     );
 
-    // Определяем высоту бордера в зависимости от ширины экрана
     const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
     const borderHeight = isDesktop ? 3 : 2;
 
-    // Начальные стили для бордера
     gsap.set(border, {
       height: borderHeight,
       backgroundColor: isActive ? 'var(--prime-1)' : 'var(--prime-2)',
     });
 
-    // Анимация исчезновения бордера
     const borderAnim = gsap.to(border, {
       height: 0,
       duration: 0.2,
@@ -64,48 +61,42 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
       paused: true,
     });
 
-    // Применяем класс для анимации после загрузки, если нужно
     if (shouldAnimate) {
       header.classList.add(styles.animate);
     }
 
     ScrollTrigger.create({
       trigger: '#smooth-content',
-      start: 'top top+=50', // Начинаем отслеживать после 50px
+      start: 'top top+=50',
       end: 'bottom top',
       onUpdate: (self) => {
         if (isActive) {
-          // Если меню активно, шапка всегда видна с бордером prime-1
           showAnim.pause();
           gsap.set(header, { yPercent: 0 });
           gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
         } else if (self.scroll() <= 50) {
-          // На верхних 50px шапка видна, бордер есть
           showAnim.pause();
           gsap.set(header, { yPercent: 0 });
           borderAnim.reverse();
           gsap.set(border, { backgroundColor: 'var(--prime-2)' });
         } else {
-          // Скролл вниз: шапка уходит, бордер исчезает
-          // Скролл вверх: шапка возвращается, бордер зависит от положения
           if (self.direction === -1) {
-            showAnim.reverse(); // Шапка появляется
+            showAnim.reverse();
             if (self.scroll() <= 50) {
-              borderAnim.reverse(); // Бордер возвращается
+              borderAnim.reverse();
               gsap.set(border, { backgroundColor: 'var(--prime-2)' });
             } else {
-              borderAnim.play(); // Бордер исчезает
+              borderAnim.play();
             }
           } else {
-            showAnim.play(); // Шапка скрывается
-            borderAnim.play(); // Бордер исчезает
+            showAnim.play();
+            borderAnim.play();
           }
         }
       },
       scrub: true,
     });
 
-    // Обновляем цвет бордера при изменении isActive
     gsap.set(border, {
       backgroundColor: isActive ? 'var(--prime-1)' : 'var(--prime-2)',
       overwrite: 'auto',

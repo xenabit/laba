@@ -4,6 +4,7 @@ import Balloons from './Balloons/Balloons';
 import FlareComponent from './FlareComponent/FlareComponent';
 import { gsap } from 'gsap';
 import headerStyles from '../Header/Header.module.scss';
+import styles from './LoadingMainScreen.module.scss';
 
 const ANIMATION_CONFIG = {
   BALOON_MOVE_DURATION: 1.5,
@@ -22,8 +23,16 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     const header = headerRef.current;
     if (!header) return;
 
-    // Инициализация: шапка скрыта, прозрачный фон
-    gsap.set(header, { opacity: 0, backgroundColor: 'transparent' });
+    // Инициализация: шапка скрыта через CSS (opacity: 0), прозрачный фон
+    gsap.set(header, { backgroundColor: 'transparent' });
+
+    // Сразу устанавливаем opacity: 1 для контейнера, чтобы он стал видимым до анимаций
+    if (containerRef.current) {
+      gsap.set(containerRef.current, { opacity: 1 });
+    } else {
+      console.warn('containerRef.current is not yet available');
+      return;
+    }
 
     const logo = header.querySelector(`.${headerStyles.Header__logo}`);
     const toggle = header.querySelector(`.${headerStyles.Header__toggle}`);
@@ -93,7 +102,6 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
           window.removeEventListener('wheel', handleScroll);
           window.removeEventListener('touchmove', handleScroll);
           document.body.style.overflow = '';
-          // Устанавливаем цвет фона шапки после анимации
           gsap.set(header, { backgroundColor: 'var(--prime-1)' });
         },
       });
@@ -147,24 +155,9 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     onStageChange('complete');
   };
 
-  const styles = {
-    LoadingMainScreen: {
-      display: loadingStage === 'complete' ? 'none' : 'block',
-    },
-    LoadingMainScreen__container: {
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'relative',
-      backgroundColor: 'white',
-      overflow: 'hidden',
-    },
-  };
-
   return (
-    <section style={styles.LoadingMainScreen}>
-      <div ref={containerRef} style={styles.LoadingMainScreen__container}>
+    <section style={{ display: loadingStage === 'complete' ? 'none' : 'block' }}>
+      <div ref={containerRef} className={styles.LoadingMainScreen__container}>
         {(loadingStage === 'initial' || loadingStage === 'scrolling') && (
           <>
             <BackgroundLetters containerRef={containerRef} />
