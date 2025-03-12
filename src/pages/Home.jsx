@@ -10,7 +10,7 @@ import Gallery from '../components/Gallery/Gallery';
 import AboutList from '../components/AboutList/AboutList';
 import Partners from '../components/Partners/Partners';
 
-export default function Home({ introRef, shouldAnimate }) {
+export default function Home({ introRef, projectsTileRef, shouldAnimate }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Home({ introRef, shouldAnimate }) {
   return (
     <main>
       <Intro2 introRef={introRef} />
-      <ProjectsTile shouldAnimate={shouldAnimate} />
+      <ProjectsTile projectsTileRef={projectsTileRef} /> {/* Передаем реф */}
       {/* <Ticker /> */}
       {/* <Counter />
       {isMobile && <TextEffect />} */}

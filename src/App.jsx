@@ -21,6 +21,7 @@ const App = () => {
   const headerRef = useRef(null);
   const wrapperRef = useRef(null);
   const introRef = useRef(null);
+  const projectsTileRef = useRef(null);
   const [loadingStage, setLoadingStage] = useState('initial');
   const [shouldAnimateHome, setShouldAnimateHome] = useState(false);
 
@@ -53,7 +54,15 @@ const App = () => {
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
       <Header ref={headerRef} shouldAnimate={shouldAnimateHome} />
-      <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} onMaxBalloonSize={handleMaxBalloonSize} introRef={introRef} />
+      <LoadingMainScreen
+        headerRef={headerRef}
+        onStageChange={handleStageChange}
+        wrapperRef={wrapperRef}
+        loadingStage={loadingStage}
+        onMaxBalloonSize={handleMaxBalloonSize}
+        introRef={introRef}
+        projectsTileRef={projectsTileRef}
+      />
       <div
         id="smooth-content"
         style={{
@@ -63,7 +72,7 @@ const App = () => {
         }}
       >
         <Routes>
-          <Route path="/" element={<Home introRef={introRef} shouldAnimate={shouldAnimateHome} />} />
+          <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} shouldAnimate={shouldAnimateHome} />} />
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />

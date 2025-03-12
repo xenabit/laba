@@ -5,6 +5,8 @@ import FlareComponent from './FlareComponent/FlareComponent';
 import { gsap } from 'gsap';
 import headerStyles from '../Header/Header.module.scss';
 import styles from './LoadingMainScreen.module.scss';
+import introStyles from '../Intro2/Intro2.module.scss';
+import projectsTileStyles from '../ProjectsTile/ProjectsTile.module.scss';
 
 const ANIMATION_CONFIG = {
   BALOON_MOVE_DURATION: 1.5,
@@ -13,10 +15,10 @@ const ANIMATION_CONFIG = {
   MAGNET_STRENGTH: 25,
   HEADER_FADE_DURATION: 0.5,
   LOGO_ANIMATION_DURATION: 2,
-  LOGO_ANIMATION_DELAY: 1,
+  LOGO_ANIMATION_DELAY: 0,
 };
 
-function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage, onMaxBalloonSize, introRef }) {
+function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage, onMaxBalloonSize, introRef, projectsTileRef }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -92,7 +94,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       });
       gsap.set(header, { opacity: 1 });
       gsap.set([toggle, desc, border], { opacity: 0 });
-    } else if (loadingStage === 'complete' && introRef.current) {
+    } else if (loadingStage === 'complete' && introRef.current && projectsTileRef.current) {
       tl = gsap.timeline({
         onComplete: () => {
           window.removeEventListener('wheel', blockScroll);
@@ -133,8 +135,9 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
           ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
         );
 
-      const introLaba = introRef.current.querySelector(`.${styles.Intro2__laba}`);
-      const introDesc = introRef.current.querySelector(`.${styles.Intro2__desc}`);
+      // Анимация Intro2
+      const introLaba = introRef.current.querySelector(`.${introStyles.Intro2__laba}`);
+      const introDesc = introRef.current.querySelector(`.${introStyles.Intro2__desc}`);
 
       if (introLaba && introDesc) {
         gsap.set(introLaba, { xPercent: -100 });
@@ -158,6 +161,21 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
           ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
         );
       }
+
+      // Анимация ProjectsTile
+      const projectsTile = projectsTileRef.current;
+      if (projectsTile && window.innerWidth >= 1440) {
+        gsap.set(projectsTile, { yPercent: 100 });
+        tl.to(
+          projectsTile,
+          {
+            yPercent: 0,
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
+        );
+      }
     }
 
     return () => {
@@ -169,12 +187,15 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       gsap.killTweensOf(header);
       gsap.killTweensOf([logo, toggle, desc, border]);
       if (introRef.current) {
-        const introLaba = introRef.current.querySelector(`.${styles.Intro2__laba}`);
-        const introDesc = introRef.current.querySelector(`.${styles.Intro2__desc}`);
+        const introLaba = introRef.current.querySelector(`.${introStyles.Intro2__laba}`);
+        const introDesc = introRef.current.querySelector(`.${introStyles.Intro2__desc}`);
         gsap.killTweensOf([introLaba, introDesc]);
       }
+      if (projectsTileRef.current) {
+        gsap.killTweensOf(projectsTileRef.current);
+      }
     };
-  }, [headerRef, loadingStage, onStageChange, introRef]);
+  }, [headerRef, loadingStage, onStageChange, introRef, projectsTileRef]);
 
   const handleBalloonsToCenterComplete = () => {
     onStageChange('transition');

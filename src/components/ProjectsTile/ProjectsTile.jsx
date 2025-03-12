@@ -38,7 +38,7 @@ const items = [
   },
 ];
 
-function ProjectsTile({ shouldAnimate }) {
+function ProjectsTile({ projectsTileRef }) {
   const animationRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1440);
@@ -93,7 +93,7 @@ function ProjectsTile({ shouldAnimate }) {
   }, []);
 
   return (
-    <section className={`${styles.ProjectsTile} ${shouldAnimate ? styles.animate : ''}`}>
+    <section className={styles.ProjectsTile} ref={projectsTileRef}>
       <div className={styles.ProjectsTile__container}>
         <div className={`${styles.ProjectsTile__layer} ${styles.ProjectsTile__layer_bot}`}>
           <div ref={animationRef} className={`${styles.ProjectsTile__items} ${styles.animate}`}>
