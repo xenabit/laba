@@ -34,7 +34,14 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
 
     if (!headerTop || !border) return;
 
-    // Анимация шапки (скрытие/показ)
+    const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
+    const borderHeight = isDesktop ? 3 : 2;
+
+    gsap.set(border, {
+      height: borderHeight,
+      backgroundColor: isActive ? 'var(--prime-1)' : 'var(--prime-2)',
+    });
+
     const showAnim = gsap.fromTo(
       header,
       { yPercent: 0 },
@@ -45,14 +52,6 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
         ease: 'power1.out',
       }
     );
-
-    const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
-    const borderHeight = isDesktop ? 3 : 2;
-
-    gsap.set(border, {
-      height: borderHeight,
-      backgroundColor: isActive ? 'var(--prime-1)' : 'var(--prime-2)',
-    });
 
     const borderAnim = gsap.to(border, {
       height: 0,
@@ -70,24 +69,20 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
       start: 'top top+=50',
       end: 'bottom top',
       onUpdate: (self) => {
+        const scrollPos = self.scroll();
+
         if (isActive) {
           showAnim.pause();
           gsap.set(header, { yPercent: 0 });
           gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
-        } else if (self.scroll() <= 50) {
-          showAnim.pause();
-          gsap.set(header, { yPercent: 0 });
+        } else if (scrollPos <= 50) {
+          showAnim.reverse();
           borderAnim.reverse();
           gsap.set(border, { backgroundColor: 'var(--prime-2)' });
         } else {
           if (self.direction === -1) {
             showAnim.reverse();
-            if (self.scroll() <= 50) {
-              borderAnim.reverse();
-              gsap.set(border, { backgroundColor: 'var(--prime-2)' });
-            } else {
-              borderAnim.play();
-            }
+            borderAnim.play();
           } else {
             showAnim.play();
             borderAnim.play();
@@ -97,10 +92,11 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
       scrub: true,
     });
 
-    gsap.set(border, {
-      backgroundColor: isActive ? 'var(--prime-1)' : 'var(--prime-2)',
-      overwrite: 'auto',
-    });
+    if (window.scrollY > 50) {
+      borderAnim.play();
+    } else {
+      borderAnim.reverse();
+    }
 
     ScrollTrigger.refresh();
 
