@@ -150,11 +150,19 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
   const shrinkCentralBalloon = (balloonCenter) => {
     if (!balloonCenter) return;
 
+    const baseHeight = 900;
+    const baseTop = 41.5;
+
+    const currentHeight = window.innerHeight;
+
+    const heightRatio = currentHeight / baseHeight;
+    const adjustedTop = baseTop / heightRatio;
+
     const tl = gsap.timeline({ onComplete: onBalloonsShrinkComplete });
     tl.to(balloonCenter, {
       scale: 0.1,
       left: '51%',
-      top: '41.5%',
+      top: `${adjustedTop}%`,
       duration: 1.5,
       ease: 'power2.inOut',
       overwrite: 'all',
