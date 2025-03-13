@@ -29,14 +29,14 @@ export default function Home({ introRef, projectsTileRef, shouldAnimate }) {
   return (
     <main>
       <Intro2 introRef={introRef} />
-      <ProjectsTile projectsTileRef={projectsTileRef} /> {/* Передаем реф */}
-      {/* <Ticker /> */}
-      {/* <Counter />
-      {isMobile && <TextEffect />} */}
+      <ProjectsTile projectsTileRef={projectsTileRef} />
+      <Ticker />
+      <Counter />
+      {isMobile && <TextEffect />}
       <Gallery />
-      {/* <Ticker />
+      <Ticker />
       <AboutList />
-      <Partners /> */}
+      <Partners />
     </main>
   );
 }

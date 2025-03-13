@@ -22,17 +22,17 @@ function BackgroundLetters({ containerRef }) {
     tl.to(container, { background: '#27292F', duration: 1.6, ease: 'elastic.out(1.3, 0.35)', delay: 0.4 })
       .to(letters, { fill: '#2f3137', duration: 1, ease: 'elastic.out(1.3, 0.35)' }, 0.4) // Старт в 0.4
 
-      // Вторая группа: начинается после окончания первой (в 2 секунды)
+      // Вторая группа
       .to(container, { background: '#27292F', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' }, 2) // Старт в 2 секунды
+      .to(letters, { fill: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' }, 2)
 
-      // Вторая группа: начинается после окончания первой (в 2 секунды)
+      // Вторая группа
       .to(container, { background: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 2.3) // Старт в 2 секунды
+      .to(letters, { fill: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 2.3)
 
-      // Третья группа: начинается после окончания второй (в 2.1 секунды)
+      // Третья группа
       .to(container, { background: '#F0F2F5', duration: 0, ease: 'none' })
-      .to(letters, { fill: '#27292F', duration: 0, ease: 'none' }, 3); // Старт в 2.1 секунды
+      .to(letters, { fill: '#27292F', duration: 0, ease: 'none' }, 3);
   };
 
   useEffect(() => {
