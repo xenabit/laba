@@ -81,7 +81,7 @@ const App = () => {
         </Routes>
         <Footer />
       </div>
-      <CookieAgreement />
+      <CookieAgreement loadingStage={loadingStage} />
     </div>
   );
 };
