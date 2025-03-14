@@ -39,7 +39,7 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
 
     gsap.set(border, {
       height: borderHeight,
-      backgroundColor: isActive ? 'var(--prime-1)' : 'var(--prime-2)',
+      backgroundColor: 'var(--prime-2)',
     });
 
     const showAnim = gsap.fromTo(
@@ -53,12 +53,16 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
       }
     );
 
-    const borderAnim = gsap.to(border, {
-      height: 0,
-      duration: 0.2,
-      ease: 'power1.out',
-      paused: true,
-    });
+    const borderAnim = gsap.fromTo(
+      border,
+      { height: borderHeight },
+      {
+        height: 0,
+        duration: 0.2,
+        ease: 'power1.out',
+        paused: true,
+      }
+    );
 
     if (shouldAnimate) {
       header.classList.add(styles.animate);
@@ -73,6 +77,7 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
 
         if (isActive) {
           showAnim.pause();
+          borderAnim.pause();
           gsap.set(header, { yPercent: 0 });
           gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
         } else if (scrollPos <= 50) {
@@ -93,8 +98,10 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
     });
 
     if (window.scrollY > 50) {
+      showAnim.play();
       borderAnim.play();
     } else {
+      showAnim.reverse();
       borderAnim.reverse();
     }
 
