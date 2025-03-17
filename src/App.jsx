@@ -68,7 +68,7 @@ const App = () => {
         style={{
           opacity: loadingStage === 'complete' ? 1 : 0,
           pointerEvents: loadingStage === 'complete' ? 'auto' : 'none',
-          transition: 'opacity 0.5s ease',
+          transition: 'opacity 1s ease',
         }}
       >
         <Routes>

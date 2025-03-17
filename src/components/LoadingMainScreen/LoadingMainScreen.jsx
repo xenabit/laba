@@ -71,11 +71,20 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
   const animateScrollingStage = (header) => {
     enableScrollLock();
 
+    const headerContainer = header.querySelector(`.${headerStyles.Header__container}`);
+
     gsap.to(header, {
       opacity: 0,
       duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
       ease: 'power2.out',
       overwrite: 'auto',
+      onComplete: () => {
+        gsap.delayedCall(0.5, () => {
+          if (headerContainer) {
+            headerContainer.classList.remove(headerStyles.active);
+          }
+        });
+      },
     });
   };
 
@@ -136,6 +145,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
 
     const introLaba = introRef.current?.querySelector(`.${introStyles.Intro2__laba}`);
     const introDesc = introRef.current?.querySelector(`.${introStyles.Intro2__desc}`);
+
     if (introLaba && introDesc) {
       gsap.set(introLaba, { xPercent: -100 });
       gsap.set(introDesc, { xPercent: 100 });
