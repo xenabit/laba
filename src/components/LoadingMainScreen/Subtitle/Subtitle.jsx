@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-
-const BALOON_TRANSITION_DELAY = 5;
+import { ANIMATION_CONFIG } from '../LoadingMainScreen';
 
 function Subtitle() {
   const descRefs = useRef([]);
@@ -20,7 +19,7 @@ function Subtitle() {
       duration: 0.2,
       ease: 'power2.out',
       stagger: 0.04,
-      delay: BALOON_TRANSITION_DELAY,
+      delay: ANIMATION_CONFIG.TITLE_END,
     });
   }, []);
 

@@ -7,9 +7,10 @@ import headerStyles from '../Header/Header.module.scss';
 import styles from './LoadingMainScreen.module.scss';
 import introStyles from '../Intro2/Intro2.module.scss';
 
-const ANIMATION_CONFIG = {
+export const ANIMATION_CONFIG = {
+  BG_END: 3,
   BALOON_MOVE_DURATION: 1.5,
-  BALOON_TRANSITION_DELAY: 5,
+  TITLE_END: 4.5,
   MAGNET_MAX_DISTANCE: 400,
   MAGNET_STRENGTH: 25,
   HEADER_FADE_DURATION: 0.5,
@@ -50,7 +51,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     enableScrollLock();
 
     tlRef.current = gsap.timeline({
-      delay: ANIMATION_CONFIG.BALOON_TRANSITION_DELAY,
+      delay: ANIMATION_CONFIG.TITLE_END,
       onComplete: () => {
         window.removeEventListener('wheel', blockScroll);
         window.removeEventListener('touchmove', blockScroll);
@@ -248,7 +249,6 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
           onMaxBalloonSize={onMaxBalloonSize}
           wrapperRef={wrapperRef}
           loadingStage={loadingStage}
-          animationConfig={ANIMATION_CONFIG}
         />
       </div>
     </section>

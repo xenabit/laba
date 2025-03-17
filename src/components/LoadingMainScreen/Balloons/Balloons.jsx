@@ -21,6 +21,8 @@ import Baloon_cb2 from '../../../assets/images/loading-main-baloon-cb2.svg';
 import Baloon_r from '../../../assets/images/loading-main-baloon-r.svg';
 import Baloon_c from '../../../assets/images/loading-main-baloon-c.svg';
 
+import { ANIMATION_CONFIG } from '../LoadingMainScreen';
+
 const BALLOONS_CONFIG = [
   {
     key: 'c',
@@ -86,19 +88,19 @@ const BALLOONS_CONFIG = [
   },
 ];
 
-function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterComplete, onBalloonsShrinkComplete, onMaxBalloonSize, wrapperRef, loadingStage, animationConfig }) {
+function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterComplete, onBalloonsShrinkComplete, onMaxBalloonSize, wrapperRef, loadingStage }) {
   const balloonRefs = useRef({});
   const hasScrolled = useRef(false);
 
   const balloonsEntryAnimate = (balloons) => {
-    const tl = gsap.timeline({ delay: animationConfig.BALOON_TRANSITION_DELAY });
+    const tl = gsap.timeline({ delay: ANIMATION_CONFIG.TITLE_END });
     BALLOONS_CONFIG.forEach(({ key, anim: { from, to, change } }) => {
       const balloon = balloonRefs.current[key]?.current;
       if (!balloon) return;
       gsap.set(balloon, from);
-      tl.to(balloon, { ...to, duration: animationConfig.BALOON_MOVE_DURATION, ease: 'linear' }, 0).to(
+      tl.to(balloon, { ...to, duration: ANIMATION_CONFIG.BALOON_MOVE_DURATION, ease: 'linear' }, 0).to(
         balloon,
-        { ...change, duration: animationConfig.BALOON_MOVE_DURATION, ease: 'linear', repeat: -1, yoyo: true },
+        { ...change, duration: ANIMATION_CONFIG.BALOON_MOVE_DURATION, ease: 'linear', repeat: -1, yoyo: true },
         '>'
       );
     });
@@ -175,9 +177,9 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
     const balloonY = balloonRect.top - containerRect.top + balloonRect.height / 2;
     const distance = Math.sqrt((mouseX - balloonX) ** 2 + (mouseY - balloonY) ** 2);
 
-    const isWithinRange = distance < animationConfig.MAGNET_MAX_DISTANCE;
-    const x = isWithinRange ? Math.cos(Math.atan2(mouseY - balloonY, mouseX - balloonX)) * (1 - distance / animationConfig.MAGNET_MAX_DISTANCE) * animationConfig.MAGNET_STRENGTH : 0;
-    const y = isWithinRange ? Math.sin(Math.atan2(mouseY - balloonY, mouseX - balloonX)) * (1 - distance / animationConfig.MAGNET_MAX_DISTANCE) * animationConfig.MAGNET_STRENGTH : 0;
+    const isWithinRange = distance < ANIMATION_CONFIG.MAGNET_MAX_DISTANCE;
+    const x = isWithinRange ? Math.cos(Math.atan2(mouseY - balloonY, mouseX - balloonX)) * (1 - distance / ANIMATION_CONFIG.MAGNET_MAX_DISTANCE) * ANIMATION_CONFIG.MAGNET_STRENGTH : 0;
+    const y = isWithinRange ? Math.sin(Math.atan2(mouseY - balloonY, mouseX - balloonX)) * (1 - distance / ANIMATION_CONFIG.MAGNET_MAX_DISTANCE) * ANIMATION_CONFIG.MAGNET_STRENGTH : 0;
 
     gsap.to(balloon, {
       x,
@@ -213,7 +215,7 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
             container.addEventListener('mousemove', handleMouseMove);
           }
         },
-        animationConfig.BALOON_TRANSITION_DELAY * 1000 + animationConfig.BALOON_MOVE_DURATION * 1000
+        ANIMATION_CONFIG.TITLE_END * 1000 + ANIMATION_CONFIG.BALOON_MOVE_DURATION * 1000
       );
     }
 
@@ -232,7 +234,7 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
       gsap.killTweensOf(balloons);
       container.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [loadingStage, startBalloonsToCenter, onBalloonsToCenterComplete, onBalloonsShrinkComplete, onMaxBalloonSize, containerRef, animationConfig]);
+  }, [loadingStage, startBalloonsToCenter, onBalloonsToCenterComplete, onBalloonsShrinkComplete, onMaxBalloonSize, containerRef, ANIMATION_CONFIG]);
 
   return (
     <div className={styles.Balloons__container}>

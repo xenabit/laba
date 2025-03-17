@@ -3,10 +3,7 @@ import { motion } from 'framer-motion';
 import styles from './BackgroundLetters.module.scss';
 import { gsap } from 'gsap';
 import Subtitle from '../Subtitle/Subtitle';
-
-const ANIMATION_CONFIG = {
-  LETTER_DELAY: 4.2,
-};
+import { ANIMATION_CONFIG } from '../LoadingMainScreen';
 
 function BackgroundLetters({ containerRef }) {
   const letterRefs = useRef([]);
@@ -19,20 +16,20 @@ function BackgroundLetters({ containerRef }) {
     });
 
     // Первая группа: одновременно с задержкой 0.4
-    tl.to(container, { background: '#27292F', duration: 1.6, ease: 'elastic.out(1.3, 0.35)', delay: 0.4 })
-      .to(letters, { fill: '#2f3137', duration: 1, ease: 'elastic.out(1.3, 0.35)' }, 0.4) // Старт в 0.4
+    tl.to(container, { background: '#27292F', duration: 1.2, ease: 'elastic.out(1.3, 0.35)', delay: 0.4 })
+      .to(letters, { fill: '#2f3137', duration: 1.2, ease: 'elastic.out(1.3, 0.35)' }, 0.4)
 
       // Вторая группа
       .to(container, { background: '#27292F', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' }, 2)
+      .to(letters, { fill: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' }, 1.8)
 
       // Вторая группа
       .to(container, { background: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 2.3)
+      .to(letters, { fill: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 2.1)
 
       // Третья группа
       .to(container, { background: '#F0F2F5', duration: 0, ease: 'none' })
-      .to(letters, { fill: '#27292F', duration: 0, ease: 'none' }, 3);
+      .to(letters, { fill: '#27292F', duration: 0, ease: 'none' }, 2.5);
   };
 
   useEffect(() => {
@@ -97,7 +94,7 @@ function BackgroundLetters({ containerRef }) {
           className={`${styles.BackgroundLetters__letter} ${styles.BackgroundLetters__letter_l}`}
           initial={{ x: '-17.69vw', y: '38.89vh', rotate: -38, scale: 3.11 }}
           animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}
+          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}
         >
           <LetterL />
         </motion.div>
@@ -105,7 +102,7 @@ function BackgroundLetters({ containerRef }) {
           className={`${styles.BackgroundLetters__letter} ${styles.BackgroundLetters__letter_a}`}
           initial={{ x: '-24.25vw', y: '-54.55vh', rotate: 77, scale: 1.116 }}
           animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}
+          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}
         >
           <LetterA />
         </motion.div>
@@ -113,7 +110,7 @@ function BackgroundLetters({ containerRef }) {
           className={`${styles.BackgroundLetters__letter} ${styles.BackgroundLetters__letter_b}`}
           initial={{ x: '-4vw', y: '32.2vh', rotate: 130, scale: 0.52 }}
           animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}
+          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}
         >
           <LetterB />
         </motion.div>
@@ -121,11 +118,11 @@ function BackgroundLetters({ containerRef }) {
           className={`${styles.BackgroundLetters__letter} ${styles.BackgroundLetters__letter_a}`}
           initial={{ x: '34.5vw', y: '41vh', rotate: -35, scale: 1.83 }}
           animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}
+          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}
         >
           <LetterA />
         </motion.div>
-        <motion.div className={styles.BackgroundLetters__spot} initial={{ scale: 17 }} animate={{ scale: 1 }} transition={{ ...baseTransition, delay: ANIMATION_CONFIG.LETTER_DELAY }}>
+        <motion.div className={styles.BackgroundLetters__spot} initial={{ scale: 17 }} animate={{ scale: 1 }} transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}>
           <Spot />
         </motion.div>
       </div>
