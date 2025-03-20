@@ -35,7 +35,7 @@ export default function Case() {
       <Text title={text[0].title} text={text[0].text} />
       <Softwar />
       <Text title={text[1].title} text={text[1].text} />
-      <CasesSlider />
+      {/* <CasesSlider /> */}
       <Text title={text[2].title} text={text[2].text} />
       <Picture src={picture} />
       <MarksTour />

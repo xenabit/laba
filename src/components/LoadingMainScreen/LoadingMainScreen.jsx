@@ -194,7 +194,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     }
 
     // Начальные установки
-    gsap.set(header, { backgroundColor: 'transparent' });
+    gsap.set(header, { backgroundColor: 'transparent', opacity: 0 });
     gsap.set(containerRef.current, { opacity: 1 });
 
     const logo = header.querySelector(`.${headerStyles.Header__logo}`);
