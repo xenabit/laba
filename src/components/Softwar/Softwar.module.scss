@@ -43,6 +43,10 @@
     align-items: center;
     gap: rem(16);
     margin: rem(24) 0;
+
+    .swiper-pagination-lock {
+      display: none;
+    }
   }
 
   &__bullet {

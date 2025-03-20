@@ -13,6 +13,24 @@ import CasesItems from '../components/CasesItems/CasesItems';
 // import video from '/src/assets/videos/about-list-3.mp4';
 import picture from '/src/assets/images/cases-1.jpg';
 
+// const contentSoftwar = [
+//   { logo: logo_after_effect, title: 'Adobe After Effect' },
+//   { logo: logo_3dsmax, title: '3Ds Max' },
+//   { logo: logo_figma, title: 'Figma' },
+//   { logo: logo_blender, title: 'Blender' },
+//   { logo: logo_react, title: 'React' },
+//   { logo: logo_redux, title: 'Redux' },
+//   { logo: logo_unreal, title: 'Unreal Engine' },
+// ];
+// import logo_figma from '/src/assets/images/softwar-figma.svg';
+// import logo_react from '/src/assets/images/softwar-react.svg';
+// import logo_nodejs from '/src/assets/images/softwar-nodejs.svg';
+// import logo_blender from '/src/assets/images/softwar-blender.svg';
+// import logo_redux from '/src/assets/images/softwar-redux.svg';
+// import logo_unreal from '/src/assets/images/softwar-unreal.svg';
+// import logo_after_effect from '/src/assets/images/softwar-after-effect.svg';
+// import logo_3dsmax from '/src/assets/images/softwar-3dsmax.svg';
+
 const text = [
   {
     title: 'VR',
