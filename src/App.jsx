@@ -14,6 +14,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother.min';
 import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -24,6 +25,19 @@ const App = () => {
   const projectsTileRef = useRef(null);
   const [loadingStage, setLoadingStage] = useState('initial');
   const [shouldAnimateHome, setShouldAnimateHome] = useState(false);
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem('hasVisitedHome');
+    if (!hasVisited && location.pathname === '/') {
+      setIsFirstVisit(true);
+      sessionStorage.setItem('hasVisitedHome', 'true');
+    } else {
+      setIsFirstVisit(false);
+      setLoadingStage('complete');
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     let smoother;
@@ -54,21 +68,23 @@ const App = () => {
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
       <Header ref={headerRef} shouldAnimate={shouldAnimateHome} />
-      <LoadingMainScreen
-        headerRef={headerRef}
-        onStageChange={handleStageChange}
-        wrapperRef={wrapperRef}
-        loadingStage={loadingStage}
-        onMaxBalloonSize={handleMaxBalloonSize}
-        introRef={introRef}
-        projectsTileRef={projectsTileRef}
-      />
+      {isFirstVisit && location.pathname === '/' && (
+        <LoadingMainScreen
+          headerRef={headerRef}
+          onStageChange={handleStageChange}
+          wrapperRef={wrapperRef}
+          loadingStage={loadingStage}
+          onMaxBalloonSize={handleMaxBalloonSize}
+          introRef={introRef}
+          projectsTileRef={projectsTileRef}
+        />
+      )}
       <div
         id="smooth-content"
         style={{
-          opacity: loadingStage === 'complete' ? 1 : 0,
-          pointerEvents: loadingStage === 'complete' ? 'auto' : 'none',
-          transition: 'opacity 1s ease',
+          opacity: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 0 : 1,
+          pointerEvents: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 'none' : 'auto',
+          transition: isFirstVisit && location.pathname === '/' ? 'opacity 1s ease' : 'none',
         }}
       >
         <Routes>
