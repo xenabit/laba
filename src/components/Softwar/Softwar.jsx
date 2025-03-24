@@ -31,7 +31,7 @@ function Softwar({ items }) {
           {items.map((item, index) => (
             <SwiperSlide className={styles.Softwar__slide} key={index}>
               <div className={styles.Softwar__img}>
-                <img src={item.logo} loading="lazy" alt={item.title} />
+                <img src={item.src} loading="lazy" alt={item.title} />
               </div>
               <div className={styles.Softwar__title}>{item.title} </div>
             </SwiperSlide>
