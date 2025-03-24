@@ -1,0 +1,163 @@
+.CasesCompareSlider {
+  $s: &;
+  @include sectionMarginMob;
+
+  &__container {
+    position: relative;
+  }
+
+  &__swiper {
+    @include containerMob;
+    transition: 0.3s;
+    overflow: visible !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  &__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-height: 52vw;
+  }
+
+  &__wrapper {
+    position: relative;
+    width: 70%;
+    height: 82%;
+    padding: 50px 0;
+  }
+
+  &__pictures {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__half {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+
+    &_left {
+      clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+      z-index: 1;
+    }
+
+    &_right {
+      clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+      z-index: 0;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 10px solid var(--prime-2);
+      border-radius: 14px;
+
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 10px solid var(--prime-2);
+      border-radius: 14px;
+      user-drag: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+  }
+
+  &__divider {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 4px;
+    background-color: var(--prime-3);
+    z-index: 10;
+  }
+
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-top: 11px solid transparent;
+    border-right: 22px solid var(--prime-2);
+    border-bottom: 11px solid transparent;
+    opacity: 0.8;
+    cursor: grab;
+    z-index: 100;
+    transition: 0.3s;
+
+    &:active {
+      border-right: 22px solid var(--prime-3);
+      cursor: grabbing;
+    }
+
+    &:hover {
+      opacity: 0.8;
+      border-right: 22px solid var(--prime-3);
+    }
+
+    &_left {
+      right: 10px;
+    }
+
+    &_right {
+      left: 10px;
+      transform: rotate(180deg);
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: rem(16);
+    margin: rem(24) 0;
+
+    &:global(.swiper-pagination-lock) {
+      display: none;
+    }
+  }
+
+  &__bullet {
+    display: inline-block;
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: var(--sec-5);
+    width: rem(8);
+    height: rem(8);
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &_active {
+      cursor: initial;
+      background-color: var(--sec-3);
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    &__swiper {
+      @include containerDesk;
+    }
+  }
+
+  @media all and (min-width: $bp0) {
+    @include sectionMarginDesk;
+  }
+}
