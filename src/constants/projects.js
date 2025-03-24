@@ -31,10 +31,10 @@ export const projects = [
   {
     id: 3,
     video: video_3,
-    src: '#',
-    title: 'Проект Вуаля длинное название',
-    desc: 'ЗD визуализация видео продакшн VR',
-    type: '3d',
+    src: 'canon-change',
+    title: 'Канон перемен',
+    desc: 'Приложение с игровой механикой',
+    type: 'game',
   },
   {
     id: 4,

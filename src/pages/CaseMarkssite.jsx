@@ -5,20 +5,49 @@ import Text from '../components/Text/Text';
 import Softwar from '../components/Softwar/Softwar';
 import CasesSlider from '../components/CasesSlider/CasesSlider';
 import Picture from '../components/Picture/Picture';
-import MarksTour from '../components/MarksTour/MarksTour';
 import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
 import CasesItems from '../components/CasesItems/CasesItems';
+import CasesCompareSlider from '../components/CasesCompareSlider/CasesCompareSlider';
+import CaseIframe from '../components/CaseIframe/CaseIframe';
+
+import softwarLogos from '/src/constants/softwarLogos';
 
 import picture from '/src/assets/images/picture-markssite.jpg';
 import case_intro_picture from '/src/assets/images/case-intro-markssite.jpg';
-import softwar_logo_figma from '/src/assets/images/softwar-figma.svg';
-import softwar_logo_react from '/src/assets/images/softwar-react.svg';
-import softwar_logo_nodejs from '/src/assets/images/softwar-nodejs.svg';
+
 import video_horizontal from '/src/assets/videos/video-horizontal-markssite.mp4';
 
 import reviews_slider_author_1 from '/src/assets/images/reviews-slider-1.svg';
 import reviews_slider_author_2 from '/src/assets/images/reviews-slider-2.jpg';
+
+import case_slider_bg from '/src/assets/images/case-slider-bg-mg-1.svg';
+import case_compare_slider_bg from '/src/assets/images/case-compare-slider-bg-mg-1.svg';
+
+import case_slider_picture_left_1 from '/src/assets/images/cases-slider-markssite-left-1.png';
+import case_slider_picture_right_1 from '/src/assets/images/cases-slider-markssite-right-1.png';
+import case_slider_picture_left_2 from '/src/assets/images/cases-slider-markssite-left-2.png';
+import case_slider_picture_right_2 from '/src/assets/images/cases-slider-markssite-right-2.png';
+import case_slider_picture_left_3 from '/src/assets/images/cases-slider-markssite-left-3.png';
+import case_slider_picture_right_3 from '/src/assets/images/cases-slider-markssite-right-3.png';
+import case_slider_picture_left_4 from '/src/assets/images/cases-slider-markssite-left-4.png';
+import case_slider_picture_right_4 from '/src/assets/images/cases-slider-markssite-right-4.png';
+import case_slider_picture_left_5 from '/src/assets/images/cases-slider-markssite-left-5.png';
+import case_slider_picture_right_5 from '/src/assets/images/cases-slider-markssite-right-5.png';
+import case_slider_picture_left_6 from '/src/assets/images/cases-slider-markssite-left-6.png';
+import case_slider_picture_right_6 from '/src/assets/images/cases-slider-markssite-right-6.png';
+
+import case_slider_picture_left_1_2 from '/src/assets/images/cases-slider-markssite-left-1_2.png';
+import case_slider_picture_right_1_2 from '/src/assets/images/cases-slider-markssite-right-1_2.png';
+import case_slider_picture_left_2_2 from '/src/assets/images/cases-slider-markssite-left-2_2.png';
+import case_slider_picture_right_2_2 from '/src/assets/images/cases-slider-markssite-right-2_2.png';
+import case_slider_picture_left_3_2 from '/src/assets/images/cases-slider-markssite-left-3_2.png';
+import case_slider_picture_right_3_2 from '/src/assets/images/cases-slider-markssite-right-3_2.png';
+
+import case_compare_slider_picture_left_1 from '/src/assets/images/cases-compare-slider-markssite-left-1.jpg';
+import case_compare_slider_picture_right_1 from '/src/assets/images/cases-compare-slider-markssite-right-1.jpg';
+import case_compare_slider_picture_left_2 from '/src/assets/images/cases-compare-slider-markssite-left-2.jpg';
+import case_compare_slider_picture_right_2 from '/src/assets/images/cases-compare-slider-markssite-right-2.jpg';
 
 const contentCasesIntro = {
   title: 'marksgroup.ru',
@@ -64,11 +93,7 @@ const contentText = [
   },
 ];
 
-const contentSoftwar = [
-  { logo: softwar_logo_figma, title: 'Figma' },
-  { logo: softwar_logo_react, title: 'React' },
-  { logo: softwar_logo_nodejs, title: 'Node.js' },
-];
+const contentSoftwar = [softwarLogos.figma, softwarLogos.react, softwarLogos.nodejs];
 
 const contentReviews = [
   {
@@ -121,15 +146,100 @@ const contentReviews = [
   },
 ];
 
+const case_slider_pictures_1 = {
+  sizes: {
+    width_left: '69.61%',
+    width_right: '79.74%',
+  },
+  bg: case_slider_bg,
+  pictures: [
+    {
+      id: '1_1',
+      picture_left: case_slider_picture_left_1,
+      picture_right: case_slider_picture_right_1,
+    },
+    {
+      id: '1_2',
+      picture_left: case_slider_picture_left_2,
+      picture_right: case_slider_picture_right_2,
+    },
+    {
+      id: '1_3',
+      picture_left: case_slider_picture_left_3,
+      picture_right: case_slider_picture_right_3,
+    },
+    {
+      id: '1_4',
+      picture_left: case_slider_picture_left_4,
+      picture_right: case_slider_picture_right_4,
+    },
+    {
+      id: '1_5',
+      picture_left: case_slider_picture_left_5,
+      picture_right: case_slider_picture_right_5,
+    },
+    {
+      id: '1_6',
+      picture_left: case_slider_picture_left_6,
+      picture_right: case_slider_picture_right_6,
+    },
+  ],
+};
+
+const case_slider_pictures_2 = {
+  sizes: {
+    width_left: '69.61%',
+    width_right: '69.61%',
+  },
+  bg: case_slider_bg,
+  pictures: [
+    {
+      id: '2_1',
+      picture_left: case_slider_picture_left_1_2,
+      picture_right: case_slider_picture_right_1_2,
+    },
+    {
+      id: '2_2',
+      picture_left: case_slider_picture_left_2_2,
+      picture_right: case_slider_picture_right_2_2,
+    },
+    {
+      id: '2_3',
+      picture_left: case_slider_picture_left_3_2,
+      picture_right: case_slider_picture_right_3_2,
+    },
+  ],
+};
+
+const case_compare_slider_pictures_1 = {
+  bg: case_compare_slider_bg,
+  pictures: [
+    {
+      id: '1_1',
+      picture_left: case_compare_slider_picture_left_1,
+      picture_right: case_compare_slider_picture_right_1,
+    },
+    {
+      id: '1_2',
+      picture_left: case_compare_slider_picture_left_2,
+      picture_right: case_compare_slider_picture_right_2,
+    },
+  ],
+};
+
 export default function CaseMarkssite() {
   return (
     <main>
       <CasesIntro contentCasesIntro={contentCasesIntro} />
       <Text title={contentText[0].title} text={contentText[0].text} />
       <Softwar items={contentSoftwar} />
+      <CasesSlider items={case_slider_pictures_1} />
       <Text title={contentText[1].title} text={contentText[1].text} />
-      <Text title={contentText[2].title} text={contentText[2].text} />
       <Picture src={picture} />
+      <Text title={contentText[2].title} text={contentText[2].text} />
+      <CasesSlider items={case_slider_pictures_2} />
+      <Text title={contentText[2].title} text={contentText[2].text} />
+      <CasesCompareSlider items={case_compare_slider_pictures_1} />
       <VideoHorizontal videoUrl={video_horizontal} />
       <ReviewsSlider items={contentReviews} />
       <CasesItems type="web" />
