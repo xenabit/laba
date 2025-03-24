@@ -39,10 +39,10 @@ export const projects = [
   {
     id: 4,
     video: video_4,
-    src: '#',
-    title: 'Проект Вуаля длинное название',
-    desc: 'ЗD визуализация',
-    type: '3d',
+    src: 'tamagotchi',
+    title: 'Тамагочи',
+    desc: 'Гиперказуальная игра',
+    type: 'game',
   },
   {
     id: 5,

@@ -10,6 +10,7 @@ import Case from './pages/Case.jsx';
 import CaseMarkssite from './pages/CaseMarkssite.jsx';
 import CaseMarkssiteHR from './pages/CaseMarkssiteHR.jsx';
 import CaseCanonChange from './pages/CaseCanonChange.jsx';
+import Tamagotchi from './pages/Tamagotchi.jsx';
 import FormBrief from './components/FormBrief/FormBrief.jsx';
 import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
 import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.jsx';
@@ -99,6 +100,7 @@ const App = () => {
           <Route path="/markssite" element={<CaseMarkssite />} />
           <Route path="/markssite-hr" element={<CaseMarkssiteHR />} />
           <Route path="/canon-change" element={<CaseCanonChange />} />
+          <Route path="/tamagotchi" element={<Tamagotchi />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
