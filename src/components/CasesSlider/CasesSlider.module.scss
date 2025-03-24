@@ -1,37 +1,22 @@
 .CasesSlider {
   $s: &;
-
-  &.active {
-    z-index: 110;
-    #{$s}__swiper {
-      padding: 0;
-    }
-  }
+  @include sectionMarginMob;
 
   &__container {
     position: relative;
-  }
-
-  &__cursor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    border-radius: 50%;
-    background-color: var(--prime-1);
-    width: 0;
-    height: 0;
-    pointer-events: none;
   }
 
   &__swiper {
     @include containerMob;
     transition: 0.3s;
     overflow: visible !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
-  &__wrapper {
+  &__inner {
+    display: flex;
     position: relative;
     width: 100%;
     height: 100vh;
@@ -39,49 +24,17 @@
   }
 
   &__half {
-    position: absolute;
-    top: 0;
-    z-index: 15;
-    cursor: default;
-    background-color: transparent;
+    flex-shrink: 0;
     width: 50%;
     height: 100%;
-
-    &_left {
-      left: 0;
-      cursor:
-        url('../../assets/images/cases-slider-left.svg') 10 10,
-        auto;
-    }
-
-    &_right {
-      right: 0;
-      cursor:
-        url('../../assets/images/cases-slider-right.svg') 10 10,
-        auto;
-    }
-
-    @media (pointer: coarse) {
-      &_left {
-        cursor: default;
-      }
-
-      &_right {
-        cursor: default;
-      }
-    }
-  }
-
-  &__background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
 
     img {
       display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
     }
   }
 
@@ -109,35 +62,16 @@
     font-family: var(--font-sec);
   }
 
-  &__circle {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    z-index: 20;
-    backdrop-filter: blur(12px);
-    transition: 1s;
-    border: 1px solid var(--prime-1);
-    border-radius: 100%;
-    background-color: rgba(30, 36, 45, 0.24);
-    width: 22vw;
-    height: 22vw;
-    color: var(--prime-1);
-    font-size: rem(32);
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
   &__pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: rem(16);
     margin: rem(24) 0;
+
+    &:global(.swiper-pagination-lock) {
+      display: none;
+    }
   }
 
   &__bullet {
@@ -159,35 +93,13 @@
     }
   }
 
-  @media all and (min-width: $bp3) {
-    &:hover {
-      #{$s}__cursor {
-        z-index: 100;
-        transition:
-          width 0.8s,
-          height 0.8s;
-        width: rem(62);
-        height: rem(62);
-
-        &.hidden {
-          width: 0;
-          height: 0;
-        }
-      }
-    }
-
-    &__circle {
-      display: block;
-    }
-
-    &__swiper {
-      @include containerDesk;
-    }
+  @media all and (min-width: $bp0) {
+    @include sectionMarginDesk;
   }
 
-  @media all and (min-width: $bp2) {
-    &__pagination {
-      display: none;
+  @media all and (min-width: $bp3) {
+    &__swiper {
+      @include containerDesk;
     }
   }
 }
