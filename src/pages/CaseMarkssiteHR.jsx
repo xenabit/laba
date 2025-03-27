@@ -48,6 +48,10 @@ const contentCasesIntro = {
   title: 'marksgroup.ru',
   subtitle: 'Корпоративный сайт компании HR портал',
   tags: ['WEB интерфейс', 'UX/UI', '???'],
+  src: {
+    url: 'https://marks-tour.ru/',
+    title: 'Перейти на сайт',
+  },
   picture_intro: case_intro_picture,
   about: [
     {

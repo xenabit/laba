@@ -23,21 +23,25 @@ const softwarLogos = {
     src: new URL('/src/assets/images/softwar-redux.svg', import.meta.url).href,
     title: 'Redux',
   },
-  unreal: {
-    src: new URL('/src/assets/images/softwar-unreal.svg', import.meta.url).href,
-    title: 'Unreal Engine',
-  },
   after_effect: {
     src: new URL('/src/assets/images/softwar-after-effect.svg', import.meta.url).href,
     title: 'Adobe After Effect',
+  },
+  adobe_photoshop: {
+    src: new URL('/src/assets/images/softwar-photoshop.svg', import.meta.url).href,
+    title: 'Adobe Photoshop',
   },
   adobe_illustrator: {
     src: new URL('/src/assets/images/softwar-adobe-illustrator.svg', import.meta.url).href,
     title: 'Adobe Illustrator',
   },
-  '3dsmax': {
+  tree_d_max: {
     src: new URL('/src/assets/images/softwar-3dsmax.svg', import.meta.url).href,
     title: '3Ds Max',
+  },
+  github: {
+    src: new URL('/src/assets/images/softwar-github.svg', import.meta.url).href,
+    title: 'GitHub',
   },
 };
 

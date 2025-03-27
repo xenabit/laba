@@ -6,11 +6,12 @@ import GalleryTabs from './components/GalleryTabs/GalleryTabs.jsx';
 import Contacts from './components/Contacts/Contacts.jsx';
 import './App.scss';
 import Home from './pages/Home.jsx';
-import Case from './pages/Case.jsx';
+import CaseMarksTour from './pages/CaseMarksTour.jsx';
 import CaseMarkssite from './pages/CaseMarkssite.jsx';
 import CaseMarkssiteHR from './pages/CaseMarkssiteHR.jsx';
 import CaseCanonChange from './pages/CaseCanonChange.jsx';
-import Tamagotchi from './pages/Tamagotchi.jsx';
+import CaseTamagotchi from './pages/CaseTamagotchi.jsx';
+import CaseMarksCity from './pages/CaseMarksCity.jsx';
 import FormBrief from './components/FormBrief/FormBrief.jsx';
 import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
 import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.jsx';
@@ -96,11 +97,12 @@ const App = () => {
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />
-          <Route path="/case" element={<Case />} />
+          <Route path="/case" element={<CaseMarksTour />} />
           <Route path="/markssite" element={<CaseMarkssite />} />
           <Route path="/markssite-hr" element={<CaseMarkssiteHR />} />
           <Route path="/canon-change" element={<CaseCanonChange />} />
-          <Route path="/tamagotchi" element={<Tamagotchi />} />
+          <Route path="/tamagotchi" element={<CaseTamagotchi />} />
+          <Route path="/markscity" element={<CaseMarksCity />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />

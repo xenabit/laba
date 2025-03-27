@@ -7,6 +7,8 @@ import CasesSliderVideo from '../components/CasesSliderVideo/CasesSliderVideo';
 import CaseIframe from '../components/CaseIframe/CaseIframe';
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import CasesSliderScroll from '../components/CasesSliderScroll/CasesSliderScroll';
+import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
+import CasesItems from '../components/CasesItems/CasesItems';
 
 import softwarLogos from '/src/constants/softwarLogos';
 
@@ -44,6 +46,10 @@ import case_slider_scroll_picture_3_2 from '/src/assets/images/case-slider-scrol
 const contentCasesIntro = {
   title: 'Канон перемен',
   subtitle: 'Приложение с игровой механикой',
+  src: {
+    url: 'https://marks-tour.ru/',
+    // title: 'Перейти на сайт',
+  },
   tags: ['Android, IOS', 'Unreal Engine', 'UX/UI'],
   picture_intro: case_intro_picture,
   about: [
@@ -118,7 +124,7 @@ const cases_slider_video_content = {
 
 const case_slider_full_content_1 = {
   sizes: {
-    width_left: '84.4%',
+    width: '84.4%',
   },
   bg: case_slider_full_bg,
   pictures: [
@@ -151,7 +157,7 @@ const case_slider_full_content_1 = {
 
 const case_slider_full_content_2 = {
   sizes: {
-    width_left: '100%',
+    width: '100%',
   },
   pictures: [
     {
@@ -191,6 +197,59 @@ const case_slider_scroll_content = {
   ],
 };
 
+const contentReviews = [
+  {
+    title: 'Отзыв клиента MG',
+    text: 'Создать MGSite 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
+    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
+    picture: [
+      { logo: reviews_slider_author_1, title: 'Манагер' },
+      { logo: reviews_slider_author_2, title: 'Клиент' },
+      { logo: reviews_slider_author_1, title: 'Манагер' },
+      { logo: reviews_slider_author_2, title: 'Клиент' },
+      { logo: reviews_slider_author_1, title: 'Манагер' },
+    ],
+  },
+  {
+    title: 'Отзыв клиента 2',
+    text: 'Создать MGSite  3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
+    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
+    picture: [
+      { logo: reviews_slider_author_1, title: 'Ололо' },
+      { logo: reviews_slider_author_2, title: 'Алала' },
+    ],
+  },
+  {
+    title: 'Отзыв клиента 3',
+    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
+    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
+    picture: [
+      { logo: reviews_slider_author_1, title: 'Тырым пырым' },
+      { logo: reviews_slider_author_2, title: 'Пхпхппх' },
+    ],
+  },
+  {
+    title: 'Отзыв  MGSite клиента 4',
+    text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
+    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
+    picture: [
+      { logo: reviews_slider_author_1, title: 'Тырым пырым' },
+      { logo: reviews_slider_author_2, title: 'Пхпхппх' },
+    ],
+  },
+  {
+    title: 'Отзыв клиента 5',
+    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
+    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
+    picture: [
+      { logo: reviews_slider_author_1, title: 'Тырым пырым' },
+      { logo: reviews_slider_author_2, title: 'Пхпхппх' },
+    ],
+  },
+];
+
+import case_iframe_preview_image from '/src/assets/images/case-iframe-canon.jpg';
+
 export default function CaseMarkssite() {
   return (
     <main>
@@ -199,16 +258,23 @@ export default function CaseMarkssite() {
       <Softwar items={contentSoftwar} />
       <CasesSliderVideo items={cases_slider_video_content} />
       <Text title={contentText[1].title} text={contentText[1].text} />
-      <CaseIframe />
-
-      <Text title={contentText[2].title} text={contentText[1].text} />
+      <CaseIframe
+        iframeProps={{
+          src: 'https://embed.figma.com/board/9TbTy2tieMNVOZgKzqwa9q/%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE.-%D0%A1%D0%B0%D0%B9%D1%82-LABA.?node-id=0-1&embed-host=share',
+          allowFullScreen: true,
+        }}
+        previewSrc={case_iframe_preview_image}
+        mobilePreviewSrc={case_iframe_preview_image}
+      />
+      <Text title={contentText[2].title} text={contentText[2].text} />
       <CasesSliderFull items={case_slider_full_content_1} />
-
-      <Text title={contentText[3].title} text={contentText[1].text} />
+      <Text title={contentText[3].title} text={contentText[3].text} />
       <CasesSliderFull items={case_slider_full_content_2} />
-      <Text title={contentText[4].title} text={contentText[1].text} />
+      <Text title={contentText[4].title} text={contentText[4].text} />
       <CasesSliderScroll items={case_slider_scroll_content} />
-      <Text title={contentText[5].title} text={contentText[1].text} />
+      <Text title={contentText[5].title} text={contentText[5].text} />
+      <ReviewsSlider items={contentReviews} />
+      <CasesItems type="unreal" />
     </main>
   );
 }
