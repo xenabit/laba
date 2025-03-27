@@ -162,13 +162,21 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
 
     const tl = gsap.timeline({ onComplete: onBalloonsShrinkComplete });
     tl.to(balloonCenter, {
-      scale: 0.1,
+      scale: 1,
       left: '51%',
       top: `${adjustedTop}%`,
       duration: 1.5,
       ease: 'power2.inOut',
       overwrite: 'all',
-    });
+    }).to(
+      balloonCenter,
+      {
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power2.in',
+      },
+      '-=0.5'
+    );
   };
 
   const applyMagnetEffect = (balloon, mouseX, mouseY, containerRect) => {

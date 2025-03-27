@@ -8,7 +8,6 @@
     align-items: center;
     margin-right: rem(16);
     margin-left: rem(16);
-    border-top: 2px solid var(--prime-2);
     padding: rem(48) 0 rem(32) 0;
   }
 
@@ -211,12 +210,6 @@
         height: auto;
         object-position: bottom 842px right 1191px;
       }
-    }
-  }
-
-  @media all and (min-width: $bp0) {
-    &__content {
-      border-top: 3px solid var(--prime-2);
     }
   }
 
