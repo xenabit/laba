@@ -1,11 +1,11 @@
 import styles from './CasesIntro.module.scss';
 
 function CasesIntro({ contentCasesIntro }) {
-  const { title, subtitle, tags, picture_intro, about } = contentCasesIntro;
+  const { title, subtitle, tags, src, picture_intro, about } = contentCasesIntro;
   return (
     <section className={`${styles.CasesIntro}`}>
       <div className={styles.CasesIntro__header}>
-        <a href="#" className={styles.CasesIntro__return}>
+        <a href="/portfolio" className={styles.CasesIntro__return}>
           Смотреть все кейсы
         </a>
         <div className={styles.CasesIntro__info}>
@@ -24,9 +24,11 @@ function CasesIntro({ contentCasesIntro }) {
         <div className={styles.CasesIntro__picture}>
           <img src={picture_intro} loading="lazy"></img>
         </div>
-        <a href="#" className={styles.CasesIntro__button}>
-          Перейти на сайт
-        </a>
+        {src?.url && (
+          <a href={src.url} className={styles.CasesIntro__button}>
+            {src.title || 'Перейти на сайт'}
+          </a>
+        )}
       </div>
       <div className={styles.CasesIntro__footer}>
         <div className={styles.CasesIntro__cols}>
