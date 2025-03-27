@@ -62,7 +62,15 @@ function CasesSliderFull({ items }) {
           {items.pictures?.map((item) => (
             <SwiperSlide className={styles.CasesSliderFull__slide} key={item.id}>
               <div className={styles.CasesSliderFull__inner}>
-                <img loading="lazy" src={item.picture} alt={item.title} style={{ width: `${items.sizes.width_left}` }} />
+                <img
+                  loading="lazy"
+                  src={item.picture}
+                  alt={item.title}
+                  style={{
+                    width: item.sizes?.width || items.sizes.width,
+                    height: item.sizes?.height || 'auto',
+                  }}
+                />
               </div>
             </SwiperSlide>
           ))}

@@ -4,12 +4,15 @@ import CasesIntro from '../components/CasesIntro/CasesIntro';
 import Text from '../components/Text/Text';
 import Softwar from '../components/Softwar/Softwar';
 import CasesSlider from '../components/CasesSlider/CasesSlider';
+import Picture from '../components/Picture/Picture';
 import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import CasesItems from '../components/CasesItems/CasesItems';
 import CaseIframe from '../components/CaseIframe/CaseIframe';
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 
 import softwarLogos from '/src/constants/softwarLogos';
+
+import picture from '/src/assets/images/picture-tamtam.svg';
 
 import case_intro_picture from '/src/assets/images/case-intro-tamtam.jpg';
 
@@ -36,10 +39,16 @@ import case_slider_full_picture_1_2 from '/src/assets/images/cases-slider-full-t
 import case_slider_full_picture_2_2 from '/src/assets/images/cases-slider-full-tamtam-2-2.png';
 import case_slider_full_picture_3_2 from '/src/assets/images/cases-slider-full-tamtam-3-2.png';
 
+import case_iframe_preview_image from '/src/assets/images/case-iframe-canon.jpg';
+
 const contentCasesIntro = {
-  title: 'marksgroup.ru',
-  subtitle: 'Корпоративный сайт компании',
+  title: 'Тамагочи',
+  subtitle: 'Гиперказуальная игра',
   tags: ['WEB интерфейс', 'UX/UI', '???'],
+  src: {
+    url: 'https://marks-tour.ru/',
+    // title: 'Перейти на сайт',
+  },
   picture_intro: case_intro_picture,
   about: [
     {
@@ -155,11 +164,15 @@ const case_slider_pictures_1 = {
 
 const case_slider_full_content_1 = {
   sizes: {
-    width_left: '75.5%',
+    width: '75.5%',
   },
   bg: case_slider_full_bg,
   pictures: [
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_1',
       picture: case_slider_full_picture_1,
     },
@@ -184,7 +197,7 @@ const case_slider_full_content_1 = {
 
 const case_slider_full_content_2 = {
   sizes: {
-    width_left: '72.5%',
+    width: '72.5%',
   },
   bg: case_slider_full_bg,
   pictures: [
@@ -203,7 +216,7 @@ const case_slider_full_content_2 = {
   ],
 };
 
-export default function Tamagotchi() {
+export default function CaseTamagotchi() {
   return (
     <main>
       <CasesIntro contentCasesIntro={contentCasesIntro} />
@@ -211,12 +224,23 @@ export default function Tamagotchi() {
       <Softwar items={contentSoftwar} />
       <CasesSlider items={case_slider_pictures_1} />
       <Text title={contentText[1].title} text={contentText[1].text} />
-      <CaseIframe />
-      <Text title={contentText[2].title} text={contentText[2].text} />
-      <CasesSliderFull items={case_slider_full_content_1} />
-      <CasesSliderFull items={case_slider_full_content_2} />
-      <Text title={contentText[2].title} text={contentText[2].text} />
 
+      <CaseIframe
+        iframeProps={{
+          src: 'https://embed.figma.com/board/9TbTy2tieMNVOZgKzqwa9q/%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE.-%D0%A1%D0%B0%D0%B9%D1%82-LABA.?node-id=7-2107&embed-host=share',
+          allowFullScreen: true,
+        }}
+        previewSrc={case_iframe_preview_image}
+        mobilePreviewSrc={case_iframe_preview_image}
+      />
+
+      <CasesSliderFull items={case_slider_full_content_1} />
+      <Text title={contentText[2].title} text={contentText[2].text} />
+      <CasesSliderFull items={case_slider_full_content_2} />
+
+      <Text title={contentText[3].title} text={contentText[3].text} />
+      <Picture src={picture} />
+      <Text title={contentText[4].title} text={contentText[4].text} />
       <ReviewsSlider items={contentReviews} />
       <CasesItems type="web" />
     </main>
