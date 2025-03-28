@@ -23,13 +23,6 @@
     max-height: 52vw;
   }
 
-  &__wrapper {
-    position: relative;
-    width: 70%;
-    height: 82%;
-    padding: 50px 0;
-  }
-
   &__pictures {
     position: relative;
     width: 100%;
@@ -75,6 +68,13 @@
       -webkit-user-drag: none;
       pointer-events: none;
     }
+  }
+
+  &__wrapper {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    padding: 12px 0;
   }
 
   &__divider {
@@ -154,6 +154,14 @@
   @media all and (min-width: $bp3) {
     &__swiper {
       @include containerDesk;
+    }
+  }
+
+  @media all and (min-width: $bp1) {
+    &__wrapper {
+      width: 70%;
+      height: 82%;
+      padding: 50px 0;
     }
   }
 

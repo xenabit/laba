@@ -97,7 +97,7 @@ const App = () => {
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />
-          <Route path="/case" element={<CaseMarksTour />} />
+          <Route path="/markstour" element={<CaseMarksTour />} />
           <Route path="/markssite" element={<CaseMarkssite />} />
           <Route path="/markssite-hr" element={<CaseMarkssiteHR />} />
           <Route path="/canon-change" element={<CaseCanonChange />} />

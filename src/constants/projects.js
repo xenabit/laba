@@ -22,7 +22,7 @@ export const projects = [
     src: '/markstour',
     title: 'MARKS-TOUR',
     desc: 'Панорама 360° с WEB интерфейсом, VR',
-    type: '360',
+    type: '3d',
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ export const projects = [
     src: 'canon-change',
     title: 'Канон перемен',
     desc: 'Приложение с игровой механикой',
-    type: 'video',
+    type: 'game',
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ export const projects = [
     src: 'markscity',
     title: 'MARKS-CITY',
     desc: 'Десктоп игра для интерактивного стола. Зодчество 2023',
-    type: 'game',
+    type: '3d',
   },
 ];
 

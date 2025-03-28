@@ -6,7 +6,6 @@
   &__header {
     @include containerMob;
     margin-bottom: rem(40);
-    border-top: 2px solid var(--prime-2);
   }
 
   &__return {

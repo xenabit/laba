@@ -177,7 +177,7 @@ export default function Case() {
       <Text title={text[3].title} text={text[3].text} />
       <VideoHorizontal videoUrl="https://rutube.ru/play/embed/8cf88425e21edd7fe6f8ff77913b233c" />
       <ReviewsSlider items={contentReviews} />
-      <CasesItems type="360" />
+      <CasesItems type="3d" />
     </main>
   );
 }

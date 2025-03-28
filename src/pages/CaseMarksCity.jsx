@@ -220,7 +220,7 @@ export default function CaseMarksCity() {
 
       <ReviewsSlider items={contentReviews} />
       <VideoHorizontal videoUrl={video} />
-      <CasesItems type="game" />
+      <CasesItems type="3d" />
     </main>
   );
 }

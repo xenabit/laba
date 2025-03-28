@@ -41,7 +41,6 @@
 
   &__header {
     @include containerMob;
-    border-top: 2px solid var(--prime-2);
     padding: rem(48) 0 rem(40) 0;
   }
 
