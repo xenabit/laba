@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom';
 import styles from './GalleryItem.module.scss';
 
 function GalleryItem({ videoSrc, href, title, desc, videoProps }) {
   return (
     <li className={styles.GalleryItem__item}>
-      <a href={href}>
+      <Link to={href}>
         <video {...videoProps} preload="auto" loop muted>
           <source src={videoSrc} type="video/mp4" />
           Your browser does not support the video tag.
@@ -12,7 +13,7 @@ function GalleryItem({ videoSrc, href, title, desc, videoProps }) {
           <span>{title}</span>
           <span>{desc}</span>
         </h2>
-      </a>
+      </Link>
     </li>
   );
 }

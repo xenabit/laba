@@ -1,5 +1,4 @@
-import '../App.scss';
-
+import { useParams } from 'react-router-dom';
 import CasesIntro from '../components/CasesIntro/CasesIntro';
 import Text from '../components/Text/Text';
 import Softwar from '../components/Softwar/Softwar';
@@ -9,6 +8,8 @@ import MarksTour from '../components/MarksTour/MarksTour';
 import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
 import CasesItems from '../components/CasesItems/CasesItems';
+import { projects } from '../constants/projects';
+import '../App.scss';
 
 // import video from '/src/assets/videos/about-list-3.mp4';
 import picture from '/src/assets/images/cases-1.jpg';
@@ -29,11 +30,20 @@ const text = [
 ];
 
 export default function Case() {
+  const { projectId } = useParams();
+
+  const project = projects.find((item) => item.id === Number(projectId));
+
+  if (!project) {
+    return <h2>Проект не найден</h2>;
+  }
+
+
   return (
     <main>
       <CasesIntro />
       <Text title={text[0].title} text={text[0].text} />
-      <Softwar />
+      <Softwar someProp={project.type} />
       <Text title={text[1].title} text={text[1].text} />
       <CasesSlider />
       <Text title={text[2].title} text={text[2].text} />
