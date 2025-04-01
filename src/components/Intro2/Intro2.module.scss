@@ -3,7 +3,6 @@
   $s: &;
   position: relative;
   margin-bottom: rem(48);
-  border-top: 2px solid var(--prime-2);
   padding-top: rem(54);
 
   &__container {
@@ -69,8 +68,8 @@
   }
 
   @media all and (min-width: $bp1) {
-    border-top: 3px solid var(--prime-2);
     padding-top: rem(100);
+    margin-bottom: rem(89);
 
     &__container {
       flex-direction: row;

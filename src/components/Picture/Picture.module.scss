@@ -16,4 +16,8 @@
   @media all and (min-width: $bp3) {
     @include containerDesk;
   }
+
+  @media all and (min-width: $bp0) {
+    @include sectionMarginDesk;
+  }
 }

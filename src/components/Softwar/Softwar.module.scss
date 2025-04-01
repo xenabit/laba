@@ -1,6 +1,7 @@
 .Softwar {
   $s: &;
   background-color: var(--prime-1);
+  @include sectionMarginMob;
 
   &__slide {
     display: flex;
@@ -43,6 +44,10 @@
     align-items: center;
     gap: rem(16);
     margin: rem(24) 0;
+
+    &:global(.swiper-pagination-lock) {
+      display: none;
+    }
   }
 
   &__bullet {
@@ -96,6 +101,8 @@
   }
 
   @media all and (min-width: $bp0) {
+    @include sectionMarginDesk;
+
     &__slide {
       gap: rem(42);
       height: clamp(rem(296), 18.5vw, rem(592));

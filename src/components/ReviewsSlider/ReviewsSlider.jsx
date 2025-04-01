@@ -4,61 +4,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import picture_1 from '../../assets/images/reviews-slider-1.svg';
-import picture_2 from '../../assets/images/reviews-slider-2.jpg';
-
-const items = [
-  {
-    title: 'Отзыв клиента',
-    text: 'Создать 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
-    picture: [
-      { logo: picture_1, title: 'Манагер' },
-      { logo: picture_2, title: 'Клиент' },
-      { logo: picture_1, title: 'Манагер' },
-      { logo: picture_2, title: 'Клиент' },
-      { logo: picture_1, title: 'Манагер' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 2',
-    text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: picture_1, title: 'Ололо' },
-      { logo: picture_2, title: 'Алала' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 3',
-    text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: picture_1, title: 'Тырым пырым' },
-      { logo: picture_2, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 4',
-    text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: picture_1, title: 'Тырым пырым' },
-      { logo: picture_2, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 5',
-    text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: picture_1, title: 'Тырым пырым' },
-      { logo: picture_2, title: 'Пхпхппх' },
-    ],
-  },
-];
-
-function ReviewsSlider() {
+function ReviewsSlider({ items }) {
   return (
     <section className="ReviewsSlider">
       <div className="ReviewsSlider__container">

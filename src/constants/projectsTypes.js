@@ -16,7 +16,7 @@ export const projectsTypes = [
   },
   {
     id: 4,
-    title: 'Видео продакшн',
-    type: 'video',
+    title: 'Игры',
+    type: 'game',
   },
 ];

@@ -1,0 +1,85 @@
+.CaseIframe {
+  $s: &;
+  @include sectionMarginMob;
+  @include containerMob;
+  position: relative;
+  background-color: var(--prime-1);
+
+  &.active {
+    #{$s}__iframe {
+      pointer-events: auto;
+    }
+
+    #{$s}__button {
+      opacity: 0;
+      height: 0;
+    }
+  }
+
+  &__container {
+    position: relative;
+    width: 70vw;
+    margin: auto;
+    aspect-ratio: 1 / 1.87;
+    border-radius: rem(16);
+    overflow: hidden;
+    border: 2px solid var(--prime-2);
+  }
+
+  &__iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  &__preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 5;
+  }
+
+  &__button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    border-radius: rem(33);
+    background-color: var(--prime-1);
+    padding: rem(20) rem(30);
+    width: max-content;
+    height: rem(58);
+    color: var(--prime-2);
+    font-weight: var(--fw-light);
+    font-size: rem(16);
+    line-height: 1.1;
+    font-family: var(--font-sec);
+    transition:
+      all 0.3s ease,
+      opacity 0.5s ease,
+      height 0.2s 0.5s ease;
+
+    &:hover {
+      background-color: var(--prime-3);
+      color: white;
+    }
+  }
+
+  @media all and (min-width: $bp4) {
+    &__container {
+      width: 80vw;
+      border: 8px solid var(--prime-2);
+      aspect-ratio: 1278/ 700;
+      box-shadow: 0px 20.36px 30.1px 0px #0000004a;
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    @include containerDesk;
+  }
+}

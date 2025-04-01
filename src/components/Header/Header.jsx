@@ -1,33 +1,49 @@
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Header.module.scss';
-
 import logo from '/src/assets/images/header-logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Header() {
+const Header = forwardRef(({ shouldAnimate }, ref) => {
   const [isActive, setIsActive] = useState(false);
   const [activeTab, setActiveTab] = useState('/');
   const location = useLocation();
 
-  // Хук для установки активной вкладки
   useEffect(() => {
     const savedTab = localStorage.getItem('activeTab') || location.pathname;
     setActiveTab(savedTab);
   }, [location.pathname]);
 
-  // // Хук для блокировки/разблокировки скролла страницы
   useEffect(() => {
     document.body.style.overflow = isActive ? 'hidden' : '';
     return () => (document.body.style.overflow = '');
   }, [isActive]);
 
   useEffect(() => {
+    if (!ref || !ref.current) {
+      console.warn('Header ref is not ready');
+      return;
+    }
+
+    const header = ref.current;
+    const headerTop = header.querySelector(`.${styles.Header__top}`);
+    const border = headerTop.querySelector(`.${styles.Header__border}`);
+
+    if (!headerTop || !border) return;
+
+    const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
+    const borderHeight = isDesktop ? 3 : 2;
+
+    gsap.set(border, {
+      height: borderHeight,
+      backgroundColor: 'var(--prime-2)',
+    });
+
     const showAnim = gsap.fromTo(
-      '#main-tool-bar',
+      header,
       { yPercent: 0 },
       {
         yPercent: -100,
@@ -37,20 +53,65 @@ function Header() {
       }
     );
 
+    const borderAnim = gsap.fromTo(
+      border,
+      { height: borderHeight },
+      {
+        height: 0,
+        duration: 0.2,
+        ease: 'power1.out',
+        paused: true,
+      }
+    );
+
+    if (shouldAnimate) {
+      header.classList.add(styles.animate);
+    }
+
     ScrollTrigger.create({
-      trigger: '#smooth-content', // Используй правильный триггер для ScrollSmoother
-      start: 'top top',
+      trigger: '#smooth-content',
+      start: 'top top+=50',
       end: 'bottom top',
       onUpdate: (self) => {
-        if (self.direction === -1) {
+        const scrollPos = self.scroll();
+
+        if (isActive) {
+          showAnim.pause();
+          borderAnim.pause();
+          gsap.set(header, { yPercent: 0 });
+          gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
+        } else if (scrollPos <= 50) {
           showAnim.reverse();
+          borderAnim.reverse();
+          gsap.set(border, { backgroundColor: 'var(--prime-2)' });
         } else {
-          showAnim.play();
+          if (self.direction === -1) {
+            showAnim.reverse();
+            borderAnim.play();
+          } else {
+            showAnim.play();
+            borderAnim.play();
+          }
         }
       },
       scrub: true,
     });
-  }, []);
+
+    if (window.scrollY > 50) {
+      showAnim.play();
+      borderAnim.play();
+    } else {
+      showAnim.reverse();
+      borderAnim.reverse();
+    }
+
+    ScrollTrigger.refresh();
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      gsap.killTweensOf([header, border]);
+    };
+  }, [ref, isActive, shouldAnimate]);
 
   const toggleActiveClass = () => setIsActive((prev) => !prev);
 
@@ -63,7 +124,7 @@ function Header() {
   };
 
   return (
-    <header id="main-tool-bar" className={styles.Header}>
+    <header ref={ref} id="main-tool-bar" className={`${styles.Header}`}>
       <div className={`${styles.Header__container} ${isActive ? styles.active : ''}`}>
         <div className={styles.Header__top}>
           <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
@@ -79,6 +140,7 @@ function Header() {
             <span></span>
             <span></span>
           </button>
+          <div className={styles.Header__border}></div>
         </div>
         <div className={styles.Header__inner}>
           <nav>
@@ -98,11 +160,6 @@ function Header() {
                   Контакты
                 </Link>
               </li>
-              <li>
-                <Link className={activeTab === '/case' ? styles.active : ''} to="/case" onClick={() => handleTabClick('/case')}>
-                  Кейс
-                </Link>
-              </li>
             </ul>
           </nav>
           <ul className={styles.Header__links}>
@@ -120,7 +177,7 @@ function Header() {
             <a href="tel:+74951201226" className={styles.Header__tel}>
               тел. +7 (495) 120-12-26
             </a>
-            <a href="https://yandex.ru/profile/1116551737" target="_black">
+            <a href="https://yandex.ru/profile/1116551737" target="_blank" rel="noopener noreferrer">
               г. Москва ул. 3-я Ямского Поля д. 20 с1
             </a>
           </div>
@@ -128,6 +185,6 @@ function Header() {
       </div>
     </header>
   );
-}
+});
 
 export default Header;

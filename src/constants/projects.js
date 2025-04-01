@@ -11,105 +11,63 @@ import video_10 from '../assets/videos/gallery-10.mp4';
 import video_11 from '../assets/videos/gallery-11.mp4';
 import video_12 from '../assets/videos/gallery-12.mp4';
 
+import { projectsTypes } from './projectsTypes';
+
+const validTypes = new Set(projectsTypes.map((item) => item.type));
+
 export const projects = [
   {
     id: 1,
     video: video_1,
-    // src: '/portfolio/1',
-    title: 'Проект ТЕСТ 3D',
-    desc: 'ЗD визуализация',
+    src: '/portfolio/markstour',
+    title: 'MARKS-TOUR',
+    desc: 'Панорама 360° с WEB интерфейсом, VR',
     type: '3d',
   },
   {
     id: 2,
     video: video_2,
-    // src: '/portfolio/2',
-    title: 'Проект Signature',
-    desc: 'ЗD визуализация',
+    src: '/portfolio/markssite',
+    title: 'marksgroup.ru',
+    desc: 'Корпоративный сайт компании',
     type: 'web',
   },
   {
     id: 3,
     video: video_3,
-    src: '#',
-    // src: '/portfolio/3',
-    title: 'Проект Вуаля длинное название',
-    desc: 'ЗD визуализация видео продакшн VR',
-    type: '3d',
+    src: '/portfolio/markssite-hr',
+    title: 'HR портал',
+    desc: 'HR портал компании',
+    type: 'web',
   },
   {
     id: 4,
     video: video_4,
-    src: '#',
-    // src: '/portfolio/4',
-    title: 'Проект Вуаля длинное название',
-    desc: 'ЗD визуализация',
-    type: '3d',
+    src: '/portfolio/canon-change',
+    title: 'Канон перемен',
+    desc: 'Приложение с игровой механикой',
+    type: 'game',
   },
   {
     id: 5,
     video: video_5,
-    src: '#',
-    // ssrc: '/portfolio/5',
-    title: 'Проект Вуаля',
-    desc: 'ЗD визуализация',
-    type: 'web',
+    src: '/portfolio/tamagotchi',
+    title: 'Тамагочи',
+    desc: 'Гиперказуальная игра',
+    type: 'game',
   },
   {
     id: 6,
     video: video_6,
-    src: '#',
-    // src: '/portfolio/6',
-    title: 'Проект Вуаля',
-    desc: 'ЗD визуализация видео продакшн VR',
+    src: '/portfolio/markscity',
+    title: 'MARKS-CITY',
+    desc: 'Десктоп игра для интерактивного стола. Зодчество 2023',
     type: '3d',
   },
-  // {
-  //   id: 7,
-  //   video: video_7,
-  //   src: '#',
-  //   title: 'Проект Вуаля',
-  //   desc: 'ЗD визуализация видео продакшн VR',
-  //   type: 'video',
-  // },
-  // {
-  //   id: 8,
-  //   video: video_8,
-  //   src: '#',
-  //   title: 'Проект Вуаля',
-  //   desc: 'ЗD визуализация видео продакшн VR',
-  //   type: 'video',
-  // },
-  // {
-  //   id: 9,
-  //   video: video_9,
-  //   src: '#',
-  //   title: 'Проект Вуаля',
-  //   desc: 'ЗD визуализация видео продакшн VR',
-  //   type: 'video',
-  // },
-  // {
-  //   id: 10,
-  //   video: video_10,
-  //   src: '#',
-  //   title: 'Проект Вуаля',
-  //   desc: 'ЗD визуализация видео продакшн VR',
-  //   type: 'web',
-  // },
-  // {
-  //   id: 11,
-  //   video: video_11,
-  //   src: '#',
-  //   title: 'Проект Вуаля',
-  //   desc: 'ЗD визуализация видео продакшн VR',
-  //   type: 'web',
-  // },
-  // {
-  //   id: 12,
-  //   video: video_12,
-  //   src: '#',
-  //   title: 'Проект Вуаля',
-  //   desc: 'ЗD визуализация видео продакшн VR',
-  //   type: 'video',
-  // },
 ];
+
+projects.forEach((project) => {
+  if (!validTypes.has(project.type)) {
+    console.warn(`Недопустимый тип "${project.type}" в проекте "${project.title}". Допустимые типы: ${[...validTypes]}`);
+  }
+});

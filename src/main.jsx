@@ -1,10 +1,12 @@
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter
-  future={{
+  // <BrowserRouter// >
+  <HashRouter
+    future={{
     v7_relativeSplatPath: true,
     v7_startTransition: true,
     v7_fetcherPersist: true,
@@ -14,5 +16,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   }}
   >
     <App />
-  </BrowserRouter>
+  </HashRouter>
+  // </BrowserRouter>
 );
