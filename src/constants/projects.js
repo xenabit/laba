@@ -15,7 +15,7 @@ export const projects = [
   {
     id: 1,
     video: video_1,
-    src: '/portfolio/1',
+    // src: '/portfolio/1',
     title: 'Проект ТЕСТ 3D',
     desc: 'ЗD визуализация',
     type: '3d',
@@ -23,7 +23,7 @@ export const projects = [
   {
     id: 2,
     video: video_2,
-    src: '/portfolio/2',
+    // src: '/portfolio/2',
     title: 'Проект Signature',
     desc: 'ЗD визуализация',
     type: 'web',
@@ -31,7 +31,8 @@ export const projects = [
   {
     id: 3,
     video: video_3,
-    src: '/portfolio/3',
+    src: '#',
+    // src: '/portfolio/3',
     title: 'Проект Вуаля длинное название',
     desc: 'ЗD визуализация видео продакшн VR',
     type: '3d',
@@ -39,7 +40,8 @@ export const projects = [
   {
     id: 4,
     video: video_4,
-    src: '/portfolio/4',
+    src: '#',
+    // src: '/portfolio/4',
     title: 'Проект Вуаля длинное название',
     desc: 'ЗD визуализация',
     type: '3d',
@@ -47,7 +49,8 @@ export const projects = [
   {
     id: 5,
     video: video_5,
-    ssrc: '/portfolio/5',
+    src: '#',
+    // ssrc: '/portfolio/5',
     title: 'Проект Вуаля',
     desc: 'ЗD визуализация',
     type: 'web',
@@ -55,7 +58,8 @@ export const projects = [
   {
     id: 6,
     video: video_6,
-    src: '/portfolio/6',
+    src: '#',
+    // src: '/portfolio/6',
     title: 'Проект Вуаля',
     desc: 'ЗD визуализация видео продакшн VR',
     type: '3d',

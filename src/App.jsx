@@ -47,7 +47,7 @@ const App = () => {
             <Route path="/contact" element={<Contacts />} />
             <Route path="/form" element={<FormBrief />} />
             <Route path="/case" element={<Case />} />
-            <Route path="/portfolio/:projectId" element={<Case />} />
+            {/* <Route path="/portfolio/:projectId" element={<Case />} /> */}
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Footer />
