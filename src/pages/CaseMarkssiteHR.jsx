@@ -13,6 +13,8 @@ import softwarLogos from '/src/constants/softwarLogos';
 import case_slider_bg from '/src/assets/images/case-slider-bg-hr-1.svg';
 import case_compare_slider_bg from '/src/assets/images/case-compare-slider-bg-hr-1.svg';
 
+import case_slider_picture_left_0 from '/src/assets/images/cases-slider-markssite-hr-left-0.png';
+import case_slider_picture_right_0 from '/src/assets/images/cases-slider-markssite-hr-right-0.png';
 import case_slider_picture_left_1 from '/src/assets/images/cases-slider-markssite-hr-left-1.png';
 import case_slider_picture_right_1 from '/src/assets/images/cases-slider-markssite-hr-right-1.png';
 import case_slider_picture_left_2 from '/src/assets/images/cases-slider-markssite-hr-left-2.png';
@@ -80,6 +82,11 @@ const case_slider_pictures_1 = {
   },
   bg: case_slider_bg,
   pictures: [
+    {
+      id: '0_1',
+      picture_left: case_slider_picture_left_0,
+      picture_right: case_slider_picture_right_0,
+    },
     {
       id: '1_1',
       picture_left: case_slider_picture_left_1,
