@@ -17,3 +17,21 @@ import case_slider_picture_left_2_2 from '/src/assets/images/cases-slider-markss
 import case_slider_picture_right_2_2 from '/src/assets/images/cases-slider-markssite-right-2_2.png';
 import case_slider_picture_left_3_2 from '/src/assets/images/cases-slider-markssite-left-3_2.png';
 import case_slider_picture_right_3_2 from '/src/assets/images/cases-slider-markssite-right-3_2.png';
+import case_slider_picture_left_1_2 from '/src/assets/images/cases-slider-markssite-hr-left-1_2.png';
+import case_slider_picture_right_1_2 from '/src/assets/images/cases-slider-markssite-hr-right-1_2.png';
+import case_slider_picture_left_2_2 from '/src/assets/images/cases-slider-markssite-hr-left-2_2.png';
+import case_slider_picture_right_2_2 from '/src/assets/images/cases-slider-markssite-hr-right-2_2.png';
+import case_slider_picture_left_3_2 from '/src/assets/images/cases-slider-markssite-hr-left-3_2.png';
+import case_slider_picture_right_3_2 from '/src/assets/images/cases-slider-markssite-hr-right-3_2.png';
+import case_slider_picture_left_0 from '/src/assets/images/cases-slider-markssite-hr-left-0.png';
+import case_slider_picture_right_0 from '/src/assets/images/cases-slider-markssite-hr-right-0.png';
+import case_slider_picture_left_1 from '/src/assets/images/cases-slider-markssite-hr-left-1.png';
+import case_slider_picture_right_1 from '/src/assets/images/cases-slider-markssite-hr-right-1.png';
+import case_slider_picture_left_2 from '/src/assets/images/cases-slider-markssite-hr-left-2.png';
+import case_slider_picture_right_2 from '/src/assets/images/cases-slider-markssite-hr-right-2.png';
+import case_slider_picture_left_3 from '/src/assets/images/cases-slider-markssite-hr-left-3.png';
+import case_slider_picture_right_3 from '/src/assets/images/cases-slider-markssite-hr-right-3.png';
+import case_slider_picture_left_4 from '/src/assets/images/cases-slider-markssite-hr-left-4.png';
+import case_slider_picture_right_4 from '/src/assets/images/cases-slider-markssite-hr-right-4.png';
+
+import case_slider_bg from '/src/assets/images/case-slider-bg-hr-1.svg';
