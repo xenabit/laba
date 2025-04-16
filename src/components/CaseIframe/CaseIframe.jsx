@@ -28,12 +28,8 @@ function CaseIframe({ iframeProps = {}, previewSrc, mobilePreviewSrc }) {
 
   return (
     <section className={`${styles.CaseIframe} ${isActive ? styles.active : ''}`}>
-      <div className={styles.CaseIframe__container}>
-        {!isActive && (
-          <button className={styles.CaseIframe__button} onClick={handleButtonClick}>
-            Начать взаимодействие
-          </button>
-        )}
+      <div className={styles.CaseIframe__container} onClick={handleButtonClick}>
+        {!isActive && <button className={styles.CaseIframe__button}>Начать взаимодействие</button>}
 
         {previewSrc && isPreviewVisible && (
           <picture>

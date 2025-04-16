@@ -24,6 +24,15 @@
     border-radius: rem(16);
     overflow: hidden;
     border: 2px solid var(--prime-2);
+
+    &:hover {
+      cursor: pointer;
+
+      #{$s}__button {
+        background-color: var(--prime-3);
+        color: white;
+      }
+    }
   }
 
   &__iframe {
@@ -63,11 +72,6 @@
       all 0.3s ease,
       opacity 0.5s ease,
       height 0.2s 0.5s ease;
-
-    &:hover {
-      background-color: var(--prime-3);
-      color: white;
-    }
   }
 
   @media all and (min-width: $bp4) {
