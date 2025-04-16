@@ -140,7 +140,7 @@ const contentReviews = [
 const case_slider_pictures_1 = {
   sizes: {
     width_left: '69.61%',
-    width_right: '79.74%',
+    width_right: '69.61%',
   },
   bg: case_slider_bg,
   pictures: [
@@ -177,18 +177,34 @@ const case_slider_full_content_1 = {
       picture: case_slider_full_picture_1,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_2',
       picture: case_slider_full_picture_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_3',
       picture: case_slider_full_picture_3,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_4',
       picture: case_slider_full_picture_4,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_5',
       picture: case_slider_full_picture_5,
     },
