@@ -11,6 +11,7 @@ import softwarLogos from '/src/constants/softwarLogos';
 
 import case_intro_picture from '/src/assets/images/case-intro-markssite-hr.jpg';
 import case_compare_slider_bg from '/src/assets/images/case-compare-slider-bg-hr-1.svg';
+
 import case_compare_slider_picture_left_1 from '/src/assets/images/cases-compare-slider-markssite-hr-left-1.jpg';
 import case_compare_slider_picture_right_1 from '/src/assets/images/cases-compare-slider-markssite-hr-right-1.jpg';
 import case_compare_slider_picture_left_2 from '/src/assets/images/cases-compare-slider-markssite-hr-left-2.jpg';
@@ -19,8 +20,10 @@ import case_compare_slider_picture_left_3 from '/src/assets/images/cases-compare
 import case_compare_slider_picture_right_3 from '/src/assets/images/cases-compare-slider-markssite-hr-right-3.jpg';
 import case_compare_slider_picture_left_4 from '/src/assets/images/cases-compare-slider-markssite-hr-left-4.jpg';
 import case_compare_slider_picture_right_4 from '/src/assets/images/cases-compare-slider-markssite-hr-right-4.jpg';
+
 import reviews_slider_author_1 from '/src/assets/images/reviews-slider-1.svg';
 import reviews_slider_author_2 from '/src/assets/images/reviews-slider-2.jpg';
+
 import case_slider_full_picture_1_1 from '/src/assets/images/cases-slider-full-markssite-hr-1-1.jpg';
 import case_slider_full_picture_1_2 from '/src/assets/images/cases-slider-full-markssite-hr-1-2.jpg';
 import case_slider_full_picture_1_3 from '/src/assets/images/cases-slider-full-markssite-hr-1-3.jpg';
@@ -163,14 +166,26 @@ const case_slider_full_content_1 = {
 
   pictures: [
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_1',
       picture: case_slider_full_picture_1_1,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_2',
       picture: case_slider_full_picture_1_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_3',
       picture: case_slider_full_picture_1_3,
     },
@@ -188,21 +203,33 @@ const case_slider_full_content_2 = {
 
   pictures: [
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_1',
       picture: case_slider_full_picture_2_1,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_2',
       picture: case_slider_full_picture_2_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_3',
       picture: case_slider_full_picture_2_3,
     },
   ],
 };
 
-export default function CaseMarkssiteHR() {
+export default function CaseMarkssite() {
   return (
     <main>
       <CasesIntro contentCasesIntro={contentCasesIntro} />

@@ -156,23 +156,36 @@ const case_slider_full_content_1 = {
 };
 
 const case_slider_full_content_2 = {
-  sizes: {
-    width: '100%',
-  },
   pictures: [
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_1',
       picture: case_slider_full_picture_1_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_2',
       picture: case_slider_full_picture_2_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_3',
       picture: case_slider_full_picture_3_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_4',
       picture: case_slider_full_picture_4_2,
     },

@@ -131,22 +131,42 @@ const case_slider_full_content_1 = {
 
   pictures: [
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_1',
       picture: case_slider_full_picture_1,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_2',
       picture: case_slider_full_picture_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_3',
       picture: case_slider_full_picture_3,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_4',
       picture: case_slider_full_picture_4,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_5',
       picture: case_slider_full_picture_5,
     },
@@ -175,7 +195,7 @@ export default function Case() {
       />
 
       <Text title={text[3].title} text={text[3].text} />
-      <VideoHorizontal videoUrl="https://rutube.ru/play/embed/8cf88425e21edd7fe6f8ff77913b233c" />
+      <VideoHorizontal videoUrl="https://rutube.ru/video/1c6a32ff34498a5cff63eecc7f257d74/?r=wd" />
       <ReviewsSlider items={contentReviews} />
       <CasesItems type="3d" />
     </main>

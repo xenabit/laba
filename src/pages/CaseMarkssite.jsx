@@ -26,6 +26,7 @@ import case_slider_full_picture_1_6 from '/src/assets/images/cases-slider-full-m
 import case_slider_full_picture_2_1 from '/src/assets/images/cases-slider-full-markssite-2-1.jpg';
 import case_slider_full_picture_2_2 from '/src/assets/images/cases-slider-full-markssite-2-2.jpg';
 import case_slider_full_picture_2_3 from '/src/assets/images/cases-slider-full-markssite-2-3.jpg';
+
 import case_compare_slider_picture_left_1 from '/src/assets/images/cases-compare-slider-markssite-left-1.jpg';
 import case_compare_slider_picture_right_1 from '/src/assets/images/cases-compare-slider-markssite-right-1.jpg';
 import case_compare_slider_picture_left_2 from '/src/assets/images/cases-compare-slider-markssite-left-2.jpg';
@@ -155,14 +156,26 @@ const case_slider_full_content_1 = {
 
   pictures: [
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_1',
       picture: case_slider_full_picture_1_1,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_2',
       picture: case_slider_full_picture_1_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_3',
       picture: case_slider_full_picture_1_3,
     },
@@ -171,10 +184,18 @@ const case_slider_full_content_1 = {
       picture: case_slider_full_picture_1_4,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_5',
       picture: case_slider_full_picture_1_5,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_6',
       picture: case_slider_full_picture_1_6,
     },
@@ -188,14 +209,26 @@ const case_slider_full_content_2 = {
 
   pictures: [
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_1',
       picture: case_slider_full_picture_2_1,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_2',
       picture: case_slider_full_picture_2_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '2_3',
       picture: case_slider_full_picture_2_3,
     },
