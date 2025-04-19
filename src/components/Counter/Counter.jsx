@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 import TextEffect from '../TextEffect/TextEffect';
 
 // import video from '../../assets/videos/intro-cover.mp4';
-import img from '../../assets/images/counter-img1.png';
+import img from '../../assets/images/counter-img.jpg';
 import styles from './Counter.module.scss';
 
 const Number = ({ n }) => {

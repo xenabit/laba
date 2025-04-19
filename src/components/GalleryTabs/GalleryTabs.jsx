@@ -4,8 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styles from './GalleryTabs.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
 
-import { projects } from '../../constants/projects';
-import { projectsTypes } from '../../constants/projectsTypes';
+import { projects, projectsTypes } from '../../constants/projects';
 
 export default function GalleryTabs() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -31,7 +30,13 @@ export default function GalleryTabs() {
     e.currentTarget.style.setProperty('--y4', `${y}px`);
   };
 
-  const filteredItems = activeFilter === 'all' ? projects : projects.filter((item) => item.type === activeFilter);
+  const filteredItems =
+    activeFilter === 'all'
+      ? projects
+      : projects.filter((item) => {
+          const itemTypes = Array.isArray(item.type) ? item.type : [item.type];
+          return itemTypes.includes(activeFilter);
+        });
 
   return (
     <section className={styles.GalleryTabs}>

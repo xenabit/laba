@@ -258,7 +258,7 @@ export default function CaseTamagotchi() {
       <Picture src={picture} />
       <Text title={contentText[4].title} text={contentText[4].text} />
       <ReviewsSlider items={contentReviews} />
-      <CasesItems type="game" />
+      <CasesItems type={['game', 'mobile']} excludeId="tamagotchi" />
     </main>
   );
 }

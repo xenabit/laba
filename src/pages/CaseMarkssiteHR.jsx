@@ -242,7 +242,7 @@ export default function CaseMarkssite() {
       <CasesSliderFull items={case_slider_full_content_2} />
       <Text title={contentText[3].title} text={contentText[2].text} />
       <ReviewsSlider items={contentReviews} />
-      <CasesItems type="web" />
+      <CasesItems type="web" excludeId="markssite-hr" />
     </main>
   );
 }

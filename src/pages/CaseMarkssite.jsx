@@ -250,7 +250,7 @@ export default function CaseMarkssite() {
       <CasesCompareSlider items={case_compare_slider_pictures_1} />
       <VideoHorizontal videoUrl={video_horizontal} />
       <ReviewsSlider items={contentReviews} />
-      <CasesItems type="web" />
+      <CasesItems type="web" excludeId="markssite" />
     </main>
   );
 }

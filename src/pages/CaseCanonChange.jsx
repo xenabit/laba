@@ -287,7 +287,7 @@ export default function CaseMarkssite() {
       <CasesSliderScroll items={case_slider_scroll_content} />
       <Text title={contentText[5].title} text={contentText[5].text} />
       <ReviewsSlider items={contentReviews} />
-      <CasesItems type="game" />
+      <CasesItems type={['game', 'mobile']} excludeId="canon-change" />
     </main>
   );
 }

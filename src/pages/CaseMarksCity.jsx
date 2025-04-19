@@ -10,8 +10,6 @@ import CaseIframe from '../components/CaseIframe/CaseIframe';
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
 
-import { projectsTypes } from '../constants/projectsTypes';
-
 import softwarLogos from '/src/constants/softwarLogos';
 import picture from '/src/assets/images/picture-markscity.jpg';
 import video from '/src/assets/videos/vr.mp4';
@@ -174,16 +172,8 @@ const case_slider_full_content_2 = {
       picture: case_slider_full_picture_3_2,
     },
     {
-      id: '2_3',
-      picture: case_slider_full_picture_3_2,
-    },
-    {
       id: '2_4',
       picture: case_slider_full_picture_4_2,
-    },
-    {
-      id: '2_5',
-      picture: case_slider_full_picture_5_2,
     },
     {
       id: '2_5',
@@ -220,7 +210,7 @@ export default function CaseMarksCity() {
 
       <ReviewsSlider items={contentReviews} />
       <VideoHorizontal videoUrl={video} />
-      <CasesItems type="3d" />
+      <CasesItems type={['game', 'desktop']} excludeId="markscity" />
     </main>
   );
 }

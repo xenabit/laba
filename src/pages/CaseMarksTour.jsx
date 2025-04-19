@@ -10,6 +10,8 @@ import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
 import CasesItems from '../components/CasesItems/CasesItems';
 
+import { projects } from '../constants/projects';
+
 import picture from '/src/assets/images/picture-markstour.jpg';
 import case_intro_picture from '/src/assets/images/case-intro-markstour.jpg';
 import softwarLogos from '/src/constants/softwarLogos';
@@ -173,7 +175,7 @@ const case_slider_full_content_1 = {
   ],
 };
 
-export default function Case() {
+export default function CaseMarksTour() {
   return (
     <main>
       <CasesIntro contentCasesIntro={contentCasesIntro} />
@@ -197,7 +199,7 @@ export default function Case() {
       <Text title={text[3].title} text={text[3].text} />
       <VideoHorizontal videoUrl="https://rutube.ru/video/1c6a32ff34498a5cff63eecc7f257d74/?r=wd" />
       <ReviewsSlider items={contentReviews} />
-      <CasesItems type="3d" />
+      <CasesItems type="web" excludeId="markstour" />
     </main>
   );
 }
