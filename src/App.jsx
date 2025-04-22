@@ -29,7 +29,6 @@ const App = () => {
   const introRef = useRef(null);
   const projectsTileRef = useRef(null);
   const [loadingStage, setLoadingStage] = useState('initial');
-  const [shouldAnimateHome, setShouldAnimateHome] = useState(false);
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const location = useLocation();
 
@@ -37,11 +36,9 @@ const App = () => {
     const hasVisited = sessionStorage.getItem('hasVisitedHome');
     if (!hasVisited && location.pathname === '/') {
       setIsFirstVisit(true);
-      setShouldAnimateHome(false);
       sessionStorage.setItem('hasVisitedHome', 'true');
     } else {
       setIsFirstVisit(false);
-      setShouldAnimateHome(false);
       setLoadingStage('complete');
     }
   }, [location.pathname]);
@@ -69,23 +66,11 @@ const App = () => {
     setLoadingStage(stage);
   };
 
-  const handleMaxBalloonSize = () => {
-    setShouldAnimateHome(true);
-  };
-
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
-      <Header ref={headerRef} shouldAnimate={shouldAnimateHome} loadingStage={loadingStage} />
+      <Header ref={headerRef} loadingStage={loadingStage} />
       {isFirstVisit && location.pathname === '/' && (
-        <LoadingMainScreen
-          headerRef={headerRef}
-          onStageChange={handleStageChange}
-          wrapperRef={wrapperRef}
-          loadingStage={loadingStage}
-          onMaxBalloonSize={handleMaxBalloonSize}
-          introRef={introRef}
-          projectsTileRef={projectsTileRef}
-        />
+        <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
       )}
       <div
         id="smooth-content"
@@ -96,7 +81,7 @@ const App = () => {
         }}
       >
         <Routes>
-          <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} shouldAnimate={shouldAnimateHome} />} />
+          <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} />} />
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />

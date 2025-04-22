@@ -93,7 +93,7 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
   const hasScrolled = useRef(false);
 
   const balloonsEntryAnimate = (balloons) => {
-    const tl = gsap.timeline({ delay: ANIMATION_CONFIG.TITLE_END });
+    const tl = gsap.timeline({ delay: ANIMATION_CONFIG.SUBTITLE_END });
     BALLOONS_CONFIG.forEach(({ key, anim: { from, to, change } }) => {
       const balloon = balloonRefs.current[key]?.current;
       if (!balloon) return;
@@ -223,7 +223,7 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
             container.addEventListener('mousemove', handleMouseMove);
           }
         },
-        ANIMATION_CONFIG.TITLE_END * 1000 + ANIMATION_CONFIG.BALOON_MOVE_DURATION * 1000
+        ANIMATION_CONFIG.SUBTITLE_END * 1000 + ANIMATION_CONFIG.BALOON_MOVE_DURATION * 1000
       );
     }
 

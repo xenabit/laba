@@ -19,7 +19,7 @@ function Subtitle() {
       duration: 0.2,
       ease: 'power2.out',
       stagger: 0.04,
-      delay: ANIMATION_CONFIG.TITLE_END,
+      delay: ANIMATION_CONFIG.SUBTITLE_END,
     });
   }, []);
 

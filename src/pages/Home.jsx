@@ -10,7 +10,7 @@ import Gallery from '../components/Gallery/Gallery';
 import AboutList from '../components/AboutList/AboutList';
 import Partners from '../components/Partners/Partners';
 
-export default function Home({ introRef, projectsTileRef, shouldAnimate }) {
+export default function Home({ introRef, projectsTileRef }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

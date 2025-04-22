@@ -8,13 +8,14 @@ import { ANIMATION_CONFIG } from '../LoadingMainScreen/LoadingMainScreen';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
+const Header = forwardRef(({ loadingStage }, ref) => {
   const [isActive, setIsActive] = useState(false);
   const [activeTab, setActiveTab] = useState('/');
   const location = useLocation();
 
   useEffect(() => {
-    console.log('Header useEffect triggered', { loadingStage, isActive, shouldAnimate });
+    console.log('Header useEffect triggered', { loadingStage, isActive });
+
     if (!ref.current) {
       console.warn('Header ref is not ready');
       return;
@@ -32,25 +33,42 @@ const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
       return;
     }
 
-    // Начальные установки
-    gsap.set(header, { backgroundColor: 'transparent', opacity: 0 });
-    gsap.set([logo, toggle, desc, border], { opacity: 0 });
+    // Функция для установки шапки в видимое состояние
+    const setHeaderVisible = () => {
+      gsap.set(header, { opacity: 1, backgroundColor: 'transparent' });
+      gsap.set([logo, toggle, desc, border], { opacity: 1 });
+    };
 
-    // Анимации в зависимости от loadingStage
+    // Если меню активно, шапка видима с цветами для active
+    if (isActive) {
+      console.log('Header: Menu is active, forcing visibility');
+      gsap.set([logo, toggle, desc, border], { opacity: 1 });
+      gsap.set(border, { backgroundColor: 'var(--prime-1)' });
+      return;
+    }
+
+    // Анимации в зависимости от стадии загрузки
     if (loadingStage === 'initial') {
+      console.log('Header: Applying initial stage animations');
+      // Шапка появляется после завершения анимации букв и шаров
       gsap.to(header, {
         opacity: 1,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
         ease: 'power2.out',
-        delay: ANIMATION_CONFIG.BALOON_MOVE_DURATION,
+        delay: ANIMATION_CONFIG.HEADER_1_OPACITY_DELAY,
+        onComplete: () => {
+          // Сохраняем видимость шапки после анимации
+          setHeaderVisible();
+        },
       });
       gsap.to([logo, toggle, desc, border], {
         opacity: 1,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
         ease: 'power2.out',
-        delay: ANIMATION_CONFIG.BALOON_MOVE_DURATION,
+        delay: ANIMATION_CONFIG.HEADER_1_OPACITY_DELAY,
       });
     } else if (loadingStage === 'scrolling') {
+      console.log('Header: Applying scrolling stage animations');
       gsap.to(header, {
         opacity: 0,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
@@ -60,22 +78,25 @@ const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
           const headerContainer = header.querySelector(`.${styles.Header__container}`);
           if (headerContainer) {
             headerContainer.classList.remove(styles.active);
+            setIsActive(false); // Закрываем меню
           }
         },
       });
     } else if (loadingStage === 'transition') {
+      console.log('Header: Applying transition stage animations');
       gsap.set(logo, {
+        opacity: 1,
         scale: 6.66,
         position: 'absolute',
         left: '50.5%',
         top: '41.5%',
         transform: 'translate(-31%, 1700%)',
         zIndex: 10,
-        opacity: 1,
       });
       gsap.set(header, { opacity: 1 });
       gsap.set([toggle, desc, border], { opacity: 0 });
     } else if (loadingStage === 'complete') {
+      console.log('Header: Applying complete stage animations');
       const tl = gsap.timeline({
         onComplete: () => {
           gsap.set(header, { backgroundColor: 'var(--prime-1)' });
@@ -112,7 +133,7 @@ const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
         );
     }
 
-    // ScrollTrigger логика
+    // Настройка ScrollTrigger для стадии complete
     const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
     const borderHeight = isDesktop ? 3 : 2;
 
@@ -143,26 +164,29 @@ const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
       }
     );
 
-    if (shouldAnimate) {
-      header.classList.add(styles.animate);
-    }
-
     ScrollTrigger.create({
       trigger: '#smooth-content',
       start: 'top top+=50',
       end: 'bottom top',
       onUpdate: (self) => {
         const scrollPos = self.scroll();
+        if (loadingStage !== 'complete') {
+          // Пропускаем ScrollTrigger на стадиях initial, scrolling, transition
+          return;
+        }
         if (isActive) {
+          // Если меню активно, шапка видима
           showAnim.pause();
           borderAnim.pause();
-          gsap.set(header, { yPercent: 0 });
+          gsap.set(header, { yPercent: 0, opacity: 1 });
           gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
         } else if (scrollPos <= 50) {
+          // Прокрутка вверху: шапка видима
           showAnim.reverse();
           borderAnim.reverse();
           gsap.set(border, { backgroundColor: 'var(--prime-2)' });
         } else {
+          // Прокрутка вниз/вверх
           if (self.direction === -1) {
             showAnim.reverse();
             borderAnim.play();
@@ -175,7 +199,7 @@ const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
       scrub: true,
     });
 
-    if (window.scrollY > 50) {
+    if (loadingStage === 'complete' && window.scrollY > 50) {
       showAnim.play();
       borderAnim.play();
     } else {
@@ -186,10 +210,11 @@ const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
     ScrollTrigger.refresh();
 
     return () => {
+      console.log('Header: Cleaning up animations');
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       gsap.killTweensOf([header, border, logo, toggle, desc]);
     };
-  }, [ref, isActive, shouldAnimate, loadingStage]);
+  }, [ref, isActive, loadingStage]);
 
   useEffect(() => {
     const savedTab = localStorage.getItem('activeTab') || location.pathname;
@@ -200,8 +225,6 @@ const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
     document.body.style.overflow = isActive ? 'hidden' : '';
     return () => (document.body.style.overflow = '');
   }, [isActive]);
-
-  const toggleActiveClass = () => setIsActive((prev) => !prev);
 
   const handleTabClick = (path) => {
     if (path !== activeTab) {
@@ -223,12 +246,12 @@ const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
               <img loading="lazy" src={logo} alt="Логотип Laba" />
             </picture>
           </Link>
-          <button className={styles.Header__toggle} onClick={toggleActiveClass}>
+          <button className={styles.Header__toggle} onClick={() => setIsActive((prev) => !prev)} aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={isActive}>
             <span></span>
             <span></span>
             <span></span>
           </button>
-          <div className={styles.Header__border}></div>
+          <div className={styles.Header__border} aria-hidden="true"></div>
         </div>
         <div className={styles.Header__inner}>
           <nav>

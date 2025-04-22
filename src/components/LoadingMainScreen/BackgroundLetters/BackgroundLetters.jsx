@@ -28,8 +28,8 @@ function BackgroundLetters({ containerRef }) {
       .to(letters, { fill: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 1.2)
 
       // Третья группа
-      .to(container, { background: '#F0F2F5', duration: 0, ease: 'none' })
-      .to(letters, { fill: '#27292F', duration: 0, ease: 'none' }, 1.7);
+      .to(container, { background: '#F0F2F5', duration: 0.2, ease: 'none' })
+      .to(letters, { fill: '#27292F', duration: 0.2, ease: 'none' }, 1.7);
   };
 
   useEffect(() => {
