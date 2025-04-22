@@ -16,20 +16,20 @@ function BackgroundLetters({ containerRef }) {
     });
 
     // Первая группа: одновременно с задержкой 0.4
-    tl.to(container, { background: '#27292F', duration: 1.2, ease: 'elastic.out(1.3, 0.35)', delay: 0.4 })
-      .to(letters, { fill: '#2f3137', duration: 1.2, ease: 'elastic.out(1.3, 0.35)' }, 0.4)
+    tl.to(container, { background: '#27292F', duration: 0.5, ease: 'elastic.out(1.3, 0.35)', delay: 0.4 })
+      .to(letters, { fill: '#2f3137', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 0.4)
 
       // Вторая группа
       .to(container, { background: '#27292F', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' }, 1.8)
+      .to(letters, { fill: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' }, 0.9)
 
       // Вторая группа
       .to(container, { background: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 2.1)
+      .to(letters, { fill: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 1.2)
 
       // Третья группа
       .to(container, { background: '#F0F2F5', duration: 0, ease: 'none' })
-      .to(letters, { fill: '#27292F', duration: 0, ease: 'none' }, 2.5);
+      .to(letters, { fill: '#27292F', duration: 0, ease: 'none' }, 1.7);
   };
 
   useEffect(() => {

@@ -120,7 +120,7 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
     });
     const otherBalloons = balloons.filter((balloon) => !balloon.classList.contains(styles.Balloons__item_c));
     otherBalloons.forEach((balloon, index) => {
-      tl.to(balloon, { width: '0px', height: '0px', top: '39.8%', left: '30.7%', scale: 1, rotation: 0, duration: 0.2, opacity: 0, ease: 'linear', overwrite: 'all' }, index * 0.2);
+      tl.to(balloon, { width: '0px', height: '0px', top: '39.8%', left: '30.7%', scale: 1, rotation: 0, duration: 0.2, opacity: 0, ease: 'linear', overwrite: 'all' }, index * 0.1);
     });
 
     const balloonCenter = balloonRefs.current.c?.current;
@@ -144,7 +144,7 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
         { scale: 27.2, top: '58.3%', left: '25%' },
       ];
       scaleSteps.forEach((step, index) => {
-        tl.to(balloonCenter, { ...step, duration: 0.6, ease: 'linear', overwrite: 'all' }, index * 0.2);
+        tl.to(balloonCenter, { ...step, duration: 0.6, ease: 'linear', overwrite: 'all' }, index * 0.1);
       });
     }
   };

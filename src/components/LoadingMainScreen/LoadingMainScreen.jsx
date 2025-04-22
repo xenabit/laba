@@ -8,13 +8,13 @@ import styles from './LoadingMainScreen.module.scss';
 import introStyles from '../Intro2/Intro2.module.scss';
 
 export const ANIMATION_CONFIG = {
-  BG_END: 3,
+  BG_END: 1.9,
   BALOON_MOVE_DURATION: 1.5,
-  TITLE_END: 4.5,
+  TITLE_END: 2.7,
   MAGNET_MAX_DISTANCE: 400,
   MAGNET_STRENGTH: 25,
   HEADER_FADE_DURATION: 0.5,
-  LOGO_ANIMATION_DURATION: 2,
+  LOGO_ANIMATION_DURATION: 1,
   LOGO_ANIMATION_DELAY: 0,
 };
 
