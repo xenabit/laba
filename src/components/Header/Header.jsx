@@ -4,26 +4,18 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Header.module.scss';
 import logo from '/src/assets/images/header-logo.svg';
+import { ANIMATION_CONFIG } from '../LoadingMainScreen/LoadingMainScreen';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Header = forwardRef(({ shouldAnimate }, ref) => {
+const Header = forwardRef(({ shouldAnimate, loadingStage }, ref) => {
   const [isActive, setIsActive] = useState(false);
   const [activeTab, setActiveTab] = useState('/');
   const location = useLocation();
 
   useEffect(() => {
-    const savedTab = localStorage.getItem('activeTab') || location.pathname;
-    setActiveTab(savedTab);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    document.body.style.overflow = isActive ? 'hidden' : '';
-    return () => (document.body.style.overflow = '');
-  }, [isActive]);
-
-  useEffect(() => {
-    if (!ref || !ref.current) {
+    console.log('Header useEffect triggered', { loadingStage, isActive, shouldAnimate });
+    if (!ref.current) {
       console.warn('Header ref is not ready');
       return;
     }
@@ -31,9 +23,96 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
     const header = ref.current;
     const headerTop = header.querySelector(`.${styles.Header__top}`);
     const border = headerTop.querySelector(`.${styles.Header__border}`);
+    const logo = header.querySelector(`.${styles.Header__logo}`);
+    const toggle = header.querySelector(`.${styles.Header__toggle}`);
+    const desc = header.querySelector(`.${styles.Header__desc}`);
 
-    if (!headerTop || !border) return;
+    if (!headerTop || !border || !logo || !toggle || !desc) {
+      console.warn('Header elements missing', { headerTop, border, logo, toggle, desc });
+      return;
+    }
 
+    // Начальные установки
+    gsap.set(header, { backgroundColor: 'transparent', opacity: 0 });
+    gsap.set([logo, toggle, desc, border], { opacity: 0 });
+
+    // Анимации в зависимости от loadingStage
+    if (loadingStage === 'initial') {
+      gsap.to(header, {
+        opacity: 1,
+        duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
+        ease: 'power2.out',
+        delay: ANIMATION_CONFIG.BALOON_MOVE_DURATION,
+      });
+      gsap.to([logo, toggle, desc, border], {
+        opacity: 1,
+        duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
+        ease: 'power2.out',
+        delay: ANIMATION_CONFIG.BALOON_MOVE_DURATION,
+      });
+    } else if (loadingStage === 'scrolling') {
+      gsap.to(header, {
+        opacity: 0,
+        duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
+        ease: 'power2.out',
+        overwrite: 'auto',
+        onComplete: () => {
+          const headerContainer = header.querySelector(`.${styles.Header__container}`);
+          if (headerContainer) {
+            headerContainer.classList.remove(styles.active);
+          }
+        },
+      });
+    } else if (loadingStage === 'transition') {
+      gsap.set(logo, {
+        scale: 6.66,
+        position: 'absolute',
+        left: '50.5%',
+        top: '41.5%',
+        transform: 'translate(-31%, 1700%)',
+        zIndex: 10,
+        opacity: 1,
+      });
+      gsap.set(header, { opacity: 1 });
+      gsap.set([toggle, desc, border], { opacity: 0 });
+    } else if (loadingStage === 'complete') {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.set(header, { backgroundColor: 'var(--prime-1)' });
+        },
+      });
+      tl.to(header, {
+        opacity: 1,
+        duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
+        ease: 'power2.out',
+      })
+        .to(
+          logo,
+          {
+            scale: 1,
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+            overwrite: 'auto',
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
+        )
+        .to(
+          [toggle, desc, border],
+          {
+            opacity: 1,
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+            overwrite: 'auto',
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
+        );
+    }
+
+    // ScrollTrigger логика
     const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
     const borderHeight = isDesktop ? 3 : 2;
 
@@ -74,7 +153,6 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
       end: 'bottom top',
       onUpdate: (self) => {
         const scrollPos = self.scroll();
-
         if (isActive) {
           showAnim.pause();
           borderAnim.pause();
@@ -109,9 +187,19 @@ const Header = forwardRef(({ shouldAnimate }, ref) => {
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      gsap.killTweensOf([header, border]);
+      gsap.killTweensOf([header, border, logo, toggle, desc]);
     };
-  }, [ref, isActive, shouldAnimate]);
+  }, [ref, isActive, shouldAnimate, loadingStage]);
+
+  useEffect(() => {
+    const savedTab = localStorage.getItem('activeTab') || location.pathname;
+    setActiveTab(savedTab);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = isActive ? 'hidden' : '';
+    return () => (document.body.style.overflow = '');
+  }, [isActive]);
 
   const toggleActiveClass = () => setIsActive((prev) => !prev);
 

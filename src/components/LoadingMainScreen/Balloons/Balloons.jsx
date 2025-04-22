@@ -242,7 +242,7 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
       gsap.killTweensOf(balloons);
       container.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [loadingStage, startBalloonsToCenter, onBalloonsToCenterComplete, onBalloonsShrinkComplete, onMaxBalloonSize, containerRef, ANIMATION_CONFIG]);
+  }, [loadingStage, startBalloonsToCenter, onBalloonsToCenterComplete, onBalloonsShrinkComplete, onMaxBalloonSize, containerRef]);
 
   return (
     <div className={styles.Balloons__container}>

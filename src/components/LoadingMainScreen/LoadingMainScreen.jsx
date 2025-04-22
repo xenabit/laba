@@ -47,7 +47,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     document.body.style.overflow = '';
   };
 
-  const animateInitialStage = (header, logo, toggle, desc, border) => {
+  const animateInitialStage = () => {
     enableScrollLock();
 
     tlRef.current = gsap.timeline({
@@ -60,89 +60,32 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       },
     });
 
-    tlRef.current.to(header, {
+    // Анимация контейнера
+    tlRef.current.to(containerRef.current, {
       opacity: 1,
       duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
       ease: 'power2.out',
-      delay: ANIMATION_CONFIG.BALOON_MOVE_DURATION,
     });
   };
 
-  const animateScrollingStage = (header) => {
+  const animateScrollingStage = () => {
     enableScrollLock();
-
-    const headerContainer = header.querySelector(`.${headerStyles.Header__container}`);
-
-    gsap.to(header, {
-      opacity: 0,
-      duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
-      ease: 'power2.out',
-      overwrite: 'auto',
-      onComplete: () => {
-        gsap.delayedCall(0.5, () => {
-          if (headerContainer) {
-            headerContainer.classList.remove(headerStyles.active);
-          }
-        });
-      },
-    });
+    // Ничего не делаем с header, так как анимация перенесена в Header.jsx
   };
 
-  const animateTransitionStage = (header, logo, toggle, desc, border) => {
+  const animateTransitionStage = () => {
     enableScrollLock();
-
-    gsap.set(logo, {
-      scale: 6.66,
-      position: 'absolute',
-      left: '50.5%',
-      top: '41.5%',
-      transform: 'translate(-31%, 1700%)',
-      zIndex: 10,
-      opacity: 1,
-    });
-    gsap.set(header, { opacity: 1 });
-    gsap.set([toggle, desc, border], { opacity: 0 });
+    // Ничего не делаем с header, так как анимация перенесена в Header.jsx
   };
 
-  const animateCompleteStage = (header, logo, toggle, desc, border) => {
+  const animateCompleteStage = () => {
     tlRef.current = gsap.timeline({
       onComplete: () => {
         disableScrollLock();
-        gsap.set(header, { backgroundColor: 'var(--prime-1)' });
       },
     });
 
-    tlRef.current
-      .to(header, {
-        opacity: 1,
-        duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
-        ease: 'power2.out',
-      })
-      .to(
-        logo,
-        {
-          scale: 1,
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-          ease: 'linear',
-          overwrite: 'auto',
-        },
-        ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
-      )
-      .to(
-        [toggle, desc, border],
-        {
-          opacity: 1,
-          duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-          ease: 'linear',
-          overwrite: 'auto',
-        },
-        ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
-      );
-
+    // Анимация других элементов (intro и projectsTile)
     const introLaba = introRef.current?.querySelector(`.${introStyles.Intro2__laba}`);
     const introDesc = introRef.current?.querySelector(`.${introStyles.Intro2__desc}`);
 
@@ -193,46 +136,27 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       return;
     }
 
-    // Начальные установки
-    gsap.set(header, { backgroundColor: 'transparent', opacity: 0 });
-    gsap.set(containerRef.current, { opacity: 1 });
-
-    const logo = header.querySelector(`.${headerStyles.Header__logo}`);
-    const toggle = header.querySelector(`.${headerStyles.Header__toggle}`);
-    const desc = header.querySelector(`.${headerStyles.Header__desc}`);
-    const border = header.querySelector(`.${headerStyles.Header__border}`);
-
-    if (!logo || !toggle || !desc || !border) {
-      console.warn('One or more header elements not found:', { logo, toggle, desc, border });
-      return;
-    }
+    // Начальные установки для контейнера
+    gsap.set(containerRef.current, { opacity: 0 });
 
     // Выполнение анимации в зависимости от стадии
     if (loadingStage === 'initial') {
-      animateInitialStage(header, logo, toggle, desc, border);
+      animateInitialStage();
     } else if (loadingStage === 'scrolling') {
-      animateScrollingStage(header);
+      animateScrollingStage();
     } else if (loadingStage === 'transition') {
-      animateTransitionStage(header, logo, toggle, desc, border);
+      animateTransitionStage();
     } else if (loadingStage === 'complete') {
-      animateCompleteStage(header, logo, toggle, desc, border);
+      animateCompleteStage();
     }
 
     // Cleanup
     return () => {
       if (tlRef.current) tlRef.current.kill();
-      gsap.killTweensOf([header, logo, toggle, desc, border]);
-      if (introRef.current) {
-        const introLaba = introRef.current.querySelector(`.${introStyles.Intro2__laba}`);
-        const introDesc = introRef.current.querySelector(`.${introStyles.Intro2__desc}`);
-        gsap.killTweensOf([introLaba, introDesc]);
-      }
-      if (projectsTileRef.current) {
-        gsap.killTweensOf(projectsTileRef.current);
-      }
-      disableScrollLock(); // Убеждаемся, что скролл разблокируется при размонтировании
+      gsap.killTweensOf([containerRef.current, introRef.current, projectsTileRef.current]);
+      disableScrollLock();
     };
-  }, [loadingStage, headerRef, onStageChange, introRef, projectsTileRef]);
+  }, [loadingStage, headerRef, introRef, projectsTileRef]);
 
   const handleBalloonsToCenterComplete = () => {
     onStageChange('transition');

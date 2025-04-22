@@ -37,9 +37,11 @@ const App = () => {
     const hasVisited = sessionStorage.getItem('hasVisitedHome');
     if (!hasVisited && location.pathname === '/') {
       setIsFirstVisit(true);
+      setShouldAnimateHome(false);
       sessionStorage.setItem('hasVisitedHome', 'true');
     } else {
       setIsFirstVisit(false);
+      setShouldAnimateHome(false);
       setLoadingStage('complete');
     }
   }, [location.pathname]);
@@ -58,6 +60,7 @@ const App = () => {
     }
     return () => {
       if (smoother) smoother.kill();
+      ScrollTrigger.refresh();
       document.body.style.overflow = '';
     };
   }, [loadingStage]);
@@ -72,7 +75,7 @@ const App = () => {
 
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
-      <Header ref={headerRef} shouldAnimate={shouldAnimateHome} />
+      <Header ref={headerRef} shouldAnimate={shouldAnimateHome} loadingStage={loadingStage} />
       {isFirstVisit && location.pathname === '/' && (
         <LoadingMainScreen
           headerRef={headerRef}
