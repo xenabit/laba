@@ -10,26 +10,26 @@ import CaseIframe from '../components/CaseIframe/CaseIframe';
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
 
-import softwarLogos from '/src/constants/softwarLogos';
-import picture from '/src/assets/images/picture-markscity.jpg';
-import video from '/src/assets/videos/vr.mp4';
+import softwarLogos from '../constants/softwarLogos';
+import picture from '../assets/images/picture-markscity.jpg';
+import video from '../assets/videos/vr.mp4';
 
-import case_intro_picture from '/src/assets/images/case-intro-markscity.jpg';
-import reviews_slider_author_1 from '/src/assets/images/reviews-slider-1.svg';
-import reviews_slider_author_2 from '/src/assets/images/reviews-slider-2.jpg';
-import case_slider_full_bg from '/src/assets/images/case-slider-full-bg-markscity-1.svg';
-import case_slider_full_bg_2 from '/src/assets/images/case-slider-full-bg-markscity-2.svg';
-import case_slider_full_picture_1 from '/src/assets/images/cases-slider-full-markscity-1.png';
-import case_slider_full_picture_2 from '/src/assets/images/cases-slider-full-markscity-2.png';
-import case_slider_full_picture_3 from '/src/assets/images/cases-slider-full-markscity-3.png';
-import case_slider_full_picture_4 from '/src/assets/images/cases-slider-full-markscity-4.png';
-import case_slider_full_picture_1_2 from '/src/assets/images/cases-slider-full-markscity-1-2.png';
-import case_slider_full_picture_2_2 from '/src/assets/images/cases-slider-full-markscity-2-2.png';
-import case_slider_full_picture_3_2 from '/src/assets/images/cases-slider-full-markscity-3-2.png';
-import case_slider_full_picture_4_2 from '/src/assets/images/cases-slider-full-markscity-4-2.png';
-import case_slider_full_picture_5_2 from '/src/assets/images/cases-slider-full-markscity-5-2.png';
-import case_slider_full_picture_7_2 from '/src/assets/images/cases-slider-full-markscity-7-2.png';
-import case_iframe_preview_image from '/src/assets/images/case-iframe-markcity.jpg';
+import case_intro_picture from '../assets/images/case-intro-markscity.jpg';
+import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
+import reviews_slider_author_2 from '../assets/images/reviews-slider-2.jpg';
+import case_slider_full_bg from '../assets/images/case-slider-full-bg-markscity-1.svg';
+import case_slider_full_bg_2 from '../assets/images/case-slider-full-bg-markscity-2.svg';
+import case_slider_full_picture_1 from '../assets/images/cases-slider-full-markscity-1.png';
+import case_slider_full_picture_2 from '../assets/images/cases-slider-full-markscity-2.png';
+import case_slider_full_picture_3 from '../assets/images/cases-slider-full-markscity-3.png';
+import case_slider_full_picture_4 from '../assets/images/cases-slider-full-markscity-4.png';
+import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-markscity-1-2.png';
+import case_slider_full_picture_2_2 from '../assets/images/cases-slider-full-markscity-2-2.png';
+import case_slider_full_picture_3_2 from '../assets/images/cases-slider-full-markscity-3-2.png';
+import case_slider_full_picture_4_2 from '../assets/images/cases-slider-full-markscity-4-2.png';
+import case_slider_full_picture_5_2 from '../assets/images/cases-slider-full-markscity-5-2.png';
+import case_slider_full_picture_7_2 from '../assets/images/cases-slider-full-markscity-7-2.png';
+import case_iframe_preview_image from '../assets/images/case-iframe-markcity.jpg';
 
 const contentCasesIntro = {
   title: 'MARKS-CITY',

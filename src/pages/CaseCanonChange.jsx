@@ -10,38 +10,38 @@ import CasesSliderScroll from '../components/CasesSliderScroll/CasesSliderScroll
 import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import CasesItems from '../components/CasesItems/CasesItems';
 
-import softwarLogos from '/src/constants/softwarLogos';
+import softwarLogos from '../constants/softwarLogos';
 
-import case_intro_picture from '/src/assets/images/case-intro-canon-change.jpg';
+import case_intro_picture from '../assets/images/case-intro-canon-change.jpg';
 
-import reviews_slider_author_1 from '/src/assets/images/reviews-slider-1.svg';
-import reviews_slider_author_2 from '/src/assets/images/reviews-slider-2.jpg';
+import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
+import reviews_slider_author_2 from '../assets/images/reviews-slider-2.jpg';
 
-import case_slider_bg from '/src/assets/images/case-slider-bg-canon-change-1.svg';
-import case_slider_full_bg from '/src/assets/images/case-slider-full-bg-canon-change-1.svg';
-import case_compare_slider_bg from '/src/assets/images/case-compare-slider-bg-mg-1.svg';
+import case_slider_bg from '../assets/images/case-slider-bg-canon-change-1.svg';
+import case_slider_full_bg from '../assets/images/case-slider-full-bg-canon-change-1.svg';
+import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-mg-1.svg';
 
-import case_slider_video_left_1 from '/src/assets/videos/cases-slider-video-canon-change-left-1.mp4';
-import case_slider_video_right_1 from '/src/assets/videos/cases-slider-video-canon-change-right-1.mp4';
-import case_slider_video_left_2 from '/src/assets/videos/cases-slider-video-canon-change-left-2.mp4';
-import case_slider_video_right_2 from '/src/assets/videos/cases-slider-video-canon-change-right-2.mp4';
-import case_slider_video_left_3 from '/src/assets/videos/cases-slider-video-canon-change-left-3.mp4';
-import case_slider_video_right_3 from '/src/assets/videos/cases-slider-video-canon-change-right-3.mp4';
+import case_slider_video_left_1 from '../assets/videos/cases-slider-video-canon-change-left-1.mp4';
+import case_slider_video_right_1 from '../assets/videos/cases-slider-video-canon-change-right-1.mp4';
+import case_slider_video_left_2 from '../assets/videos/cases-slider-video-canon-change-left-2.mp4';
+import case_slider_video_right_2 from '../assets/videos/cases-slider-video-canon-change-right-2.mp4';
+import case_slider_video_left_3 from '../assets/videos/cases-slider-video-canon-change-left-3.mp4';
+import case_slider_video_right_3 from '../assets/videos/cases-slider-video-canon-change-right-3.mp4';
 
-import case_slider_full_picture_1 from '/src/assets/images/cases-slider-full-1.png';
-import case_slider_full_picture_2 from '/src/assets/images/cases-slider-full-2.png';
-import case_slider_full_picture_3 from '/src/assets/images/cases-slider-full-3.png';
-import case_slider_full_picture_4 from '/src/assets/images/cases-slider-full-4.png';
-import case_slider_full_picture_5 from '/src/assets/images/cases-slider-full-5.png';
+import case_slider_full_picture_1 from '../assets/images/cases-slider-full-1.png';
+import case_slider_full_picture_2 from '../assets/images/cases-slider-full-2.png';
+import case_slider_full_picture_3 from '../assets/images/cases-slider-full-3.png';
+import case_slider_full_picture_4 from '../assets/images/cases-slider-full-4.png';
+import case_slider_full_picture_5 from '../assets/images/cases-slider-full-5.png';
 
-import case_slider_full_picture_1_2 from '/src/assets/images/cases-slider-full-1-2.png';
-import case_slider_full_picture_2_2 from '/src/assets/images/cases-slider-full-2-2.png';
-import case_slider_full_picture_3_2 from '/src/assets/images/cases-slider-full-3-2.png';
-import case_slider_full_picture_4_2 from '/src/assets/images/cases-slider-full-4-2.png';
+import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-1-2.png';
+import case_slider_full_picture_2_2 from '../assets/images/cases-slider-full-2-2.png';
+import case_slider_full_picture_3_2 from '../assets/images/cases-slider-full-3-2.png';
+import case_slider_full_picture_4_2 from '../assets/images/cases-slider-full-4-2.png';
 
-import case_slider_scroll_picture_1_2 from '/src/assets/images/case-slider-scroll-1.png';
-import case_slider_scroll_picture_2_2 from '/src/assets/images/case-slider-scroll-2.png';
-import case_slider_scroll_picture_3_2 from '/src/assets/images/case-slider-scroll-3.png';
+import case_slider_scroll_picture_1_2 from '../assets/images/case-slider-scroll-1.png';
+import case_slider_scroll_picture_2_2 from '../assets/images/case-slider-scroll-2.png';
+import case_slider_scroll_picture_3_2 from '../assets/images/case-slider-scroll-3.png';
 
 const contentCasesIntro = {
   title: 'Канон перемен',
@@ -261,7 +261,7 @@ const contentReviews = [
   },
 ];
 
-import case_iframe_preview_image from '/src/assets/images/case-iframe-canon.jpg';
+import case_iframe_preview_image from '../assets/images/case-iframe-canon.jpg';
 
 export default function CaseMarkssite() {
   return (

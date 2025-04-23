@@ -6,10 +6,11 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [react(), svgr()],
   server: {
+    historyApiFallback: true,
     port: 3001,
     open: true,
   },
-  base: './',
+  base: '/',
   css: {
     preprocessorOptions: {
       scss: {

@@ -1,13 +1,14 @@
 import styles from './CasesIntro.module.scss';
+import { Link } from 'react-router-dom';
 
 function CasesIntro({ contentCasesIntro }) {
   const { title, subtitle, tags, src, picture_intro, about } = contentCasesIntro;
   return (
     <section className={`${styles.CasesIntro}`}>
       <div className={styles.CasesIntro__header}>
-        <a href="/portfolio" className={styles.CasesIntro__return}>
+        <Link to="/portfolio" className={styles.CasesIntro__return}>
           Смотреть все кейсы
-        </a>
+        </Link>
         <div className={styles.CasesIntro__info}>
           <div className={styles.CasesIntro__name}>
             <div className={styles.CasesIntro__title} dangerouslySetInnerHTML={{ __html: title }}></div>

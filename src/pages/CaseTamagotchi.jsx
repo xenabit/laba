@@ -10,36 +10,36 @@ import CasesItems from '../components/CasesItems/CasesItems';
 import CaseIframe from '../components/CaseIframe/CaseIframe';
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 
-import softwarLogos from '/src/constants/softwarLogos';
+import softwarLogos from '../constants/softwarLogos';
 
-import picture from '/src/assets/images/picture-tamtam.svg';
+import picture from '../assets/images/picture-tamtam.svg';
 
-import case_intro_picture from '/src/assets/images/case-intro-tamtam.jpg';
+import case_intro_picture from '../assets/images/case-intro-tamtam.jpg';
 
-import reviews_slider_author_1 from '/src/assets/images/reviews-slider-1.svg';
-import reviews_slider_author_2 from '/src/assets/images/reviews-slider-2.jpg';
+import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
+import reviews_slider_author_2 from '../assets/images/reviews-slider-2.jpg';
 
-import case_slider_bg from '/src/assets/images/case-slider-bg-tamtam-1.svg';
-import case_slider_full_bg from '/src/assets/images/case-slider-full-bg-tamtam-1.svg';
+import case_slider_bg from '../assets/images/case-slider-bg-tamtam-1.svg';
+import case_slider_full_bg from '../assets/images/case-slider-full-bg-tamtam-1.svg';
 
-import case_slider_picture_left_1 from '/src/assets/images/cases-slider-tamtam-left-1.png';
-import case_slider_picture_right_1 from '/src/assets/images/cases-slider-tamtam-right-1.png';
-import case_slider_picture_left_2 from '/src/assets/images/cases-slider-tamtam-left-2.png';
-import case_slider_picture_right_2 from '/src/assets/images/cases-slider-tamtam-right-2.png';
-import case_slider_picture_left_3 from '/src/assets/images/cases-slider-tamtam-left-3.png';
-import case_slider_picture_right_3 from '/src/assets/images/cases-slider-tamtam-right-3.png';
+import case_slider_picture_left_1 from '../assets/images/cases-slider-tamtam-left-1.png';
+import case_slider_picture_right_1 from '../assets/images/cases-slider-tamtam-right-1.png';
+import case_slider_picture_left_2 from '../assets/images/cases-slider-tamtam-left-2.png';
+import case_slider_picture_right_2 from '../assets/images/cases-slider-tamtam-right-2.png';
+import case_slider_picture_left_3 from '../assets/images/cases-slider-tamtam-left-3.png';
+import case_slider_picture_right_3 from '../assets/images/cases-slider-tamtam-right-3.png';
 
-import case_slider_full_picture_1 from '/src/assets/images/cases-slider-full-tamtam-1.svg';
-import case_slider_full_picture_2 from '/src/assets/images/cases-slider-full-tamtam-2.png';
-import case_slider_full_picture_3 from '/src/assets/images/cases-slider-full-tamtam-3.png';
-import case_slider_full_picture_4 from '/src/assets/images/cases-slider-full-tamtam-4.png';
-import case_slider_full_picture_5 from '/src/assets/images/cases-slider-full-tamtam-5.png';
+import case_slider_full_picture_1 from '../assets/images/cases-slider-full-tamtam-1.svg';
+import case_slider_full_picture_2 from '../assets/images/cases-slider-full-tamtam-2.png';
+import case_slider_full_picture_3 from '../assets/images/cases-slider-full-tamtam-3.png';
+import case_slider_full_picture_4 from '../assets/images/cases-slider-full-tamtam-4.png';
+import case_slider_full_picture_5 from '../assets/images/cases-slider-full-tamtam-5.png';
 
-import case_slider_full_picture_1_2 from '/src/assets/images/cases-slider-full-tamtam-1-2.png';
-import case_slider_full_picture_2_2 from '/src/assets/images/cases-slider-full-tamtam-2-2.png';
-import case_slider_full_picture_3_2 from '/src/assets/images/cases-slider-full-tamtam-3-2.png';
+import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-tamtam-1-2.png';
+import case_slider_full_picture_2_2 from '../assets/images/cases-slider-full-tamtam-2-2.png';
+import case_slider_full_picture_3_2 from '../assets/images/cases-slider-full-tamtam-3-2.png';
 
-import case_iframe_preview_image from '/src/assets/images/case-iframe-canon.jpg';
+import case_iframe_preview_image from '../assets/images/case-iframe-canon.jpg';
 
 const contentCasesIntro = {
   title: 'Тамагочи',

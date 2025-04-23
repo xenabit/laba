@@ -9,28 +9,28 @@ import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
 import CasesItems from '../components/CasesItems/CasesItems';
 import CasesCompareSlider from '../components/CasesCompareSlider/CasesCompareSlider';
-import softwarLogos from '/src/constants/softwarLogos';
+import softwarLogos from '../constants/softwarLogos';
 
-import picture from '/src/assets/images/picture-markssite.jpg';
-import case_intro_picture from '/src/assets/images/case-intro-markssite.jpg';
-import video_horizontal from '/src/assets/videos/video-horizontal-markssite.mp4';
-import reviews_slider_author_1 from '/src/assets/images/reviews-slider-1.svg';
-import reviews_slider_author_2 from '/src/assets/images/reviews-slider-2.jpg';
-import case_compare_slider_bg from '/src/assets/images/case-compare-slider-bg-mg-1.svg';
-import case_slider_full_picture_1_1 from '/src/assets/images/cases-slider-full-markssite-1-1.jpg';
-import case_slider_full_picture_1_2 from '/src/assets/images/cases-slider-full-markssite-1-2.jpg';
-import case_slider_full_picture_1_3 from '/src/assets/images/cases-slider-full-markssite-1-3.jpg';
-import case_slider_full_picture_1_4 from '/src/assets/images/cases-slider-full-markssite-1-4.jpg';
-import case_slider_full_picture_1_5 from '/src/assets/images/cases-slider-full-markssite-1-5.jpg';
-import case_slider_full_picture_1_6 from '/src/assets/images/cases-slider-full-markssite-1-6.jpg';
-import case_slider_full_picture_2_1 from '/src/assets/images/cases-slider-full-markssite-2-1.jpg';
-import case_slider_full_picture_2_2 from '/src/assets/images/cases-slider-full-markssite-2-2.jpg';
-import case_slider_full_picture_2_3 from '/src/assets/images/cases-slider-full-markssite-2-3.jpg';
+import picture from '../assets/images/picture-markssite.jpg';
+import case_intro_picture from '../assets/images/case-intro-markssite.jpg';
+import video_horizontal from '../assets/videos/video-horizontal-markssite.mp4';
+import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
+import reviews_slider_author_2 from '../assets/images/reviews-slider-2.jpg';
+import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-mg-1.svg';
+import case_slider_full_picture_1_1 from '../assets/images/cases-slider-full-markssite-1-1.jpg';
+import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-markssite-1-2.jpg';
+import case_slider_full_picture_1_3 from '../assets/images/cases-slider-full-markssite-1-3.jpg';
+import case_slider_full_picture_1_4 from '../assets/images/cases-slider-full-markssite-1-4.jpg';
+import case_slider_full_picture_1_5 from '../assets/images/cases-slider-full-markssite-1-5.jpg';
+import case_slider_full_picture_1_6 from '../assets/images/cases-slider-full-markssite-1-6.jpg';
+import case_slider_full_picture_2_1 from '../assets/images/cases-slider-full-markssite-2-1.jpg';
+import case_slider_full_picture_2_2 from '../assets/images/cases-slider-full-markssite-2-2.jpg';
+import case_slider_full_picture_2_3 from '../assets/images/cases-slider-full-markssite-2-3.jpg';
 
-import case_compare_slider_picture_left_1 from '/src/assets/images/cases-compare-slider-markssite-left-1.jpg';
-import case_compare_slider_picture_right_1 from '/src/assets/images/cases-compare-slider-markssite-right-1.jpg';
-import case_compare_slider_picture_left_2 from '/src/assets/images/cases-compare-slider-markssite-left-2.jpg';
-import case_compare_slider_picture_right_2 from '/src/assets/images/cases-compare-slider-markssite-right-2.jpg';
+import case_compare_slider_picture_left_1 from '../assets/images/cases-compare-slider-markssite-left-1.jpg';
+import case_compare_slider_picture_right_1 from '../assets/images/cases-compare-slider-markssite-right-1.jpg';
+import case_compare_slider_picture_left_2 from '../assets/images/cases-compare-slider-markssite-left-2.jpg';
+import case_compare_slider_picture_right_2 from '../assets/images/cases-compare-slider-markssite-right-2.jpg';
 
 const contentCasesIntro = {
   title: 'marksgroup.ru',

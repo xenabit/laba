@@ -43,14 +43,14 @@
     &_left {
       left: 0;
       cursor:
-        url('../../assets/images/projects-slider-left.svg') 10 10,
+        url('/src/assets/images/projects-slider-left.svg') 10 10,
         auto;
     }
 
     &_right {
       right: 0;
       cursor:
-        url('../../assets/images/projects-slider-right.svg') 10 10,
+        url('/src/assets/images/projects-slider-right.svg') 10 10,
         auto;
     }
 

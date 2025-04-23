@@ -12,18 +12,18 @@ import CasesItems from '../components/CasesItems/CasesItems';
 
 import { projects } from '../constants/projects';
 
-import picture from '/src/assets/images/picture-markstour.jpg';
-import case_intro_picture from '/src/assets/images/case-intro-markstour.jpg';
-import softwarLogos from '/src/constants/softwarLogos';
+import picture from '../assets/images/picture-markstour.jpg';
+import case_intro_picture from '../assets/images/case-intro-markstour.jpg';
+import softwarLogos from '../constants/softwarLogos';
 
-import case_iframe_preview_image from '/src/assets/images/case-iframe-markstour.jpg';
-import reviews_slider_author_1 from '/src/assets/images/reviews-slider-1.svg';
-import reviews_slider_author_2 from '/src/assets/images/reviews-slider-2.jpg';
-import case_slider_full_picture_1 from '/src/assets/images/cases-slider-full-markstour-1.jpg';
-import case_slider_full_picture_2 from '/src/assets/images/cases-slider-full-markstour-2.jpg';
-import case_slider_full_picture_3 from '/src/assets/images/cases-slider-full-markstour-3.jpg';
-import case_slider_full_picture_4 from '/src/assets/images/cases-slider-full-markstour-4.jpg';
-import case_slider_full_picture_5 from '/src/assets/images/cases-slider-full-markstour-5.jpg';
+import case_iframe_preview_image from '../assets/images/case-iframe-markstour.jpg';
+import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
+import reviews_slider_author_2 from '../assets/images/reviews-slider-2.jpg';
+import case_slider_full_picture_1 from '../assets/images/cases-slider-full-markstour-1.jpg';
+import case_slider_full_picture_2 from '../assets/images/cases-slider-full-markstour-2.jpg';
+import case_slider_full_picture_3 from '../assets/images/cases-slider-full-markstour-3.jpg';
+import case_slider_full_picture_4 from '../assets/images/cases-slider-full-markstour-4.jpg';
+import case_slider_full_picture_5 from '../assets/images/cases-slider-full-markstour-5.jpg';
 
 const text = [
   {

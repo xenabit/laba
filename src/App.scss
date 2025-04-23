@@ -12,15 +12,15 @@
   font-style: normal;
   font-weight: normal;
   src:
-    url('/src/assets/fonts/GellaDisplay/GellaDisplay-ExpandedMedium.otf') format('opentype'),
-    url('/src/assets/fonts/GellaDisplay/GellaDisplay-ExpandedMedium.woff2') format('woff2');
+    url('./assets/fonts/GellaDisplay/GellaDisplay-ExpandedMedium.otf') format('opentype'),
+    url('./assets/fonts/GellaDisplay/GellaDisplay-ExpandedMedium.woff2') format('woff2');
   font-family: 'GellaDisplay';
 }
 
 @font-face {
   font-style: normal;
   font-weight: 300;
-  src: url('/src/assets/fonts/GellaDisplay/GellaDisplay-Light.otf') format('opentype');
+  src: url('./assets/fonts/GellaDisplay/GellaDisplay-Light.otf') format('opentype');
   font-family: 'GellaDisplay';
 }
 

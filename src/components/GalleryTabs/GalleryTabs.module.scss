@@ -167,10 +167,6 @@
   }
 
   @media all and (min-width: $bp4) {
-    &__header {
-      border-top: 3px solid var(--prime-2);
-    }
-
     &__filters {
       margin-bottom: rem(8);
 
