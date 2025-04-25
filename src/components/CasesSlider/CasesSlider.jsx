@@ -32,10 +32,13 @@ function CasesSlider({ items }) {
   return (
     <section className={styles.CasesSlider}>
       <div className={styles.CasesSlider__container}>
+        <div className={styles.CasesSlider__bg}>
+          <img loading="lazy" src={items.bg} />
+        </div>
+
         <Swiper
           ref={swiperRef}
           className={styles.CasesSlider__swiper}
-          style={{ backgroundImage: `url(${items.bg})` }}
           modules={[Navigation, Pagination]}
           speed={1000}
           keyboard={{ enabled: true }}

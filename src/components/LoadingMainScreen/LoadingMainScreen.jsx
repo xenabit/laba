@@ -183,12 +183,6 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
   return (
     <section style={{ display: loadingStage === 'complete' ? 'none' : 'block' }}>
       <div ref={containerRef} className={styles.LoadingMainScreen__container}>
-        {(loadingStage === 'initial' || loadingStage === 'scrolling') && (
-          <>
-            <BackgroundLetters containerRef={containerRef} />
-            <FlareComponent />
-          </>
-        )}
         <Balloons
           containerRef={containerRef}
           startBalloonsToCenter={loadingStage === 'scrolling'}
@@ -198,6 +192,12 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
           wrapperRef={wrapperRef}
           loadingStage={loadingStage}
         />
+        {(loadingStage === 'initial' || loadingStage === 'scrolling') && (
+          <>
+            <BackgroundLetters containerRef={containerRef} />
+            <FlareComponent />
+          </>
+        )}
       </div>
     </section>
   );

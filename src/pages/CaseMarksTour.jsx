@@ -24,6 +24,7 @@ import case_slider_full_picture_2 from '../assets/images/cases-slider-full-marks
 import case_slider_full_picture_3 from '../assets/images/cases-slider-full-markstour-3.jpg';
 import case_slider_full_picture_4 from '../assets/images/cases-slider-full-markstour-4.jpg';
 import case_slider_full_picture_5 from '../assets/images/cases-slider-full-markstour-5.jpg';
+import { object } from 'framer-motion/client';
 
 const text = [
   {
@@ -136,6 +137,7 @@ const case_slider_full_content_1 = {
       sizes: {
         width: '100%',
         height: '100%',
+        objectfit: 'cover',
       },
       id: '1_1',
       picture: case_slider_full_picture_1,
@@ -144,6 +146,7 @@ const case_slider_full_content_1 = {
       sizes: {
         width: '100%',
         height: '100%',
+        objectfit: 'cover',
       },
       id: '1_2',
       picture: case_slider_full_picture_2,
@@ -152,6 +155,7 @@ const case_slider_full_content_1 = {
       sizes: {
         width: '100%',
         height: '100%',
+        objectfit: 'cover',
       },
       id: '1_3',
       picture: case_slider_full_picture_3,
@@ -160,6 +164,7 @@ const case_slider_full_content_1 = {
       sizes: {
         width: '100%',
         height: '100%',
+        objectfit: 'cover',
       },
       id: '1_4',
       picture: case_slider_full_picture_4,

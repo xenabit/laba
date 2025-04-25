@@ -172,6 +172,7 @@ const case_slider_full_content_1 = {
       sizes: {
         width: '100%',
         height: '100%',
+        objectfit: 'fill',
       },
       id: '1_1',
       picture: case_slider_full_picture_1,
@@ -179,7 +180,7 @@ const case_slider_full_content_1 = {
     {
       sizes: {
         width: '100%',
-        height: '100%',
+        height: '90%',
       },
       id: '1_2',
       picture: case_slider_full_picture_2,
@@ -187,7 +188,7 @@ const case_slider_full_content_1 = {
     {
       sizes: {
         width: '100%',
-        height: '100%',
+        height: '90%',
       },
       id: '1_3',
       picture: case_slider_full_picture_3,
@@ -195,7 +196,7 @@ const case_slider_full_content_1 = {
     {
       sizes: {
         width: '100%',
-        height: '100%',
+        height: '90%',
       },
       id: '1_4',
       picture: case_slider_full_picture_4,
@@ -203,7 +204,7 @@ const case_slider_full_content_1 = {
     {
       sizes: {
         width: '100%',
-        height: '100%',
+        height: '90%',
       },
       id: '1_5',
       picture: case_slider_full_picture_5,

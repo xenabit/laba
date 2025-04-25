@@ -69,6 +69,7 @@ function CasesSliderFull({ items }) {
                   style={{
                     width: item.sizes?.width || items.sizes.width,
                     height: item.sizes?.height || 'auto',
+                    objectFit: item.sizes?.objectfit || 'contain',
                   }}
                 />
               </div>
