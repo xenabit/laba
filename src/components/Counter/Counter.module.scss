@@ -41,36 +41,14 @@
   }
 
   &__picture {
+    overflow: hidden;
+
     img {
       display: block;
       width: 100%;
-      height: 100%;
-    }
-  }
-
-  .switcherWrapper {
-    position: relative;
-    width: 100%;
-    min-height: 140vh;
-    height: 100%;
-    overflow: hidden;
-
-    &__picture {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    &__textEffectContainer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
+      height: 100vh;
+      max-height: rem(1024);
+      transform-origin: center center;
     }
   }
 
@@ -144,10 +122,6 @@
   }
 
   @media all and (min-width: $bp1) {
-    .switcherWrapper {
-      min-height: 150vh;
-    }
-
     &__items {
       height: rem(327);
       grid-template-rows: rem(327) rem(327);

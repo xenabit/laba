@@ -1,17 +1,13 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useInView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
-import TextEffect from '../TextEffect/TextEffect';
-
-// import video from '../../assets/videos/intro-cover.mp4';
 import img from '../../assets/images/counter-img.jpg';
 import styles from './Counter.module.scss';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Number = ({ n }) => {
   const { ref, inView } = useInView({
@@ -54,193 +50,107 @@ Number.propTypes = {
 };
 
 const Counter = () => {
-  const NumbersBoxRef = useRef(null);
-  const sectionRef = useRef(null);
-  const modelsRef = useRef(null);
-  const switcherRef = useRef(null);
-  const pictureRef = useRef(null);
-  const textRef = useRef(null);
-
-  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null); // Реф для всей секции
+  const itemsRef = useRef([]); // Реф для элементов Counter__item
+  const imageRef = useRef(null); // Реф для изображения
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1025);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      setIsDesktop(window.innerWidth >= 1025);
     };
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
-    if (!NumbersBoxRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(NumbersBoxRef.current);
-    return () => observer.disconnect();
-  }, []);
+    if (isMobile) return; // Отключаем анимацию на мобильных, если не требуется
 
-  useEffect(() => {
-    if (!isDesktop) return;
-
-    const ctxModels = gsap.context(() => {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: modelsRef.current,
-          start: 'top top',
-          end: '+=120',
-          pin: sectionRef.current,
-          scrub: true,
-        },
-      }).to(modelsRef.current, { y: -100, duration: 0.2 }, 0);
-    }, sectionRef);
-
-    return () => ctxModels.revert();
-  }, [isDesktop]);
-
-  useEffect(() => {
-    if (!isDesktop) return;
-    const ctxSwitcher = gsap.context(() => {
-       gsap.timeline({
-          scrollTrigger: {
-            trigger: modelsRef.current,
-            start: 'bottom top',
-            toggleActions: 'play none reverse none',
+    // Создаём контекст GSAP для очистки
+    const ctx = gsap.context(() => {
+      // Анимация для каждого элемента Counter__item
+      itemsRef.current.forEach((item, index) => {
+        gsap.fromTo(
+          item,
+          {
+            y: 0,
+            opacity: 1,
           },
-        })
-        .fromTo(
-          pictureRef.current,
-          { scale: 1 },
-          { scale: 2, duration: 0.2, ease: 'none' },
-          0
-        )
-        .fromTo(
-          pictureRef.current,
-          { opacity: 1 },
-          { opacity: 0, duration: 0.2, ease: 'none' },
-          0.4
-        )
-        .fromTo(
-          textRef.current,
-          { opacity: 0, marginTop: '100px' },
-          { opacity: 1, marginTop: '100px', duration: 0.3, ease: 'linear' },
-          0.3
+          {
+            y: -450, // Смещение вверх
+            opacity: 0, // Затухание
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top top', // Когда верх секции достигает верха окна
+              end: 'bottom top', // Когда низ секции достигает верха окна
+              scrub: true,
+              id: `counter-item-${index}`,
+            },
+          }
         );
+      });
+
+      // Анимация для изображения (зум на 140%)
+      gsap.fromTo(
+        imageRef.current,
+        {
+          scale: 1, // Начальный масштаб (100%)
+        },
+        {
+          scale: 1.4, // Конечный масштаб (140%)
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+            id: 'counter-image',
+          },
+        }
+      );
     }, sectionRef);
-    return () => ctxSwitcher.revert();
-  }, [isDesktop]);
 
-
-  useEffect(() => {
-    if (!isDesktop || !textRef.current) return;
-
-    const blockScroll = () => {
-      document.body.style.overflow = "hidden";
-      setTimeout(() => {
-        document.body.style.overflow = "";
-      }, 3000);
-    };
-
-    // ScrollTrigger для скролла вниз
-    const stDown = ScrollTrigger.create({
-      trigger: textRef.current,
-      start: "center center",
-      end: "center center",
-      // pin: true,
-      onEnter: () => {
-        blockScroll();
-      },
-    });
-
-    // ScrollTrigger для скролла вверх
-    // const stUp = ScrollTrigger.create({
-    //   trigger: textRef.current,
-    //   start: "center center",
-    //   end: "center center",
-    //   // pin: true,
-    //   onEnterBack: () => {
-    //     blockScroll();
-    //   },
-    // });
-
-    return () => {
-      stDown.kill();
-      // stUp.kill();
-    };
-  }, [isDesktop]);
+    // Очистка анимаций при размонтировании
+    return () => ctx.revert();
+  }, [isMobile]);
 
   return (
-    <section ref={sectionRef} className={styles.Counter}>
+    <section className={styles.Counter} ref={sectionRef}>
       <div>
-        <div ref={NumbersBoxRef} className={styles.Counter__items}>
-          <div className={`${styles.Counter__item} ${isVisible && isMobile ? styles.active : ''}`}>
-            <div>
-              <Number n={130} />
+        <div className={styles.Counter__items}>
+          {[
+            { n: 130, text: 'Создано рилсов и видео роликов' },
+            {
+              n: 85,
+              text: 'Серверов в собственном дата-центре<br> для просчета компьютерной графики',
+            },
+            { n: 1000, text: '3д моделей' },
+            { n: 7, text: 'Лет на рынке 3D графики' },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className={`${styles.Counter__item} ${isMobile ? styles.active : ''}`}
+              ref={(el) => (itemsRef.current[index] = el)}
+            >
+              <div>
+                <Number n={item.n} />
+              </div>
+              <p dangerouslySetInnerHTML={{ __html: item.text }} />
             </div>
-            <p>Создано рилсов и&nbsp;видео роликов</p>
-          </div>
-
-          <div className={`${styles.Counter__item} ${isVisible && isMobile ? styles.active : ''}`}>
-            <div>
-              <Number n={85} />
-            </div>
-            <p>
-              Серверов в&nbsp;собственном дата-центре
-              <br />
-              для&nbsp;просчета компьютерной графики
-            </p>
-          </div>
-          <div ref={modelsRef} className={`${styles.Counter__item} ${isVisible && isMobile ? styles.active : ''}`}>
-            <div>
-              <Number n={1000} />
-            </div>
-            <p>3д&nbsp;моделей</p>
-          </div>
-
-          <div className={`${styles.Counter__item} ${isVisible && isMobile ? styles.active : ''}`}>
-            <div>
-              <Number n={7} />
-            </div>
-            <p>Лет на&nbsp;рынке 3D&nbsp;графики</p>
-          </div>
+          ))}
         </div>
-        {isDesktop ? (
-          <div ref={switcherRef} className={styles.switcherWrapper}>
-            <img
-              ref={pictureRef}
-              src={img}
-              alt="3D"
-              className={styles.switcherWrapper__picture}
-            />
-            <div ref={textRef} className={styles.switcherWrapper__textEffectContainer}>
-              <TextEffect />
-            </div>
-          </div>
-        ) : (
-          <div ref={pictureRef} className={styles.Counter__picture}>
-            <picture>
-              <img src={img} alt="3D" />
-            </picture>
-          </div>
-        )}
-
-        {/*
-        <div className={styles.Counter__video}>
-          <video preload="auto" autoPlay loop muted>
-            <source src={video} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+        <div className={styles.Counter__picture}>
+          <picture>
+            <img ref={imageRef} src={img} alt="Counter background" />
+          </picture>
         </div>
-        */}
       </div>
     </section>
   );
-}
+};
 
 export default Counter;
