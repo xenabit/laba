@@ -38,14 +38,14 @@
       span {
         display: inline-block;
 
-        &:first-child {
+        &:last-child {
           color: var(--prime-1);
           font-weight: var(--fw-medium);
           font-size: rem(24);
           line-height: rem(32);
         }
 
-        &:last-child {
+        &:first-child {
           display: flex;
           position: relative;
           align-items: center;
@@ -183,12 +183,12 @@
     &__item {
       h2 {
         span {
-          &:first-child {
+          &:last-child  {
             font-size: rem(40);
             line-height: rem(48);
           }
 
-          &:last-child {
+          &:first-child{
             font-size: rem(24);
             line-height: rem(32);
           }
