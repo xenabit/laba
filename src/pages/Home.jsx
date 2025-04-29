@@ -11,20 +11,6 @@ import AboutList from '../components/AboutList/AboutList';
 import Partners from '../components/Partners/Partners';
 
 export default function Home({ introRef, projectsTileRef }) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1024);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <main>
@@ -32,7 +18,7 @@ export default function Home({ introRef, projectsTileRef }) {
       <ProjectsTile projectsTileRef={projectsTileRef} />
       <Ticker />
       <Counter />
-      {isMobile && <TextEffect />}
+      <TextEffect />
       <Gallery />
       <Ticker />
       <AboutList />

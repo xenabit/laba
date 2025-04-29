@@ -12,12 +12,10 @@
 
 .TextEffect {
   $s: &;
-  position: relative;
-  overflow: hidden;
 
-  --circle-1-big: 2.75rem;
-  --circle-2-big: 2.25rem;
-  --circle-3-big: 1.375rem;
+  --circle-1-big: 44px;
+  --circle-2-big: 36px;
+  --circle-3-big: 22px;
   --circle-1-small: calc(var(--circle-1-big) * 0.3);
   --circle-2-small: calc(var(--circle-2-big) * 0.3);
   --circle-3-small: calc(var(--circle-3-big) * 0.3);
@@ -37,7 +35,7 @@
     &_first {
       position: relative;
       z-index: 20;
-      background-color: transparent;
+      background-color: var(--prime-1);
     }
 
     &_secondary {
@@ -46,9 +44,10 @@
       left: 0;
       z-index: 10;
 
-
       #{$s}__text {
         div {
+          opacity: 1;
+
           span {
             background: linear-gradient(134.58deg, #73ccd2 14.79%, #9fcaf1 44.57%, #f8b7fa 100.22%, #deafdf 124.62%);
             -webkit-background-clip: text;
@@ -72,9 +71,7 @@
     div {
       display: flex;
       opacity: 0;
-      transition:
-        transform 1s ease,
-        opacity 1s ease;
+      transition-duration: 1s;
       width: 100%;
 
       span {
@@ -133,7 +130,7 @@
     position: absolute;
     opacity: 0;
     z-index: 30;
-    transition-duration: 1s;
+    transition-duration: 1.5s;
 
     img {
       display: block;
@@ -186,7 +183,7 @@
 
     #{$s}__icon {
       opacity: 1;
-      transition-duration: 2s;
+      transition-duration: 1s;
 
       &:nth-child(1) {
         top: -18%;
@@ -199,7 +196,7 @@
         top: 72%;
         left: 4vw;
         transition-delay: 0.2s;
-        transition-duration: 2s;
+        transition-duration: 1.5s;
         width: var(--circle-2-big);
         height: var(--circle-2-big);
       }
@@ -208,7 +205,7 @@
         top: 100%;
         left: 17vw;
         transition-delay: 0.5s;
-        transition-duration: 2s;
+        transition-duration: 1.3s;
         width: var(--circle-3-big);
         height: var(--circle-3-big);
       }
@@ -219,12 +216,12 @@
       opacity: 1;
     }
   }
-  
 
   @media all and (min-width: $bp4) {
-    --circle-1-big: 5rem;
-    --circle-2-big: 4.0625rem;
-    --circle-3-big: 2.5rem;
+    --circle-1-big: 80px;
+    --circle-2-big: 65px;
+    --circle-3-big: 40px;
+
     &__wrapper {
       margin: rem(156) 0 rem(150) 0;
     }
@@ -262,9 +259,9 @@
   }
 
   @media all and (min-width: $bp1) {
-    --circle-1-big: clamp(7.625rem, 7.6vw, 15.25rem);
-    --circle-2-big: clamp(6.25rem, 6.25vw, 12.5rem);
-    --circle-3-big: clamp(3.75rem, 3.75vw, 7.5rem);
+    --circle-1-big: clamp(122px, 7.6vw, 244px);
+    --circle-2-big: clamp(100px, 6.25vw, 200px);
+    --circle-3-big: clamp(60px, 3.75vw, 120px);
 
     &__wrapper {
       margin: rem(228) 0 rem(200) 0;
