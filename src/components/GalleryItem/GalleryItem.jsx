@@ -10,8 +10,8 @@ function GalleryItem({ videoSrc, href, title, desc, videoProps }) {
           Your browser does not support the video tag.
         </video>
         <h2>
-          <span>{title}</span>
           <span>{desc}</span>
+          <span>{title}</span>
         </h2>
       </Link>
     </li>
