@@ -53,7 +53,6 @@ const App = () => {
         effects: true,
       });
       ScrollTrigger.refresh();
-      document.body.style.overflow = '';
     }
     return () => {
       if (smoother) smoother.kill();
@@ -64,13 +63,21 @@ const App = () => {
 
   const handleStageChange = (stage) => {
     setLoadingStage(stage);
+    ScrollTrigger.refresh();
   };
 
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
       <Header ref={headerRef} loadingStage={loadingStage} />
       {isFirstVisit && location.pathname === '/' && (
-        <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
+        <LoadingMainScreen
+          headerRef={headerRef}
+          onStageChange={handleStageChange}
+          wrapperRef={wrapperRef}
+          loadingStage={loadingStage}
+          introRef={introRef}
+          projectsTileRef={projectsTileRef}
+        />
       )}
       <div
         id="smooth-content"
@@ -81,7 +88,7 @@ const App = () => {
         }}
       >
         <Routes>
-          <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} />} />
+          <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />
