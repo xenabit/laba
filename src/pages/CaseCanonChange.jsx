@@ -28,11 +28,11 @@ import case_slider_video_right_2 from '../assets/videos/cases-slider-video-canon
 import case_slider_video_left_3 from '../assets/videos/cases-slider-video-canon-change-left-3.mp4';
 import case_slider_video_right_3 from '../assets/videos/cases-slider-video-canon-change-right-3.mp4';
 
-import case_slider_full_picture_1 from '../assets/images/cases-slider-full-1.png';
-import case_slider_full_picture_2 from '../assets/images/cases-slider-full-2.png';
-import case_slider_full_picture_3 from '../assets/images/cases-slider-full-3.png';
-import case_slider_full_picture_4 from '../assets/images/cases-slider-full-4.png';
-import case_slider_full_picture_5 from '../assets/images/cases-slider-full-5.png';
+import case_slider_full_picture_1 from '../assets/images/cases-slider-full-1.jpg';
+import case_slider_full_picture_2 from '../assets/images/cases-slider-full-2.jpg';
+import case_slider_full_picture_3 from '../assets/images/cases-slider-full-3.jpg';
+import case_slider_full_picture_4 from '../assets/images/cases-slider-full-4.jpg';
+import case_slider_full_picture_5 from '../assets/images/cases-slider-full-5.jpg';
 
 import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-1-2.png';
 import case_slider_full_picture_2_2 from '../assets/images/cases-slider-full-2-2.png';
@@ -42,6 +42,9 @@ import case_slider_full_picture_4_2 from '../assets/images/cases-slider-full-4-2
 import case_slider_scroll_picture_1_2 from '../assets/images/case-slider-scroll-1.png';
 import case_slider_scroll_picture_2_2 from '../assets/images/case-slider-scroll-2.png';
 import case_slider_scroll_picture_3_2 from '../assets/images/case-slider-scroll-3.png';
+
+
+import case_iframe_preview_image from '../assets/images/case-iframe-canon.jpg';
 
 const contentCasesIntro = {
   title: 'Канон перемен',
@@ -124,31 +127,55 @@ const cases_slider_video_content = {
 
 const case_slider_full_content_1 = {
   sizes: {
-    width: '84.4%',
+    width: '100%',
+    height: '100%',
   },
-  bg: case_slider_full_bg,
   pictures: [
     {
+      sizes: {
+        width: '100%',
+        height: 'auto',
+      },
       id: '1_1',
       picture: case_slider_full_picture_1,
     },
     {
+      sizes: {
+        width: '100%',
+        height: 'auto',
+      },
       id: '1_2',
       picture: case_slider_full_picture_2,
     },
     {
+      sizes: {
+        width: '100%',
+        height: 'auto',
+      },
       id: '1_3',
       picture: case_slider_full_picture_3,
     },
     {
+      sizes: {
+        width: '100%',
+        height: 'auto',
+      },
       id: '1_4',
       picture: case_slider_full_picture_4,
     },
     {
+      sizes: {
+        width: '100%',
+        height: 'auto',
+      },
       id: '1_5',
       picture: case_slider_full_picture_5,
     },
     {
+      sizes: {
+        width: '100%',
+        height: 'auto',
+      },
       id: '1_6',
       picture: case_slider_full_picture_1,
     },
@@ -160,7 +187,7 @@ const case_slider_full_content_2 = {
     {
       sizes: {
         width: '100%',
-        height: '100%',
+        height: 'auto',
       },
       id: '2_1',
       picture: case_slider_full_picture_1_2,
@@ -168,7 +195,7 @@ const case_slider_full_content_2 = {
     {
       sizes: {
         width: '100%',
-        height: '100%',
+        height: 'auto',
       },
       id: '2_2',
       picture: case_slider_full_picture_2_2,
@@ -176,7 +203,7 @@ const case_slider_full_content_2 = {
     {
       sizes: {
         width: '100%',
-        height: '100%',
+        height: 'auto',
       },
       id: '2_3',
       picture: case_slider_full_picture_3_2,
@@ -184,7 +211,7 @@ const case_slider_full_content_2 = {
     {
       sizes: {
         width: '100%',
-        height: '100%',
+        height: 'auto',
       },
       id: '2_4',
       picture: case_slider_full_picture_4_2,
@@ -261,7 +288,6 @@ const contentReviews = [
   },
 ];
 
-import case_iframe_preview_image from '../assets/images/case-iframe-canon.jpg';
 
 export default function CaseMarkssite() {
   return (
