@@ -3,7 +3,6 @@ import '../App.scss';
 import CasesIntro from '../components/CasesIntro/CasesIntro';
 import Text from '../components/Text/Text';
 import Softwar from '../components/Softwar/Softwar';
-import CasesSlider from '../components/CasesSlider/CasesSlider';
 import Picture from '../components/Picture/Picture';
 import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import CasesItems from '../components/CasesItems/CasesItems';
@@ -22,22 +21,19 @@ import reviews_slider_author_2 from '../assets/images/reviews-slider-2.jpg';
 import case_slider_bg from '../assets/images/case-slider-bg-tamtam-1.svg';
 import case_slider_full_bg from '../assets/images/case-slider-full-bg-tamtam-1.svg';
 
-import case_slider_picture_left_1 from '../assets/images/cases-slider-tamtam-left-1.png';
-import case_slider_picture_right_1 from '../assets/images/cases-slider-tamtam-right-1.png';
-import case_slider_picture_left_2 from '../assets/images/cases-slider-tamtam-left-2.png';
-import case_slider_picture_right_2 from '../assets/images/cases-slider-tamtam-right-2.png';
-import case_slider_picture_left_3 from '../assets/images/cases-slider-tamtam-left-3.png';
-import case_slider_picture_right_3 from '../assets/images/cases-slider-tamtam-right-3.png';
-
 import case_slider_full_picture_1 from '../assets/images/cases-slider-full-tamtam-1.svg';
-import case_slider_full_picture_2 from '../assets/images/cases-slider-full-tamtam-2.png';
-import case_slider_full_picture_3 from '../assets/images/cases-slider-full-tamtam-3.png';
-import case_slider_full_picture_4 from '../assets/images/cases-slider-full-tamtam-4.png';
-import case_slider_full_picture_5 from '../assets/images/cases-slider-full-tamtam-5.png';
+import case_slider_full_picture_2 from '../assets/images/cases-slider-full-tamtam-2.jpg';
+import case_slider_full_picture_3 from '../assets/images/cases-slider-full-tamtam-3.jpg';
+import case_slider_full_picture_4 from '../assets/images/cases-slider-full-tamtam-4.jpg';
+import case_slider_full_picture_5 from '../assets/images/cases-slider-full-tamtam-5.jpg';
 
-import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-tamtam-1-2.png';
-import case_slider_full_picture_2_2 from '../assets/images/cases-slider-full-tamtam-2-2.png';
-import case_slider_full_picture_3_2 from '../assets/images/cases-slider-full-tamtam-3-2.png';
+import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-tamtam-1-2.jpg';
+import case_slider_full_picture_2_2 from '../assets/images/cases-slider-full-tamtam-2-2.jpg';
+import case_slider_full_picture_3_2 from '../assets/images/cases-slider-full-tamtam-3-2.jpg';
+
+import case_slider_full_picture_1_3 from '../assets/images/cases-slider-full-tamtam-1-3.jpg';
+import case_slider_full_picture_2_3 from '../assets/images/cases-slider-full-tamtam-2-3.jpg';
+import case_slider_full_picture_3_3 from '../assets/images/cases-slider-full-tamtam-3-3.jpg';
 
 import case_iframe_preview_image from '../assets/images/case-iframe-canon.jpg';
 
@@ -137,75 +133,29 @@ const contentReviews = [
   },
 ];
 
-const case_slider_pictures_1 = {
-  sizes: {
-    width_left: '69.61%',
-    width_right: '69.61%',
-  },
-  bg: case_slider_bg,
-  pictures: [
-    {
-      id: '1_1',
-      picture_left: case_slider_picture_left_1,
-      picture_right: case_slider_picture_right_1,
-    },
-    {
-      id: '1_2',
-      picture_left: case_slider_picture_left_2,
-      picture_right: case_slider_picture_right_2,
-    },
-    {
-      id: '1_3',
-      picture_left: case_slider_picture_left_3,
-      picture_right: case_slider_picture_right_3,
-    },
-  ],
-};
-
 const case_slider_full_content_1 = {
   sizes: {
-    width: '75.5%',
+    width: '100%',
+    height: '100%',
   },
-  bg: case_slider_full_bg,
   pictures: [
     {
-      sizes: {
-        width: '100%',
-        height: '100%',
-        objectfit: 'fill',
-      },
       id: '1_1',
       picture: case_slider_full_picture_1,
     },
     {
-      sizes: {
-        width: '100%',
-        height: '90%',
-      },
       id: '1_2',
       picture: case_slider_full_picture_2,
     },
     {
-      sizes: {
-        width: '100%',
-        height: '90%',
-      },
       id: '1_3',
       picture: case_slider_full_picture_3,
     },
     {
-      sizes: {
-        width: '100%',
-        height: '90%',
-      },
       id: '1_4',
       picture: case_slider_full_picture_4,
     },
     {
-      sizes: {
-        width: '100%',
-        height: '90%',
-      },
       id: '1_5',
       picture: case_slider_full_picture_5,
     },
@@ -214,9 +164,9 @@ const case_slider_full_content_1 = {
 
 const case_slider_full_content_2 = {
   sizes: {
-    width: '72.5%',
+    width: '100%',
+    height: '100%',
   },
-  bg: case_slider_full_bg,
   pictures: [
     {
       id: '2_1',
@@ -233,13 +183,35 @@ const case_slider_full_content_2 = {
   ],
 };
 
+const case_slider_full_content_3 = {
+  sizes: {
+    width: '100%',
+    height: '100%',
+  },
+  pictures: [
+    {
+      id: '3_1',
+      picture: case_slider_full_picture_1_3,
+    },
+    {
+      id: '3_2',
+      picture: case_slider_full_picture_2_3,
+    },
+    {
+      id: '3_3',
+      picture: case_slider_full_picture_3_3,
+    },
+
+  ],
+};
+
 export default function CaseTamagotchi() {
   return (
     <main>
       <CasesIntro contentCasesIntro={contentCasesIntro} />
       <Text title={contentText[0].title} text={contentText[0].text} />
       <Softwar items={contentSoftwar} />
-      <CasesSlider items={case_slider_pictures_1} />
+      <CasesSliderFull items={case_slider_full_content_3} />
       <Text title={contentText[1].title} text={contentText[1].text} />
 
       <CaseIframe

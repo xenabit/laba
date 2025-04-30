@@ -35,3 +35,16 @@ import case_slider_picture_left_4 from '/src/assets/images/cases-slider-markssit
 import case_slider_picture_right_4 from '/src/assets/images/cases-slider-markssite-hr-right-4.png';
 
 import case_slider_bg from '/src/assets/images/case-slider-bg-hr-1.svg';
+import case_slider_picture_left_1 from '../assets/images/cases-slider-tamtam-left-1.png';
+import case_slider_picture_right_1 from '../assets/images/cases-slider-tamtam-right-1.png';
+import case_slider_picture_left_2 from '../assets/images/cases-slider-tamtam-left-2.png';
+import case_slider_picture_right_2 from '../assets/images/cases-slider-tamtam-right-2.png';
+import case_slider_picture_left_3 from '../assets/images/cases-slider-tamtam-left-3.png';
+import case_slider_picture_right_3 from '../assets/images/cases-slider-tamtam-right-3.png';
+
+
+import case_slider_full_picture_1 from '../assets/images/cases-slider-full-1.png';
+import case_slider_full_picture_2 from '../assets/images/cases-slider-full-2.png';
+import case_slider_full_picture_3 from '../assets/images/cases-slider-full-3.png';
+import case_slider_full_picture_4 from '../assets/images/cases-slider-full-4.png';
+import case_slider_full_picture_5 from '../assets/images/cases-slider-full-5.png';
