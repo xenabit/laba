@@ -6,6 +6,17 @@ import styles from './Header.module.scss';
 import logo from '/src/assets/images/header-logo.svg';
 import { ANIMATION_CONFIG } from '../LoadingMainScreen/LoadingMainScreen';
 
+import Baloon_c from '../../assets/images/loading-main-baloon-c.svg';
+
+const BALLOONS_CONFIG = [
+  {
+    key: 'c',
+    src: Baloon_c,
+    className: `${styles.Balloons__item} ${styles.Balloons__item_c}`,
+    anim: { from: { top: '-8.89%', left: '47.94%', scale: 1 }, to: { top: '39.8%', left: '30.7%' }, change: { scale: 0.7, top: '39%', left: '30.8%' } },
+  },
+];
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Header = forwardRef(({ loadingStage }, ref) => {
@@ -111,10 +122,10 @@ const Header = forwardRef(({ loadingStage }, ref) => {
           logo,
           {
             scale: 1,
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
+            position: 'static',
+            top: 'auto',
+            left: 'auto',
+            transform: 'none',
             duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
             ease: 'linear',
             overwrite: 'auto',
@@ -235,62 +246,67 @@ const Header = forwardRef(({ loadingStage }, ref) => {
   };
 
   return (
-    <header ref={ref} id="main-tool-bar" className={`${styles.Header}`}>
-      <div className={`${styles.Header__container} ${isActive ? styles.active : ''}`}>
-        <div className={styles.Header__top}>
-          <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
-            digital agency
-          </Link>
-          <Link to="/" className={styles.Header__logo} onClick={() => handleTabClick('/')}>
-            <picture>
-              <img loading="lazy" src={logo} alt="Логотип Laba" />
-            </picture>
-          </Link>
-          <button className={styles.Header__toggle} onClick={() => setIsActive((prev) => !prev)} aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={isActive}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <div className={styles.Header__border} aria-hidden="true"></div>
-        </div>
-        <div className={styles.Header__inner}>
-          <nav>
-            <ul>
+    <header className={styles.Header}>
+      <div className={styles.Header__baloon}>
+        <img src={Baloon_c} />
+      </div>
+      <div ref={ref} id="main-tool-bar" className={`${styles.Header__main}`}>
+        <div className={`${styles.Header__container} ${isActive ? styles.active : ''}`}>
+          <div className={styles.Header__top}>
+            <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
+              digital agency
+            </Link>
+            <Link to="/" className={styles.Header__logo} onClick={() => handleTabClick('/')}>
+              <picture>
+                <img loading="lazy" src={logo} alt="Логотип Laba" />
+              </picture>
+            </Link>
+            <button className={styles.Header__toggle} onClick={() => setIsActive((prev) => !prev)} aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={isActive}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <div className={styles.Header__border} aria-hidden="true"></div>
+          </div>
+          <div className={styles.Header__inner}>
+            <nav>
+              <ul>
+                <li>
+                  <Link className={activeTab === '/' ? styles.active : ''} to="/" onClick={() => handleTabClick('/')}>
+                    Главная
+                  </Link>
+                </li>
+                <li>
+                  <Link className={activeTab === '/portfolio' ? styles.active : ''} to="/portfolio" onClick={() => handleTabClick('/portfolio')}>
+                    Портфолио
+                  </Link>
+                </li>
+                <li>
+                  <Link className={activeTab === '/contact' ? styles.active : ''} to="/contact" onClick={() => handleTabClick('/contact')}>
+                    Контакты
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+            <ul className={styles.Header__links}>
               <li>
-                <Link className={activeTab === '/' ? styles.active : ''} to="/" onClick={() => handleTabClick('/')}>
-                  Главная
-                </Link>
+                <a href="#">Реквизиты</a>
               </li>
               <li>
-                <Link className={activeTab === '/portfolio' ? styles.active : ''} to="/portfolio" onClick={() => handleTabClick('/portfolio')}>
-                  Портфолио
-                </Link>
-              </li>
-              <li>
-                <Link className={activeTab === '/contact' ? styles.active : ''} to="/contact" onClick={() => handleTabClick('/contact')}>
-                  Контакты
-                </Link>
+                <a href="#">Презентация</a>
               </li>
             </ul>
-          </nav>
-          <ul className={styles.Header__links}>
-            <li>
-              <a href="#">Реквизиты</a>
-            </li>
-            <li>
-              <a href="#">Презентация</a>
-            </li>
-          </ul>
-          <div className={styles.Header__contacts}>
-            <a className={styles.Header__mail} href="mailto:mail@marksgroup.ru">
-              mail@marksgroup.ru
-            </a>
-            <a href="tel:+74951201226" className={styles.Header__tel}>
-              тел. +7 (495) 120-12-26
-            </a>
-            <a href="https://yandex.ru/profile/1116551737" target="_blank" rel="noopener noreferrer">
-              г. Москва ул. 3-я Ямского Поля д. 20 с1
-            </a>
+            <div className={styles.Header__contacts}>
+              <a className={styles.Header__mail} href="mailto:mail@marksgroup.ru">
+                mail@marksgroup.ru
+              </a>
+              <a href="tel:+74951201226" className={styles.Header__tel}>
+                тел. +7 (495) 120-12-26
+              </a>
+              <a href="https://yandex.ru/profile/1116551737" target="_blank" rel="noopener noreferrer">
+                г. Москва ул. 3-я Ямского Поля д. 20 с1
+              </a>
+            </div>
           </div>
         </div>
       </div>

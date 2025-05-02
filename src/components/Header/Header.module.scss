@@ -1,44 +1,61 @@
 .Header {
   $s: &;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 200;
-  // transition: ease 0.4s;
-  width: 100%;
-  height: 50px;
-  background-color: var(--prime-1);
-  opacity: 0;
+  background-color: transparent;
+  position: relative;
 
-  @media all and (min-width: $bp4) {
-    height: 54px;
+  &__baloon {
+    position: absolute;
+    top: 0;
+    left: 0;
 
-    &__top {
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    // transition: ease 0.4s;
+    width: 100%;
+    height: 50px;
+    background-color: var(--prime-1);
+    opacity: 0;
+
+    @media all and (min-width: $bp4) {
       height: 54px;
+
+      &__top {
+        height: 54px;
+      }
     }
-  }
 
-  @media all and (min-width: $bp1) {
-    height: 62px;
-
-    &__top {
+    @media all and (min-width: $bp1) {
       height: 62px;
+
+      &__top {
+        height: 62px;
+      }
     }
-  }
 
-  @media all and (min-width: $bp) {
-    height: 73px;
-
-    &__top {
+    @media all and (min-width: $bp) {
       height: 73px;
+
+      &__top {
+        height: 73px;
+      }
     }
-  }
 
-  @media all and (min-width: 2560px) {
-    height: 96px;
-
-    &__top {
+    @media all and (min-width: 2560px) {
       height: 96px;
+
+      &__top {
+        height: 96px;
+      }
     }
   }
 
