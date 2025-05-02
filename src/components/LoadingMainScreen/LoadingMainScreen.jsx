@@ -8,18 +8,18 @@ import styles from './LoadingMainScreen.module.scss';
 import introStyles from '../Intro2/Intro2.module.scss';
 
 export const ANIMATION_CONFIG = {
-  SUBTITLE_END: 2.7, // Время завершения анимации букв и шаров
-  BG_END: 2, // Задержка для анимации букв в BackgroundLetters
-  BALOON_MOVE_DURATION: 1.5, // Длительность движения шаров
-  HEADER_1_OPACITY_DELAY: 4.7, // Задержка появления шапки (синхронизировано с SUBTITLE_END)
-  HEADER_FADE_DURATION: 0.5, // Длительность анимации появления шапки
+  SUBTITLE_END: 2.7,
+  BG_END: 2,
+  BALOON_MOVE_DURATION: 1.5,
+  HEADER_1_OPACITY_DELAY: 4.7,
+  HEADER_FADE_DURATION: 0.5,
   MAGNET_MAX_DISTANCE: 400,
   MAGNET_STRENGTH: 25,
   LOGO_ANIMATION_DURATION: 1,
   LOGO_ANIMATION_DELAY: 0,
 };
 
-function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage, onMaxBalloonSize, introRef, projectsTileRef }) {
+function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage, introRef, projectsTileRef }) {
   const containerRef = useRef(null);
   const tlRef = useRef(null);
 
@@ -65,25 +65,16 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
         window.addEventListener('touchmove', handleScroll, { passive: false });
       },
     });
-
-    // Анимация контейнера не нужна, так как шапка анимируется в Header.jsx
-    // tlRef.current.to(containerRef.current, {
-    //   opacity: 1,
-    //   duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
-    //   ease: 'power2.out',
-    // });
   };
 
   const animateScrollingStage = () => {
     console.log('LoadingMainScreen: Starting scrolling stage');
     enableScrollLock();
-    // Ничего не делаем с header, так как анимация перенесена в Header.jsx
   };
 
   const animateTransitionStage = () => {
     console.log('LoadingMainScreen: Starting transition stage');
     enableScrollLock();
-    // Ничего не делаем с header, так как анимация перенесена в Header.jsx
   };
 
   const animateCompleteStage = () => {
@@ -95,7 +86,6 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       },
     });
 
-    // Анимация элементов intro и projectsTile
     const introLaba = introRef.current?.querySelector(`.${introStyles.Intro2__laba}`);
     const introDesc = introRef.current?.querySelector(`.${introStyles.Intro2__desc}`);
 
@@ -147,10 +137,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     }
 
     console.log('LoadingMainScreen: useEffect triggered with loadingStage:', loadingStage);
-    // Начальные установки для контейнера не нужны
-    // gsap.set(containerRef.current, { opacity: 0 });
 
-    // Выполнение анимации в зависимости от стадии
     if (loadingStage === 'initial') {
       animateInitialStage();
     } else if (loadingStage === 'scrolling') {
@@ -161,7 +148,6 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       animateCompleteStage();
     }
 
-    // Cleanup
     return () => {
       console.log('LoadingMainScreen: Cleaning up animations');
       if (tlRef.current) tlRef.current.kill();
@@ -183,15 +169,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
   return (
     <section style={{ display: loadingStage === 'complete' ? 'none' : 'block' }}>
       <div ref={containerRef} className={styles.LoadingMainScreen__container}>
-        <Balloons
-          containerRef={containerRef}
-          startBalloonsToCenter={loadingStage === 'scrolling'}
-          onBalloonsToCenterComplete={handleBalloonsToCenterComplete}
-          onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
-          onMaxBalloonSize={onMaxBalloonSize}
-          wrapperRef={wrapperRef}
-          loadingStage={loadingStage}
-        />
+        <Balloons containerRef={containerRef} startBalloonsToCenter={loadingStage === 'scrolling'} wrapperRef={wrapperRef} loadingStage={loadingStage} />
         {(loadingStage === 'initial' || loadingStage === 'scrolling') && (
           <>
             <BackgroundLetters containerRef={containerRef} />

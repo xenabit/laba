@@ -66,18 +66,31 @@ const App = () => {
     ScrollTrigger.refresh();
   };
 
+  const handleBalloonsToCenterComplete = () => {
+    console.log('App: Balloons to center complete, switching to transition');
+    handleStageChange('transition');
+  };
+
+  const handleBalloonsShrinkComplete = () => {
+    console.log('App: Balloons shrink complete, switching to complete');
+    handleStageChange('complete');
+  };
+
+  const handleMaxBalloonSize = () => {
+    console.log('App: Max balloon size reached');
+  };
+
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
-      <Header ref={headerRef} loadingStage={loadingStage} />
+      <Header
+        ref={headerRef}
+        loadingStage={loadingStage}
+        onBalloonsToCenterComplete={handleBalloonsToCenterComplete}
+        onMaxBalloonSize={handleMaxBalloonSize}
+        onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
+      />
       {isFirstVisit && location.pathname === '/' && (
-        <LoadingMainScreen
-          headerRef={headerRef}
-          onStageChange={handleStageChange}
-          wrapperRef={wrapperRef}
-          loadingStage={loadingStage}
-          introRef={introRef}
-          projectsTileRef={projectsTileRef}
-        />
+        <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
       )}
       <div
         id="smooth-content"
