@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import throttle from 'lodash/throttle';
 import styles from './Balloons.module.scss';
 import { gsap } from 'gsap';
+import { magnetEffect } from '../../../utils/magnetEffect';
 
 import Baloon_lt2 from '../../../assets/images/loading-main-baloon-lt2.svg';
 import Baloon_lt1 from '../../../assets/images/loading-main-baloon-lt1.svg';
@@ -179,26 +180,6 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
     );
   };
 
-  const applyMagnetEffect = (balloon, mouseX, mouseY, containerRect) => {
-    const balloonRect = balloon.getBoundingClientRect();
-    const balloonX = balloonRect.left - containerRect.left + balloonRect.width / 2;
-    const balloonY = balloonRect.top - containerRect.top + balloonRect.height / 2;
-    const distance = Math.sqrt((mouseX - balloonX) ** 2 + (mouseY - balloonY) ** 2);
-
-    const isWithinRange = distance < ANIMATION_CONFIG.MAGNET_MAX_DISTANCE;
-    const x = isWithinRange ? Math.cos(Math.atan2(mouseY - balloonY, mouseX - balloonX)) * (1 - distance / ANIMATION_CONFIG.MAGNET_MAX_DISTANCE) * ANIMATION_CONFIG.MAGNET_STRENGTH : 0;
-    const y = isWithinRange ? Math.sin(Math.atan2(mouseY - balloonY, mouseX - balloonX)) * (1 - distance / ANIMATION_CONFIG.MAGNET_MAX_DISTANCE) * ANIMATION_CONFIG.MAGNET_STRENGTH : 0;
-
-    gsap.to(balloon, {
-      x,
-      y,
-      duration: 0.3,
-      ease: 'power2.out',
-      overwrite: 'auto',
-      onComplete: () => !isWithinRange && gsap.to(balloon, { x: 0, y: 0, duration: 0.3, ease: 'power2.out' }),
-    });
-  };
-
   useEffect(() => {
     const balloons = Object.values(balloonRefs.current)
       .map((ref) => ref.current)
@@ -211,7 +192,12 @@ function Balloons({ containerRef, startBalloonsToCenter, onBalloonsToCenterCompl
       const containerRect = container.getBoundingClientRect();
       const mouseX = e.clientX - containerRect.left;
       const mouseY = e.clientY - containerRect.top;
-      balloons.forEach((balloon) => applyMagnetEffect(balloon, mouseX, mouseY, containerRect));
+      balloons.forEach((balloon) =>
+        magnetEffect(balloon, mouseX, mouseY, containerRect, {
+          maxDistance: ANIMATION_CONFIG.MAGNET_MAX_DISTANCE,
+          strength: ANIMATION_CONFIG.MAGNET_STRENGTH,
+        })
+      );
     }, 16);
 
     if (loadingStage === 'initial') {
