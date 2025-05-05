@@ -23,7 +23,6 @@
     width: 100%;
     height: 50px;
     background-color: var(--prime-1);
-    opacity: 0;
 
     @media all and (min-width: $bp4) {
       height: 54px;
@@ -76,6 +75,10 @@
     position: relative;
   }
 
+  &__box {
+    position: relative;
+  }
+
   &__border {
     position: absolute;
     height: 2px;
@@ -90,10 +93,24 @@
     font-size: rem(15);
   }
 
+  &__loading {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+  }
+
   &__logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 15px;
+    transform: translateX(-50%);
+    z-index: 1000;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   }
 
   &__toggle {

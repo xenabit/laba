@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Header.module.scss';
-import logo from '/src/assets/images/header-logo.svg';
 import { ANIMATION_CONFIG } from '../LoadingMainScreen/LoadingMainScreen';
 import Baloon_c from '../../assets/images/loading-main-baloon-c.svg';
+import logoImg from '/src/assets/images/header-logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,8 +14,8 @@ const BALLOON_C_CONFIG = {
   src: Baloon_c,
   anim: {
     from: { top: '-8.89%', left: '47.94%', scale: 1 },
-    to: { top: '40.3%', left: '31%', zIndex: '10' },
-    change: { top: '40.3%', left: '30.8%', scale: 0.7 },
+    to: { top: '39%', left: '25.6%', zIndex: '10000' },
+    // change: { top: '40.3%', left: '30.8%', scale: 0.7 },
   },
 };
 
@@ -24,6 +24,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const [activeTab, setActiveTab] = useState('/');
   const location = useLocation();
   const balloonRef = useRef(null);
+  const logoRef = useRef(null); // Добавлено определение logoRef
 
   const balloonsEntryAnimate = () => {
     const balloon = balloonRef.current;
@@ -32,6 +33,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     const tl = gsap.timeline({ delay: ANIMATION_CONFIG.SUBTITLE_END });
     const { anim } = BALLOON_C_CONFIG;
     gsap.set(balloon, anim.from);
+
     tl.to(balloon, {
       ...anim.to,
       duration: ANIMATION_CONFIG.BALOON_MOVE_DURATION,
@@ -51,9 +53,10 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
 
   const balloonsToCenterAnimate = () => {
     const balloon = balloonRef.current;
-    if (!balloon) return;
+    const logo = logoRef.current;
+    if (!balloon || !logo) return;
 
-    gsap.killTweensOf(balloon);
+    gsap.killTweensOf([balloon, logo]);
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -66,19 +69,17 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       top: '39.8%',
       left: '30.7%',
       transformOrigin: 'center',
-      width: '68px',
-      height: '68px',
       zIndex: 1000,
     });
 
     const scaleSteps = [
-      { scale: 1.2, top: '39.8%', left: '30.7%' },
-      { scale: 1.5, top: '39.8%', left: '30.7%' },
-      { scale: 1.7, top: '41%', left: '30.7%' },
-      { scale: 3.1, top: '42%', left: '30.7%' },
-      { scale: 4.2, top: '42.1%', left: '30.1%' },
-      { scale: 9.4, top: '46.2%', left: '29.2%' },
-      { scale: 10.6, top: '47.3%', left: '29.1%' },
+      { scale: 1.2, top: '39%', left: '25.6%%' },
+      { scale: 1.5, top: '41%', left: '24.6%%' },
+      { scale: 1.7, top: '42%', left: '23%' },
+      { scale: 3.1, top: '48%', left: '20%' },
+      { scale: 4.2, top: '54%', left: '17.6%' },
+      { scale: 6, top: '61%', left: '12.6%%' },
+      { scale: 8, top: '71%', left: '8%' },
       { scale: 12, top: '47.3%', left: '28%' },
       { scale: 12.5, top: '47.3%', left: '28%' },
       { scale: 14, top: '49.3%', left: '28%' },
@@ -86,64 +87,63 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       { scale: 16.5, top: '51.3%', left: '27%' },
       { scale: 20.3, top: '51.3%', left: '27%' },
       { scale: 23.8, top: '56.3%', left: '25%' },
-      { scale: 27.2, top: '58.3%', left: '25%' },
+      { scale: 26, top: '152%', left: '-38%' },
     ];
 
     scaleSteps.forEach((step, index) => {
       tl.to(balloon, { ...step, duration: 0.6, ease: 'linear', overwrite: 'all' }, index * 0.1);
     });
+
+    // Анимация логотипа начинается, когда шар достиг максимального размера
+    tl.to(
+      logo,
+      {
+        top: '50%',
+        height: '160px',
+        width: '160px',
+        zIndex: 1000,
+        duration: 0.6,
+        ease: 'power2.inOut',
+      },
+      scaleSteps.length * 0.1
+    );
   };
 
   const shrinkCentralBalloon = () => {
     const balloon = balloonRef.current;
     if (!balloon) return;
 
-    const baseHeight = 900;
-    const baseTop = 41.5;
-    const currentHeight = window.innerHeight;
-    const heightRatio = currentHeight / baseHeight;
-    const adjustedTop = baseTop / heightRatio;
-
-    const logo = ref.current?.querySelector(`.${styles.Header__logo}`);
-    if (!logo) return;
-
     const tl = gsap.timeline({
-      onComplete: () => onBalloonsShrinkComplete?.(),
+      onComplete: () => {
+        onBalloonsShrinkComplete?.();
+      },
     });
 
-    // Синхронизация с логотипом
+    // Анимация шара
     tl.to(
       balloon,
       {
         scale: 1,
-        left: '51%',
-        top: `${adjustedTop}%`,
+        left: '50%',
+        top: '50%',
+        transform: 'translateX(-50%)',
         duration: 1.5,
         ease: 'power2.inOut',
         overwrite: 'all',
+        opacity: 1,
       },
       0
-    ).to(
-      balloon,
-      {
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.in',
-      },
-      '-=0.5'
-    );
+    )
 
-    // Анимация логотипа для стадии transition
-    gsap.to(logo, {
-      scale: 1,
-      position: 'static',
-      top: 'auto',
-      left: 'auto',
-      transform: 'none',
-      duration: 1.5,
-      ease: 'power2.inOut',
-      overwrite: 'all',
-    });
+      .to(
+        balloon,
+        {
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.in',
+        },
+        '-=0.5'
+      );
   };
 
   useEffect(() => {
@@ -157,9 +157,9 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     const header = ref.current;
     const headerTop = header.querySelector(`.${styles.Header__top}`);
     const border = headerTop.querySelector(`.${styles.Header__border}`);
-    const logo = header.querySelector(`.${styles.Header__logo}`);
     const toggle = header.querySelector(`.${styles.Header__toggle}`);
     const desc = header.querySelector(`.${styles.Header__desc}`);
+    const logo = logoRef.current; // Используем logoRef.current
     const balloon = balloonRef.current;
 
     if (!headerTop || !border || !logo || !toggle || !desc || !balloon) {
@@ -183,7 +183,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       console.log('Header: Menu is active, forcing visibility');
       gsap.set([logo, toggle, desc, border], { opacity: 1 });
       gsap.set(border, { backgroundColor: 'var(--prime-1)' });
-      gsap.set(balloon, { opacity: 0 }); // Скрываем шар при активном меню
       return;
     }
 
@@ -207,7 +206,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       console.log('Header: Applying scrolling stage animations');
       balloonsToCenterAnimate();
       gsap.to(header, {
-        opacity: 0,
+        // opacity: 0,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
         ease: 'power2.out',
         overwrite: 'auto',
@@ -236,16 +235,30 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         opacity: 1,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
         ease: 'power2.out',
-      }).to(
-        [toggle, desc, border],
-        {
-          opacity: 1,
-          duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-          ease: 'linear',
-          overwrite: 'all',
-        },
-        ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
-      );
+      })
+        .to(
+          [toggle, desc, border],
+          {
+            opacity: 1,
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+            overwrite: 'all',
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DURATION
+        )
+        .to(
+          logo,
+          {
+            top: '15px',
+            width: '24px',
+            height: '24px',
+            scale: 1,
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+            overwrite: 'all',
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
+        );
     }
 
     const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
@@ -344,19 +357,21 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
 
   return (
     <header className={styles.Header}>
-      <div ref={balloonRef} className={styles.Header__baloon}>
-        <img src={Baloon_c} alt="balloon-c" />
-      </div>
       <div ref={ref} id="main-tool-bar" className={`${styles.Header__main}`}>
         <div className={`${styles.Header__container} ${isActive ? styles.active : ''}`}>
+          <div className={styles.Header__loading}>
+            <div ref={balloonRef} className={styles.Header__baloon}>
+              <img src={Baloon_c} alt="balloon-c" aria-hidden="true" />
+            </div>
+            <Link ref={logoRef} to="/" className={styles.Header__logo} onClick={() => handleTabClick('/')}>
+              <picture>
+                <img loading="lazy" src={logoImg} alt="Логотип Laba" />
+              </picture>
+            </Link>
+          </div>
           <div className={styles.Header__top}>
             <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
               digital agency
-            </Link>
-            <Link to="/" className={styles.Header__logo} onClick={() => handleTabClick('/')}>
-              <picture>
-                <img loading="lazy" src={logo} alt="Логотип Laba" />
-              </picture>
             </Link>
             <button className={styles.Header__toggle} onClick={() => setIsActive((prev) => !prev)} aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={isActive}>
               <span></span>
