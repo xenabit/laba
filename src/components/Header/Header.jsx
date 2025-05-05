@@ -14,7 +14,7 @@ const BALLOON_C_CONFIG = {
   src: Baloon_c,
   anim: {
     from: { top: '-8.89%', left: '47.94%', scale: 1 },
-    to: { top: '39%', left: '25.6%', zIndex: '10000' },
+    to: { top: '39%', left: '25.6%', zIndex: '2000' },
     change: { top: '39%', left: '25.4%', scale: 0.7 },
   },
 };
@@ -25,6 +25,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const location = useLocation();
   const balloonRef = useRef(null);
   const logoRef = useRef(null);
+  const isInitialRender = useRef(true); // Флаг для начальной стадии
 
   const balloonsEntryAnimate = () => {
     const balloon = balloonRef.current;
@@ -69,7 +70,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       top: '39.8%',
       left: '30.7%',
       transformOrigin: 'center',
-      zIndex: 1000,
+      zIndex: 2000,
       opacity: 1,
     });
 
@@ -95,14 +96,13 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       tl.to(balloon, { ...step, duration: 0.6, ease: 'linear', overwrite: 'all' }, index * 0.1);
     });
 
-    // Анимация логотипа
     tl.to(
       logo,
       {
         top: '50%',
         height: '160px',
         width: '160px',
-        zIndex: 100,
+        zIndex: 1000,
         duration: 0.6,
         ease: 'power2.inOut',
       },
@@ -121,7 +121,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       },
     });
 
-    // Делаем логотип видимым в начале shrinkCentralBalloon
     gsap.set(logo, { opacity: 1 });
 
     tl.to(
@@ -176,8 +175,12 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       return;
     }
 
-    // Изначально скрываем все элементы, включая логотип
-    gsap.set([headerTop, border, toggle, desc, logo], { opacity: 0 });
+    // Устанавливаем начальную прозрачность только на стадии initial
+    if (loadingStage === 'initial' && isInitialRender.current) {
+      console.log('Setting initial opacity to 0 for initial stage');
+      gsap.set([headerTop, border, toggle, desc, logo], { opacity: 0 });
+      isInitialRender.current = false; // Отключаем повторное применение
+    }
 
     const setHeaderVisible = () => {
       gsap.set([headerTop, border, toggle, desc, logo], { opacity: 1 });
@@ -205,10 +208,13 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       balloonsToCenterAnimate();
       gsap.to([headerTop, toggle, desc, border, logo], {
         opacity: 0,
-        duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
-        ease: 'power2.out',
-        overwrite: 'auto',
+        duration: 0.5,
+        ease: 'sine.out',
+        delay: 0.2,
+        overwrite: false,
+        onStart: () => console.log('Scrolling animation started'),
         onComplete: () => {
+          console.log('Scrolling animation completed');
           const headerContainer = header.querySelector(`.${styles.Header__container}`);
           if (headerContainer) {
             headerContainer.classList.remove(styles.active);
@@ -219,7 +225,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     } else if (loadingStage === 'transition') {
       console.log('Header: Applying transition stage animations');
       shrinkCentralBalloon();
-      gsap.set([headerTop, toggle, desc, border], { opacity: 0 });
+      gsap.set([headerTop, toggle, desc, border], { opacity: 0, y: 0 });
     } else if (loadingStage === 'complete') {
       console.log('Header: Applying complete stage animations');
       const tl = gsap.timeline({
