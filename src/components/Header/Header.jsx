@@ -15,7 +15,7 @@ const BALLOON_C_CONFIG = {
   anim: {
     from: { top: '-8.89%', left: '47.94%', scale: 1 },
     to: { top: '39%', left: '25.6%', zIndex: '2000' },
-    change: { top: '39%', left: '25.4%', scale: 0.7 },
+    // change: { top: '39%', left: '25.4%', scale: 0.7 },
   },
 };
 
@@ -67,28 +67,30 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     });
 
     gsap.set(balloon, {
-      top: '39.8%',
-      left: '30.7%',
+      top: '39%',
+      left: '25.6%',
       transformOrigin: 'center',
       zIndex: 2000,
       opacity: 1,
     });
 
     const scaleSteps = [
+      { scale: 1, top: '39%', left: '25.6%' },
       { scale: 1.2, top: '39%', left: '25.6%' },
-      { scale: 1.5, top: '41%', left: '24.6%' },
+      { scale: 1.3, top: '40%', left: '25%' },
       { scale: 1.7, top: '42%', left: '23%' },
-      { scale: 3.1, top: '48%', left: '20%' },
-      { scale: 4.2, top: '54%', left: '17.6%' },
-      { scale: 6, top: '61%', left: '12.6%' },
-      { scale: 8, top: '71%', left: '8%' },
-      { scale: 12, top: '47.3%', left: '28%' },
-      { scale: 12.5, top: '47.3%', left: '28%' },
-      { scale: 14, top: '49.3%', left: '28%' },
-      { scale: 14.5, top: '49.3%', left: '28%' },
-      { scale: 16.5, top: '51.3%', left: '27%' },
-      { scale: 20.3, top: '51.3%', left: '27%' },
-      { scale: 23.8, top: '56.3%', left: '25%' },
+      { scale: 3, top: '48%', left: '20%' },
+      { scale: 4, top: '52%', left: '18%' },
+      { scale: 6, top: '61%', left: '13%' },
+      { scale: 8, top: '70%', left: '8%' },
+      { scale: 9, top: '75%', left: '5%' },
+      { scale: 10, top: '80%', left: '3%' },
+      { scale: 11, top: '84%', left: '0%' },
+      { scale: 11.5, top: '86%', left: '-1%' },
+      { scale: 13.5, top: '95%', left: '-6%' },
+      { scale: 15.5, top: '104%', left: '-11%' },
+      { scale: 22, top: '133%', left: '-27%' },
+      { scale: 25, top: '146%', left: '-35%' },
       { scale: 26, top: '152%', left: '-38%' },
     ];
 
@@ -162,8 +164,9 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     const desc = header.querySelector(`.${styles.Header__desc}`);
     const logo = logoRef.current;
     const balloon = balloonRef.current;
+    const loading = header.querySelector(`.${styles.Header__loading}`);
 
-    if (!headerTop || !border || !logo || !toggle || !desc || !balloon) {
+    if (!headerTop || !border || !logo || !toggle || !desc || !balloon || !loading) {
       console.warn('Header elements missing', {
         headerTop,
         border,
@@ -171,15 +174,17 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         toggle,
         desc,
         balloon,
+        loading,
       });
       return;
     }
 
-    // Устанавливаем начальную прозрачность только на стадии initial
+    // Устанавливаем начальную прозрачность и высоту только на стадии initial
     if (loadingStage === 'initial' && isInitialRender.current) {
-      console.log('Setting initial opacity to 0 for initial stage');
+      console.log('Setting initial opacity to 0 and height to 100vh for initial stage');
       gsap.set([headerTop, border, toggle, desc, logo], { opacity: 0 });
-      isInitialRender.current = false; // Отключаем повторное применение
+      gsap.set(loading, { height: '100vh' });
+      isInitialRender.current = false;
     }
 
     const setHeaderVisible = () => {
@@ -190,12 +195,14 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       console.log('Header: Menu is active, forcing visibility');
       gsap.set([logo, toggle, desc, border, headerTop], { opacity: 1 });
       gsap.set(border, { backgroundColor: 'var(--prime-1)' });
+      gsap.set(loading, { height: '100%' });
       return;
     }
 
     if (loadingStage === 'initial') {
       console.log('Header: Applying initial stage animations');
       balloonsEntryAnimate();
+      gsap.set(loading, { height: '100vh' });
       gsap.to([headerTop, toggle, desc, border, logo], {
         opacity: 1,
         duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
@@ -206,6 +213,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     } else if (loadingStage === 'scrolling') {
       console.log('Header: Applying scrolling stage animations');
       balloonsToCenterAnimate();
+      gsap.set(loading, { height: '100vh' });
       gsap.to([headerTop, toggle, desc, border, logo], {
         opacity: 0,
         duration: 0.5,
@@ -225,6 +233,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     } else if (loadingStage === 'transition') {
       console.log('Header: Applying transition stage animations');
       shrinkCentralBalloon();
+      gsap.set(loading, { height: '100vh' });
       gsap.set([headerTop, toggle, desc, border], { opacity: 0, y: 0 });
     } else if (loadingStage === 'complete') {
       console.log('Header: Applying complete stage animations');
@@ -250,6 +259,10 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
           duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
           ease: 'linear',
           overwrite: 'all',
+          onComplete: () => {
+            console.log('Logo animation completed, setting loading height to 100%');
+            gsap.set(loading, { height: '100%' });
+          },
         },
         ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
       );
@@ -296,8 +309,9 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
           showAnim.pause();
           borderAnim.pause();
           gsap.set(header, { yPercent: 0 });
-          gsap.set([headerTop, toggle, desc, border, logo], { opacity: 1 });
+          gsap.set([headerTop, toggle, border, logo], { opacity: 1 });
           gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
+          gsap.set(loading, { height: '100%' });
         } else if (scrollPos <= 50) {
           showAnim.reverse();
           borderAnim.reverse();
@@ -328,7 +342,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     return () => {
       console.log('Header: Cleaning up animations');
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      gsap.killTweensOf([header, border, logo, toggle, desc, balloon, headerTop]);
+      gsap.killTweensOf([header, border, logo, toggle, desc, balloon, headerTop, loading]);
     };
   }, [ref, isActive, loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete]);
 
@@ -368,7 +382,12 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
             <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
               digital agency
             </Link>
-            <button className={styles.Header__toggle} onClick={() => setIsActive((prev) => !prev)} aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={isActive}>
+            <button
+              className={styles.Header__toggle}
+              onClick={() => setIsActive((prev) => !prev)}
+              aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'}
+              aria-expanded={isActive}
+            >
               <span></span>
               <span></span>
               <span></span>
@@ -384,12 +403,20 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
                   </Link>
                 </li>
                 <li>
-                  <Link className={activeTab === '/portfolio' ? styles.active : ''} to="/portfolio" onClick={() => handleTabClick('/portfolio')}>
+                  <Link
+                    className={activeTab === '/portfolio' ? styles.active : ''}
+                    to="/portfolio"
+                    onClick={() => handleTabClick('/portfolio')}
+                  >
                     Портфолио
                   </Link>
                 </li>
                 <li>
-                  <Link className={activeTab === '/contact' ? styles.active : ''} to="/contact" onClick={() => handleTabClick('/contact')}>
+                  <Link
+                    className={activeTab === '/contact' ? styles.active : ''}
+                    to="/contact"
+                    onClick={() => handleTabClick('/contact')}
+                  >
                     Контакты
                   </Link>
                 </li>
