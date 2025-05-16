@@ -8,14 +8,14 @@ import styles from './LoadingMainScreen.module.scss';
 import introStyles from '../Intro2/Intro2.module.scss';
 
 export const ANIMATION_CONFIG = {
-  SUBTITLE_END: 2.7,
-  BG_END: 2,
+  MAIN_ENTRY_ANIM: 4.3,
+  BG_DURATION: 2.9,
   BALOON_MOVE_DURATION: 1.5,
-  HEADER_1_OPACITY_DELAY: 4.7,
+  HEADER_1_OPACITY_DELAY: 6,
   HEADER_FADE_DURATION: 0.5,
   MAGNET_MAX_DISTANCE: 400,
   MAGNET_STRENGTH: 25,
-  LOGO_ANIMATION_DURATION: 1,
+  LOGO_ANIMATION_DURATION: 3,
   LOGO_ANIMATION_DELAY: 0,
 };
 
@@ -56,7 +56,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     enableScrollLock();
 
     tlRef.current = gsap.timeline({
-      delay: ANIMATION_CONFIG.SUBTITLE_END,
+      delay: ANIMATION_CONFIG.MAIN_ENTRY_ANIM,
       onComplete: () => {
         console.log('LoadingMainScreen: Initial stage animation completed');
         window.removeEventListener('wheel', blockScroll);

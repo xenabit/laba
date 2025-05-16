@@ -14,7 +14,7 @@ const BALLOON_C_CONFIG = {
   src: Baloon_c,
   anim: {
     from: { top: '-8.89%', left: '47.94%', scale: 1 },
-    to: { top: '39%', left: '25.6%', zIndex: '2000' },
+    to: { top: '39%', left: '25.6%', zIndex: '250' },
     // change: { top: '39%', left: '25.4%', scale: 0.7 },
   },
 };
@@ -31,7 +31,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     const balloon = balloonRef.current;
     if (!balloon) return;
 
-    const tl = gsap.timeline({ delay: ANIMATION_CONFIG.SUBTITLE_END });
+    const tl = gsap.timeline({ delay: ANIMATION_CONFIG.MAIN_ENTRY_ANIM });
     const { anim } = BALLOON_C_CONFIG;
     gsap.set(balloon, { ...anim.from, opacity: 1 });
 
@@ -70,7 +70,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       top: '39%',
       left: '25.6%',
       transformOrigin: 'center',
-      zIndex: 2000,
+      zIndex: 250,
       opacity: 1,
     });
 
@@ -104,7 +104,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         top: '50%',
         height: '160px',
         width: '160px',
-        zIndex: 1000,
         duration: 0.6,
         ease: 'power2.inOut',
       },
@@ -255,7 +254,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
           width: '24px',
           height: '24px',
           scale: 1,
-          zIndex: 'auto',
           duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
           ease: 'linear',
           overwrite: 'all',
@@ -374,7 +372,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
             </div>
             <Link ref={logoRef} to="/" className={styles.Header__logo} onClick={() => handleTabClick('/')}>
               <picture>
-                <img loading="lazy" src={logoImg} alt="Логотип Laba" />
+                <img src={logoImg} alt="Логотип Laba" />
               </picture>
             </Link>
           </div>
@@ -382,12 +380,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
             <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
               digital agency
             </Link>
-            <button
-              className={styles.Header__toggle}
-              onClick={() => setIsActive((prev) => !prev)}
-              aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'}
-              aria-expanded={isActive}
-            >
+            <button className={styles.Header__toggle} onClick={() => setIsActive((prev) => !prev)} aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={isActive}>
               <span></span>
               <span></span>
               <span></span>
@@ -403,20 +396,12 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    className={activeTab === '/portfolio' ? styles.active : ''}
-                    to="/portfolio"
-                    onClick={() => handleTabClick('/portfolio')}
-                  >
+                  <Link className={activeTab === '/portfolio' ? styles.active : ''} to="/portfolio" onClick={() => handleTabClick('/portfolio')}>
                     Портфолио
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    className={activeTab === '/contact' ? styles.active : ''}
-                    to="/contact"
-                    onClick={() => handleTabClick('/contact')}
-                  >
+                  <Link className={activeTab === '/contact' ? styles.active : ''} to="/contact" onClick={() => handleTabClick('/contact')}>
                     Контакты
                   </Link>
                 </li>

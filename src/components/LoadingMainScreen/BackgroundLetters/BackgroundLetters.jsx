@@ -15,32 +15,41 @@ function BackgroundLetters({ containerRef }) {
       },
     });
 
-    // Первая группа: одновременно с задержкой 0.4
-    tl.to(container, { background: '#27292F', duration: 0.5, ease: 'elastic.out(1.3, 0.35)', delay: 0.4 })
-      .to(letters, { fill: '#2f3137', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 0.4)
+    // Начальное состояние: белый фон и буквы на 1 секунду
+    tl.set([container, letters], { background: '#F0F2F5', fill: '#F0F2F5' }, 0)
+      .to([container, letters], { duration: 1, background: '#F0F2F5', fill: '#F0F2F5', ease: 'none' }, 0) // Задержка 1 секунда
+
+      // Первая группа: начинается с задержкой 1 + 0.4 = 1.4 секунды
+      .to(container, { background: '#27292F', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 1.4)
+      .to(letters, { fill: '#2f3137', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 1.4)
 
       // Вторая группа
-      .to(container, { background: '#27292F', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' }, 0.9)
-
-      // Вторая группа
-      .to(container, { background: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' })
-      .to(letters, { fill: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 1.2)
+      .to(container, { background: '#27292F', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' }, 1.9)
+      .to(letters, { fill: '#F0F2F5', duration: 0.3, ease: 'elastic.out(1.3, 0.35)' }, 1.9)
 
       // Третья группа
-      .to(container, { background: '#F0F2F5', duration: 0.2, ease: 'none' })
-      .to(letters, { fill: '#27292F', duration: 0.2, ease: 'none' }, 1.7);
+      .to(container, { background: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 2.2)
+      .to(letters, { fill: '#F0F2F5', duration: 0.5, ease: 'elastic.out(1.3, 0.35)' }, 2.2)
+
+      // Четвёртая группа
+      .to(container, { background: '#F0F2F5', duration: 0.2, ease: 'none' }, 2.7)
+      .to(letters, { fill: '#27292F', duration: 0.2, ease: 'none' }, 2.7);
   };
 
   useEffect(() => {
     const container = containerRef.current;
     const letters = letterRefs.current;
+
+    console.log('BackgroundLetters: Initializing with white background and letters');
     gsap.set(container, { background: '#F0F2F5' });
-    gsap.set(letters, { fill: '#27292F' });
+    gsap.set(letters, { fill: '#F0F2F5' });
+
+    // Запускаем анимацию с учётом начальной задержки
     animateSequence(container, letters);
 
     // Очистка анимации при размонтировании
     return () => {
+      console.log('BackgroundLetters: Cleaning up animations');
       gsap.killTweensOf([container, letters]);
     };
   }, [containerRef]);
@@ -94,7 +103,7 @@ function BackgroundLetters({ containerRef }) {
           className={`${styles.BackgroundLetters__letter} ${styles.BackgroundLetters__letter_l}`}
           initial={{ x: '-17.69vw', y: '38.89vh', rotate: -38, scale: 3.11 }}
           animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}
+          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_DURATION }}
         >
           <LetterL />
         </motion.div>
@@ -102,7 +111,7 @@ function BackgroundLetters({ containerRef }) {
           className={`${styles.BackgroundLetters__letter} ${styles.BackgroundLetters__letter_a}`}
           initial={{ x: '-24.25vw', y: '-54.55vh', rotate: 77, scale: 1.116 }}
           animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}
+          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_DURATION }}
         >
           <LetterA />
         </motion.div>
@@ -110,7 +119,7 @@ function BackgroundLetters({ containerRef }) {
           className={`${styles.BackgroundLetters__letter} ${styles.BackgroundLetters__letter_b}`}
           initial={{ x: '-4vw', y: '32.2vh', rotate: 130, scale: 0.52 }}
           animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}
+          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_DURATION }}
         >
           <LetterB />
         </motion.div>
@@ -118,11 +127,11 @@ function BackgroundLetters({ containerRef }) {
           className={`${styles.BackgroundLetters__letter} ${styles.BackgroundLetters__letter_a}`}
           initial={{ x: '34.5vw', y: '41vh', rotate: -35, scale: 1.83 }}
           animate={{ x: 0, y: 0, rotate: 0, scale: 1 }}
-          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}
+          transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_DURATION }}
         >
           <LetterA />
         </motion.div>
-        <motion.div className={styles.BackgroundLetters__spot} initial={{ scale: 17 }} animate={{ scale: 1 }} transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_END }}>
+        <motion.div className={styles.BackgroundLetters__spot} initial={{ scale: 17 }} animate={{ scale: 1 }} transition={{ ...baseTransition, delay: ANIMATION_CONFIG.BG_DURATION }}>
           <Spot />
         </motion.div>
       </div>

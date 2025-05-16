@@ -189,7 +189,7 @@ function Balloons({ containerRef, startBalloonsToCenter, wrapperRef, loadingStag
   const hasScrolled = useRef(false);
 
   const balloonsEntryAnimate = (balloons) => {
-    const tl = gsap.timeline({ delay: ANIMATION_CONFIG.SUBTITLE_END });
+    const tl = gsap.timeline({ delay: ANIMATION_CONFIG.MAIN_ENTRY_ANIM });
 
     // Устанавливаем начальные позиции для всех шаров
     BALLOONS_CONFIG.forEach(({ key, anim: { from } }) => {
@@ -282,7 +282,7 @@ function Balloons({ containerRef, startBalloonsToCenter, wrapperRef, loadingStag
             container.addEventListener('mousemove', handleMouseMove);
           }
         },
-        ANIMATION_CONFIG.SUBTITLE_END * 1000 + ANIMATION_CONFIG.BALOON_MOVE_DURATION * 1000
+        ANIMATION_CONFIG.MAIN_ENTRY_ANIM * 1000 + ANIMATION_CONFIG.BALOON_MOVE_DURATION * 1000
       );
     }
 
