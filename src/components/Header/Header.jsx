@@ -25,7 +25,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const location = useLocation();
   const balloonRef = useRef(null);
   const logoRef = useRef(null);
-  const isInitialRender = useRef(true); // Флаг для начальной стадии
+  const isInitialRender = useRef(true);
 
   const balloonsEntryAnimate = () => {
     const balloon = balloonRef.current;
@@ -137,14 +137,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         opacity: 1,
       },
       0
-    ).to(
-      balloon,
-      {
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.in',
-      },
-      '-=0.5'
     );
   };
 
@@ -178,7 +170,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       return;
     }
 
-    // Устанавливаем начальную прозрачность и высоту только на стадии initial
     if (loadingStage === 'initial' && isInitialRender.current) {
       console.log('Setting initial opacity to 0 and height to 100vh for initial stage');
       gsap.set([headerTop, border, toggle, desc, logo], { opacity: 0 });
@@ -247,23 +238,39 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
         ease: 'linear',
         overwrite: 'all',
-      }).to(
-        logo,
-        {
-          top: '15px',
-          width: '24px',
-          height: '24px',
-          scale: 1,
-          duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-          ease: 'linear',
-          overwrite: 'all',
-          onComplete: () => {
-            console.log('Logo animation completed, setting loading height to 100%');
-            gsap.set(loading, { height: '100%' });
+      })
+        .to(
+          logo,
+          {
+            top: '15px',
+            width: '24px',
+            height: '24px',
+            scale: 1,
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            ease: 'linear',
+            overwrite: 'all',
+            onComplete: () => {
+              console.log('Logo animation completed, setting loading height to 100%');
+              gsap.set(loading, { height: '100%' });
+            },
           },
-        },
-        ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
-      );
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
+        )
+        .to(
+          balloon,
+          {
+            opacity: 0,
+            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+            top: '15px',
+            width: '24px',
+            height: '24px',
+            scale: 1,
+            ease: 'linear',
+            overwrite: 'all',
+            onStart: () => console.log('Starting balloon fade-out animation'),
+          },
+          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
+        );
     }
 
     const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
