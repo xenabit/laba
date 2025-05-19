@@ -2,8 +2,10 @@ import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import throttle from 'lodash/throttle';
 import styles from './Header.module.scss';
 import { ANIMATION_CONFIG } from '../LoadingMainScreen/LoadingMainScreen';
+import { magnetEffect } from '../../utils/magnetEffect';
 import Baloon_c from '../../assets/images/loading-main-baloon-c.svg';
 import logoImg from '/src/assets/images/header-logo.svg';
 
@@ -25,12 +27,15 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const location = useLocation();
   const balloonRef = useRef(null);
   const logoRef = useRef(null);
+  const containerRef = useRef(null);
   const isInitialRender = useRef(true);
+  const hasScrolled = useRef(false); // Флаг для отслеживания скроллинга
 
-  // Анимация шара
+  // Анимация шара с эффектом примагничивания
   const balloonsEntryAnimate = () => {
     const balloon = balloonRef.current;
-    if (!balloon) return;
+    const container = containerRef.current;
+    if (!balloon || !container) return;
 
     const tl = gsap.timeline({ delay: ANIMATION_CONFIG.MAIN_ENTRY_ANIM });
     const { anim } = BALLOON_C_CONFIG;
@@ -52,6 +57,57 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       },
       ANIMATION_CONFIG.BALOON_MOVE_DURATION
     );
+
+    // Эффект примагничивания
+    let isMagnetActive = loadingStage === 'initial';
+    const handleMouseMove = throttle((e) => {
+      if (!isMagnetActive || hasScrolled.current || loadingStage !== 'initial') return;
+      const containerRect = container.getBoundingClientRect();
+      const mouseX = e.clientX - containerRect.left;
+      const mouseY = e.clientY - containerRect.top;
+      magnetEffect(balloon, mouseX, mouseY, containerRect, {
+        maxDistance: ANIMATION_CONFIG.MAGNET_MAX_DISTANCE,
+        strength: ANIMATION_CONFIG.MAGNET_STRENGTH * 0.5,
+        duration: 0.2,
+      });
+    }, 32);
+
+    // Сброс эффекта примагничивания при скроллинге
+    const handleScroll = () => {
+      if (loadingStage !== 'initial' || hasScrolled.current) return;
+      hasScrolled.current = true;
+      isMagnetActive = false;
+      gsap.to(balloon, {
+        x: 0,
+        y: 0,
+        duration: 0.2,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+      container.removeEventListener('mousemove', handleMouseMove);
+    };
+
+    // Активируем эффект примагничивания после начальной анимации
+    const magnetTimeout = setTimeout(
+      () => {
+        if (!hasScrolled.current && loadingStage === 'initial') {
+          isMagnetActive = true;
+          container.addEventListener('mousemove', handleMouseMove);
+        }
+      },
+      (ANIMATION_CONFIG.MAIN_ENTRY_ANIM + ANIMATION_CONFIG.BALOON_MOVE_DURATION) * 1000
+    );
+
+    // Добавляем обработчик скроллинга
+    window.addEventListener('wheel', handleScroll, { passive: false });
+    window.addEventListener('touchmove', handleScroll, { passive: false });
+
+    return () => {
+      clearTimeout(magnetTimeout);
+      container.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+    };
   };
 
   const balloonsToCenterAnimate = () => {
@@ -59,6 +115,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     const logo = logoRef.current;
     if (!balloon || !logo) return;
 
+    hasScrolled.current = true; // Устанавливаем флаг при переходе к scrolling
     gsap.killTweensOf([balloon, logo]);
 
     const tl = gsap.timeline({
@@ -142,15 +199,15 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     );
   };
 
-  // useEffect только для анимации шара
+  // useEffect для анимации шара
   useEffect(() => {
-    if (!balloonRef.current || !logoRef.current) {
-      console.warn('Balloon or logo ref is not ready');
+    if (!balloonRef.current || !logoRef.current || !containerRef.current) {
+      console.warn('Balloon, logo, or container ref is not ready');
       return;
     }
 
     if (loadingStage === 'initial') {
-      console.log('Header: Applying initial balloon animation');
+      console.log('Header: Applying initial balloon animation with magnet effect');
       balloonsEntryAnimate();
     } else if (loadingStage === 'scrolling') {
       console.log('Header: Applying scrolling balloon animation');
@@ -387,7 +444,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   };
 
   return (
-    <header className={styles.Header}>
+    <header className={styles.Header} ref={containerRef}>
       <div ref={ref} id="main-tool-bar" className={`${styles.Header__main}`}>
         <div className={`${styles.Header__container} ${isActive ? styles.active : ''}`}>
           <div className={styles.Header__loading}>
