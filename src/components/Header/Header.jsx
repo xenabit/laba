@@ -27,6 +27,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const logoRef = useRef(null);
   const isInitialRender = useRef(true);
 
+  // Анимация шара
   const balloonsEntryAnimate = () => {
     const balloon = balloonRef.current;
     if (!balloon) return;
@@ -141,9 +142,46 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     );
   };
 
+  // useEffect только для анимации шара
   useEffect(() => {
-    console.log('Header useEffect triggered', { loadingStage, isActive });
+    if (!balloonRef.current || !logoRef.current) {
+      console.warn('Balloon or logo ref is not ready');
+      return;
+    }
 
+    if (loadingStage === 'initial') {
+      console.log('Header: Applying initial balloon animation');
+      balloonsEntryAnimate();
+    } else if (loadingStage === 'scrolling') {
+      console.log('Header: Applying scrolling balloon animation');
+      balloonsToCenterAnimate();
+    } else if (loadingStage === 'transition') {
+      console.log('Header: Applying transition balloon animation');
+      shrinkCentralBalloon();
+    } else if (loadingStage === 'complete') {
+      console.log('Header: Applying complete balloon animation');
+      const balloon = balloonRef.current;
+      gsap.to(balloon, {
+        opacity: 0,
+        duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+        top: '15px',
+        width: '24px',
+        height: '24px',
+        scale: 1,
+        ease: 'linear',
+        overwrite: 'all',
+        onStart: () => console.log('Starting balloon fade-out animation'),
+      });
+    }
+
+    return () => {
+      console.log('Header: Cleaning up balloon animations');
+      gsap.killTweensOf([balloonRef.current, logoRef.current]);
+    };
+  }, [loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete]);
+
+  // useEffect для остальной логики хедера
+  useEffect(() => {
     if (!ref.current) {
       console.warn('Header ref is not ready');
       return;
@@ -155,17 +193,15 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     const toggle = header.querySelector(`.${styles.Header__toggle}`);
     const desc = header.querySelector(`.${styles.Header__desc}`);
     const logo = logoRef.current;
-    const balloon = balloonRef.current;
     const loading = header.querySelector(`.${styles.Header__loading}`);
 
-    if (!headerTop || !border || !logo || !toggle || !desc || !balloon || !loading) {
+    if (!headerTop || !border || !logo || !toggle || !desc || !loading) {
       console.warn('Header elements missing', {
         headerTop,
         border,
         logo,
         toggle,
         desc,
-        balloon,
         loading,
       });
       return;
@@ -191,8 +227,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     }
 
     if (loadingStage === 'initial') {
-      console.log('Header: Applying initial stage animations');
-      balloonsEntryAnimate();
+      console.log('Header: Applying initial stage header animations');
       gsap.set(loading, { height: '100vh' });
       gsap.to([headerTop, toggle, desc, border, logo], {
         opacity: 1,
@@ -202,8 +237,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         onComplete: setHeaderVisible,
       });
     } else if (loadingStage === 'scrolling') {
-      console.log('Header: Applying scrolling stage animations');
-      balloonsToCenterAnimate();
+      console.log('Header: Applying scrolling stage header animations');
       gsap.set(loading, { height: '100vh' });
       gsap.to([headerTop, toggle, desc, border, logo], {
         opacity: 0,
@@ -222,16 +256,14 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         },
       });
     } else if (loadingStage === 'transition') {
-      console.log('Header: Applying transition stage animations');
-      shrinkCentralBalloon();
+      console.log('Header: Applying transition stage header animations');
       gsap.set(loading, { height: '100vh' });
       gsap.set([headerTop, toggle, desc, border], { opacity: 0, y: 0 });
     } else if (loadingStage === 'complete') {
-      console.log('Header: Applying complete stage animations');
+      console.log('Header: Applying complete stage header animations');
       const tl = gsap.timeline({
         onComplete: () => {
           gsap.set(header, { backgroundColor: 'var(--prime-1)' });
-          gsap.set(balloon, { opacity: 0 });
         },
       });
       tl.to([headerTop, toggle, desc, border, logo], {
@@ -239,39 +271,23 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
         ease: 'linear',
         overwrite: 'all',
-      })
-        .to(
-          logo,
-          {
-            top: '15px',
-            width: '24px',
-            height: '24px',
-            scale: 1,
-            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-            ease: 'linear',
-            overwrite: 'all',
-            onComplete: () => {
-              console.log('Logo animation completed, setting loading height to 100%');
-              gsap.set(loading, { height: '100%' });
-            },
+      }).to(
+        logo,
+        {
+          top: '15px',
+          width: '24px',
+          height: '24px',
+          scale: 1,
+          duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
+          ease: 'linear',
+          overwrite: 'all',
+          onComplete: () => {
+            console.log('Logo animation completed, setting loading height to 100%');
+            gsap.set(loading, { height: '100%' });
           },
-          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
-        )
-        .to(
-          balloon,
-          {
-            opacity: 0,
-            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-            top: '15px',
-            width: '24px',
-            height: '24px',
-            scale: 1,
-            ease: 'linear',
-            overwrite: 'all',
-            onStart: () => console.log('Starting balloon fade-out animation'),
-          },
-          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
-        );
+        },
+        ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
+      );
     }
 
     const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
@@ -346,11 +362,11 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     ScrollTrigger.refresh();
 
     return () => {
-      console.log('Header: Cleaning up animations');
+      console.log('Header: Cleaning up header animations');
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      gsap.killTweensOf([header, border, logo, toggle, desc, balloon, headerTop, loading]);
+      gsap.killTweensOf([header, border, logo, toggle, desc, headerTop, loading]);
     };
-  }, [ref, isActive, loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete]);
+  }, [ref, isActive, loadingStage]);
 
   useEffect(() => {
     const savedTab = localStorage.getItem('activeTab') || location.pathname;

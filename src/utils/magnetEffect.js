@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 
 const defaultConfig = {
   maxDistance: 200,
-  strength: 5,
+  strength: 25,
   duration: 0.2,
   ease: 'power2.out',
 };

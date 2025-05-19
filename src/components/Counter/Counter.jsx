@@ -76,7 +76,7 @@ const Counter = ({ loadingStage }) => {
         imageRef.current,
         { scale: 1 },
         {
-          y: 350,
+          y: 250,
           scale: 1.4,
           duration: 0.8,
           ease: 'power2.out',
