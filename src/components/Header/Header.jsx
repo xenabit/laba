@@ -15,7 +15,7 @@ const BALLOON_C_CONFIG = {
   anim: {
     from: { top: '-8.89%', left: '47.94%', scale: 1 },
     to: { top: '39%', left: '25.6%', zIndex: '60' },
-    // change: { top: '39%', left: '25.4%', scale: 0.7 },
+    change: { top: '39.3%', left: '25.4%', scale: 0.9 },
   },
 };
 

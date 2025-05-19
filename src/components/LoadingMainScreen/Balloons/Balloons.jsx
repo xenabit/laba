@@ -29,7 +29,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '155%', left: '42%', scale: 1 },
       to: { top: '83%', left: '39%' },
-      change: { scale: 1.01, top: '84%' },
+      change: { scale: 1.01, top: '83.5%' },
     },
   },
   {
@@ -39,7 +39,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '164.65%', left: '20.75%', scale: 1 },
       to: { top: '74%', left: '5%' },
-      change: { scale: 0.89, rotate: 21.79 },
+      change: { scale: 0.98, rotate: 10 },
     },
   },
   {
@@ -49,7 +49,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '5.28%', left: '134.35%', scale: 1 },
       to: { top: '46%', left: '92.5%' },
-      change: { scale: 1.09, top: '48%' },
+      change: { scale: 1.02, top: '46.5%' },
     },
   },
   {
@@ -59,7 +59,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '-56%', left: '-77%', scale: 1 },
       to: { top: '7%', left: '-18%' },
-      change: { scale: 0.95, left: '-20%' },
+      change: { scale: 0.95, left: '-18.5%' },
     },
   },
   {
@@ -69,7 +69,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '134.28%', left: '134.44%', scale: 1 },
       to: { top: '63%', left: '79%' },
-      change: { scale: 0.9, top: '64%' },
+      change: { scale: 0.95, top: '63.5%' },
     },
   },
   {
@@ -79,7 +79,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '-96.44%', left: '120.81%', scale: 1 },
       to: { top: '6%', left: '76%' },
-      change: { scale: 1.02, top: '8%', rotate: -21.5 },
+      change: { scale: 1.02, top: '6.5%', rotate: -10 },
     },
   },
   {
@@ -89,7 +89,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '-100%', left: '33%', scale: 1 },
       to: { top: '9%', left: '29.5%' },
-      change: { scale: 1.15, left: '29.2%' },
+      change: { scale: 1.05, left: '29.2%' },
     },
   },
   {
@@ -99,7 +99,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '-58.11%', left: '122.38%', scale: 1 },
       to: { top: '26%', left: '86%' },
-      change: { scale: 1.1, top: '25%' },
+      change: { scale: 1.05, top: '25.5%' },
     },
   },
   {
@@ -109,7 +109,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '-39.99%', left: '107.73%', scale: 1 },
       to: { top: '19.5%', left: '72%' },
-      change: { scale: 0.95, top: '18%' },
+      change: { scale: 0.95, top: '19%' },
     },
   },
   {
@@ -119,7 +119,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '95.42%', left: '124.5%', scale: 1 },
       to: { top: '73%', left: '78.5%' },
-      change: { scale: 0.9, top: '70%', left: '78.8%' },
+      change: { scale: 0.95, top: '72.5%', left: '78.8%' },
     },
   },
   {
@@ -129,7 +129,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '92.07%', left: '137.38%', scale: 1 },
       to: { top: '64.11%', left: '89.25%' },
-      change: { scale: 1.08, top: '64%', left: '91%' },
+      change: { scale: 1.05, top: '64%', left: '89.75%' },
     },
   },
   {
@@ -139,7 +139,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '-48.78%', left: '32.25%', scale: 1 },
       to: { top: '16.5%', left: '35.5%' },
-      change: { scale: 0.8, top: '15.7%', left: '35.4%' },
+      change: { scale: 0.95, top: '16%', left: '35.5%' },
     },
   },
   {
@@ -149,7 +149,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '-26.67%', left: '30.31%', scale: 1 },
       to: { top: '24.5%', left: '34%' },
-      change: { scale: 0.87, top: '25%', left: '33.8%' },
+      change: { scale: 0.95, top: '25%', left: '33.8%' },
     },
   },
   {
@@ -159,7 +159,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '226.67%', left: '-20.13%', scale: 1 },
       to: { top: '67%', left: '-3%' },
-      change: { top: '65%' },
+      change: { top: '66.5%' },
     },
   },
   {
@@ -169,7 +169,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '29.22%', left: '-34.83%', scale: 1 },
       to: { top: '21%', left: '-7%' },
-      change: { scale: 0.95, top: '23%' },
+      change: { scale: 0.95, top: '21.5%' },
     },
   },
   {
@@ -179,7 +179,7 @@ const BALLOONS_CONFIG = [
     anim: {
       from: { top: '128.89%', left: '49.88%', scale: 1 },
       to: { top: '84%', left: '48.5%', scale: 1.2 },
-      change: { scale: 1.15, top: '84%', left: '47%' },
+      change: { scale: 1.05, top: '84%', left: '48%' },
     },
   },
 ];
