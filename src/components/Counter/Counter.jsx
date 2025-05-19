@@ -72,30 +72,11 @@ const Counter = ({ loadingStage }) => {
     if (isMobile || loadingStage !== 'complete') return;
 
     const ctx = gsap.context(() => {
-      itemsRef.current.forEach((item, index) => {
-        gsap.fromTo(
-          item,
-          { y: 0, opacity: 1 },
-          {
-            y: -650,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: 'top top',
-              end: 'bottom top',
-              scrub: true,
-              id: `counter-item-${index}`,
-            },
-          }
-        );
-      });
-
       gsap.fromTo(
         imageRef.current,
         { scale: 1 },
         {
+          y: 350,
           scale: 1.4,
           duration: 0.8,
           ease: 'power2.out',
@@ -128,11 +109,7 @@ const Counter = ({ loadingStage }) => {
             { n: 1000, text: '3д моделей' },
             { n: 7, text: 'Лет на рынке 3D графики' },
           ].map((item, index) => (
-            <div
-              key={index}
-              className={`${styles.Counter__item} ${isMobile ? styles.active : ''}`}
-              ref={(el) => (itemsRef.current[index] = el)}
-            >
+            <div key={index} className={`${styles.Counter__item} ${isMobile ? styles.active : ''}`} ref={(el) => (itemsRef.current[index] = el)}>
               <div>
                 <Number n={item.n} />
               </div>
