@@ -7,8 +7,8 @@
 
   &__item {
     position: absolute;
-    overflow: hidden;
-    transform-origin: center;
+    will-change: transform;
+    transform-origin: center center;
 
     img {
       display: block;

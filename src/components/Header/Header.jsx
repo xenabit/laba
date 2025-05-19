@@ -13,9 +13,9 @@ const BALLOON_C_CONFIG = {
   key: 'c',
   src: Baloon_c,
   anim: {
-    from: { top: '-8.89%', left: '47.94%', scale: 1 },
+    from: { top: '-8.89%', left: '47.94%', scale: 1, transformOrigin: 'center center' },
     to: { top: '39%', left: '25.6%', zIndex: '60' },
-    change: { top: '39.3%', left: '25.4%', scale: 0.9 },
+    change: { scale: 0.9, yPercent: 0.3, xPercent: -0.2 },
   },
 };
 
@@ -47,8 +47,9 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         ease: 'linear',
         repeat: -1,
         yoyo: true,
+        overwrite: 'auto',
       },
-      '>'
+      ANIMATION_CONFIG.BALOON_MOVE_DURATION
     );
   };
 
@@ -69,7 +70,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     gsap.set(balloon, {
       top: '39%',
       left: '25.6%',
-      transformOrigin: 'center',
+      transformOrigin: 'center center',
       zIndex: 60,
       opacity: 1,
     });

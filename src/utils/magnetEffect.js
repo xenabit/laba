@@ -1,10 +1,10 @@
 import { gsap } from 'gsap';
 
 const defaultConfig = {
-  maxDistance: 400, // Максимальное расстояние для эффекта
-  strength: 25, // Сила примагничивания
-  duration: 0.3, // Длительность анимации
-  ease: 'power2.out', // Тип смягчения
+  maxDistance: 200,
+  strength: 5,
+  duration: 0.2,
+  ease: 'power2.out',
 };
 
 export const magnetEffect = (element, mouseX, mouseY, containerRect, config = {}) => {
@@ -39,6 +39,7 @@ export const magnetEffect = (element, mouseX, mouseY, containerRect, config = {}
           y: 0,
           duration,
           ease,
+          overwrite: 'auto',
         });
       }
     },

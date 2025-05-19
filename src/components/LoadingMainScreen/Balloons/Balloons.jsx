@@ -27,9 +27,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_cb2,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '155%', left: '42%', scale: 1 },
+      from: { top: '155%', left: '42%', scale: 1, transformOrigin: 'center center' },
       to: { top: '83%', left: '39%' },
-      change: { scale: 1.01, top: '83.5%' },
+      change: { scale: 1.03, yPercent: 1 },
     },
   },
   {
@@ -37,7 +37,7 @@ const BALLOONS_CONFIG = [
     src: Baloon_lb2,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '164.65%', left: '20.75%', scale: 1 },
+      from: { top: '164.65%', left: '20.75%', scale: 1, transformOrigin: 'center center' },
       to: { top: '74%', left: '5%' },
       change: { scale: 0.98, rotate: 10 },
     },
@@ -47,9 +47,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_r,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '5.28%', left: '134.35%', scale: 1 },
+      from: { top: '5.28%', left: '134.35%', scale: 1, transformOrigin: 'center center' },
       to: { top: '46%', left: '92.5%' },
-      change: { scale: 1.02, top: '46.5%' },
+      change: { scale: 1.1, yPercent: 0.6 },
     },
   },
   {
@@ -57,9 +57,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_lt1,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '-56%', left: '-77%', scale: 1 },
+      from: { top: '-56%', left: '-77%', scale: 1, transformOrigin: 'center center' },
       to: { top: '7%', left: '-18%' },
-      change: { scale: 0.95, left: '-18.5%' },
+      change: { scale: 0.98, xPercent: -1 },
     },
   },
   {
@@ -67,9 +67,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_rb2,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '134.28%', left: '134.44%', scale: 1 },
+      from: { top: '134.28%', left: '134.44%', scale: 1, transformOrigin: 'center center' },
       to: { top: '63%', left: '79%' },
-      change: { scale: 0.95, top: '63.5%' },
+      change: { scale: 0.95, yPercent: 1 },
     },
   },
   {
@@ -77,9 +77,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_rt3,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '-96.44%', left: '120.81%', scale: 1 },
+      from: { top: '-96.44%', left: '120.81%', scale: 1, transformOrigin: 'center center' },
       to: { top: '6%', left: '76%' },
-      change: { scale: 1.02, top: '6.5%', rotate: -10 },
+      change: { scale: 1.02, yPercent: 1, rotate: -15 },
     },
   },
   {
@@ -87,9 +87,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_ct1,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '-100%', left: '33%', scale: 1 },
+      from: { top: '-100%', left: '33%', scale: 1, transformOrigin: 'center center' },
       to: { top: '9%', left: '29.5%' },
-      change: { scale: 1.05, left: '29.2%' },
+      change: { scale: 1.05, xPercent: -0.3 },
     },
   },
   {
@@ -97,9 +97,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_rt2,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '-58.11%', left: '122.38%', scale: 1 },
+      from: { top: '-58.11%', left: '122.38%', scale: 1, transformOrigin: 'center center' },
       to: { top: '26%', left: '86%' },
-      change: { scale: 1.05, top: '25.5%' },
+      change: { scale: 1.05, yPercent: -1 },
     },
   },
   {
@@ -107,9 +107,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_rt1,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '-39.99%', left: '107.73%', scale: 1 },
+      from: { top: '-39.99%', left: '107.73%', scale: 1, transformOrigin: 'center center' },
       to: { top: '19.5%', left: '72%' },
-      change: { scale: 0.95, top: '19%' },
+      change: { scale: 0.95, yPercent: -1 },
     },
   },
   {
@@ -117,9 +117,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_rb1,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '95.42%', left: '124.5%', scale: 1 },
+      from: { top: '95.42%', left: '124.5%', scale: 1, transformOrigin: 'center center' },
       to: { top: '73%', left: '78.5%' },
-      change: { scale: 0.95, top: '72.5%', left: '78.8%' },
+      change: { scale: 1.05, yPercent: -1, xPercent: 0.3 },
     },
   },
   {
@@ -127,9 +127,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_rb3,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '92.07%', left: '137.38%', scale: 1 },
+      from: { top: '92.07%', left: '137.38%', scale: 1, transformOrigin: 'center center' },
       to: { top: '64.11%', left: '89.25%' },
-      change: { scale: 1.05, top: '64%', left: '89.75%' },
+      change: { scale: 1.05, yPercent: -0.11, xPercent: 1 },
     },
   },
   {
@@ -137,9 +137,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_ct2,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '-48.78%', left: '32.25%', scale: 1 },
+      from: { top: '-48.78%', left: '32.25%', scale: 1, transformOrigin: 'center center' },
       to: { top: '16.5%', left: '35.5%' },
-      change: { scale: 0.95, top: '16%', left: '35.5%' },
+      change: { scale: 0.95, yPercent: -1 },
     },
   },
   {
@@ -147,9 +147,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_ct3,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '-26.67%', left: '30.31%', scale: 1 },
+      from: { top: '-26.67%', left: '30.31%', scale: 1, transformOrigin: 'center center' },
       to: { top: '24.5%', left: '34%' },
-      change: { scale: 0.95, top: '25%', left: '33.8%' },
+      change: { scale: 0.95, yPercent: 1, xPercent: -0.2 },
     },
   },
   {
@@ -157,9 +157,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_lb1,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '226.67%', left: '-20.13%', scale: 1 },
+      from: { top: '226.67%', left: '-20.13%', scale: 1, transformOrigin: 'center center' },
       to: { top: '67%', left: '-3%' },
-      change: { top: '66.5%' },
+      change: { scale: 1.05, yPercent: -1 },
     },
   },
   {
@@ -167,9 +167,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_lt2,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '29.22%', left: '-34.83%', scale: 1 },
+      from: { top: '29.22%', left: '-34.83%', scale: 1, transformOrigin: 'center center' },
       to: { top: '21%', left: '-7%' },
-      change: { scale: 0.95, top: '21.5%' },
+      change: { scale: 0.95, yPercent: 1 },
     },
   },
   {
@@ -177,9 +177,9 @@ const BALLOONS_CONFIG = [
     src: Baloon_cb1,
     className: styles.Balloons__item,
     anim: {
-      from: { top: '128.89%', left: '49.88%', scale: 1 },
+      from: { top: '128.89%', left: '49.88%', scale: 1, transformOrigin: 'center center' },
       to: { top: '84%', left: '48.5%', scale: 1.2 },
-      change: { scale: 1.05, top: '84%', left: '48%' },
+      change: { scale: 1.05, yPercent: 0, xPercent: -1 },
     },
   },
 ];
@@ -191,7 +191,6 @@ function Balloons({ containerRef, startBalloonsToCenter, wrapperRef, loadingStag
   const balloonsEntryAnimate = (balloons) => {
     const tl = gsap.timeline({ delay: ANIMATION_CONFIG.MAIN_ENTRY_ANIM });
 
-    // Устанавливаем начальные позиции для всех шаров
     BALLOONS_CONFIG.forEach(({ key, anim: { from } }) => {
       const balloon = balloonRefs.current[key]?.current;
       if (balloon) {
@@ -199,7 +198,6 @@ function Balloons({ containerRef, startBalloonsToCenter, wrapperRef, loadingStag
       }
     });
 
-    // Запускаем анимации для всех шаров одновременно
     balloons.forEach((balloon, index) => {
       const {
         anim: { to, change },
@@ -211,7 +209,7 @@ function Balloons({ containerRef, startBalloonsToCenter, wrapperRef, loadingStag
           duration: ANIMATION_CONFIG.BALOON_MOVE_DURATION,
           ease: 'linear',
         },
-        0 // Все анимации начинаются одновременно
+        0
       ).to(
         balloon,
         {
@@ -220,8 +218,9 @@ function Balloons({ containerRef, startBalloonsToCenter, wrapperRef, loadingStag
           ease: 'linear',
           repeat: -1,
           yoyo: true,
+          overwrite: 'auto',
         },
-        ANIMATION_CONFIG.BALOON_MOVE_DURATION // Начинается после первой анимации
+        ANIMATION_CONFIG.BALOON_MOVE_DURATION
       );
     });
   };
@@ -268,10 +267,11 @@ function Balloons({ containerRef, startBalloonsToCenter, wrapperRef, loadingStag
       balloons.forEach((balloon) =>
         magnetEffect(balloon, mouseX, mouseY, containerRect, {
           maxDistance: ANIMATION_CONFIG.MAGNET_MAX_DISTANCE,
-          strength: ANIMATION_CONFIG.MAGNET_STRENGTH,
+          strength: ANIMATION_CONFIG.MAGNET_STRENGTH * 0.5,
+          duration: 0.2,
         })
       );
-    }, 16);
+    }, 32);
 
     if (loadingStage === 'initial') {
       balloonsEntryAnimate(balloons);
