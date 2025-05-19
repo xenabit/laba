@@ -14,7 +14,7 @@ const BALLOON_C_CONFIG = {
   src: Baloon_c,
   anim: {
     from: { top: '-8.89%', left: '47.94%', scale: 1 },
-    to: { top: '39%', left: '25.6%', zIndex: '250' },
+    to: { top: '39%', left: '25.6%', zIndex: '60' },
     // change: { top: '39%', left: '25.4%', scale: 0.7 },
   },
 };
@@ -70,7 +70,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       top: '39%',
       left: '25.6%',
       transformOrigin: 'center',
-      zIndex: 250,
+      zIndex: 60,
       opacity: 1,
     });
 
