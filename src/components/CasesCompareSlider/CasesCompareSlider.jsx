@@ -100,7 +100,6 @@ function CasesCompareSlider({ items }) {
         <Swiper
           ref={swiperRef}
           className={styles.CasesCompareSlider__swiper}
-          style={{ backgroundImage: `url(${items.bg})` }}
           modules={[Navigation, Pagination]}
           speed={1000}
           keyboard={{ enabled: true }}
@@ -121,6 +120,9 @@ function CasesCompareSlider({ items }) {
         >
           {items.pictures?.map((item, index) => (
             <SwiperSlide className={styles.CasesCompareSlider__slide} key={item.id}>
+              <div className={styles.CasesCompareSlider__bg}>
+                <img loading="lazy" src={items.bg} alt="Before"></img>
+              </div>
               <div className={styles.CasesCompareSlider__wrapper}>
                 <div className={styles.CasesCompareSlider__pictures}>
                   <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_left}`}>

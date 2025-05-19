@@ -25,7 +25,6 @@ function CasesSliderFull({ items }) {
         <Swiper
           ref={swiperRef}
           className={styles.CasesSliderFull__swiper}
-          style={{ backgroundImage: `url(${items.bg})` }}
           modules={[Navigation, Pagination]}
           speed={1000}
           keyboard={{ enabled: true }}

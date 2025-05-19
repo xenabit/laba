@@ -36,7 +36,6 @@ function CasesSliderVideo({ items }) {
         <Swiper
           ref={swiperRef}
           className={styles.CasesSliderVideo__swiper}
-          style={{ backgroundImage: `url(${items.bg})` }}
           modules={[Navigation, Pagination]}
           speed={1000}
           keyboard={{ enabled: true }}
@@ -72,6 +71,9 @@ function CasesSliderVideo({ items }) {
         >
           {items.videos?.map((item) => (
             <SwiperSlide className={styles.CasesSliderVideo__slide} key={item.id}>
+              <div className={styles.CasesSliderVideo__bg}>
+                <img loading="lazy" src={items.bg} alt="Before"></img>
+              </div>
               <div className={styles.CasesSliderVideo__inner}>
                 <div className={`${styles.CasesSliderVideo__half} ${styles.CasesSliderVideo__half_left}`} onClick={() => handleSlide('prev')}>
                   <div className={styles.CasesSliderVideo__box}>

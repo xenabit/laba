@@ -10,9 +10,19 @@
     @include containerMob;
     transition: 0.3s;
     overflow: visible !important;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+  }
+
+  &__bg {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: 5;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   }
 
   &__slide {
@@ -21,6 +31,7 @@
     align-items: center;
     height: 100vh;
     max-height: 52vw;
+    z-index: 10;
   }
 
   &__pictures {
@@ -42,12 +53,12 @@
 
     &_left {
       clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-      z-index: 1;
+      z-index: 15;
     }
 
     &_right {
       clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
-      z-index: 0;
+      z-index: 15;
     }
 
     img {
@@ -84,7 +95,7 @@
     height: 100%;
     width: 4px;
     background-color: var(--prime-3);
-    z-index: 10;
+    z-index: 15;
   }
 
   &__toggle {
@@ -97,7 +108,7 @@
     border-bottom: 11px solid transparent;
     opacity: 0.8;
     cursor: grab;
-    z-index: 100;
+    z-index: 30;
     transition: 0.3s;
 
     &:active {

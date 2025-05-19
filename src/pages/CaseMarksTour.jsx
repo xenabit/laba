@@ -173,6 +173,7 @@ const case_slider_full_content_1 = {
       sizes: {
         width: '100%',
         height: '100%',
+        objectfit: 'cover',
       },
       id: '1_5',
       picture: case_slider_full_picture_5,
