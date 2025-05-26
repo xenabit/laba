@@ -31,6 +31,7 @@ const App = () => {
   const [loadingStage, setLoadingStage] = useState('initial');
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const location = useLocation();
+  const smootherRef = useRef(null); // Сохраняем экземпляр ScrollSmoother
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem('hasVisitedHome');
@@ -44,9 +45,8 @@ const App = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    let smoother;
     if (loadingStage === 'complete') {
-      smoother = ScrollSmoother.create({
+      smootherRef.current = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
         smooth: 1.5,
@@ -55,11 +55,27 @@ const App = () => {
       ScrollTrigger.refresh();
     }
     return () => {
-      if (smoother) smoother.kill();
+      if (smootherRef.current) {
+        smootherRef.current.kill();
+        smootherRef.current = null;
+      }
       ScrollTrigger.refresh();
       document.body.style.overflow = '';
     };
   }, [loadingStage]);
+
+  // Сбрасываем скролл при смене маршрута
+  useEffect(() => {
+    if (loadingStage === 'complete' && smootherRef.current) {
+      // Прокручиваем к началу страницы с плавной анимацией
+      smootherRef.current.scrollTo(0, true);
+    } else {
+      // Если ScrollSmoother ещё не инициализирован, используем нативный scroll
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    // Обновляем ScrollTrigger после сброса скролла
+    ScrollTrigger.refresh();
+  }, [location.pathname, loadingStage]);
 
   const handleStageChange = (stage) => {
     setLoadingStage(stage);
