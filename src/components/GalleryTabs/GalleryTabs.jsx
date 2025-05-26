@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
+import { useSearchParams } from 'react-router-dom';
 import styles from './GalleryTabs.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
-
 import { projects, projectsTypes } from '../../constants/projects';
 
 export default function GalleryTabs() {
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialFilter = searchParams.get('filter') || 'all';
+  const [activeFilter, setActiveFilter] = useState(initialFilter);
+
+  useEffect(() => {
+    const filterFromUrl = searchParams.get('filter') || 'all';
+    if (filterFromUrl !== activeFilter) {
+      setActiveFilter(filterFromUrl);
+    }
+  }, [searchParams]);
 
   const handleMouseEnter = (video) => {
     video.play();
@@ -19,6 +27,7 @@ export default function GalleryTabs() {
 
   const handleFilterChange = (type) => {
     setActiveFilter(type);
+    setSearchParams({ filter: type });
   };
 
   const handleMouseMove = (e) => {
@@ -43,10 +52,10 @@ export default function GalleryTabs() {
       <div className={styles.GalleryTabs__header}>
         <h1 className={styles.GalleryTabs__title}>ПОРТФОЛИО</h1>
         <div className={styles.GalleryTabs__links}>
-          <a className={styles.GalleryTabs__mail} href="#">
+          <a className={styles.GalleryTabs__mail} href="mailto:mail@marksgroup.ru">
             mail@marksgroup.ru
           </a>
-          <a className={styles.GalleryTabs__tel} href="#">
+          <a className={styles.GalleryTabs__tel} href="tel:+74951201226">
             тел. +7 (495) 120-12-26
           </a>
         </div>
