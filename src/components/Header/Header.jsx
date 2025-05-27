@@ -150,7 +150,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       { scale: 15.5, top: '104%', left: '-11%' },
       { scale: 22, top: '133%', left: '-27%' },
       { scale: 25, top: '146%', left: '-35%' },
-      { scale: 26, top: '152%', left: '-38%' },
+      { scale: 26.1, top: '152%', left: '-38%' },
     ];
 
     scaleSteps.forEach((step, index) => {
