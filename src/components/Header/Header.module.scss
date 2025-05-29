@@ -17,12 +17,22 @@
   }
 
   &__logo {
+    display: none;
     position: absolute;
     left: 50%;
-    top: 15px;
+    top: 16px;
     transform: translateX(-50%);
     z-index: 50;
 
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__logomob {
+    display: block;
     img {
       display: block;
       width: 100%;
@@ -85,7 +95,7 @@
     justify-content: space-between;
     align-items: center;
     z-index: 30;
-    padding: rem(8) 0 rem(16) 0;
+    padding: 8px 0 16px 0;
     position: relative;
   }
 
@@ -104,7 +114,7 @@
 
   &__desc {
     display: none;
-    font-size: rem(15);
+    font-size: 15px;
   }
 
   &__loading {
@@ -116,15 +126,15 @@
 
   &__toggle {
     position: relative;
-    width: rem(62);
-    min-height: rem(18);
+    width: 62px;
+    min-height: 18px;
 
     span {
       position: absolute;
       transition: all 0.5s;
       background-color: var(--prime-2);
       width: 100%;
-      height: rem(2);
+      height: 2px;
 
       &:first-child {
         top: 0;
@@ -148,12 +158,12 @@
     &:hover {
       span {
         transition: all 0.5s;
-        width: rem(5);
-        height: rem(5);
+        width: 5px;
+        height: 5px;
 
         &:first-child {
           top: 50%;
-          right: rem(12);
+          right: 12px;
           left: auto;
         }
 
@@ -166,7 +176,7 @@
         &:last-child {
           top: 50%;
           right: auto;
-          left: rem(17);
+          left: 17px;
         }
       }
     }
@@ -179,7 +189,7 @@
           transition: all 0.5s;
           background-color: var(--prime-2);
           width: 100%;
-          height: rem(2);
+          height: 2px;
 
           &:first-child {
             top: 0;
@@ -205,12 +215,12 @@
     &:hover {
       span {
         transition: all 0.5s;
-        width: rem(5);
-        height: rem(5);
+        width: 5px;
+        height: 5px;
 
         &:first-child {
           top: 50%;
-          right: rem(12);
+          right: 12px;
           left: auto;
         }
 
@@ -223,7 +233,7 @@
         &:last-child {
           top: 50%;
           right: auto;
-          left: rem(17);
+          left: 17px;
         }
       }
     }
@@ -235,21 +245,21 @@
     flex-direction: column;
     justify-content: space-between;
     animation: header-slide-down 0.5s ease-out forwards;
-    padding: 0 rem(16) rem(16) rem(16);
+    padding: 0 16px 16px 16px;
     height: 100%;
-    min-height: rem(726);
+    min-height: 726px;
     z-index: 70;
 
     &::before {
       position: absolute;
-      top: rem(234);
-      right: rem(-66);
+      top: 234px;
+      right: -66px;
       background-image: url('/src/assets/images/header-menu.svg');
       background-position: center center;
       background-size: contain;
       background-repeat: no-repeat;
-      width: rem(384);
-      height: rem(330);
+      width: 384px;
+      height: 330px;
       content: '';
     }
   }
@@ -260,20 +270,20 @@
     flex-direction: column;
     align-items: flex-start;
     z-index: 10;
-    padding-top: rem(60);
-    padding-bottom: rem(16);
+    padding-top: 60px;
+    padding-bottom: 16px;
     overflow: hidden;
     color: var(--prime-1);
 
     li:not(:last-child) {
-      margin-bottom: rem(32);
+      margin-bottom: 32px;
     }
 
     a {
       display: inline-block;
       position: relative;
       transition: color 0.3s;
-      font-size: rem(40);
+      font-size: 40px;
       line-height: 1.1;
 
       &:hover {
@@ -282,15 +292,15 @@
 
       &::before {
         position: absolute;
-        bottom: rem(-12);
+        bottom: -12px;
         left: 0;
-        transform: translateX(rem(-10));
+        transform: translateX(10px);
         opacity: 0;
         z-index: 20;
         transition: all 0.5s ease-in-out;
         background-color: var(--prime-3);
         width: 0;
-        height: rem(2);
+        height: 20x;
         content: '';
       }
 
@@ -303,7 +313,7 @@
           transform: translateX(0);
           opacity: 1;
           transition: 0.3s;
-          width: rem(95);
+          width: 95px;
         }
       }
     }
@@ -312,11 +322,11 @@
   &__links {
     display: flex;
     align-self: flex-end;
-    gap: rem(20);
+    gap: 20px;
     opacity: 0.6;
     z-index: 20;
     margin-top: auto;
-    margin-bottom: rem(16);
+    margin-bottom: 16px;
     color: var(--prime-1);
     font-weight: var(--fw-light);
     font-family: var(--font-sec);
@@ -345,28 +355,28 @@
       display: block;
       opacity: 0.6;
       transition: color 0.3s;
-      font-size: rem(16);
-      line-height: rem(24);
+      font-size: 16px;
+      line-height: 24px;
 
       &:hover {
         color: var(--prime-3);
       }
 
       &#{$s}__mail {
-        margin: 0 0 rem(16) 0;
-        font-size: rem(24);
-        line-height: rem(32);
+        margin: 0 0 16px 0;
+        font-size: 24px;
+        line-height: 32px;
       }
 
       &#{$s}__tel {
-        margin: 0 0 rem(4) 0;
+        margin: 0 0 4px 0;
       }
     }
   }
 
   @keyframes header-slide-down {
     0% {
-      transform: translateY(rem(-50));
+      transform: translateY(-50px);
       opacity: 0;
     }
     100% {
@@ -381,7 +391,7 @@
       opacity: 1;
     }
     100% {
-      transform: translateY(rem(-50));
+      transform: translateY(-50px);
       opacity: 0;
     }
   }
@@ -403,6 +413,10 @@
       filter: invert(1) grayscale(1) brightness(1000%);
     }
 
+    #{$s}__logomob img {
+      filter: invert(1) grayscale(1) brightness(1000%);
+    }
+
     #{$s}__toggle {
       span {
         top: auto;
@@ -411,8 +425,8 @@
 
         &:first-child,
         &:last-child {
-          width: rem(32);
-          height: 0.125rem;
+          width: 32px;
+          height: 2px;
         }
 
         &:nth-child(2) {
@@ -421,7 +435,7 @@
 
         &:first-child {
           top: 50%;
-          right: rem(15);
+          right: 15px;
           left: auto;
           transform: translateY(-50%) rotate(-30deg);
         }
@@ -429,7 +443,7 @@
         &:last-child {
           top: 50%;
           right: auto;
-          left: rem(15);
+          left: 15px;
           transform: translateY(-50%) rotate(30deg);
         }
       }
@@ -451,7 +465,7 @@
           span {
             &:first-child {
               top: 50%;
-              right: rem(15);
+              right: 15px;
               left: auto;
               transform: translateY(-50%) rotate(-30deg);
             }
@@ -459,7 +473,7 @@
             &:last-child {
               top: 50%;
               right: auto;
-              left: rem(15);
+              left: 15px;
               transform: translateY(-50%) rotate(30deg);
             }
           }
@@ -476,49 +490,42 @@
 
   @media all and (min-width: $bp4) {
     &__top {
-      padding: rem(12) 0 rem(16) 0;
+      @include containerDesk;
+      padding: 20px 0 16px 0;
     }
 
-    &__inner::before {
-      right: 0;
-    }
-
-    &__desc {
+    &__logo {
       display: block;
     }
-  }
 
-  // Адаптация для tablet
-  @media all and (min-width: $bp3) {
-    &__top {
-      @include containerDesk;
-      padding: rem(12) 0 rem(16) 0;
+    &__logomob {
+      display: none;
     }
 
     &__inner {
-      padding: 0 rem(32) rem(32) rem(32);
+      padding: 0 32px 32px 32px;
       min-height: 100vh;
 
       &::before {
-        top: rem(219);
+        top: 219px;
         right: auto;
-        left: rem(-189);
+        left: -189px;
         transform: scaleX(1);
-        width: rem(962);
-        height: rem(826);
+        width: 962px;
+        height: 826px;
       }
     }
-
+    &__desc {
+      display: block;
+    }
     nav {
-      padding: rem(200) 0 0 51.5%;
+      padding: 200px 0 0 51.5%;
     }
   }
 
   // Адаптация для desktop
   @media all and (min-width: $bp1) {
     &__top {
-      padding: rem(20) 0 rem(16) 0;
-
       #{$s}__border {
         height: 3px;
       }
@@ -527,11 +534,11 @@
     &__inner {
       position: relative;
       min-height: 95vh;
-      max-height: rem(1024);
+      max-height: 1025px;
 
       &::before {
-        top: rem(59);
-        left: rem(-43);
+        top: 59px;
+        left: -43px;
       }
     }
 
@@ -543,14 +550,14 @@
       }
     }
     nav {
-      padding: rem(195) 0 1rem 51.5%;
+      padding: 195px 0 16px 51.5%;
     }
 
     &__links {
       position: absolute;
-      top: rem(24);
-      right: rem(30);
-      gap: rem(50);
+      top: 24px;
+      right: 30px;
+      gap: 50px;
     }
 
     &__contacts {

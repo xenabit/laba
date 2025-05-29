@@ -3,7 +3,6 @@ import BackgroundLetters from './BackgroundLetters/BackgroundLetters';
 import Balloons from './Balloons/Balloons';
 import FlareComponent from './FlareComponent/FlareComponent';
 import { gsap } from 'gsap';
-import headerStyles from '../Header/Header.module.scss';
 import styles from './LoadingMainScreen.module.scss';
 import introStyles from '../Intro2/Intro2.module.scss';
 

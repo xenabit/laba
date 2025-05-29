@@ -238,6 +238,20 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   }, [loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete]);
 
   // useEffect для остальной логики хедера
+  const [isDesktop, setIsDesktop] = useState(typeof window !== 'undefined' ? window.matchMedia('(min-width: 1440px)').matches : false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1440px)');
+    const handleResize = () => {
+      setIsDesktop(mediaQuery.matches);
+    };
+
+    setIsDesktop(mediaQuery.matches);
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     if (!ref.current) {
       console.warn('Header ref is not ready');
@@ -347,7 +361,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       );
     }
 
-    const isDesktop = window.matchMedia('(min-width: 90rem)').matches;
     const borderHeight = isDesktop ? 3 : 2;
 
     gsap.set(border, {
@@ -423,7 +436,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       gsap.killTweensOf([header, border, logo, toggle, desc, headerTop, loading]);
     };
-  }, [ref, isActive, loadingStage]);
+  }, [ref, isActive, loadingStage, isDesktop]);
 
   useEffect(() => {
     const savedTab = localStorage.getItem('activeTab') || location.pathname;
@@ -460,6 +473,11 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
           <div className={styles.Header__top}>
             <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
               digital agency
+            </Link>
+            <Link to="/" className={styles.Header__logomob} onClick={() => handleTabClick('/')}>
+              <picture>
+                <img src={logoImg} alt="Логотип Laba" />
+              </picture>
             </Link>
             <button className={styles.Header__toggle} onClick={() => setIsActive((prev) => !prev)} aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={isActive}>
               <span></span>
