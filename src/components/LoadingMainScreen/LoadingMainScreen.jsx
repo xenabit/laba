@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BackgroundLetters from './BackgroundLetters/BackgroundLetters';
 import Balloons from './Balloons/Balloons';
 import FlareComponent from './FlareComponent/FlareComponent';
@@ -21,6 +21,19 @@ export const ANIMATION_CONFIG = {
 function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage, introRef, projectsTileRef }) {
   const containerRef = useRef(null);
   const tlRef = useRef(null);
+  const [isTabletOrLarger, setIsTabletOrLarger] = useState(typeof window !== 'undefined' ? window.matchMedia('(min-width: 1024px)').matches : false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    const handleResize = () => {
+      setIsTabletOrLarger(mediaQuery.matches);
+    };
+
+    setIsTabletOrLarger(mediaQuery.matches);
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const blockScroll = (event) => {
     event.preventDefault();
@@ -28,21 +41,18 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
 
   const handleScroll = (event) => {
     event.preventDefault();
-    if (loadingStage === 'initial') {
-      console.log('LoadingMainScreen: Scroll detected, switching to scrolling stage');
+    if (loadingStage === 'initial' && isTabletOrLarger) {
       onStageChange('scrolling');
     }
   };
 
   const enableScrollLock = () => {
-    console.log('LoadingMainScreen: Enabling scroll lock');
     window.addEventListener('wheel', blockScroll, { passive: false });
     window.addEventListener('touchmove', blockScroll, { passive: false });
     document.body.style.overflow = 'hidden';
   };
 
   const disableScrollLock = () => {
-    console.log('LoadingMainScreen: Disabling scroll lock');
     window.removeEventListener('wheel', blockScroll);
     window.removeEventListener('touchmove', blockScroll);
     window.removeEventListener('wheel', handleScroll);
@@ -51,13 +61,16 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
   };
 
   const animateInitialStage = () => {
-    console.log('LoadingMainScreen: Starting initial stage animation');
+    if (!isTabletOrLarger) {
+      onStageChange('complete');
+      return;
+    }
+
     enableScrollLock();
 
     tlRef.current = gsap.timeline({
       delay: ANIMATION_CONFIG.MAIN_ENTRY_ANIM,
       onComplete: () => {
-        console.log('LoadingMainScreen: Initial stage animation completed');
         window.removeEventListener('wheel', blockScroll);
         window.removeEventListener('touchmove', blockScroll);
         window.addEventListener('wheel', handleScroll, { passive: false });
@@ -67,23 +80,33 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
   };
 
   const animateScrollingStage = () => {
-    console.log('LoadingMainScreen: Starting scrolling stage');
+    if (!isTabletOrLarger) {
+      onStageChange('transition');
+      return;
+    }
+
     enableScrollLock();
   };
 
   const animateTransitionStage = () => {
-    console.log('LoadingMainScreen: Starting transition stage');
+    if (!isTabletOrLarger) {
+      onStageChange('complete');
+      return;
+    }
+
     enableScrollLock();
   };
 
   const animateCompleteStage = () => {
-    console.log('LoadingMainScreen: Starting complete stage');
     tlRef.current = gsap.timeline({
       onComplete: () => {
-        console.log('LoadingMainScreen: Complete stage animation finished');
         disableScrollLock();
       },
     });
+
+    if (!isTabletOrLarger) {
+      return;
+    }
 
     const introLaba = introRef.current?.querySelector(`.${introStyles.Intro2__laba}`);
     const introDesc = introRef.current?.querySelector(`.${introStyles.Intro2__desc}`);
@@ -135,8 +158,6 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
       return;
     }
 
-    console.log('LoadingMainScreen: useEffect triggered with loadingStage:', loadingStage);
-
     if (loadingStage === 'initial') {
       animateInitialStage();
     } else if (loadingStage === 'scrolling') {
@@ -148,28 +169,43 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
     }
 
     return () => {
-      console.log('LoadingMainScreen: Cleaning up animations');
       if (tlRef.current) tlRef.current.kill();
       gsap.killTweensOf([containerRef.current, introRef.current, projectsTileRef.current]);
       disableScrollLock();
     };
-  }, [loadingStage, headerRef, introRef, projectsTileRef]);
+  }, [loadingStage, headerRef, introRef, projectsTileRef, isTabletOrLarger]);
 
   const handleBalloonsToCenterComplete = () => {
-    console.log('LoadingMainScreen: Balloons to center complete, switching to transition');
+    if (!isTabletOrLarger) {
+      onStageChange('transition');
+      return;
+    }
     onStageChange('transition');
   };
 
   const handleBalloonsShrinkComplete = () => {
-    console.log('LoadingMainScreen: Balloons shrink complete, switching to complete');
+    if (!isTabletOrLarger) {
+      onStageChange('complete');
+      return;
+    }
+
     onStageChange('complete');
   };
 
   return (
     <section style={{ display: loadingStage === 'complete' ? 'none' : 'block' }}>
       <div ref={containerRef} className={styles.LoadingMainScreen__container}>
-        <Balloons containerRef={containerRef} startBalloonsToCenter={loadingStage === 'scrolling'} wrapperRef={wrapperRef} loadingStage={loadingStage} />
-        {(loadingStage === 'initial' || loadingStage === 'scrolling') && (
+        {isTabletOrLarger && (
+          <Balloons
+            containerRef={containerRef}
+            startBalloonsToCenter={loadingStage === 'scrolling'}
+            wrapperRef={wrapperRef}
+            loadingStage={loadingStage}
+            onBalloonsToCenterComplete={handleBalloonsToCenterComplete}
+            onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
+          />
+        )}
+        {(loadingStage === 'initial' || loadingStage === 'scrolling') && isTabletOrLarger && (
           <>
             <BackgroundLetters containerRef={containerRef} />
             <FlareComponent />
