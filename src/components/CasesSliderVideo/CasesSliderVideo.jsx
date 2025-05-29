@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './CasesSliderVideo.module.scss';
@@ -36,7 +36,7 @@ function CasesSliderVideo({ items }) {
         <Swiper
           ref={swiperRef}
           className={styles.CasesSliderVideo__swiper}
-          modules={[Navigation, Pagination]}
+          modules={[Navigation, Pagination, Autoplay]}
           speed={1000}
           keyboard={{ enabled: true }}
           pagination={{
@@ -45,6 +45,11 @@ function CasesSliderVideo({ items }) {
             bulletClass: `${styles.CasesSliderVideo__bullet}`,
             bulletActiveClass: `${styles.CasesSliderVideo__bullet_active}`,
             renderBullet: (index, className) => `<span class="${className}"></span>`,
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
           }}
           breakpoints={{
             320: {

@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './CasesSliderFull.module.scss';
@@ -25,7 +25,7 @@ function CasesSliderFull({ items }) {
         <Swiper
           ref={swiperRef}
           className={styles.CasesSliderFull__swiper}
-          modules={[Navigation, Pagination]}
+          modules={[Navigation, Pagination, Autoplay]}
           speed={1000}
           keyboard={{ enabled: true }}
           pagination={{
@@ -33,11 +33,16 @@ function CasesSliderFull({ items }) {
             clickable: true,
             bulletClass: `${styles.CasesSliderFull__bullet}`,
             bulletActiveClass: `${styles.CasesSliderFull__bullet_active}`,
-            renderBullet: (index, className) => `<span class="${className}"></span>`,
+            renderBullet: (index, className) => `<span class="${className}" role="button" aria-label="Перейти к слайду ${index + 1}"></span>`,
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
           }}
           breakpoints={{
             320: {
-              spaceBetween: 16,
+              spaceBetween: 32,
               slidesPerView: 1,
               loop: true,
             },
@@ -57,6 +62,8 @@ function CasesSliderFull({ items }) {
               loop: true,
             },
           }}
+          role="region"
+          aria-label="Карусель изображений"
         >
           {items.pictures?.map((item) => (
             <SwiperSlide className={styles.CasesSliderFull__slide} key={item.id}>

@@ -15,13 +15,14 @@
   &__bg {
     position: absolute;
     width: 100%;
-    height: auto;
+    height: 100%;
     z-index: 5;
 
     img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
@@ -58,8 +59,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 24.19px;
-      border: 7.26px solid rgba(0, 0, 0, 1);
+      border-radius: 8px;
+      border: 3px solid rgba(0, 0, 0, 1);
     }
   }
 
@@ -101,6 +102,17 @@
   @media all and (min-width: $bp3) {
     &__swiper {
       @include containerDesk;
+    }
+
+    &__swiper {
+      overflow: visible !important;
+    }
+
+    &__box {
+      video {
+        border-radius: 24.19px;
+        border: 7.26px solid rgba(0, 0, 0, 1);
+      }
     }
   }
 }

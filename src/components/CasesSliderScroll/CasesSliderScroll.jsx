@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, FreeMode } from 'swiper/modules';
+import { Navigation, Pagination, FreeMode, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './CasesSliderScroll.module.scss';
@@ -26,7 +26,7 @@ function CasesSliderScroll({ items }) {
           ref={swiperRef}
           className={styles.CasesSliderScroll__swiper}
           style={{ backgroundImage: `url(${items.bg})` }}
-          modules={[Navigation, Pagination, FreeMode]}
+          modules={[Navigation, Pagination, FreeMode, Autoplay]}
           freeMode={{ enabled: true, momentum: true }}
           speed={800}
           keyboard={{ enabled: true }}
@@ -36,6 +36,11 @@ function CasesSliderScroll({ items }) {
             bulletClass: `${styles.CasesSliderScroll__bullet}`,
             bulletActiveClass: `${styles.CasesSliderScroll__bullet_active}`,
             renderBullet: (index, className) => `<span class="${className}"></span>`,
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
           }}
           breakpoints={{
             320: {
