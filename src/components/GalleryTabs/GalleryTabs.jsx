@@ -52,11 +52,14 @@ export default function GalleryTabs() {
       <div className={styles.GalleryTabs__header}>
         <h1 className={styles.GalleryTabs__title}>ПОРТФОЛИО</h1>
         <div className={styles.GalleryTabs__links}>
-          <a className={styles.GalleryTabs__mail} href="mailto:mail@marksgroup.ru">
-            mail@marksgroup.ru
+          <a className={styles.GalleryTabs__mail} href="mailto:info@laba-laba.ru">
+            info@laba-laba.ru
           </a>
-          <a className={styles.GalleryTabs__tel} href="tel:+74951201226">
-            тел. +7 (495) 120-12-26
+          <a href="tel:+79161958226" className={styles.GalleryTabs__tel}>
+            тел. +7&nbsp;(916)&nbsp;195-82-26
+          </a>
+          <a href="tel:+79690639323" className={styles.GalleryTabs__tel}>
+            тел. +7&nbsp;(969)&nbsp;063-93-23
           </a>
         </div>
       </div>

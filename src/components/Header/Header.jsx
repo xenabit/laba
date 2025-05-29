@@ -15,7 +15,7 @@ const BALLOON_C_CONFIG = {
   key: 'c',
   src: Baloon_c,
   anim: {
-    from: { top: '-8.89%', left: '47.94%', scale: 1, transformOrigin: 'center center' },
+    from: { top: '-20%', left: '47.94%', scale: 1, transformOrigin: 'center center' },
     to: { top: '39%', left: '25.6%', zIndex: '60' },
     change: { scale: 0.9, yPercent: 0.3, xPercent: -0.2 },
   },
@@ -488,23 +488,26 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
                 </li>
               </ul>
             </nav>
-            <ul className={styles.Header__links}>
+            {/* <ul className={styles.Header__links}>
               <li>
                 <a href="#">Реквизиты</a>
               </li>
               <li>
                 <a href="#">Презентация</a>
               </li>
-            </ul>
+            </ul> */}
             <div className={styles.Header__contacts}>
-              <a className={styles.Header__mail} href="mailto:mail@marksgroup.ru">
-                mail@marksgroup.ru
+              <a className={styles.Header__mail} href="mailto:info@laba-laba.ru">
+                info@laba-laba.ru
               </a>
               <a href="tel:+74951201226" className={styles.Header__tel}>
-                тел. +7 (495) 120-12-26
+                тел. +7&nbsp;(916)&nbsp;195-82-26
+              </a>
+              <a href="tel:+79690639323" className={styles.Header__tel}>
+                тел. +7&nbsp;(969)&nbsp;063-93-23
               </a>
               <a href="https://yandex.ru/profile/1116551737" target="_blank" rel="noopener noreferrer">
-                г. Москва ул. 3-я Ямского Поля д. 20 с1
+                125124, город Москва, ул 3-Я Ямского Поля, д. 2 к. 13
               </a>
             </div>
           </div>

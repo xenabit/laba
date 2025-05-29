@@ -4,7 +4,7 @@
 
   &__baloon {
     position: absolute;
-    top: 0;
+    top: -10%;
     left: 0;
     z-index: 60;
     pointer-events: auto;
@@ -238,7 +238,7 @@
     padding: 0 rem(16) rem(16) rem(16);
     height: 100%;
     min-height: rem(726);
-    z-index: 50;
+    z-index: 70;
 
     &::before {
       position: absolute;
@@ -482,6 +482,10 @@
     &__inner::before {
       right: 0;
     }
+
+    &__desc {
+      display: block;
+    }
   }
 
   // Адаптация для tablet
@@ -507,10 +511,6 @@
 
     nav {
       padding: rem(200) 0 0 51.5%;
-    }
-
-    &__desc {
-      display: block;
     }
   }
 

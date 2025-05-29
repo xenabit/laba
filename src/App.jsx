@@ -15,6 +15,7 @@ import CaseMarksCity from './pages/CaseMarksCity.jsx';
 import FormBrief from './components/FormBrief/FormBrief.jsx';
 import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
 import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother.min';
@@ -121,6 +122,7 @@ const App = () => {
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />
+          <Route path="/information" element={<PrivacyPolicy />} />
           <Route path="/portfolio/markstour" element={<CaseMarksTour />} />
           <Route path="/portfolio/markssite" element={<CaseMarkssite />} />
           <Route path="/portfolio/markssite-hr" element={<CaseMarkssiteHR />} />
