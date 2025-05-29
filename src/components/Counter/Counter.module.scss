@@ -43,14 +43,15 @@
   &__picture {
     overflow: hidden;
     height: 100vh;
-    max-height: rem(480);
+    max-height: rem(680);
 
     img {
       display: block;
       width: 100%;
-      height: 100vh;
-      max-height: rem(480);
+      height: 100%;
+      object-fit: cover;
       transform-origin: center center;
+      max-height: rem(680);
     }
   }
 
@@ -137,11 +138,11 @@
     }
 
     &__picture {
-      max-height: rem(1024);
+      max-height: rem(830);
 
       img {
         height: 100vh;
-        max-height: rem(1024);
+        max-height: rem(830);
       }
     }
   }
