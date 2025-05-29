@@ -35,10 +35,7 @@ const contentCasesIntro = {
   title: 'MARKS-CITY',
   subtitle: 'Десктоп игра для интерактивного стола. Зодчество 2023',
   tags: ['Игровая разработка', '3D визуализация', '3D моделировани', 'UX/UI'],
-  src: {
-    url: 'https://marks-tour.ru/',
-    title: 'Смотреть видео',
-  },
+  src: {},
   picture_intro: case_intro_picture,
   about: [
     {

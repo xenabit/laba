@@ -40,11 +40,8 @@ import case_iframe_preview_image from '../assets/images/case-iframe-canon.jpg';
 const contentCasesIntro = {
   title: 'Тамагочи',
   subtitle: 'Гиперказуальная игра',
-  tags: ['WEB интерфейс', 'UX/UI', '???'],
-  src: {
-    url: 'https://marks-tour.ru/',
-    // title: 'Перейти на сайт',
-  },
+  tags: ['WEB интерфейс', 'UX/UI', 'Административная панель'],
+  src: {},
   picture_intro: case_intro_picture,
   about: [
     {
@@ -201,7 +198,6 @@ const case_slider_full_content_3 = {
       id: '3_3',
       picture: case_slider_full_picture_3_3,
     },
-
   ],
 };
 

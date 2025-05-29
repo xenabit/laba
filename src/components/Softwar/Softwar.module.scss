@@ -19,7 +19,6 @@
   }
 
   &__img {
-    width: rem(56);
     height: rem(56);
 
     img {
@@ -91,7 +90,6 @@
     }
 
     &__img {
-      width: rem(80);
       height: rem(80);
     }
 
@@ -109,7 +107,6 @@
     }
 
     &__img {
-      width: clamp(rem(80), 5vw, rem(160));
       height: clamp(rem(80), 5vw, rem(160));
     }
 

@@ -16,6 +16,11 @@
   &__text {
     font-size: rem(24);
     line-height: 1.33;
+
+    a {
+      font-weight: var(--fw-bold);
+      color: var(--prime-3);
+    }
   }
 
   @media all and (min-width: $bp3) {

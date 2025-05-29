@@ -1,4 +1,5 @@
 import '../App.scss';
+import { Link } from 'react-router-dom';
 
 import CasesIntro from '../components/CasesIntro/CasesIntro';
 import Text from '../components/Text/Text';
@@ -35,9 +36,9 @@ import case_compare_slider_picture_right_2 from '../assets/images/cases-compare-
 const contentCasesIntro = {
   title: 'marksgroup.ru',
   subtitle: 'Корпоративный сайт компании',
-  tags: ['WEB интерфейс', 'UX/UI', '???'],
+  tags: ['WEB интерфейс', 'UX/UI', 'Custom CMS', 'Fastify'],
   src: {
-    url: 'https://marks-tour.ru/',
+    url: 'https://marksgroup.ru/',
     title: 'Перейти на сайт',
   },
   picture_intro: case_intro_picture,
@@ -64,71 +65,72 @@ const contentCasesIntro = {
 const contentText = [
   {
     title: 'Задача',
-    text: 'Создать корпоративный сайт компании MARKS GROUP, отразить ключевые компетенции компании. Сайт должен иметь кастомную алминистративную панель, с возможность кастомизировать отдельные публикации и проекты. Фильтрация проектов по городу и направлении деятельности. А также костамизация отдельных блоков главной странцыю?????',
+    text: 'Создать корпоративный сайт компании MARKS GROUP, отразить ключевые компетенции компании. Сайт должен иметь кастомную административную панель, с возможность кастомизировать отдельные публикации и проекты. Фильтрация проектов по городу и направлении деятельности. А также кастомизировать отдельные публикации и проекты',
   },
   {
     title: 'Результаты',
-    text: 'Разработан сайт компании ??',
+    text: 'Готовый корпоративный сайт, главная страница, отдельные страницы под новостные материалы и под портфолио. Реализована система фильтрации материала - поиск по городам, направлениям и временным интервалам.',
   },
   {
     title: 'Административная панель',
-    text: 'Админка?????',
+    text: 'Разработан кастомный WEB конструктор для редактирования, добавления или удаления материалов (проектов, новостей) сайта, не требующий глубокого познания технических нюансов от специалистов.',
   },
   {
-    title: 'Административная панель',
-    text: 'В рамках проекта был реализован собственный HR портал. В админ-панели можно заполнять вакансии, выбирать преимущества, условия работы и предложения непосредственно под кандидата. Со стороны пользователя, по этим данным есть детальная фильтрация, для удобного отслеживания подходящих вакансии.  Подробнее о кейсе <a href="#">читайте здесь.</a>',
+    title: 'HR портал',
+    text: (
+      <>
+        В ходе аналитики предложена реализация собственного HR портала. Реализованы кастомная администраторская панель для специалистов (HR), поиск и фильтрация вакансий для пользователей. Подробнее о
+        кейсе <Link to="/portfolio/markssite-hr">читайте здесь.</Link>
+      </>
+    ),
+  },
+  {
+    title: 'Поиск соискателей',
+    text: '30% анкет от общего числа поступает через HR портал',
+  },
+  {
+    title: 'Поиск соискателей',
+    text: 'При работе над HR порталом разработан дизайн брендирования для hh.ru, проведено обучение HR-специалистов по сборке вакансий.',
   },
 ];
 
-const contentSoftwar = [softwarLogos.figma, softwarLogos.react, softwarLogos.nodejs];
+const contentSoftwar = [softwarLogos.react, softwarLogos.nodejs, softwarLogos.figma];
 
 const contentReviews = [
   {
-    title: 'Отзыв клиента MG',
-    text: 'Создать MGSite 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
+    title: 'Отзыв клиента',
+    text: 'Отдельная благодарность за то, что делаете работу как для себя. Всё просто и понятно, без лишних терминов и с реальным вниманием к нашим словам',
     name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
     picture: [
       { logo: reviews_slider_author_1, title: 'Манагер' },
       { logo: reviews_slider_author_2, title: 'Клиент' },
+    ],
+  },
+  {
+    title: 'Отзыв клиента',
+    text: 'Отдельная благодарность за то, что делаете работу как для себя. Всё просто и понятно, без лишних терминов и с реальным вниманием к нашим словам',
+    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
+    picture: [
       { logo: reviews_slider_author_1, title: 'Манагер' },
       { logo: reviews_slider_author_2, title: 'Клиент' },
+    ],
+  },
+  {
+    title: 'Отзыв клиента',
+    text: 'Отдельная благодарность за то, что делаете работу как для себя. Всё просто и понятно, без лишних терминов и с реальным вниманием к нашим словам',
+    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
+    picture: [
       { logo: reviews_slider_author_1, title: 'Манагер' },
+      { logo: reviews_slider_author_2, title: 'Клиент' },
     ],
   },
   {
-    title: 'Отзыв клиента 2',
-    text: 'Создать MGSite  3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
+    title: 'Отзыв клиента',
+    text: 'Отдельная благодарность за то, что делаете работу как для себя. Всё просто и понятно, без лишних терминов и с реальным вниманием к нашим словам',
+    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
     picture: [
-      { logo: reviews_slider_author_1, title: 'Ололо' },
-      { logo: reviews_slider_author_2, title: 'Алала' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 3',
-    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Тырым пырым' },
-      { logo: reviews_slider_author_2, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв  MGSite клиента 4',
-    text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Тырым пырым' },
-      { logo: reviews_slider_author_2, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 5',
-    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Тырым пырым' },
-      { logo: reviews_slider_author_2, title: 'Пхпхппх' },
+      { logo: reviews_slider_author_1, title: 'Манагер' },
+      { logo: reviews_slider_author_2, title: 'Клиент' },
     ],
   },
 ];
@@ -246,9 +248,11 @@ export default function CaseMarkssite() {
       <Picture src={picture} />
       <Text title={contentText[2].title} text={contentText[2].text} />
       <CasesSliderFull items={case_slider_full_content_2} />
-      <Text title={contentText[2].title} text={contentText[2].text} />
+      <Text title={contentText[3].title} text={contentText[3].text} />
       <CasesCompareSlider items={case_compare_slider_pictures_1} />
+      <Text title={contentText[4].title} text={contentText[4].text} />
       <VideoHorizontal videoUrl={video_horizontal} />
+      <Text title={contentText[5].title} text={contentText[5].text} />
       <ReviewsSlider items={contentReviews} />
       <CasesItems type="web" excludeId="markssite" />
     </main>

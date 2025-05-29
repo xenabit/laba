@@ -23,14 +23,6 @@ const validTypes = new Set(projectsTypes.map((item) => item.type));
 
 export const projects = [
   {
-    id: 'markstour',
-    video: video_1,
-    src: '/portfolio/markstour',
-    title: 'MARKS-TOUR',
-    desc: 'Панорама 360° с WEB интерфейсом, VR',
-    type: ['web'],
-  },
-  {
     id: 'markssite',
     video: video_2,
     src: '/portfolio/markssite',
@@ -44,6 +36,14 @@ export const projects = [
     src: '/portfolio/markssite-hr',
     title: 'HR портал',
     desc: 'HR портал компании',
+    type: ['web'],
+  },
+  {
+    id: 'markstour',
+    video: video_1,
+    src: '/portfolio/markstour',
+    title: 'MARKS-TOUR',
+    desc: 'Панорама 360° с WEB интерфейсом, VR',
     type: ['web'],
   },
   {

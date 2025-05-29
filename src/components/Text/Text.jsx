@@ -6,7 +6,7 @@ function Text({ title, text }) {
     <section className={styles.Text}>
       <div className={styles.Text__container}>
         <div className={styles.Text__title} dangerouslySetInnerHTML={{ __html: title }}></div>
-        <div className={styles.Text__text} dangerouslySetInnerHTML={{ __html: text }}></div>
+        <div className={styles.Text__text}>{text}</div>
       </div>
     </section>
   );
@@ -14,7 +14,7 @@ function Text({ title, text }) {
 
 Text.propTypes = {
   title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
 
 export default Text;

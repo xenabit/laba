@@ -42,12 +42,14 @@
 
   &__picture {
     overflow: hidden;
+    height: 100vh;
+    max-height: rem(480);
 
     img {
       display: block;
       width: 100%;
       height: 100vh;
-      max-height: rem(1024);
+      max-height: rem(480);
       transform-origin: center center;
     }
   }
@@ -134,9 +136,12 @@
       }
     }
 
-    &__video {
-      video {
-        max-height: rem(830);
+    &__picture {
+      max-height: rem(1024);
+
+      img {
+        height: 100vh;
+        max-height: rem(1024);
       }
     }
   }

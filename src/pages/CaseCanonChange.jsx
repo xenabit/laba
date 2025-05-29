@@ -43,14 +43,12 @@ import case_slider_scroll_picture_1_2 from '../assets/images/case-slider-scroll-
 import case_slider_scroll_picture_2_2 from '../assets/images/case-slider-scroll-2.png';
 import case_slider_scroll_picture_3_2 from '../assets/images/case-slider-scroll-3.png';
 
-
 import case_iframe_preview_image from '../assets/images/case-iframe-canon.jpg';
 
 const contentCasesIntro = {
   title: 'Канон перемен',
   subtitle: 'Приложение с игровой механикой',
   src: {
-    url: 'https://marks-tour.ru/',
     // title: 'Перейти на сайт',
   },
   tags: ['Android, IOS', 'Unreal Engine', 'UX/UI'],
@@ -287,7 +285,6 @@ const contentReviews = [
     ],
   },
 ];
-
 
 export default function CaseMarkssite() {
   return (
