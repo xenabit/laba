@@ -5,10 +5,10 @@ import YandexMap from './YandexMap';
 // // Пример использования компонента
 const mapPoints = [
   {
-    coords: ['55.782967', '37.580526'],
+    coords: [55.781789, 37.581613],
     options: {
-      hintContent: 'Marks Group',
-      balloonContent: '3-я ул. Ямского Поля, 20, стр. 1 ',
+      hintContent: 'LABA',
+      balloonContent: ' ул 3-я Ямского Поля, д. 2 к. 13',
     },
   },
 ];
@@ -28,23 +28,18 @@ export default function Contacts() {
           <a href="tel:+79690639323" className={styles.Contacts__tel}>
             тел. +7&nbsp;(969)&nbsp;063-93-23
           </a>
-          <a href="https://yandex.ru/profile/1116551737" target="_black" rel="noopener noreferrer" className={styles.Contacts__address}>
-            г. Москва ул. 3-я Ямского Поля д. 20 с1
-          </a>
+          {/* <a href="https://yandex.ru/profile/1116551737" target="_black" rel="noopener noreferrer" className={styles.Contacts__address}>
+            125124, город Москва, ул 3-я Ямского Поля, д. 2 к. 13
+          </a> */}
+          <span className={styles.Contacts__address}>125124, город Москва, ул 3-я Ямского Поля, д. 2 к. 13</span>
         </div>
-        <a href="tel:+74951201226" className={styles.Contacts__call}>
+        <a href="tel:+79161958226" className={styles.Contacts__call}>
           <span>Связаться</span>
         </a>
       </div>
       <div className={styles.Contacts__render}>
         <div>
-          <YandexMap
-            center={[55.753544, 37.621211]}
-            zoom={11}
-            points={mapPoints}
-            additionalClass={styles.Contacts__map}
-            icon={geoPoint} // Передаем SVG-иконку
-          />
+          <YandexMap center={[55.753544, 37.621211]} zoom={11} points={mapPoints} additionalClass={styles.Contacts__map} icon={geoPoint} />
         </div>
       </div>
     </section>

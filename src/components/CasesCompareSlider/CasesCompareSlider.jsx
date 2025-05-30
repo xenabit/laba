@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './CasesCompareSlider.module.scss';
@@ -100,7 +100,7 @@ function CasesCompareSlider({ items }) {
         <Swiper
           ref={swiperRef}
           className={styles.CasesCompareSlider__swiper}
-          modules={[Navigation, Pagination]}
+          modules={[Navigation, Pagination, Autoplay]}
           speed={1000}
           keyboard={{ enabled: true }}
           allowTouchMove={!isDragging}
@@ -110,6 +110,11 @@ function CasesCompareSlider({ items }) {
             bulletClass: `${styles.CasesCompareSlider__bullet}`,
             bulletActiveClass: `${styles.CasesCompareSlider__bullet_active}`,
             renderBullet: (index, className) => `<span class="${className}"></span>`,
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
           }}
           breakpoints={{
             320: { spaceBetween: 16, slidesPerView: 1, loop: true },

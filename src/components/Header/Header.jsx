@@ -24,12 +24,20 @@ const BALLOON_C_CONFIG = {
 const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete }, ref) => {
   const [isActive, setIsActive] = useState(false);
   const [activeTab, setActiveTab] = useState('/');
+  const [isDesktop, setIsDesktop] = useState(typeof window !== 'undefined' ? window.matchMedia('(min-width: 1440px)').matches : false);
   const location = useLocation();
   const balloonRef = useRef(null);
   const logoRef = useRef(null);
   const containerRef = useRef(null);
   const isInitialRender = useRef(true);
   const hasScrolled = useRef(false); // Флаг для отслеживания скроллинга
+
+  // Синхронизация activeTab с текущим маршрутом
+  useEffect(() => {
+    const currentPath = location.pathname;
+    setActiveTab(currentPath);
+    localStorage.setItem('activeTab', currentPath); // Сохраняем текущий путь в localStorage
+  }, [location.pathname]);
 
   // Анимация шара с эффектом примагничивания
   const balloonsEntryAnimate = () => {
@@ -237,16 +245,13 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     };
   }, [loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete]);
 
-  // useEffect для остальной логики хедера
-  const [isDesktop, setIsDesktop] = useState(typeof window !== 'undefined' ? window.matchMedia('(min-width: 1440px)').matches : false);
-
+  // useEffect для обработки изменений размера окна
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 1440px)');
     const handleResize = () => {
       setIsDesktop(mediaQuery.matches);
     };
 
-    setIsDesktop(mediaQuery.matches);
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
@@ -519,13 +524,13 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
                 info@laba-laba.ru
               </a>
               <a href="tel:+74951201226" className={styles.Header__tel}>
-                тел. +7&nbsp;(916)&nbsp;195-82-26
+                тел. +7 (916) 195-82-26
               </a>
               <a href="tel:+79690639323" className={styles.Header__tel}>
-                тел. +7&nbsp;(969)&nbsp;063-93-23
+                тел. +7 (969) 063-93-23
               </a>
               <a href="https://yandex.ru/profile/1116551737" target="_blank" rel="noopener noreferrer">
-                125124, город Москва, ул 3-Я Ямского Поля, д. 2 к. 13
+                125124, город Москва, ул 3-я Ямского Поля, д. 2 к. 13
               </a>
             </div>
           </div>

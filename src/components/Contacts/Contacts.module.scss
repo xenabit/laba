@@ -36,6 +36,12 @@
     }
   }
 
+  &__address {
+    &:hover {
+      color: var(--prime-2);
+    }
+  }
+
   &__mail {
     margin-bottom: rem(8);
     font-size: rem(24);
