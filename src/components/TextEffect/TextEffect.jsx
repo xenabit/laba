@@ -83,9 +83,7 @@ const TextEffect = () => {
             </div>
           </div>
         </div>
-        <div className={styles.TextEffect__footnote}>
-          Работаем по&nbsp;системе такой то&nbsp;2х&nbsp;недельными спринтами, предоставляем результаты работ и&nbsp;внимательно слушаем наших заказчиков
-        </div>
+        <div className={styles.TextEffect__footnote}>Проводим глубокую аналитику идеи&nbsp;&mdash; предлагаем решения.</div>
         <div className={styles.TextEffect__icons}>
           <div className={styles.TextEffect__icon}>
             <img loading="lazy" src={icon1} />
