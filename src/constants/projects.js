@@ -42,7 +42,7 @@ export const projects = [
     id: 'markstour',
     video: video_1,
     src: '/portfolio/markstour',
-    title: 'MARKS-TOUR',
+    title: 'Шоурум-тур',
     desc: 'Панорама 360° с WEB интерфейсом, VR',
     type: ['web'],
   },

@@ -101,37 +101,7 @@ const contentReviews = [
     title: 'Отзыв клиента',
     text: 'Отдельная благодарность за то, что делаете работу как для себя. Всё просто и понятно, без лишних терминов и с реальным вниманием к нашим словам',
     name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента',
-    text: 'Отдельная благодарность за то, что делаете работу как для себя. Всё просто и понятно, без лишних терминов и с реальным вниманием к нашим словам',
-    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента',
-    text: 'Отдельная благодарность за то, что делаете работу как для себя. Всё просто и понятно, без лишних терминов и с реальным вниманием к нашим словам',
-    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента',
-    text: 'Отдельная благодарность за то, что делаете работу как для себя. Всё просто и понятно, без лишних терминов и с реальным вниманием к нашим словам',
-    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-    ],
+    picture: [{ logo: reviews_slider_author_1, title: 'Манагер' }],
   },
 ];
 

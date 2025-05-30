@@ -111,11 +111,11 @@ function CasesCompareSlider({ items }) {
             bulletActiveClass: `${styles.CasesCompareSlider__bullet_active}`,
             renderBullet: (index, className) => `<span class="${className}"></span>`,
           }}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: true,
-            pauseOnMouseEnter: true,
-          }}
+          // autoplay={{
+          //   delay: 2500,
+          //   disableOnInteraction: true,
+          //   pauseOnMouseEnter: true,
+          // }}
           breakpoints={{
             320: { spaceBetween: 16, slidesPerView: 1, loop: true },
             1024: { spaceBetween: 32, slidesPerView: 1, loop: true },

@@ -25,6 +25,7 @@ import case_compare_slider_picture_right_4 from '../assets/images/cases-compare-
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
 import reviews_slider_author_2 from '../assets/images/reviews-slider-3.jpg';
 
+import case_slider_full_picture_1_0 from '../assets/images/cases-slider-full-markssite-hr-1-0.jpg';
 import case_slider_full_picture_1_1 from '../assets/images/cases-slider-full-markssite-hr-1-1.jpg';
 import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-markssite-hr-1-2.jpg';
 import case_slider_full_picture_1_3 from '../assets/images/cases-slider-full-markssite-hr-1-3.jpg';
@@ -117,35 +118,8 @@ const contentSoftwar = [softwarLogos.react, softwarLogos.nodejs, softwarLogos.fi
 
 const contentReviews = [
   {
-    title: 'Отзыв клиента MG',
-    text: 'Создать HR 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Полина Журавлева <br> Ведущий специалист по подбору персонала',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента MG',
-    text: 'Создать HR 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Полина Журавлева <br> Ведущий специалист по подбору персонала',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента MG',
-    text: 'Создать HR 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Полина Журавлева <br> Ведущий специалист по подбору персонала',
-    picture: [
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента MG',
-    text: 'Создать HR 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
+    title: 'Отзыв клиента',
+    text: 'Работа с&nbsp;HR-порталом на&nbsp;сайте стала для меня и&nbsp;для HR-команды ещё одним способом привлечения кандидатов. Платформа интуитивно понятна и&nbsp;удобна в&nbsp;использовании, опубликовать вакансии на&nbsp;портале не&nbsp;занимает большого количества времени. Лично мне нравится функция размещения горящих вакансий на&nbsp;главной странице портала на&nbsp;сайте. Сайт MARKS GROUP посещает множество специалистов из&nbsp;сферы проектирования и&nbsp;цифровых технологий, поэтому классно, что они сразу могут ознакомиться с&nbsp;нашими вакансиями через сайт, откликнуться и&nbsp;их&nbsp;резюме или контакты сразу попадают к&nbsp;нам на&nbsp;hr-почту, это очень удобно!',
     name: 'Полина Журавлева <br> Ведущий специалист по подбору персонала',
     picture: [
       { logo: reviews_slider_author_1, title: 'Манагер' },
@@ -160,6 +134,22 @@ const case_slider_full_content_1 = {
   },
 
   pictures: [
+    {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
+      id: '1_0',
+      picture: case_slider_full_picture_1_0,
+    },
+    {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
+      id: '1_1',
+      picture: case_slider_full_picture_1_1,
+    },
     {
       sizes: {
         width: '100%',

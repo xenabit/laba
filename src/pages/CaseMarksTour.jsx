@@ -11,29 +11,26 @@ import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
 import CasesItems from '../components/CasesItems/CasesItems';
 
-import { projects } from '../constants/projects';
-
 import picture from '../assets/images/picture-markstour.jpg';
 import case_intro_picture from '../assets/images/case-intro-markstour.jpg';
 import softwarLogos from '../constants/softwarLogos';
 
 import case_iframe_preview_image from '../assets/images/case-iframe-markstour.jpg';
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
-import reviews_slider_author_2 from '../assets/images/reviews-slider-2.jpg';
+import reviews_slider_author_2 from '../assets/images/reviews-slider-4.jpg';
+import reviews_slider_author_3 from '../assets/images/reviews-slider-5.jpg';
 import case_slider_full_picture_1 from '../assets/images/cases-slider-full-markstour-1.jpg';
 import case_slider_full_picture_2 from '../assets/images/cases-slider-full-markstour-2.jpg';
 import case_slider_full_picture_3 from '../assets/images/cases-slider-full-markstour-3.jpg';
 import case_slider_full_picture_4 from '../assets/images/cases-slider-full-markstour-4.jpg';
 import case_slider_full_picture_5 from '../assets/images/cases-slider-full-markstour-5.jpg';
-import { object } from 'framer-motion/client';
 
 const text = [
   {
     title: 'Задача',
     text: (
       <>
-        В ходе работ над корпоративным сайтом MARKSGROUP было предложено разработать свой HR портал с функционалом формирования и просмотра вакансий, отправки анкет, представления общей информации о
-        карьере в компании, информации о преимуществах. Подробнее о кейсе <Link to="https://marks-tour.ru/">"Панорама 360".</Link>
+        Разработать тур по объекту, в рекламных целях в виде интерактивной 3D визуализации для офиса продаж <Link to="https://marks-tour.ru/">"Панорама 360".</Link>
       </>
     ),
   },
@@ -44,18 +41,18 @@ const text = [
   },
   {
     title: 'Интерфейс',
-    text: 'Был спроектирован интерфейс с адаптивами для мобильных устройств и планшета. Интерфейс имеет темную и светлую тему. Перемещение по плану этажа,  просмотр визуализаций и информации о мебели. Пользователь имеет возможность переходить на сайты производителей.',
+    text: 'Спроектирован интерфейс с адаптивами для мобильных устройств и планшета. Переключение между темной и светлой темами. Перемещение по плану объекта, просмотр визуализаций и информации о мебели. Функционал перехода на сайты производителей.',
   },
   {
     title: 'vr',
-    text: 'Реализована система VR тура, с возможностью "передвигаться" по пространству и наглядно оценивать предлагаемые услуги и товары с мобильного телефона или компьютера, без дополнительного технического обеспечения.',
+    text: 'Реализована система VR тура, с возможностью "передвигаться" по объекту и  оценивать предлагаемые услуги и товары с компьютера или мобильных устройств, без дополнительного технического обеспечения.',
   },
 ];
 
 const contentSoftwar = [softwarLogos.tree_d_max, softwarLogos.figma, softwarLogos.blender, softwarLogos.unreal];
 
 const contentCasesIntro = {
-  title: 'MARKS-TOUR',
+  title: 'Шоурум-тур',
   subtitle: 'Панорама 360° с WEB интерфейсом, VR',
   tags: ['Панорама 360°', 'VR', 'WEB интерфейс', 'UX/UI'],
   src: {
@@ -86,14 +83,20 @@ const contentCasesIntro = {
 const contentReviews = [
   {
     title: 'Отзыв клиента',
-    text: 'Создать10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
+    text: 'Грамотно выстроенная коммуникация в проекте, всегда делятся статусом, оперативное решение возникающих проблем. Спасибо.',
+    name: 'Никита Коньков<br> менеджер проекта MARKS GROUP',
     picture: [
       { logo: reviews_slider_author_1, title: 'Манагер' },
       { logo: reviews_slider_author_2, title: 'Клиент' },
+    ],
+  },
+  {
+    title: 'Отзыв клиента',
+    text: 'Коллеги слушают и слышат. Результат именно тот, который я ожидал',
+    name: 'Роман Богданов<br> Заместитель генерального директора MARKS GROUP',
+    picture: [
       { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-      { logo: reviews_slider_author_1, title: 'Манагер' },
+      { logo: reviews_slider_author_3, title: 'Клиент' },
     ],
   },
 ];
@@ -174,7 +177,6 @@ export default function CaseMarksTour() {
       />
 
       <Text title={text[3].title} text={text[3].text} />
-      <VideoHorizontal videoUrl="https://rutube.ru/video/1c6a32ff34498a5cff63eecc7f257d74/?r=wd" />
       <ReviewsSlider items={contentReviews} />
       <CasesItems type="web" excludeId="markstour" />
     </main>
