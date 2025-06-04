@@ -9,6 +9,7 @@ import { magnetEffect } from '../../utils/magnetEffect';
 import Baloon_c from '../../assets/images/loading-main-baloon-c.svg';
 import logoImg from '/src/assets/images/header-logo.svg';
 import headerMenuImg from '/src/assets/images/header-menu.svg';
+import presentationPdf from '/src/assets/docs/presentation.pdf';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -196,9 +197,8 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       balloon,
       {
         scale: 1,
-        left: '50%',
+        left: ' calc(50% - 12px)',
         top: '50%',
-        transform: 'translateX(-50%)',
         duration: 1.5,
         ease: 'power2.inOut',
         overwrite: 'all',
@@ -517,14 +517,13 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
                 </li>
               </ul>
             </nav>
-            {/* <ul className={styles.Header__links}>
+            <ul className={styles.Header__links}>
               <li>
-                <a href="#">Реквизиты</a>
+                <a href={presentationPdf} target="_blank" rel="noopener noreferrer">
+                  Презентация
+                </a>
               </li>
-              <li>
-                <a href="#">Презентация</a>
-              </li>
-            </ul> */}
+            </ul>
             <div className={styles.Header__contacts}>
               <a className={styles.Header__mail} href="mailto:info@laba-laba.ru">
                 info@laba-laba.ru
@@ -535,7 +534,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
               <a href="tel:+79690639323" className={styles.Header__tel}>
                 тел. +7 (969) 063-93-23
               </a>
-              <a href="https://yandex.ru/profile/1116551737" target="_blank" rel="noopener noreferrer">
+              <a className={styles.Header__address} href="https://yandex.ru/profile/1116551737" target="_blank" rel="noopener noreferrer">
                 Москва, ул 3-я Ямского Поля, д. 2 к. 13
               </a>
             </div>

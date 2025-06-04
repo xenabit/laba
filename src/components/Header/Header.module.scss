@@ -21,10 +21,11 @@
   &__logo {
     display: none;
     position: absolute;
-    left: 50%;
+    left: calc(50% - 12px);
     top: 16px;
-    transform: translateX(-50%);
+    transform: none;
     z-index: 50;
+    pointer-events: none;
 
     img {
       display: block;
@@ -35,6 +36,9 @@
 
   &__logomob {
     display: block;
+    z-index: 60;
+    pointer-events: auto;
+    opacity: 1;
 
     img {
       display: block;
@@ -248,7 +252,7 @@
     flex-direction: column;
     justify-content: space-between;
     animation: header-slide-down 0.5s ease-out forwards;
-    padding: 0 16px 16px 16px;
+    padding: 0 rem(16) rem(16) rem(16);
     height: 100%;
     min-height: 726px;
     z-index: 70;
@@ -345,6 +349,10 @@
         color: var(--prime-3);
       }
     }
+  }
+
+  &__address {
+    margin-top: 16px;
   }
 
   &__contacts {
@@ -512,7 +520,7 @@
     }
 
     &__inner {
-      padding: 0 32px 32px 32px;
+      padding: 0 rem(32) rem(32) rem(32);
       min-height: 100vh;
     }
 
@@ -563,8 +571,8 @@
 
     &__links {
       position: absolute;
-      top: 24px;
-      right: 30px;
+      top: rem(24);
+      right: rem(32);
       gap: 50px;
     }
 

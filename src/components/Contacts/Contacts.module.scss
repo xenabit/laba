@@ -11,12 +11,6 @@
     padding: rem(48) 0 rem(32) 0;
   }
 
-  &__text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   &__title {
     margin-bottom: rem(16);
     font-weight: var(--fw-medium);
@@ -37,13 +31,14 @@
   }
 
   &__address {
+    margin-top: rem(24);
     &:hover {
       color: var(--prime-2);
     }
   }
 
   &__mail {
-    margin-bottom: rem(8);
+    margin-bottom: rem(24);
     font-size: rem(24);
     line-height: rem(32);
   }
@@ -173,7 +168,7 @@
     &__content {
       margin-right: rem(32);
       margin-left: rem(32);
-      padding: rem(52) 0 rem(38) 0;
+      padding: rem(52) 0 rem(40) 0;
     }
 
     &__title {
