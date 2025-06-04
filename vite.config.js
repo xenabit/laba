@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
 
 export default defineConfig({
@@ -21,6 +22,14 @@ export default defineConfig({
       include: ['**/*.png', '**/*.jpg', '**/*.jpeg'], // Только PNG/JPEG
       includePublic: true, // Оптимизируем изображения в public
       logStats: true, // Статистика сжатия
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'src/assets/docs/*.pdf',
+          dest: 'assets/docs', // Копируем PDF в dist/assets/docs
+        },
+      ],
     }),
   ],
   server: {

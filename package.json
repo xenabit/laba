@@ -40,6 +40,7 @@
     "sharp": "^0.34.1",
     "vite": "^5.3.4",
     "vite-plugin-image-optimizer": "^1.1.8",
-    "vite-plugin-sass": "^0.1.0"
+    "vite-plugin-sass": "^0.1.0",
+    "vite-plugin-static-copy": "^3.0.0"
   }
 }

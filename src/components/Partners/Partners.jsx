@@ -8,13 +8,19 @@ import 'swiper/css/pagination';
 import logo_1 from '../../assets/images/partners-1.svg';
 import logo_2 from '../../assets/images/partners-2.svg';
 import logo_3 from '../../assets/images/partners-3.svg';
-import logo_4 from '../../assets/images/partners-1.svg';
+import logo_4 from '../../assets/images/partners-4.svg';
+import logo_5 from '../../assets/images/partners-5.svg';
+import logo_6 from '../../assets/images/partners-6.svg';
+import logo_7 from '../../assets/images/partners-7.svg';
 
 const items = [
-  { logo: logo_1, title: 'Партнер 1' },
-  { logo: logo_2, title: 'Партнер 2' },
-  { logo: logo_3, title: 'Партнер 3' },
-  { logo: logo_4, title: 'Партнер 4' },
+  { logo: logo_1, title: 'MARKSDIGITAL' },
+  { logo: logo_2, title: '+1D' },
+  { logo: logo_3, title: 'ФИНМАРК' },
+  { logo: logo_4, title: 'ПЕЛИСКЕР' },
+  { logo: logo_5, title: 'INPY' },
+  { logo: logo_6, title: 'MARKSENGINEERING' },
+  { logo: logo_7, title: 'ПОДЗЕМПРОЕКТ' },
 ];
 
 import circle_1 from '../../assets/images/partners-ico-1.png';
