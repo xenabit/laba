@@ -8,6 +8,7 @@ import { ANIMATION_CONFIG } from '../LoadingMainScreen/LoadingMainScreen';
 import { magnetEffect } from '../../utils/magnetEffect';
 import Baloon_c from '../../assets/images/loading-main-baloon-c.svg';
 import logoImg from '/src/assets/images/header-logo.svg';
+import headerMenuImg from '/src/assets/images/header-menu.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -158,7 +159,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       { scale: 15.5, top: '104%', left: '-11%' },
       { scale: 22, top: '133%', left: '-27%' },
       { scale: 25, top: '146%', left: '-35%' },
-      { scale: 26.1, top: '152%', left: '-38%' },
+      { scale: 28.1, top: '152%', left: '-38%' },
     ];
 
     scaleSteps.forEach((step, index) => {
@@ -169,8 +170,8 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       logo,
       {
         top: '50%',
-        height: '160px',
-        width: '160px',
+        height: '10vw',
+        width: '10vw',
         duration: 0.6,
         ease: 'power2.inOut',
       },
@@ -492,6 +493,11 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
             <div className={styles.Header__border} aria-hidden="true"></div>
           </div>
           <div className={styles.Header__inner}>
+            <div className={styles.Header__bg}>
+              <picture>
+                <img src={headerMenuImg} />
+              </picture>
+            </div>
             <nav>
               <ul>
                 <li>
@@ -530,7 +536,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
                 тел. +7 (969) 063-93-23
               </a>
               <a href="https://yandex.ru/profile/1116551737" target="_blank" rel="noopener noreferrer">
-                125124, город Москва, ул 3-я Ямского Поля, д. 2 к. 13
+                Москва, ул 3-я Ямского Поля, д. 2 к. 13
               </a>
             </div>
           </div>

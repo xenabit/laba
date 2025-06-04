@@ -7,10 +7,10 @@ import styles from './LoadingMainScreen.module.scss';
 import introStyles from '../Intro2/Intro2.module.scss';
 
 export const ANIMATION_CONFIG = {
-  MAIN_ENTRY_ANIM: 4.3,
-  BG_DURATION: 2.9,
+  MAIN_ENTRY_ANIM: 3.2,
+  BG_DURATION: 2.5,
   BALOON_MOVE_DURATION: 1.5,
-  HEADER_1_OPACITY_DELAY: 6,
+  HEADER_1_OPACITY_DELAY: 5,
   HEADER_FADE_DURATION: 0.5,
   MAGNET_MAX_DISTANCE: 400,
   MAGNET_STRENGTH: 25,

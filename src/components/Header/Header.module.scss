@@ -3,6 +3,8 @@
   background-color: transparent;
 
   &__baloon {
+    width: 10vw;
+    height: 10vw;
     position: absolute;
     top: -10%;
     left: 0;
@@ -33,6 +35,7 @@
 
   &__logomob {
     display: block;
+
     img {
       display: block;
       width: 100%;
@@ -249,18 +252,21 @@
     height: 100%;
     min-height: 726px;
     z-index: 70;
+  }
 
-    &::before {
-      position: absolute;
-      top: 234px;
-      right: -66px;
-      background-image: url('/src/assets/images/header-menu.svg');
-      background-position: center center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      width: 384px;
-      height: 330px;
-      content: '';
+  &__bg {
+    position: absolute;
+    top: 234px;
+    right: -66px;
+    width: 384px;
+    height: 330px;
+    content: '';
+    z-index: 100;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
   }
 
@@ -377,11 +383,9 @@
   @keyframes header-slide-down {
     0% {
       transform: translateY(-50px);
-      opacity: 0;
     }
     100% {
       transform: translateY(0);
-      opacity: 1;
     }
   }
 
@@ -392,7 +396,7 @@
     }
     100% {
       transform: translateY(-50px);
-      opacity: 0;
+      opacity: 0.5;
     }
   }
 
@@ -499,6 +503,7 @@
     }
 
     &__logomob {
+      width: 48px;
       left: 50%;
       height: 100%;
       opacity: 0;
@@ -509,15 +514,15 @@
     &__inner {
       padding: 0 32px 32px 32px;
       min-height: 100vh;
+    }
 
-      &::before {
-        top: 219px;
-        right: auto;
-        left: -189px;
-        transform: scaleX(1);
-        width: 962px;
-        height: 826px;
-      }
+    &__bg {
+      top: 219px;
+      right: auto;
+      left: -189px;
+      transform: scaleX(1);
+      width: 962px;
+      height: 826px;
     }
     &__desc {
       display: block;
@@ -539,11 +544,10 @@
       position: relative;
       min-height: 95vh;
       max-height: 1025px;
-
-      &::before {
-        top: 59px;
-        left: -43px;
-      }
+    }
+    &__bg {
+      top: 59px;
+      left: -43px;
     }
 
     &__container.active {

@@ -25,7 +25,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'cb2',
     src: Baloon_cb2,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--cb2']}`,
+    uniqueClass: 'Balloons__item--cb2',
     anim: {
       from: { top: '155%', left: '42%', scale: 1, transformOrigin: 'center center' },
       to: { top: '83%', left: '39%' },
@@ -35,7 +36,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'lb2',
     src: Baloon_lb2,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--lb2']}`,
+    uniqueClass: 'Balloons__item--lb2',
     anim: {
       from: { top: '164.65%', left: '20.75%', scale: 1, transformOrigin: 'center center' },
       to: { top: '74%', left: '5%' },
@@ -45,7 +47,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'r',
     src: Baloon_r,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--r']}`,
+    uniqueClass: 'Balloons__item--r',
     anim: {
       from: { top: '5.28%', left: '134.35%', scale: 1, transformOrigin: 'center center' },
       to: { top: '46%', left: '92.5%' },
@@ -55,7 +58,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'lt1',
     src: Baloon_lt1,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--lt1']}`,
+    uniqueClass: 'Balloons__item--lt1',
     anim: {
       from: { top: '-56%', left: '-77%', scale: 1, transformOrigin: 'center center' },
       to: { top: '7%', left: '-18%' },
@@ -65,7 +69,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'rb2',
     src: Baloon_rb2,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--rb2']}`,
+    uniqueClass: 'Balloons__item--rb2',
     anim: {
       from: { top: '134.28%', left: '134.44%', scale: 1, transformOrigin: 'center center' },
       to: { top: '63%', left: '79%' },
@@ -75,7 +80,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'rt3',
     src: Baloon_rt3,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--rt3']}`,
+    uniqueClass: 'Balloons__item--rt3',
     anim: {
       from: { top: '-96.44%', left: '120.81%', scale: 1, transformOrigin: 'center center' },
       to: { top: '6%', left: '76%' },
@@ -85,7 +91,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'ct1',
     src: Baloon_ct1,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--ct1']}`,
+    uniqueClass: 'Balloons__item--ct1',
     anim: {
       from: { top: '-100%', left: '33%', scale: 1, transformOrigin: 'center center' },
       to: { top: '9%', left: '29.5%' },
@@ -95,7 +102,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'rt2',
     src: Baloon_rt2,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--rt2']}`,
+    uniqueClass: 'Balloons__item--rt2',
     anim: {
       from: { top: '-58.11%', left: '122.38%', scale: 1, transformOrigin: 'center center' },
       to: { top: '26%', left: '86%' },
@@ -105,7 +113,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'rt1',
     src: Baloon_rt1,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--rt1']}`,
+    uniqueClass: 'Balloons__item--rt1',
     anim: {
       from: { top: '-39.99%', left: '107.73%', scale: 1, transformOrigin: 'center center' },
       to: { top: '19.5%', left: '72%' },
@@ -115,7 +124,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'rb1',
     src: Baloon_rb1,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--rb1']}`,
+    uniqueClass: 'Balloons__item--rb1',
     anim: {
       from: { top: '95.42%', left: '124.5%', scale: 1, transformOrigin: 'center center' },
       to: { top: '73%', left: '78.5%' },
@@ -125,7 +135,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'rb3',
     src: Baloon_rb3,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--rb3']}`,
+    uniqueClass: 'Balloons__item--rb3',
     anim: {
       from: { top: '92.07%', left: '137.38%', scale: 1, transformOrigin: 'center center' },
       to: { top: '64.11%', left: '89.25%' },
@@ -135,7 +146,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'ct2',
     src: Baloon_ct2,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--ct2']}`,
+    uniqueClass: 'Balloons__item--ct2',
     anim: {
       from: { top: '-48.78%', left: '32.25%', scale: 1, transformOrigin: 'center center' },
       to: { top: '16.5%', left: '35.5%' },
@@ -145,7 +157,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'ct3',
     src: Baloon_ct3,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--ct3']}`,
+    uniqueClass: 'Balloons__item--ct3',
     anim: {
       from: { top: '-26.67%', left: '30.31%', scale: 1, transformOrigin: 'center center' },
       to: { top: '24.5%', left: '34%' },
@@ -155,7 +168,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'lb1',
     src: Baloon_lb1,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--lb1']}`,
+    uniqueClass: 'Balloons__item--lb1',
     anim: {
       from: { top: '226.67%', left: '-20.13%', scale: 1, transformOrigin: 'center center' },
       to: { top: '67%', left: '-3%' },
@@ -165,7 +179,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'lt2',
     src: Baloon_lt2,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--lt2']}`,
+    uniqueClass: 'Balloons__item--lt2',
     anim: {
       from: { top: '29.22%', left: '-34.83%', scale: 1, transformOrigin: 'center center' },
       to: { top: '21%', left: '-7%' },
@@ -175,7 +190,8 @@ const BALLOONS_CONFIG = [
   {
     key: 'cb1',
     src: Baloon_cb1,
-    className: styles.Balloons__item,
+    className: `${styles.Balloons__item} ${styles['Balloons__item--cb1']}`,
+    uniqueClass: 'Balloons__item--cb1',
     anim: {
       from: { top: '128.89%', left: '49.88%', scale: 1, transformOrigin: 'center center' },
       to: { top: '84%', left: '48.5%', scale: 1.2 },

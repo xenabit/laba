@@ -12,7 +12,7 @@ function Subtitle() {
 
   useEffect(() => {
     const descLetters = descRefs.current;
-    gsap.set(descLetters, { y: '100%', opacity: 0, fontSize: '30', display: 'inline-block', color: '#27292F', whiteSpace: 'nowrap', overflow: 'hidden', marginTop: '50px' });
+    gsap.set(descLetters, { y: '100%', opacity: 0, fontSize: '1.8vw', display: 'inline-block', color: '#27292F', whiteSpace: 'nowrap', overflow: 'hidden', marginTop: '50px' });
     gsap.to(descLetters, {
       y: 0,
       opacity: 1,
