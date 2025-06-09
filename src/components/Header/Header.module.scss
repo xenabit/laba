@@ -266,6 +266,7 @@
     height: 330px;
     content: '';
     z-index: 100;
+    pointer-events: none;
 
     img {
       display: block;
