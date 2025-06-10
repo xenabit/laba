@@ -1,13 +1,13 @@
+import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './GalleryItem.module.scss';
 
-function GalleryItem({ videoSrc, href, title, desc, videoProps }) {
+const GalleryItem = forwardRef(function GalleryItem({ videoSrc, href, title, desc, videoProps }, ref) {
   return (
-    <li className={styles.GalleryItem__item}>
+    <li ref={ref} className={styles.GalleryItem__item}>
       <Link to={href}>
-        <video {...videoProps} preload="auto" loop muted>
+        <video {...videoProps} preload="auto" loop muted playsInline webkit-playsinline="true">
           <source src={videoSrc} type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
         <h2>
           <span>{desc}</span>
@@ -16,6 +16,6 @@ function GalleryItem({ videoSrc, href, title, desc, videoProps }) {
       </Link>
     </li>
   );
-}
+});
 
-export default GalleryItem;
+export default React.memo(GalleryItem);

@@ -65,7 +65,11 @@
       padding: 0 0 rem(12) 0;
       overflow-x: auto;
       overflow-y: hidden;
-      scrollbar-width: thin;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       button {
         display: flex;
@@ -237,3 +241,5 @@
     }
   }
 }
+
+

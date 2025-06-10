@@ -84,17 +84,14 @@ const App = () => {
   };
 
   const handleBalloonsToCenterComplete = () => {
-    console.log('App: Balloons to center complete, switching to transition');
-    handleStageChange('transition');
+     handleStageChange('transition');
   };
 
   const handleBalloonsShrinkComplete = () => {
-    console.log('App: Balloons shrink complete, switching to complete');
-    handleStageChange('complete');
+     handleStageChange('complete');
   };
 
   const handleMaxBalloonSize = () => {
-    console.log('App: Max balloon size reached');
   };
 
   return (
