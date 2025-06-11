@@ -32,7 +32,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const logoRef = useRef(null);
   const containerRef = useRef(null);
   const isInitialRender = useRef(true);
-  const hasScrolled = useRef(false); // Флаг для отслеживания скроллинга
+  const hasScrolled = useRef(false);
 
   // Синхронизация activeTab с текущим маршрутом
   useEffect(() => {
@@ -108,7 +108,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       (ANIMATION_CONFIG.MAIN_ENTRY_ANIM + ANIMATION_CONFIG.BALOON_MOVE_DURATION) * 1000
     );
 
-    // Добавляем обработчик скроллинга
     window.addEventListener('wheel', handleScroll, { passive: false });
     window.addEventListener('touchmove', handleScroll, { passive: false });
 
@@ -125,7 +124,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     const logo = logoRef.current;
     if (!balloon || !logo) return;
 
-    hasScrolled.current = true; // Устанавливаем флаг при переходе к scrolling
+    hasScrolled.current = true;
     gsap.killTweensOf([balloon, logo]);
 
     const tl = gsap.timeline({
@@ -216,16 +215,12 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     }
 
     if (loadingStage === 'initial') {
-      // console.log('Header: Applying initial balloon animation with magnet effect');
       balloonsEntryAnimate();
     } else if (loadingStage === 'scrolling') {
-      // console.log('Header: Applying scrolling balloon animation');
       balloonsToCenterAnimate();
     } else if (loadingStage === 'transition') {
-      // console.log('Header: Applying transition balloon animation');
       shrinkCentralBalloon();
     } else if (loadingStage === 'complete') {
-      // console.log('Header: Applying complete balloon animation');
       const balloon = balloonRef.current;
       gsap.to(balloon, {
         opacity: 0,
@@ -241,7 +236,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     }
 
     return () => {
-      // console.log('Header: Cleaning up balloon animations');
       gsap.killTweensOf([balloonRef.current, logoRef.current]);
     };
   }, [loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete]);
@@ -285,7 +279,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     }
 
     if (loadingStage === 'initial' && isInitialRender.current) {
-      // console.log('Setting initial opacity to 0 and height to 100vh for initial stage');
       gsap.set([headerTop, border, toggle, desc, logo], { opacity: 0 });
       gsap.set(loading, { height: '100vh' });
       isInitialRender.current = false;
@@ -296,7 +289,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     };
 
     if (isActive) {
-      // console.log('Header: Menu is active, forcing visibility');
       gsap.set([logo, toggle, desc, border, headerTop], { opacity: 1 });
       gsap.set(border, { backgroundColor: 'var(--prime-1)' });
       gsap.set(loading, { height: '100%' });
@@ -304,7 +296,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     }
 
     if (loadingStage === 'initial') {
-      // console.log('Header: Applying initial stage header animations');
       gsap.set(loading, { height: '100vh' });
       gsap.to([headerTop, toggle, desc, border, logo], {
         opacity: 1,
@@ -314,7 +305,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         onComplete: setHeaderVisible,
       });
     } else if (loadingStage === 'scrolling') {
-      // console.log('Header: Applying scrolling stage header animations');
       gsap.set(loading, { height: '100vh' });
       gsap.to([headerTop, toggle, desc, border, logo], {
         opacity: 0,
@@ -324,7 +314,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         overwrite: false,
         onStart: () => console.log('Scrolling animation started'),
         onComplete: () => {
-          // console.log('Scrolling animation completed');
           const headerContainer = header.querySelector(`.${styles.Header__container}`);
           if (headerContainer) {
             headerContainer.classList.remove(styles.active);
@@ -333,11 +322,9 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         },
       });
     } else if (loadingStage === 'transition') {
-      // console.log('Header: Applying transition stage header animations');
       gsap.set(loading, { height: '100vh' });
       gsap.set([headerTop, toggle, desc, border], { opacity: 0, y: 0 });
     } else if (loadingStage === 'complete') {
-      // console.log('Header: Applying complete stage header animations');
       const tl = gsap.timeline({
         onComplete: () => {
           gsap.set(header, { backgroundColor: 'var(--prime-1)' });
@@ -359,7 +346,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
           ease: 'linear',
           overwrite: 'all',
           onComplete: () => {
-            // console.log('Logo animation completed, setting loading height to 100%');
             gsap.set(loading, { height: '100%' });
           },
         },
