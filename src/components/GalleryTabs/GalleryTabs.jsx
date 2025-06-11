@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef, createRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useSearchParams } from 'react-router-dom';
 import styles from './GalleryTabs.module.scss';
@@ -9,43 +9,53 @@ export default function GalleryTabs() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialFilter = searchParams.get('filter') || 'all';
   const [activeFilter, setActiveFilter] = useState(initialFilter);
+  const nodeRefs = useRef({});
 
   useEffect(() => {
-    const filterFromUrl = searchParams.get('filter') || 'all';
-    if (filterFromUrl !== activeFilter) {
-      setActiveFilter(filterFromUrl);
+    const f = searchParams.get('filter') || 'all';
+    if (f !== activeFilter) {
+      setActiveFilter(f);
     }
-  }, [searchParams]);
+  }, [searchParams, activeFilter]);
 
-  const handleMouseEnter = (video) => {
-    video.play();
-  };
+  const handleFilterChange = useCallback(
+    (type) => {
+      setActiveFilter(type);
+      setSearchParams({ filter: type });
+    },
+    [setSearchParams]
+  );
 
-  const handleMouseLeave = (video) => {
-    video.pause();
-  };
+  const handleMouseMove = useCallback((e) => {
+    const { left, top } = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--x4', `${e.clientX - left}px`);
+    e.currentTarget.style.setProperty('--y4', `${e.clientY - top}px`);
+  }, []);
 
-  const handleFilterChange = (type) => {
-    setActiveFilter(type);
-    setSearchParams({ filter: type });
-  };
+  const handleMouseEnter = useCallback((video) => {
+    const p = video.play();
+    if (p && p.catch) p.catch(() => {});
+  }, []);
 
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  const handleMouseLeave = useCallback((video) => video.pause(), []);
 
-    e.currentTarget.style.setProperty('--x4', `${x}px`);
-    e.currentTarget.style.setProperty('--y4', `${y}px`);
-  };
+  const filteredItems = useMemo(() => {
+    if (activeFilter === 'all') return projects;
+    return projects.filter((it) => {
+      const types = Array.isArray(it.type) ? it.type : [it.type];
+      return types.includes(activeFilter);
+    });
+  }, [activeFilter]);
 
-  const filteredItems =
-    activeFilter === 'all'
-      ? projects
-      : projects.filter((item) => {
-          const itemTypes = Array.isArray(item.type) ? item.type : [item.type];
-          return itemTypes.includes(activeFilter);
-        });
+  const transitionClassNames = useMemo(
+    () => ({
+      enter: styles.itemEnter,
+      enterActive: styles.itemEnterActive,
+      exit: styles.itemExit,
+      exitActive: styles.itemExitActive,
+    }),
+    []
+  );
 
   return (
     <section className={styles.GalleryTabs}>
@@ -62,39 +72,34 @@ export default function GalleryTabs() {
       </div>
       <nav className={styles.GalleryTabs__filters}>
         <ul>
-          {projectsTypes.map((element) => (
-            <li key={element.id}>
-              <button onMouseMove={handleMouseMove} className={activeFilter === element.type ? styles.active : ''} onClick={() => handleFilterChange(element.type)}>
-                <span>{element.title}</span>
+          {projectsTypes.map((el) => (
+            <li key={el.id}>
+              <button onMouseMove={handleMouseMove} onClick={() => handleFilterChange(el.type)} className={activeFilter === el.type ? styles.active : ''}>
+                <span>{el.title}</span>
               </button>
             </li>
           ))}
         </ul>
       </nav>
-
       <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
-        {filteredItems.map((element, index) => {
-          const uniqueKey = `${element.id}-${activeFilter}`;
+        {filteredItems.map((item, idx) => {
+          const key = `${item.id}-${activeFilter}`;
+          if (!nodeRefs.current[key]) {
+            nodeRefs.current[key] = createRef();
+          }
+          const nodeRef = nodeRefs.current[key];
+
           const videoProps =
-            index % 2 === 0
-              ? { autoPlay: true }
+            idx % 2 === 0
+              ? { autoPlay: true, muted: true }
               : {
                   onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
                   onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
                 };
 
           return (
-            <CSSTransition
-              key={uniqueKey}
-              timeout={1000}
-              classNames={{
-                enter: styles.itemEnter,
-                enterActive: styles.itemEnterActive,
-                exit: styles.itemExit,
-                exitActive: styles.itemExitActive,
-              }}
-            >
-              <GalleryItem videoSrc={element.video} href={element.src} title={element.title} desc={element.desc} videoProps={videoProps} />
+            <CSSTransition key={key} nodeRef={nodeRef} timeout={1000} classNames={transitionClassNames}>
+              <GalleryItem ref={nodeRef} videoSrc={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
             </CSSTransition>
           );
         })}
