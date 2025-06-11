@@ -318,7 +318,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       gsap.set(loading, { height: '100vh' });
       gsap.to([headerTop, toggle, desc, border, logo], {
         opacity: 0,
-        duration: 0.5,
+        duration: ANIMATION_CONFIG.HEADER_FADE_DURATION,
         ease: 'sine.out',
         delay: 0.2,
         overwrite: false,
@@ -470,11 +470,11 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
             <div ref={balloonRef} className={styles.Header__baloon}>
               <img src={Baloon_c} alt="balloon-c" aria-hidden="true" />
             </div>
-            <Link ref={logoRef} to="/" className={styles.Header__logo} onClick={() => handleTabClick('/')}>
+            <div ref={logoRef} className={styles.Header__logo}>
               <picture>
                 <img src={logoImg} alt="Логотип Laba" />
               </picture>
-            </Link>
+            </div>
           </div>
           <div className={styles.Header__top}>
             <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
