@@ -211,7 +211,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   // useEffect для анимации шара
   useEffect(() => {
     if (!balloonRef.current || !logoRef.current || !containerRef.current) {
-      // console.warn('Balloon, logo, or container ref is not ready');
+      console.warn('Balloon, logo, or container ref is not ready');
       return;
     }
 
@@ -260,7 +260,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
 
   useEffect(() => {
     if (!ref.current) {
-      // console.warn('Header ref is not ready');
+      console.warn('Header ref is not ready');
       return;
     }
 
@@ -273,14 +273,14 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     const loading = header.querySelector(`.${styles.Header__loading}`);
 
     if (!headerTop || !border || !logo || !toggle || !desc || !loading) {
-      // console.warn('Header elements missing', {
-      //   headerTop,
-      //   border,
-      //   logo,
-      //   toggle,
-      //   desc,
-      //   loading,
-      // });
+      console.warn('Header elements missing', {
+        headerTop,
+        border,
+        logo,
+        toggle,
+        desc,
+        loading,
+      });
       return;
     }
 
