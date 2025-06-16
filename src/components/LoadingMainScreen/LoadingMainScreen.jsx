@@ -4,13 +4,12 @@ import Balloons from './Balloons/Balloons';
 import FlareComponent from './FlareComponent/FlareComponent';
 import { gsap } from 'gsap';
 import styles from './LoadingMainScreen.module.scss';
-import introStyles from '../Intro2/Intro2.module.scss';
 
 export const ANIMATION_CONFIG = {
   MAIN_ENTRY_ANIM: 3.2,
   BG_DURATION: 2.5,
   BALOON_MOVE_DURATION: 1.5,
-  HEADER_1_OPACITY_DELAY: 0,
+  HEADER_1_OPACITY_DELAY: 5,
   HEADER_FADE_DURATION: 0.5,
   MAGNET_MAX_DISTANCE: 400,
   MAGNET_STRENGTH: 25,
@@ -106,48 +105,6 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
 
     if (!isTabletOrLarger) {
       return;
-    }
-
-    const introLaba = introRef.current?.querySelector(`.${introStyles.Intro2__laba}`);
-    const introDesc = introRef.current?.querySelector(`.${introStyles.Intro2__desc}`);
-
-    if (introLaba && introDesc) {
-      gsap.set(introLaba, { xPercent: -100 });
-      gsap.set(introDesc, { xPercent: 100 });
-
-      tlRef.current
-        .to(
-          introLaba,
-          {
-            xPercent: 0,
-            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-            ease: 'linear',
-          },
-          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
-        )
-        .to(
-          introDesc,
-          {
-            xPercent: 0,
-            duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-            ease: 'linear',
-          },
-          ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
-        );
-    }
-
-    const projectsTile = projectsTileRef.current;
-    if (projectsTile && window.innerWidth >= 1440) {
-      gsap.set(projectsTile, { yPercent: 100 });
-      tlRef.current.to(
-        projectsTile,
-        {
-          yPercent: 0,
-          duration: ANIMATION_CONFIG.LOGO_ANIMATION_DURATION,
-          ease: 'linear',
-        },
-        ANIMATION_CONFIG.LOGO_ANIMATION_DELAY
-      );
     }
   };
 

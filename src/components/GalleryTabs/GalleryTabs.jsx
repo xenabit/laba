@@ -68,9 +68,6 @@ export default function GalleryTabs() {
           <a href="tel:+79161958226" className={styles.GalleryTabs__tel}>
             тел. +7&nbsp;(916)&nbsp;195-82-26
           </a>
-          <a href="tel:+79690639323" className={styles.GalleryTabs__tel}>
-            тел. +7&nbsp;(969)&nbsp;063-93-23
-          </a>
         </div>
       </div>
       <nav className={styles.GalleryTabs__filters}>
@@ -98,7 +95,7 @@ export default function GalleryTabs() {
             loop: true,
             preload: 'auto',
             playsInline: true,
-            webkitPlaysinline: 'true',
+            webkitplaysinline: 'true',
           };
 
           const videoProps =

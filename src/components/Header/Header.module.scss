@@ -9,7 +9,8 @@
     top: -10%;
     left: 0;
     z-index: 60;
-    pointer-events: auto;
+    pointer-events: none;
+    opacity: 0;
 
     img {
       display: block;
@@ -56,37 +57,37 @@
     height: 50px;
     background-color: transparent;
 
-    @media all and (min-width: $bp4) {
-      height: 54px;
+    // @media all and (min-width: $bp4) {
+    //   height: 54px;
 
-      &__top {
-        height: 54px;
-      }
-    }
+    //   &__top {
+    //     height: 54px;
+    //   }
+    // }
 
-    @media all and (min-width: $bp1) {
-      height: 62px;
+    // @media all and (min-width: $bp1) {
+    //   height: 62px;
 
-      &__top {
-        height: 62px;
-      }
-    }
+    //   &__top {
+    //     height: 62px;
+    //   }
+    // }
 
-    @media all and (min-width: $bp) {
-      height: 73px;
+    // @media all and (min-width: $bp) {
+    //   height: 73px;
 
-      &__top {
-        height: 73px;
-      }
-    }
+    //   &__top {
+    //     height: 73px;
+    //   }
+    // }
 
-    @media all and (min-width: 2560px) {
-      height: 96px;
+    // @media all and (min-width: 2560px) {
+    //   height: 96px;
 
-      &__top {
-        height: 96px;
-      }
-    }
+    //   &__top {
+    //     height: 96px;
+    //   }
+    // }
   }
 
   &__container {
@@ -253,19 +254,17 @@
     justify-content: space-between;
     animation: header-slide-down 0.5s ease-out forwards;
     padding: 0 rem(16) rem(16) rem(16);
-    height: 100%;
-    min-height: 726px;
     z-index: 70;
   }
 
   &__bg {
-    position: absolute;
-    top: 234px;
-    right: -66px;
-    width: 384px;
-    height: 330px;
+    // position: absolute;
+    order: 2;
+    width: 107vw;
+    height: auto;
     content: '';
     z-index: 100;
+    pointer-events: none;
 
     img {
       display: block;
@@ -275,6 +274,7 @@
   }
 
   nav {
+    order: 1;
     display: flex;
     position: relative;
     flex-direction: column;
@@ -293,7 +293,8 @@
       display: inline-block;
       position: relative;
       transition: color 0.3s;
-      font-size: 40px;
+      font-size: clamp(rem(40), 2.5vw, rem(80));
+
       line-height: 1.1;
 
       &:hover {
@@ -310,7 +311,7 @@
         transition: all 0.5s ease-in-out;
         background-color: var(--prime-3);
         width: 0;
-        height: 20x;
+        height: 2px;
         content: '';
       }
 
@@ -330,6 +331,7 @@
   }
 
   &__links {
+    order: 3;
     display: flex;
     align-self: flex-end;
     gap: 20px;
@@ -344,6 +346,8 @@
     a {
       display: block;
       transition: color 0.3s;
+      font-size: clamp(rem(16), 1vw, rem(32));
+      line-height: 1.5;
 
       &:hover {
         color: var(--prime-3);
@@ -356,6 +360,7 @@
   }
 
   &__contacts {
+    order: 4;
     display: flex;
     position: relative;
     flex-direction: column;
@@ -369,8 +374,8 @@
       display: block;
       opacity: 0.6;
       transition: color 0.3s;
-      font-size: 16px;
-      line-height: 24px;
+      font-size: clamp(rem(16), 1vw, rem(32));
+      line-height: 1.5;
 
       &:hover {
         color: var(--prime-3);
@@ -378,8 +383,8 @@
 
       &#{$s}__mail {
         margin: 0 0 16px 0;
-        font-size: 24px;
-        line-height: 32px;
+        font-size: clamp(rem(24), 1vw, rem(48));
+        line-height: 1.5;
       }
 
       &#{$s}__tel {
@@ -525,12 +530,12 @@
     }
 
     &__bg {
+      position: absolute;
       top: 219px;
       right: auto;
       left: -189px;
       transform: scaleX(1);
-      width: 962px;
-      height: 826px;
+      width: 90vw;
     }
     &__desc {
       display: block;
@@ -554,6 +559,7 @@
       max-height: 1025px;
     }
     &__bg {
+      width: 51vw;
       top: 59px;
       left: -43px;
     }
@@ -566,7 +572,7 @@
       }
     }
     nav {
-      padding: 195px 0 16px 51.5%;
+      padding: 21% 0 16px 51.5%;
     }
 
     &__links {
