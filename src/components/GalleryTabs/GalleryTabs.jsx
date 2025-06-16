@@ -89,10 +89,21 @@ export default function GalleryTabs() {
           }
           const nodeRef = nodeRefs.current[key];
 
+          const baseVideoProps = {
+            autoPlay: true,
+            muted: true,
+            loop: true,
+            preload: 'auto',
+            playsInline: true,
+            webkitPlaysinline: 'true',
+          };
+
           const videoProps =
             idx % 2 === 0
-              ? { autoPlay: true, muted: true }
+              ? baseVideoProps
               : {
+                  ...baseVideoProps,
+                  onLoadedMetadata: (e) => e.currentTarget.pause(),
                   onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
                   onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
                 };
