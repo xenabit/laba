@@ -16,10 +16,21 @@ function Gallery() {
     <section className={styles.Gallery}>
       <ul className={styles.Gallery__items}>
         {projects.slice(0, 6).map((item, index) => {
+          const baseVideoProps = {
+            autoPlay: true,
+            muted: true,
+            loop: true,
+            preload: 'auto',
+            playsInline: true,
+            webkitPlaysInline: 'true',
+          };
+
           const videoProps =
             index % 2 === 1
-              ? { autoPlay: true }
+              ? baseVideoProps
               : {
+                  ...baseVideoProps,
+                  onLoadedMetadata: (e) => e.currentTarget.pause(),
                   onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
                   onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
                 };
