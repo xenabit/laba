@@ -95,7 +95,7 @@ export default function GalleryTabs() {
             loop: true,
             preload: 'auto',
             playsInline: true,
-            webkitPlaysinline: 'true',
+            webkitplaysinline: 'true',
           };
 
           const videoProps =
