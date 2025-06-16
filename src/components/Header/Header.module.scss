@@ -9,7 +9,8 @@
     top: -10%;
     left: 0;
     z-index: 60;
-    pointer-events: auto;
+    pointer-events: none;
+    opacity: 0;
 
     img {
       display: block;

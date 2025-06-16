@@ -424,7 +424,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     ScrollTrigger.refresh();
 
     return () => {
-      // console.log('Header: Cleaning up header animations');
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       gsap.killTweensOf([header, border, logo, toggle, desc, headerTop, loading]);
     };
