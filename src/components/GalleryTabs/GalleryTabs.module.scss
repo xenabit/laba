@@ -261,3 +261,44 @@
     }
   }
 }
+
+
+ /* пульсация скелетона*/
+ 
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.GalleryTabs {
+  &__skeletonVideo {
+    width: 100%;
+    height: 100vw;
+    background: var(-sec-5);
+    border: 1px dashed var(--sec-4);
+    box-sizing: border-box;
+    animation: pulse 1.5s ease-in-out infinite;
+
+    @media all and (min-width: $bp4) { height: 50vw; }
+    @media all and (min-width: $bp1) { height: 33vw; }
+  }
+
+  &__skeletonTextShort,
+  &__skeletonTextLong {
+    display: block;
+    background: var(--sec-4);
+    border-radius: 2px;
+    border: 1px solid var(--sec-4);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  &__skeletonTextShort {
+    width: 40%;
+    height: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  &__skeletonTextLong {
+    width: 60%;
+    height: 1.5rem;
+  }
+}

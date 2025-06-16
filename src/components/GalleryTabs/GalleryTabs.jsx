@@ -1,7 +1,15 @@
-import { useState, useEffect, useCallback, useMemo, useRef, createRef } from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+  createRef,
+} from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useSearchParams } from 'react-router-dom';
-import styles from './GalleryTabs.module.scss';
+import styles     from './GalleryTabs.module.scss';
+import itemStyles from '../GalleryItem/GalleryItem.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { projects, projectsTypes } from '../../constants/projects';
 
@@ -13,9 +21,7 @@ export default function GalleryTabs() {
 
   useEffect(() => {
     const f = searchParams.get('filter') || 'all';
-    if (f !== activeFilter) {
-      setActiveFilter(f);
-    }
+    if (f !== activeFilter) setActiveFilter(f);
   }, [searchParams, activeFilter]);
 
   const handleFilterChange = useCallback(
@@ -47,6 +53,23 @@ export default function GalleryTabs() {
     });
   }, [activeFilter]);
 
+  const total = filteredItems.length;
+  const [loadedCount, setLoadedCount] = useState(0);
+  const handleLoaded = () => setLoadedCount((c) => c + 1);
+
+  const preloads = filteredItems.map((item) => (
+    <video
+      key={`preload-${item.id}`}
+      src={item.video}
+      preload="auto"
+      muted
+      onLoadedData={handleLoaded}
+      style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', opacity: 0 }}
+    />
+  ));
+
+  const showSkeleton = loadedCount < total;
+
   const transitionClassNames = useMemo(
     () => ({
       enter: styles.itemEnter,
@@ -68,53 +91,90 @@ export default function GalleryTabs() {
           <a href="tel:+79161958226" className={styles.GalleryTabs__tel}>
             тел. +7&nbsp;(916)&nbsp;195-82-26
           </a>
+          <a href="tel:+79690639323" className={styles.GalleryTabs__tel}>
+            тел. +7&nbsp;(969)&nbsp;063-93-23
+          </a>
         </div>
       </div>
+
       <nav className={styles.GalleryTabs__filters}>
         <ul>
           {projectsTypes.map((el) => (
             <li key={el.id}>
-              <button onMouseMove={handleMouseMove} onClick={() => handleFilterChange(el.type)} className={activeFilter === el.type ? styles.active : ''}>
+              <button
+                onMouseMove={handleMouseMove}
+                onClick={() => handleFilterChange(el.type)}
+                className={activeFilter === el.type ? styles.active : ''}
+              >
                 <span>{el.title}</span>
               </button>
             </li>
           ))}
         </ul>
       </nav>
-      <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
-        {filteredItems.map((item, idx) => {
-          const key = `${item.id}-${activeFilter}`;
-          if (!nodeRefs.current[key]) {
-            nodeRefs.current[key] = createRef();
-          }
-          const nodeRef = nodeRefs.current[key];
 
-          const baseVideoProps = {
-            autoPlay: true,
-            muted: true,
-            loop: true,
-            preload: 'auto',
-            playsInline: true,
-            webkitplaysinline: 'true',
-          };
+      <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
+        {preloads}
+      </div>
+         {showSkeleton ? (
+        <ul className={styles.GalleryTabs__items}>
+          {Array.from({ length: total }).map((_, i) => (
+            <li className={itemStyles.GalleryItem__item} key={`ske-${i}`}>
+              <div className={styles.GalleryTabs__skeletonVideo} />
+              <h2>
+                <span className={styles.GalleryTabs__skeletonTextShort} />
+                <span className={styles.GalleryTabs__skeletonTextLong} />
+              </h2>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
+          {filteredItems.map((item, idx) => {
+            const key = `${item.id}-${activeFilter}`;
+            if (!nodeRefs.current[key]) {
+              nodeRefs.current[key] = createRef();
+            }
+            const nodeRef = nodeRefs.current[key];
 
-          const videoProps =
-            idx % 2 === 0
-              ? baseVideoProps
-              : {
-                  ...baseVideoProps,
-                  onLoadedMetadata: (e) => e.currentTarget.pause(),
-                  onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
-                  onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
-                };
+            const baseVideoProps = {
+              autoPlay: true,
+              muted: true,
+              loop: true,
+              preload: 'auto',
+              playsInline: true,
+              webkitPlaysInline: 'true',
+            };
+            const videoProps =
+              idx % 2 === 0
+                ? baseVideoProps
+                : {
+                    ...baseVideoProps,
+                    onLoadedMetadata: (e) => e.currentTarget.pause(),
+                    onMouseEnter:    (e) => handleMouseEnter(e.currentTarget),
+                    onMouseLeave:    (e) => handleMouseLeave(e.currentTarget),
+                  };
 
-          return (
-            <CSSTransition key={key} nodeRef={nodeRef} timeout={1000} classNames={transitionClassNames}>
-              <GalleryItem ref={nodeRef} videoSrc={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
-            </CSSTransition>
-          );
-        })}
-      </TransitionGroup>
+            return (
+              <CSSTransition
+                key={key}
+                nodeRef={nodeRef}
+                timeout={1000}
+                classNames={transitionClassNames}
+              >
+                <GalleryItem
+                  ref={nodeRef}
+                  videoSrc={item.video}
+                  href={item.src}
+                  title={item.title}
+                  desc={item.desc}
+                  videoProps={videoProps}
+                />
+              </CSSTransition>
+            );
+          })}
+        </TransitionGroup>
+      )}
     </section>
   );
 }
