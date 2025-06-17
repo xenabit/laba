@@ -29,7 +29,6 @@
     width: 100%;
     height: 100vw;
     background: var(-sec-5);
-    border: 1px dashed var(--sec-4);
     box-sizing: border-box;
     animation: pulse 1.5s ease-in-out infinite;
 
@@ -41,12 +40,19 @@
     }
   }
 
+   &__items {
+    li:nth-child(odd) .Gallery__skeletonVideo {
+      background: var(--sec-5);
+    }
+    li:nth-child(even) .Gallery__skeletonVideo {
+      background: var(--sec-4);
+    }
+  }
+
   &__skeletonTextShort,
   &__skeletonTextLong {
     display: block;
     background: var(--sec-4);
-    border-radius: 2px;
-    border: 1px solid var(--sec-4);
     animation: pulse 1.5s ease-in-out infinite;
   }
 

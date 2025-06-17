@@ -9,7 +9,7 @@ export default function Gallery() {
   const [loadedCount, setLoadedCount] = useState(0);
 
   const handleLoaded = () => setLoadedCount(c => c + 1);
-  
+
   const handleMouseEnter = video => video.play();
   const handleMouseLeave = video => video.pause();
 
