@@ -6,7 +6,11 @@ function Picture({ src }) {
     <section className={styles.Picture}>
       <div className={styles.Picture__picture}>
         <picture>
-          <img src={src} alt="Описание изображения" />
+          <picture>
+            <source type="image/avif" srcSet={src.picture.avif} />
+            <source type="image/webp" srcSet={src.picture.webp} />
+            <img src={src.picture.jpg} loading="lazy" />
+          </picture>
         </picture>
       </div>
     </section>

@@ -126,15 +126,23 @@ function CasesCompareSlider({ items }) {
           {items.pictures?.map((item, index) => (
             <SwiperSlide className={styles.CasesCompareSlider__slide} key={item.id}>
               <div className={styles.CasesCompareSlider__bg}>
-                <img loading="lazy" src={items.bg} alt="Before"></img>
+                <img loading="lazy" src={items.bg}></img>
               </div>
               <div className={styles.CasesCompareSlider__wrapper}>
                 <div className={styles.CasesCompareSlider__pictures}>
                   <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_left}`}>
-                    <img loading="lazy" src={item.picture_left} alt="Before" />
+                    <picture>
+                      <source type="image/avif" srcSet={item.picture_left.avif} />
+                      <source type="image/webp" srcSet={item.picture_left.webp} />
+                      <img loading="lazy" src={item.picture_left.jpg} />
+                    </picture>
                   </div>
                   <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_right}`}>
-                    <img loading="lazy" src={item.picture_right} alt="After" />
+                    <picture>
+                      <source type="image/avif" srcSet={item.picture_right.avif} />
+                      <source type="image/webp" srcSet={item.picture_right.webp} />
+                      <img loading="lazy" src={item.picture_right.jpg} />
+                    </picture>
                   </div>
                 </div>
                 <div className={styles.CasesCompareSlider__divider} ref={(el) => (dividerRefs.current[index] = el)}>
