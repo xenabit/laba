@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import styles from './AboutList.module.scss';
 
 import videoSrc from '../../assets/videos/about-list.mp4';
@@ -6,7 +6,7 @@ import num1 from '../../assets/images/about-list-num-1.svg';
 import num2 from '../../assets/images/about-list-num-2.svg';
 import num3 from '../../assets/images/about-list-num-3.svg';
 
-const items = [
+const ITEMS = [
   {
     title: 'Всегда в&nbsp;контакте <br>с&nbsp;заказчиком',
     desc: 'Работаем двухнедельными спринтами, визуализируем прогресс и&nbsp;всегда готовы поделиться статусом проекта',
@@ -31,59 +31,80 @@ const items = [
 ];
 
 export default function AboutList() {
-  const [animatedSet, setAnimatedSet] = useState(new Set());
-  const listRefs = useRef(items.map(() => React.createRef()));
-  const videoRefs = useRef(items.map(() => React.createRef()));
+  const [animated, setAnimated] = useState(() => ITEMS.map(() => false));
+
+  const listRefs = useMemo(
+    () => ITEMS.map(() => React.createRef()),
+    []
+  );
+  const videoRefs = useMemo(
+    () => ITEMS.map(() => React.createRef()),
+    []
+  );
 
   useEffect(() => {
-    videoRefs.current.forEach((ref, idx) => {
-      const videoEl = ref.current;
-      if (videoEl) {
-        videoEl.currentTime = items[idx].startTime;
-        videoEl.play();
+    videoRefs.forEach((ref, idx) => {
+      const vid = ref.current;
+      if (vid) {
+        vid.currentTime = ITEMS[idx].startTime;
+        vid.play();
+      }
+    });
+  }, [videoRefs]);
+
+  const handleIntersect = useCallback((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = Number(entry.target.getAttribute('data-index'));
+        setAnimated((prev) => {
+          if (prev[idx]) return prev;
+          const copy = [...prev];
+          copy[idx] = true;
+          return copy;
+        });
+        observer.unobserve(entry.target);
       }
     });
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = Number(entry.target.getAttribute('data-index'));
-            setAnimatedSet((prev) => new Set([...prev, idx]));
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    listRefs.current.forEach((ref) => {
-      if (ref.current) observer.observe(ref.current);
+    const obs = new IntersectionObserver(handleIntersect, {
+      threshold: 0.2,
     });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+    listRefs.forEach((ref) => {
+      if (ref.current) obs.observe(ref.current);
+    });
+    return () => obs.disconnect();
+  }, [handleIntersect, listRefs]);
 
   return (
     <section className={styles.AboutList}>
       <h2 className={styles.AboutList__title}>Как мы работаем?</h2>
       <hr />
       <ul className={styles.AboutList__items}>
-        {items.map((el, index) => {
-          const isAnimated = animatedSet.has(index);
+        {ITEMS.map((el, idx) => {
+          const isAnimated = animated[idx];
           return (
             <li
-              key={index}
-              data-index={index}
-              ref={listRefs.current[index]}
-              className={`${styles.AboutList__item} ${isAnimated ? styles.animate : ''}`}
+              key={idx}
+              data-index={idx}
+              ref={listRefs[idx]}
+              className={[
+                styles.AboutList__item,
+                isAnimated && styles.animate,
+              ]
+                .filter(Boolean)
+                .join(' ')}
             >
               <div className={styles.AboutList__text}>
-                <div className={`${styles.AboutList__header} ${isAnimated ? styles.animate : ''}`}>
+                <div
+                  className={[
+                    styles.AboutList__header,
+                    isAnimated && styles.animate,
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                >
                   <div className={styles.AboutList__num}>
                     <img loading="lazy" src={el.num} alt="Номер этапа" />
                   </div>
@@ -93,13 +114,18 @@ export default function AboutList() {
                   />
                 </div>
                 <div
-                  className={`${styles.AboutList__desc} ${isAnimated ? styles.animate : ''}`}
+                  className={[
+                    styles.AboutList__desc,
+                    isAnimated && styles.animate,
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
                   dangerouslySetInnerHTML={{ __html: el.desc }}
                 />
               </div>
               <div className={styles.AboutList__video}>
                 <video
-                  ref={videoRefs.current[index]}
+                  ref={videoRefs[idx]}
                   preload="auto"
                   loop
                   muted
