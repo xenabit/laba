@@ -48,6 +48,7 @@ export default function App() {
   }, [isFirstVisit]);
 
   const smootherRef = useRef(null);
+
   useEffect(() => {
     if (loadingStage === 'complete') {
       smootherRef.current = ScrollSmoother.create({
