@@ -121,10 +121,6 @@ export default function GalleryTabs() {
           {Array.from({ length: total }).map((_, i) => (
             <li className={itemStyles.GalleryItem__item} key={`ske-${i}`}>
               <div className={styles.GalleryTabs__skeletonVideo} />
-              <h2>
-                <span className={styles.GalleryTabs__skeletonTextShort} />
-                <span className={styles.GalleryTabs__skeletonTextLong} />
-              </h2>
             </li>
           ))}
         </ul>

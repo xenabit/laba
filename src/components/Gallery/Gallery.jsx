@@ -44,10 +44,6 @@ export default function Gallery() {
             Array.from({ length: total }).map((_, i) => (
               <li className={itemStyles.GalleryItem__item} key={`ske-${i}`}>
                 <div className={styles.Gallery__skeletonVideo} />
-                <h2>
-                  <span className={styles.Gallery__skeletonTextShort} />
-                  <span className={styles.Gallery__skeletonTextLong} />
-                </h2>
               </li>
             ))
           :
