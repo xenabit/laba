@@ -10,8 +10,7 @@ function CookieAgreement({ loadingStage }) {
 
   useEffect(() => {
     try {
-      // Проверяем, есть ли уже согласие в localStorage
-      const agreement = localStorage.getItem('cookieAgreement');
+       const agreement = localStorage.getItem('cookieAgreement');
       if (agreement === 'true') {
         setIsAgreed(true);
       }
@@ -57,7 +56,6 @@ function CookieAgreement({ loadingStage }) {
 
   const handleAgreement = () => {
     try {
-      // Сохраняем согласие в localStorage
       localStorage.setItem('cookieAgreement', 'true');
       gsap.to(cookieRef.current, {
         opacity: 0,
