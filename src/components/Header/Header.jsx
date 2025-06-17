@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { forwardRef, memo, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,6 +10,7 @@ import Baloon_c from '../../assets/images/loading-main-baloon-c.svg';
 import logoImg from '/src/assets/images/header-logo.svg';
 import headerMenuImg from '/src/assets/images/header-menu.svg';
 import presentationPdf from '/src/assets/docs/presentation.pdf';
+import NavLinks from './NavLinks';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,11 +35,10 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const isInitialRender = useRef(true);
   const hasScrolled = useRef(false);
 
-  // Синхронизация activeTab с текущим маршрутом
   useEffect(() => {
     const currentPath = location.pathname;
     setActiveTab(currentPath);
-    localStorage.setItem('activeTab', currentPath); // Сохраняем текущий путь в localStorage
+    localStorage.setItem('activeTab', currentPath);
   }, [location.pathname]);
 
   // Анимация шара с эффектом примагничивания
@@ -483,25 +483,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
                 <img src={headerMenuImg} />
               </picture>
             </div>
-            <nav>
-              <ul>
-                <li>
-                  <Link className={activeTab === '/' ? styles.active : ''} to="/" onClick={() => handleTabClick('/')}>
-                    Главная
-                  </Link>
-                </li>
-                <li>
-                  <Link className={activeTab === '/portfolio' ? styles.active : ''} to="/portfolio" onClick={() => handleTabClick('/portfolio')}>
-                    Портфолио
-                  </Link>
-                </li>
-                <li>
-                  <Link className={activeTab === '/contact' ? styles.active : ''} to="/contact" onClick={() => handleTabClick('/contact')}>
-                    Контакты
-                  </Link>
-                </li>
-              </ul>
-            </nav>
+             <NavLinks activeTab={activeTab} onTabClick={handleTabClick}/>
             <ul className={styles.Header__links}>
               <li>
                 <a href={presentationPdf} target="_blank" rel="noopener noreferrer">
@@ -530,4 +512,4 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   );
 });
 
-export default Header;
+export default memo(Header);
