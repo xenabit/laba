@@ -1,8 +1,7 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother.min';
+import { ScrollTrigger, ScrollSmoother } from "gsap/all";
 
 import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';

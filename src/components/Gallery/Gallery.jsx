@@ -58,7 +58,7 @@ export default function Gallery() {
                 loop: true,
                 preload: 'auto',
                 playsInline: true,
-                webkitPlaysInline: 'true',
+                webkitplaysinline: 'true',
               };
 
               const videoProps =
