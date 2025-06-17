@@ -1,8 +1,12 @@
 import styles from './CasesIntro.module.scss';
 import { Link } from 'react-router-dom';
+import { getImageFormats } from '../../utils/imageImports';
 
 function CasesIntro({ contentCasesIntro }) {
   const { title, subtitle, tags, src, picture_intro, about } = contentCasesIntro;
+  const imageFormats = getImageFormats(picture_intro);
+  const fallbackFormat = imageFormats.jpg || imageFormats.png;
+
   return (
     <section className={`${styles.CasesIntro}`}>
       <div className={styles.CasesIntro__header}>
@@ -23,7 +27,11 @@ function CasesIntro({ contentCasesIntro }) {
       </div>
       <div className={styles.CasesIntro__body}>
         <div className={styles.CasesIntro__picture}>
-          <img src={picture_intro} loading="lazy"></img>
+          <picture>
+            <source type="image/avif" srcSet={imageFormats.avif} />
+            <source type="image/webp" srcSet={imageFormats.webp} />
+            <img src={fallbackFormat} loading="lazy" />
+          </picture>
         </div>
         {src?.url && (
           <a href={src.url} className={styles.CasesIntro__button}>

@@ -4,6 +4,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './CasesSliderFull.module.scss';
+import { getImageFormats } from '../../utils/imageImports';
 
 function CasesSliderFull({ items }) {
   const swiperRef = useRef(null);
@@ -65,22 +66,30 @@ function CasesSliderFull({ items }) {
           role="region"
           aria-label="Карусель изображений"
         >
-          {items.pictures?.map((item) => (
-            <SwiperSlide className={styles.CasesSliderFull__slide} key={item.id}>
-              <div className={styles.CasesSliderFull__inner}>
-                <img
-                  loading="lazy"
-                  src={item.picture}
-                  alt={item.title}
-                  style={{
-                    width: item.sizes?.width || items.sizes.width,
-                    height: item.sizes?.height || 'auto',
-                    objectFit: item.sizes?.objectfit || 'contain',
-                  }}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
+          {items.pictures?.map((item) => {
+            const imageFormats = getImageFormats(item.picture);
+            const fallbackFormat = imageFormats.jpg || imageFormats.png;
+            return (
+              <SwiperSlide className={styles.CasesSliderFull__slide} key={item.id}>
+                <div className={styles.CasesSliderFull__inner}>
+                  <picture>
+                    <source type="image/avif" srcSet={imageFormats.avif} />
+                    <source type="image/webp" srcSet={imageFormats.webp} />
+                    <img
+                      loading="lazy"
+                      src={fallbackFormat}
+                      alt={item.title || `Слайд ${item.id}`}
+                      style={{
+                        width: item.sizes?.width || items.sizes.width,
+                        height: item.sizes?.height || 'auto',
+                        objectFit: item.sizes?.objectfit || 'contain',
+                      }}
+                    />
+                  </picture>
+                </div>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
         <div ref={paginationRef} className={styles.CasesSliderFull__pagination}></div>
       </div>
