@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger, ScrollSmoother } from "gsap/all";
+import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
 import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
@@ -26,28 +26,28 @@ import './App.scss';
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export default function App() {
-  const headerRef = useRef(null);
-  const wrapperRef = useRef(null);
-  const introRef = useRef(null);
+  const headerRef       = useRef(null);
+  const wrapperRef      = useRef(null);
+  const introRef        = useRef(null);
   const projectsTileRef = useRef(null);
-  const location = useLocation();
+  const location        = useLocation();
 
   const [isFirstVisit] = useState(() => {
     if (typeof window === 'undefined') return false;
-    const hasVisited = sessionStorage.getItem('hasVisitedHome');
-    return !hasVisited && location.pathname === '/';
+    const has = sessionStorage.getItem('hasVisitedHome');
+    return !has && location.pathname === '/';
   });
-
   const [loadingStage, setLoadingStage] = useState(
     isFirstVisit ? 'initial' : 'complete'
   );
 
   useEffect(() => {
-    if (isFirstVisit) sessionStorage.setItem('hasVisitedHome', 'true');
+    if (isFirstVisit) {
+      sessionStorage.setItem('hasVisitedHome', 'true');
+    }
   }, [isFirstVisit]);
 
   const smootherRef = useRef(null);
-
   useEffect(() => {
     if (loadingStage === 'complete') {
       smootherRef.current = ScrollSmoother.create({
@@ -59,8 +59,10 @@ export default function App() {
       ScrollTrigger.refresh();
     }
     return () => {
-      if (smootherRef.current) smootherRef.current.kill();
-      smootherRef.current = null;
+      if (smootherRef.current) {
+        smootherRef.current.kill();
+        smootherRef.current = null;
+      }
       ScrollTrigger.refresh();
       document.body.style.overflow = '';
     };
@@ -75,20 +77,19 @@ export default function App() {
     ScrollTrigger.refresh();
   }, [location.pathname, loadingStage]);
 
-
   useEffect(() => {
-
     if (!/iP(hone|ad|od)/.test(navigator.userAgent)) return;
-
-    const root = wrapperRef.current?.querySelector('#smooth-content');
+    const root = document.getElementById('smooth-content');
     if (!root) return;
+    const vids = root.querySelectorAll('video[data-preload]');
+    if (!vids.length) return;
 
-    const videos = root.querySelectorAll('video[data-preload]');
-    if (!videos.length) return;
     const unlock = () => {
-      videos.forEach((v) => {
+      vids.forEach(v => {
         v.muted = true;
-        v.play().catch(() => {}).then(() => v.pause());
+        v.play()
+          .catch(() => {})
+          .then(() => v.pause());
         v.load();
       });
     };
@@ -99,17 +100,15 @@ export default function App() {
       window.removeEventListener('touchstart', unlock);
       window.removeEventListener('click',      unlock);
     };
-  }, [wrapperRef]);
+  }, []);
 
   const handleStageChange = (stage) => {
     setLoadingStage(stage);
     ScrollTrigger.refresh();
   };
-  const handleBalloonsToCenterComplete = () =>
-    handleStageChange('transition');
-  const handleBalloonsShrinkComplete = () =>
-    handleStageChange('complete');
-  const handleMaxBalloonSize = () => {};
+  const handleBalloonsToCenterComplete = () => handleStageChange('transition');
+  const handleBalloonsShrinkComplete  = () => handleStageChange('complete');
+  const handleMaxBalloonSize          = () => {};
 
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
@@ -121,70 +120,41 @@ export default function App() {
         onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
       />
 
-      {isFirstVisit &&
-        location.pathname === '/' &&
-        loadingStage !== 'complete' && (
-          <LoadingMainScreen
-            headerRef={headerRef}
-            onStageChange={handleStageChange}
-            wrapperRef={wrapperRef}
-            loadingStage={loadingStage}
-            introRef={introRef}
-            projectsTileRef={projectsTileRef}
-          />
-        )}
+      {isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' && (
+        <LoadingMainScreen
+          headerRef={headerRef}
+          onStageChange={handleStageChange}
+          wrapperRef={wrapperRef}
+          loadingStage={loadingStage}
+          introRef={introRef}
+          projectsTileRef={projectsTileRef}
+        />
+      )}
 
       <div
         id="smooth-content"
         style={{
           opacity:
-            isFirstVisit &&
-            location.pathname === '/' &&
-            loadingStage !== 'complete'
-              ? 0
-              : 1,
+            isFirstVisit && location.pathname === '/' && loadingStage !== 'complete'
+              ? 0 : 1,
           pointerEvents:
-            isFirstVisit &&
-            location.pathname === '/' &&
-            loadingStage !== 'complete'
-              ? 'none'
-              : 'auto',
+            isFirstVisit && location.pathname === '/' && loadingStage !== 'complete'
+              ? 'none' : 'auto',
           transition: 'opacity 0.3s ease',
         }}
       >
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                introRef={introRef}
-                projectsTileRef={projectsTileRef}
-                loadingStage={loadingStage}
-              />
-            }
-          />
+          <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />
           <Route path="/information" element={<PrivacyPolicy />} />
           <Route path="/portfolio/markstour" element={<CaseMarksTour />} />
           <Route path="/portfolio/markssite" element={<CaseMarkssite />} />
-          <Route
-            path="/portfolio/markssite-hr"
-            element={<CaseMarkssiteHR />}
-          />
-          <Route
-            path="/portfolio/canon-change"
-            element={<CaseCanonChange />}
-          />
-          <Route
-            path="/portfolio/tamagotchi"
-            element={<CaseTamagotchi />}
-          />
-          <Route
-            path="/portfolio/markscity"
-            element={<CaseMarksCity />}
-          />
+          <Route path="/portfolio/markssite-hr" element={<CaseMarkssiteHR />} />
+          <Route path="/portfolio/canon-change" element={<CaseCanonChange />} />
+          <Route path="/portfolio/tamagotchi" element={<CaseTamagotchi />} />
+          <Route path="/portfolio/markscity" element={<CaseMarksCity />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />

@@ -8,22 +8,7 @@ export default function Gallery() {
   const total = 6;
   const [loadedCount, setLoadedCount] = useState(0);
 
-  useEffect(() => {
-    if (sessionStorage.getItem('galleryVideosLoaded') === 'true') {
-      setLoadedCount(total);
-    }
-  }, [total]);
-
-  const handleLoaded = () => {
-    setLoadedCount(c => {
-      const next = c + 1;
-      if (next >= total) {
-        sessionStorage.setItem('galleryVideosLoaded', 'true');
-      }
-      return next;
-    });
-  };
-  
+  const handleLoaded = () => setLoadedCount(c => c + 1);
   const showSkeleton = loadedCount < total;
 
   const handleMouseEnter = (video) => video.play();

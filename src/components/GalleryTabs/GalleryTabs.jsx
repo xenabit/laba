@@ -24,13 +24,10 @@ export default function GalleryTabs() {
     if (f !== activeFilter) setActiveFilter(f);
   }, [searchParams, activeFilter]);
 
-  const handleFilterChange = useCallback(
-    (type) => {
-      setActiveFilter(type);
-      setSearchParams({ filter: type });
-    },
-    [setSearchParams]
-  );
+  const handleFilterChange = useCallback((type) => {
+    setActiveFilter(type);
+    setSearchParams({ filter: type });
+  }, [setSearchParams]);
 
   const handleMouseMove = useCallback((e) => {
     const { left, top } = e.currentTarget.getBoundingClientRect();
@@ -39,15 +36,15 @@ export default function GalleryTabs() {
   }, []);
 
   const handleMouseEnter = useCallback((video) => {
-    const p = video.play();
-    if (p && p.catch) p.catch(() => {});
+    video.play().catch(() => {});
   }, []);
-
-  const handleMouseLeave = useCallback((video) => video.pause(), []);
+  const handleMouseLeave = useCallback((video) => {
+    video.pause();
+  }, []);
 
   const filteredItems = useMemo(() => {
     if (activeFilter === 'all') return projects;
-    return projects.filter((it) => {
+    return projects.filter(it => {
       const types = Array.isArray(it.type) ? it.type : [it.type];
       return types.includes(activeFilter);
     });
@@ -57,7 +54,7 @@ export default function GalleryTabs() {
   const [loadedCount, setLoadedCount] = useState(0);
 
   useEffect(() => {
-    if (sessionStorage.getItem('galleryVideosLoaded') === 'true') {
+    if (sessionStorage.getItem('galleryTabsLoaded') === 'true') {
       setLoadedCount(total);
     }
   }, [total]);
@@ -66,57 +63,55 @@ export default function GalleryTabs() {
     setLoadedCount(c => {
       const next = c + 1;
       if (next >= total) {
-        sessionStorage.setItem('galleryVideosLoaded', 'true');
+        sessionStorage.setItem('galleryTabsLoaded', 'true');
       }
       return next;
     });
   };
+
   const showSkeleton = loadedCount < total;
 
-  const preloads = filteredItems.map((item) => (
-    <video
-      key={`preload-${item.id}`}
-      src={item.video}
-      preload="auto"
-      muted
-      data-preload
-      onLoadedData={handleLoaded}
-      style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', opacity: 0 }}
-      playsInline
-      webkit-playsinline="true"
-    />
-  ));
+  const preloads = showSkeleton
+    ? filteredItems.map(item => (
+        <video
+          key={`preload-${item.id}`}
+          src={item.video}
+          preload="auto"
+          muted
+          onLoadedData={handleLoaded}
+          style={{
+            position: 'absolute',
+            width: 0,
+            height: 0,
+            overflow: 'hidden',
+            opacity: 0,
+          }}
+          playsInline
+        />
+      ))
+    : null;
 
-  const transitionClassNames = useMemo(
-    () => ({
-      enter: styles.itemEnter,
-      enterActive: styles.itemEnterActive,
-      exit: styles.itemExit,
-      exitActive: styles.itemExitActive,
-    }),
-    []
-  );
+  const transitionClassNames = useMemo(() => ({
+    enter: styles.itemEnter,
+    enterActive: styles.itemEnterActive,
+    exit: styles.itemExit,
+    exitActive: styles.itemExitActive,
+  }), []);
 
   return (
     <section className={styles.GalleryTabs}>
       <div className={styles.GalleryTabs__header}>
         <h1 className={styles.GalleryTabs__title}>ПОРТФОЛИО</h1>
         <div className={styles.GalleryTabs__links}>
-          <a className={styles.GalleryTabs__mail} href="mailto:info@laba-laba.ru">
-            info@laba-laba.ru
-          </a>
-          <a href="tel:+79161958226" className={styles.GalleryTabs__tel}>
-            тел. +7&nbsp;(916)&nbsp;195-82-26
-          </a>
-          <a href="tel:+79690639323" className={styles.GalleryTabs__tel}>
-            тел. +7&nbsp;(969)&nbsp;063-93-23
-          </a>
+          <a href="mailto:info@laba-laba.ru">info@laba-laba.ru</a>
+          <a href="tel:+79161958226">+7 (916) 195-82-26</a>
+          <a href="tel:+79690639323">+7 (969) 063-93-23</a>
         </div>
       </div>
 
       <nav className={styles.GalleryTabs__filters}>
         <ul>
-          {projectsTypes.map((el) => (
+          {projectsTypes.map(el => (
             <li key={el.id}>
               <button
                 onMouseMove={handleMouseMove}
@@ -130,10 +125,12 @@ export default function GalleryTabs() {
         </ul>
       </nav>
 
+      {preloads &&
       <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
-        {preloads}
-      </div>
-         {showSkeleton ? (
+          {preloads}
+      </div>}
+
+      {showSkeleton ? (
         <ul className={styles.GalleryTabs__items}>
           {Array.from({ length: total }).map((_, i) => (
             <li className={itemStyles.GalleryItem__item} key={`ske-${i}`}>
@@ -145,9 +142,7 @@ export default function GalleryTabs() {
         <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
           {filteredItems.map((item, idx) => {
             const key = `${item.id}-${activeFilter}`;
-            if (!nodeRefs.current[key]) {
-              nodeRefs.current[key] = createRef();
-            }
+            if (!nodeRefs.current[key]) nodeRefs.current[key] = createRef();
             const nodeRef = nodeRefs.current[key];
 
             const baseVideoProps = {
@@ -156,23 +151,15 @@ export default function GalleryTabs() {
               loop: true,
               preload: 'auto',
               playsInline: true,
-              webkitplaysinline: 'true',
+              onMouseEnter:    e => handleMouseEnter(e.currentTarget),
+              onMouseLeave:    e => handleMouseLeave(e.currentTarget),
             };
-            const videoProps =
-              idx % 2 === 0
-                ? baseVideoProps
-                : {
-                    ...baseVideoProps,
-                    onLoadedMetadata: (e) => e.currentTarget.pause(),
-                    onMouseEnter:    (e) => handleMouseEnter(e.currentTarget),
-                    onMouseLeave:    (e) => handleMouseLeave(e.currentTarget),
-                  };
 
             return (
               <CSSTransition
                 key={key}
                 nodeRef={nodeRef}
-                timeout={1000}
+                timeout={600}
                 classNames={transitionClassNames}
               >
                 <GalleryItem
@@ -181,7 +168,7 @@ export default function GalleryTabs() {
                   href={item.src}
                   title={item.title}
                   desc={item.desc}
-                  videoProps={videoProps}
+                  videoProps={baseVideoProps}
                 />
               </CSSTransition>
             );
