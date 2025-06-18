@@ -75,6 +75,32 @@ export default function App() {
     ScrollTrigger.refresh();
   }, [location.pathname, loadingStage]);
 
+
+  useEffect(() => {
+
+    if (!/iP(hone|ad|od)/.test(navigator.userAgent)) return;
+
+    const root = wrapperRef.current?.querySelector('#smooth-content');
+    if (!root) return;
+
+    const videos = root.querySelectorAll('video[data-preload]');
+    if (!videos.length) return;
+    const unlock = () => {
+      videos.forEach((v) => {
+        v.muted = true;
+        v.play().catch(() => {}).then(() => v.pause());
+        v.load();
+      });
+    };
+
+    window.addEventListener('touchstart', unlock, { once: true });
+    window.addEventListener('click',      unlock, { once: true });
+    return () => {
+      window.removeEventListener('touchstart', unlock);
+      window.removeEventListener('click',      unlock);
+    };
+  }, [wrapperRef]);
+
   const handleStageChange = (stage) => {
     setLoadingStage(stage);
     ScrollTrigger.refresh();

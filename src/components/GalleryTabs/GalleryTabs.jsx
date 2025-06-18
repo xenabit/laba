@@ -55,7 +55,23 @@ export default function GalleryTabs() {
 
   const total = filteredItems.length;
   const [loadedCount, setLoadedCount] = useState(0);
-  const handleLoaded = () => setLoadedCount((c) => c + 1);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('galleryVideosLoaded') === 'true') {
+      setLoadedCount(total);
+    }
+  }, [total]);
+
+  const handleLoaded = () => {
+    setLoadedCount(c => {
+      const next = c + 1;
+      if (next >= total) {
+        sessionStorage.setItem('galleryVideosLoaded', 'true');
+      }
+      return next;
+    });
+  };
+  const showSkeleton = loadedCount < total;
 
   const preloads = filteredItems.map((item) => (
     <video
@@ -63,12 +79,13 @@ export default function GalleryTabs() {
       src={item.video}
       preload="auto"
       muted
+      data-preload
       onLoadedData={handleLoaded}
       style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', opacity: 0 }}
+      playsInline
+      webkit-playsinline="true"
     />
   ));
-
-  const showSkeleton = loadedCount < total;
 
   const transitionClassNames = useMemo(
     () => ({
