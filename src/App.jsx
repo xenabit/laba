@@ -26,20 +26,18 @@ import './App.scss';
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export default function App() {
-  const headerRef       = useRef(null);
-  const wrapperRef      = useRef(null);
-  const introRef        = useRef(null);
+  const headerRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const introRef = useRef(null);
   const projectsTileRef = useRef(null);
-  const location        = useLocation();
+  const location = useLocation();
 
   const [isFirstVisit] = useState(() => {
     if (typeof window === 'undefined') return false;
     const has = sessionStorage.getItem('hasVisitedHome');
     return !has && location.pathname === '/';
   });
-  const [loadingStage, setLoadingStage] = useState(
-    isFirstVisit ? 'initial' : 'complete'
-  );
+  const [loadingStage, setLoadingStage] = useState(isFirstVisit ? 'initial' : 'complete');
 
   useEffect(() => {
     if (isFirstVisit) {
@@ -50,13 +48,16 @@ export default function App() {
   const smootherRef = useRef(null);
   useEffect(() => {
     if (loadingStage === 'complete') {
-      smootherRef.current = ScrollSmoother.create({
-        wrapper: '#smooth-wrapper',
-        content: '#smooth-content',
-        smooth: 1.5,
-        effects: true,
-      });
-      ScrollTrigger.refresh();
+      const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
+      if (!isIOS) {
+        smootherRef.current = ScrollSmoother.create({
+          wrapper: '#smooth-wrapper',
+          content: '#smooth-content',
+          smooth: 1.5,
+          effects: true,
+        });
+        ScrollTrigger.refresh();
+      }
     }
     return () => {
       if (smootherRef.current) {
@@ -85,7 +86,7 @@ export default function App() {
     if (!vids.length) return;
 
     const unlock = () => {
-      vids.forEach(v => {
+      vids.forEach((v) => {
         v.muted = true;
         v.play()
           .catch(() => {})
@@ -95,10 +96,10 @@ export default function App() {
     };
 
     window.addEventListener('touchstart', unlock, { once: true });
-    window.addEventListener('click',      unlock, { once: true });
+    window.addEventListener('click', unlock, { once: true });
     return () => {
       window.removeEventListener('touchstart', unlock);
-      window.removeEventListener('click',      unlock);
+      window.removeEventListener('click', unlock);
     };
   }, []);
 
@@ -107,8 +108,8 @@ export default function App() {
     ScrollTrigger.refresh();
   };
   const handleBalloonsToCenterComplete = () => handleStageChange('transition');
-  const handleBalloonsShrinkComplete  = () => handleStageChange('complete');
-  const handleMaxBalloonSize          = () => {};
+  const handleBalloonsShrinkComplete = () => handleStageChange('complete');
+  const handleMaxBalloonSize = () => {};
 
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
@@ -121,25 +122,14 @@ export default function App() {
       />
 
       {isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' && (
-        <LoadingMainScreen
-          headerRef={headerRef}
-          onStageChange={handleStageChange}
-          wrapperRef={wrapperRef}
-          loadingStage={loadingStage}
-          introRef={introRef}
-          projectsTileRef={projectsTileRef}
-        />
+        <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
       )}
 
       <div
         id="smooth-content"
         style={{
-          opacity:
-            isFirstVisit && location.pathname === '/' && loadingStage !== 'complete'
-              ? 0 : 1,
-          pointerEvents:
-            isFirstVisit && location.pathname === '/' && loadingStage !== 'complete'
-              ? 'none' : 'auto',
+          opacity: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 0 : 1,
+          pointerEvents: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 'none' : 'auto',
           transition: 'opacity 0.3s ease',
         }}
       >

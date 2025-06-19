@@ -1,87 +1,101 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import styles from './VideoHorizontal.module.scss';
 
+const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
+
 function VideoHorizontal({ videoUrl }) {
-  const videoRef = useRef(null); // Для отслеживания видео элемента
+  const videoRef = useRef(null);
 
-  // Функция для извлечения ID YouTube видео из URL
   const getYouTubeId = useCallback((url) => {
-    const youtubeMatch = url.match(/[?&]v=([^&]+)/);
-    const youtubeShortMatch = url.match(/youtu\.be\/([^?&]+)/);
-    return youtubeMatch ? youtubeMatch[1] : youtubeShortMatch ? youtubeShortMatch[1] : null;
+    const m = url.match(/[?&]v=([^&]+)/) || url.match(/youtu\.be\/([^?&]+)/);
+    return m ? m[1] : null;
   }, []);
 
-  // Функция для отправки команд в видео плеер (например, YouTube или Rutube)
   const sendPlayerCommands = useCallback((iframe) => {
-    if (iframe) {
-      try {
-        iframe.contentWindow?.postMessage(JSON.stringify({ type: 'player:mute', data: {} }), '*');
-        iframe.contentWindow?.postMessage(JSON.stringify({ type: 'player:play', data: {} }), '*');
-        iframe.contentWindow?.postMessage(JSON.stringify({ type: 'player:hideControls', data: {} }), '*');
-      } catch (error) {
-        console.error('Error sending commands to iframe:', error);
-      }
+    try {
+      iframe.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'mute', args: [] }),
+        '*'
+      );
+      iframe.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+        '*'
+      );
+    } catch (e) {
+      console.warn('Player API error', e);
     }
   }, []);
-
-  useEffect(() => {
-    // Проверка, если видео с встраиваемым плеером (YouTube)
-    if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
-      const iframe = videoRef.current;
-      if (iframe) {
-        iframe.onload = () => sendPlayerCommands(iframe);
-      }
-    }
-  }, [videoUrl, sendPlayerCommands]);
 
   const renderVideoPlayer = useCallback(() => {
     if (!videoUrl) return null;
-
-    const isYouTube = videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be');
-    const isRutube = videoUrl.includes('rutube.ru');
-    const isMP4 = videoUrl.endsWith('.mp4');
+    const isYouTube = /youtube\.com|youtu\.be/.test(videoUrl);
+    const isRutube = /rutube\.ru/.test(videoUrl);
+    const isMP4 = /\.mp4$/.test(videoUrl);
 
     if (isYouTube) {
-      const videoId = getYouTubeId(videoUrl);
-      if (videoId) {
-        const embeddedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0`;
-        return (
-          <iframe
-            ref={videoRef}
-            className={styles.VideoHorizontal__video}
-            src={embeddedUrl}
-            frameBorder="0"
-            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-            playsInline
-            allowFullScreen
-            loading="lazy"
-          />
-        );
-      }
-    }
+      const id = getYouTubeId(videoUrl);
+      if (!id) return null;
+      const params = new URLSearchParams({
+        controls: 0,
+        enablejsapi: 1,
+        playsinline: 1,
+        mute: 1,
+      });
+      if (!isIOS) params.set('autoplay', 1);
+      const src = `https://www.youtube.com/embed/${id}?${params.toString()}`;
 
-    if (isRutube) {
-      const rutubeEmbedUrl = videoUrl.replace('/video/', '/play/embed/') + '?autoplay=1&muted=1&controls=0';
       return (
         <iframe
           ref={videoRef}
           className={styles.VideoHorizontal__video}
-          src={rutubeEmbedUrl}
+          src={src}
           frameBorder="0"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture; webkit-playsinline"
           allowFullScreen
           loading="lazy"
-          onLoad={() => sendPlayerCommands(videoRef.current)}
+          onLoad={() => {
+            if (!isIOS) sendPlayerCommands(videoRef.current);
+          }}
+        />
+      );
+    }
+
+    if (isRutube) {
+      const urlObj = new URL(videoUrl);
+      const embedPath = urlObj.pathname.replace('/video/', '/play/embed/');
+      let src = `https://rutube.ru${embedPath}?controls=0&playsinline=1&muted=1`;
+      if (!isIOS) src += '&autoplay=1';
+
+      return (
+        <iframe
+          ref={videoRef}
+          className={styles.VideoHorizontal__video}
+          src={src}
+          frameBorder="0"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture; webkit-playsinline"
+          allowFullScreen
+          loading="lazy"
+          onLoad={() => {
+            if (!isIOS) sendPlayerCommands(videoRef.current);
+          }}
         />
       );
     }
 
     if (isMP4) {
       return (
-        <video ref={videoRef} className={styles.VideoHorizontal__video} autoPlay muted loop preload="metadata" controls={false} loading="lazy">
-          <source src={videoUrl} type="video/mp4" />
-          Ваш браузер не поддерживает видео.
-        </video>
+        <video
+          ref={videoRef}
+          className={styles.VideoHorizontal__video}
+          src={videoUrl}
+          playsInline
+          webkit-playsinline="true"
+          muted
+          loop
+          preload="metadata"
+          autoPlay={!isIOS}
+          controls={false}
+        />
       );
     }
 
@@ -90,9 +104,11 @@ function VideoHorizontal({ videoUrl }) {
 
   return (
     <section className={styles.VideoHorizontal}>
-      <div className={styles.VideoHorizontal__container}>{renderVideoPlayer()}</div>
+      <div className={styles.VideoHorizontal__container}>
+        {renderVideoPlayer()}
+      </div>
     </section>
   );
 }
 
-export default VideoHorizontal;
+export default React.memo(VideoHorizontal);
