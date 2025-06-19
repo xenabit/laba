@@ -81,7 +81,11 @@ export default function GalleryTabs() {
         <ul>
           {projectsTypes.map((el) => (
             <li key={el.id}>
-              <button onMouseMove={handleMouseMove} onClick={() => handleFilterChange(el.type)} className={`${styles.filterBtn} ${activeFilter === el.type ? styles.active : ''}`}>
+              <button
+                onMouseMove={handleMouseMove}
+                onClick={() => handleFilterChange(el.type)}
+                className={`${styles.filterBtn} ${activeFilter === el.type ? styles.active : ''}`}
+              >
                 <span>{el.title}</span>
               </button>
             </li>
