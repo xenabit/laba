@@ -1,0 +1,52 @@
+.Gallery {
+  $s: &;
+
+  &__items {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media all and (min-width: $bp4) {
+    &__items {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  // Адаптация для desktop
+  @media all and (min-width: $bp1) {
+    &__items {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+   /* пульсация скелетона*/
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }  }
+
+
+  &__skeletonVideo {
+    width: 100%;
+    height: 100vw;
+    background: var(-sec-5);
+    box-sizing: border-box;
+    animation: pulse 1.5s ease-in-out infinite;
+
+    @media all and (min-width: $bp4) {
+      height: 50vw;
+    }
+    @media all and (min-width: $bp1) {
+      height: 33vw;
+    }
+  }
+
+   &__items {
+    li:nth-child(odd) .Gallery__skeletonVideo {
+      background: var(--sec-5);
+    }
+    li:nth-child(even) .Gallery__skeletonVideo {
+      background: var(--sec-4);
+    }
+  }
+}
+

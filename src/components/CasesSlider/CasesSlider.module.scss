@@ -1,0 +1,121 @@
+.CasesSlider {
+  $s: &;
+  @include sectionMarginMob;
+
+  &__container {
+    position: relative;
+  }
+
+  &__bg {
+    @include containerMob;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 100%;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__swiper {
+    @include containerMob;
+    transition: 0.3s;
+    overflow: visible !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  &__inner {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    max-height: 52vw;
+  }
+
+  &__half {
+    flex-shrink: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+
+    img {
+      display: block;
+      height: auto;
+    }
+  }
+
+  &__text {
+    background-color: transparent;
+    padding: rem(20) rem(30);
+    max-width: 50%;
+  }
+
+  &__title {
+    position: relative;
+    z-index: 10;
+    margin-bottom: rem(4);
+    font-weight: var(--fw-medium);
+    font-size: rem(40);
+    line-height: rem(48);
+  }
+
+  &__desc {
+    position: relative;
+    z-index: 10;
+    font-weight: var(--fw-light);
+    font-size: rem(14);
+    line-height: rem(22);
+    font-family: var(--font-sec);
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: rem(16);
+    margin: rem(24) 0;
+
+    &:global(.swiper-pagination-lock) {
+      display: none;
+    }
+  }
+
+  &__bullet {
+    display: inline-block;
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: var(--sec-5);
+    width: rem(8);
+    height: rem(8);
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &_active {
+      cursor: initial;
+      background-color: var(--sec-3);
+    }
+  }
+
+  @media all and (min-width: $bp0) {
+    @include sectionMarginDesk;
+  }
+
+  @media all and (min-width: $bp3) {
+    &__swiper {
+      @include containerDesk;
+    }
+  }
+}

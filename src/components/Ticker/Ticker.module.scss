@@ -1,0 +1,65 @@
+.Ticker {
+  height: rem(51);
+  display: flex;
+  align-items: center;
+  gap: rem(32);
+  background: linear-gradient(90.29deg, #90a1fc 0.25%, #73ccd2 25.1%, #9fcaf1 44.26%, #e3cae4 83.44%, #deafdf 103.8%);
+  overflow: hidden;
+
+  &__items {
+    display: flex;
+    align-items: center;
+    gap: rem(32);
+    font-family: var(--font-sec);
+    font-weight: var(--fw-light);
+    font-size: rem(20);
+    line-height: rem(20);
+    color: var(--prime-1);
+    text-transform: uppercase;
+    white-space: nowrap;
+    list-style-type: disc;
+    animation: ticker-marquee 20s linear infinite;
+  }
+
+  @keyframes ticker-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    font-size: rem(24);
+    line-height: rem(32);
+
+    &__star {
+      height: rem(78);
+      font-size: rem(12);
+      line-height: normal;
+
+      ul {
+        list-style-type: none;
+        gap: rem(10);
+
+        li {
+          display: flex;
+          align-items: center;
+          gap: rem(10);
+          margin: 0;
+
+          &::before {
+            content: '';
+            display: block;
+            width: rem(23.6);
+            height: rem(23.6);
+            background-position: 0 0;
+            background-repeat: no-repeat;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjUiIHZpZXdCb3g9IjAgMCAyNCAyNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjkwMDEgMC44ODAxMjdMMTMuNTkxMiAxMS4wMjlMMjMuNzQwMSAxMi43MjAxTDEzLjU5MTIgMTQuNDExM0wxMS45MDAxIDI0LjU2MDFMMTAuMjA4OSAxNC40MTEzTDAuMDYwMDU4NiAxMi43MjAxTDEwLjIwODkgMTEuMDI5TDExLjkwMDEgMC44ODAxMjdaIiBmaWxsPSIjRjBGMkY1Ii8+Cjwvc3ZnPgo=');
+          }
+        }
+      }
+    }
+  }
+}

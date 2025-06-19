@@ -1,0 +1,269 @@
+@property --x4 {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --y4 {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.itemEnter {
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+.itemEnterActive {
+  transform: scale(1);
+  opacity: 1;
+  transition:
+    opacity 1s,
+    transform 1s;
+}
+
+.itemExit {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.itemExitActive {
+  transform: scale(0.8);
+  opacity: 0;
+  transition:
+    opacity 1s,
+    transform 1s;
+}
+
+.GalleryTabs {
+  &__header {
+    @include containerMob;
+    padding: rem(48) 0 rem(40) 0;
+  }
+
+  &__title {
+    font-weight: var(--fw-medium);
+    font-size: rem(40);
+    line-height: rem(48);
+  }
+
+  &__links {
+    display: none;
+  }
+
+  &__filters {
+    margin-bottom: rem(8);
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 15px;
+      height: 10px;
+      z-index: 10;
+    }
+
+    &::before {
+      right: 0;
+      background-image: linear-gradient(
+        to left,
+        white,
+        rgba(255, 255, 255, 0)
+      );
+    }
+    &::after {
+      left: 0;
+      background-image: linear-gradient(
+        to right,
+        white,
+        rgba(255, 255, 255, 0)
+      );
+    }
+
+    ul {
+      display: flex;
+      gap: rem(8);
+      padding: 0 rem(16) rem(12) rem(16);
+      overflow-x: auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .filterBtn {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border: 1px solid var(--prime-2);
+        border-radius: rem(34);
+        background-color: var(--prime-1);
+        padding: rem(8) rem(24);
+        min-height: rem(40);
+        overflow: hidden;
+        color: var(--prime-2);
+        font-size: rem(16);
+        font-family: var(--font-sec);
+        white-space: nowrap;
+        transition: border 0.1s;
+
+        span {
+          position: relative;
+          z-index: 10;
+        }
+
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          top: var(--y4);
+          left: var(--x4);
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          width: 0;
+          height: 0;
+          transition: width 1s, height 1s;
+        }
+
+        @media (pointer: coarse) {
+          &:hover {
+            border-color: var(--prime-2);
+            color: var(--prime-2);
+            &::before {
+              content: none;
+            }
+          }
+        }
+
+        &:hover {
+          border-color: var(--prime-3);
+          color: var(--prime-1);
+          &::before {
+            border: 1px solid var(--prime-3);
+            background-color: var(--prime-3);
+            width: rem(700);
+            height: rem(700);
+          }
+        }
+
+        &.active {
+          border-color: var(--prime-3);
+          color: var(--prime-1);
+          &::after {
+            border: 1px solid var(--prime-3);
+            background-color: var(--prime-3);
+            width: rem(700);
+            height: rem(700);
+          }
+        }
+      }
+    }
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media (min-width: $bp4) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: $bp1) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    > li:nth-child(odd)  .GalleryTabs__skeletonVideo {
+      background: var(--sec-5);
+    }
+    > li:nth-child(even) .GalleryTabs__skeletonVideo {
+      background: var(--sec-6);
+    }
+
+    > li {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+  }
+
+  &__skeletonVideo {
+    position: absolute;
+    inset: 0;
+    background: var(--sec-5);
+    animation: pulse 1.5s ease-in-out infinite;
+    box-sizing: border-box;
+  }
+
+  &__items li video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: $bp4) {
+    &__filters ul {
+      flex-wrap: wrap;
+      overflow-x: hidden;
+    }
+  }
+
+  @media (min-width: $bp3) {
+    &__header {
+      @include containerDesk;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: rem(50) 0 rem(73) 0;
+    }
+    &__filters ul {
+      @include containerDesk;
+      .filterBtn {
+        padding: rem(16) rem(40);
+      }
+    }
+    &__title {
+      font-size: rem(56);
+      line-height: rem(64);
+    }
+    &__links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: rem(18);
+      a {
+        transition: 0.3s;
+        font-weight: var(--fw-light);
+        font-size: rem(27);
+        line-height: rem(24);
+        font-family: var(--font-sec);
+        text-align: right;
+        &:hover {
+          color: var(--prime-3);
+        }
+      }
+    }
+  }
+
+  @media (min-width: $bp1) {
+    &__title {
+      font-size: rem(88);
+      line-height: rem(96);
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}

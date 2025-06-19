@@ -1,0 +1,21 @@
+.CasesItems {
+  $s: &;
+
+  &__items {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media all and (min-width: $bp4) {
+    &__items {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  // Адаптация для desktop
+  @media all and (min-width: $bp1) {
+    &__items {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}

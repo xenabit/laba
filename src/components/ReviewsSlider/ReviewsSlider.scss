@@ -1,0 +1,220 @@
+.ReviewsSlider {
+  $s: &;
+  @include sectionMarginMob;
+  background-color: var(--prime-1);
+  color: var(--sec-3);
+
+  &__swiper {
+    padding-right: rem(16);
+    padding-left: rem(16);
+
+    .swiper-wrapper {
+      align-items: stretch;
+    }
+  }
+
+  &__slide {
+    height: auto;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: rem(40) rem(24);
+    height: 100%;
+  }
+
+  &__title {
+    margin-bottom: 16px;
+    font-weight: var(--fw-medium);
+    font-size: rem(32);
+    line-height: 1.25;
+    font-family: var(--font-prime);
+  }
+
+  &__text {
+    margin-bottom: 24px;
+    font-weight: var(--fw-light);
+    font-size: rem(20);
+    line-height: 1.4;
+    font-family: var(--font-sec);
+    text-align: left;
+  }
+
+  &__name {
+    margin-bottom: 24px;
+    color: var(--sec-4);
+    font-weight: var(--fw-light);
+    line-height: 1.5;
+    font-family: var(--font-sec);
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: rem(16);
+    margin: rem(24) 0;
+  }
+
+  &__pictures {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__picture {
+    flex-shrink: 0;
+    width: rem(80);
+    height: rem(80);
+
+    &:nth-child(n + 3) {
+      display: none;
+    }
+
+    &:nth-child(1) {
+      z-index: 50;
+    }
+
+    &:nth-child(2) {
+      transform: translateX(rem(-24));
+      z-index: 40;
+    }
+
+    &:nth-child(3) {
+      transform: translateX(rem(-48));
+      z-index: 30;
+    }
+    &:nth-child(4) {
+      transform: translateX(rem(-72));
+      z-index: 20;
+    }
+    &:nth-child(5) {
+      transform: translateX(rem(-96));
+      z-index: 10;
+    }
+
+    img {
+      display: block;
+      border-radius: 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__bullet {
+    display: inline-block;
+    transition: 0.6s;
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: var(--sec-5);
+    width: rem(8);
+    height: rem(8);
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &_active {
+      cursor: initial;
+      background-color: var(--sec-3);
+    }
+  }
+
+  &__footer {
+    margin-top: auto;
+  }
+
+  @media all and (min-width: $bp4) {
+    &__picture {
+      &:nth-child(n + 3) {
+        display: block;
+      }
+    }
+  }
+  @media all and (min-width: $bp3) {
+    &__title {
+      margin-bottom: 16px;
+      font-weight: var(--fw-medium);
+      font-size: rem(32);
+      line-height: 1.25;
+      font-family: var(--font-prime);
+    }
+
+    &__box {
+      padding: rem(80) rem(130);
+    }
+
+    &__pagination {
+      margin: rem(54) 0 rem(32) 0;
+    }
+  }
+
+  @media all and (min-width: $bp2) {
+    &__swiper {
+      padding-right: 18vw;
+      padding-left: 18vw;
+      overflow: visible;
+    }
+
+    &__slide {
+      #{$s}__box {
+        transform: scale(1);
+        transition: transform 0.6s ease-in-out;
+      }
+      &.swiper-slide.swiper-slide-next,
+      &.swiper-slide.swiper-slide-prev {
+        #{$s}__box {
+          transform: scale(0.8);
+          transition: transform 0.6s ease-in-out;
+        }
+      }
+    }
+  }
+
+  @media all and (min-width: $bp0) {
+    &__swiper {
+      padding-right: 18vw;
+      padding-left: 18vw;
+    }
+
+    &__box {
+      padding-top: clamp(rem(80), 5vw, rem(160));
+      padding-right: clamp(rem(80), 5vw, rem(160));
+      padding-bottom: clamp(rem(130), 8vw, rem(260));
+      padding-left: clamp(rem(130), 8vw, rem(260));
+    }
+
+    &__title {
+      margin-bottom: clamp(rem(16), 1vw, rem(32));
+      font-size: clamp(rem(40), 2.5vw, rem(80));
+    }
+
+    &__text {
+      margin-bottom: clamp(rem(24), 1.5vw, rem(48));
+      font-size: clamp(rem(24), 1.5vw, rem(48));
+    }
+
+    &__name {
+      font-size: clamp(rem(16), 1vw, rem(32));
+      font-size: sizeVw(24); // Это приведет к clamp(1.5rem, 1.5vw, 3rem)
+    }
+
+    &__bullet {
+      width: clamp(rem(8), 0.375vw, rem(16));
+      height: clamp(rem(8), 0.375vw, rem(16));
+    }
+
+    &__picture {
+      width: clamp(rem(80), 5vw, rem(160));
+      height: clamp(rem(80), 5vw, rem(160));
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: space-between;
+      gap: rem(40);
+    }
+  }
+}

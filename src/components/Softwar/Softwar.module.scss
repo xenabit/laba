@@ -1,0 +1,122 @@
+.Softwar {
+  $s: &;
+  background-color: var(--prime-1);
+  @include sectionMarginMob;
+
+  &__slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: rem(24);
+    border: 1px solid #dcddde;
+    padding: rem(40);
+    height: rem(200);
+  }
+
+  &__swiper {
+    @include containerMob;
+  }
+
+  &__img {
+    height: rem(56);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__title {
+    font-weight: var(--fw-medium);
+    font-size: rem(28);
+    line-height: 1.17;
+    font-family: var(--font-prime);
+    text-align: center;
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: rem(16);
+    margin: rem(24) 0;
+
+    &:global(.swiper-pagination-lock) {
+      display: none;
+    }
+  }
+
+  &__bullet {
+    display: inline-block;
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: var(--sec-5);
+    width: rem(8);
+    height: rem(8);
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &_active {
+      cursor: initial;
+      background-color: var(--sec-3);
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    &__swiper {
+      @include containerDesk;
+    }
+
+    &__pagination {
+      margin: rem(32) 0;
+    }
+
+    &__slide {
+      gap: rem(32);
+    }
+  }
+
+  @media all and (min-width: $bp1) {
+    &__slide {
+      padding-top: rem(64);
+      padding-bottom: rem(64);
+      height: rem(296);
+    }
+
+    &__img {
+      height: rem(80);
+    }
+
+    &__title {
+      font-size: rem(40);
+    }
+  }
+
+  @media all and (min-width: $bp0) {
+    @include sectionMarginDesk;
+
+    &__slide {
+      gap: rem(42);
+      height: clamp(rem(296), 18.5vw, rem(592));
+    }
+
+    &__img {
+      height: clamp(rem(80), 5vw, rem(160));
+    }
+
+    &__title {
+      font-size: clamp(rem(40), 2.5vw, rem(80));
+    }
+
+    &__bullet {
+      width: clamp(rem(8), 0.375vw, rem(16));
+      height: clamp(rem(8), 0.375vw, rem(16));
+    }
+  }
+}

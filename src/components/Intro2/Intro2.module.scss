@@ -1,0 +1,93 @@
+.Intro2 {
+  @include containerMob;
+  $s: &;
+  position: relative;
+  margin-bottom: rem(48);
+  padding-top: rem(54);
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: rem(32);
+    width: 100%;
+    font-weight: var(--fw-regular);
+  }
+
+  &__laba {
+    flex-shrink: 0;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__desc {
+    font-size: rem(26);
+    line-height: rem(34);
+  }
+
+  @media all and (min-width: $bp4) {
+    padding-top: rem(87);
+
+    &__container {
+      gap: rem(30);
+    }
+
+    &__laba {
+      width: 66%;
+      font-size: rem(142);
+      line-height: rem(114);
+    }
+
+    &__desc {
+      font-weight: var(--fw-medium);
+      font-size: rem(40);
+      line-height: rem(48);
+      line-height: rem(48);
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    @include containerDesk;
+
+    &__container {
+      gap: rem(50);
+      width: 66%;
+    }
+
+    &__laba {
+      width: 100%;
+    }
+
+    &__desc {
+      font-size: rem(40);
+      line-height: rem(48);
+    }
+  }
+
+  @media all and (min-width: $bp1) {
+    padding-top: rem(100);
+    margin-bottom: rem(89);
+
+    &__container {
+      flex-direction: row;
+      align-items: flex-end;
+      gap: rem(142);
+      width: 100%;
+    }
+
+    &__laba {
+      margin-bottom: 0;
+      width: 41%;
+    }
+
+    &__desc {
+      transform: translateY(rem(10));
+      width: 51%;
+      font-size: rem(48);
+      line-height: rem(56);
+    }
+  }
+}

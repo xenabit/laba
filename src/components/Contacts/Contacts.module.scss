@@ -1,0 +1,232 @@
+.Contacts {
+  $s: &;
+  position: relative;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: rem(16);
+    margin-left: rem(16);
+    padding: rem(48) 0 rem(32) 0;
+  }
+
+  &__title {
+    margin-bottom: rem(16);
+    font-weight: var(--fw-medium);
+    font-size: rem(48);
+    line-height: rem(56);
+  }
+
+  &__mail,
+  &__tel,
+  &__address {
+    display: block;
+    transition: color 0.3s;
+    font-family: var(--font-sec);
+
+    &:hover {
+      color: var(--prime-3);
+    }
+  }
+
+  &__address {
+    margin-top: rem(24);
+    &:hover {
+      color: var(--prime-2);
+    }
+  }
+
+  &__mail {
+    margin-bottom: rem(24);
+    font-size: rem(24);
+    line-height: rem(32);
+  }
+
+  &__tel,
+  &__address {
+    margin-bottom: rem(4);
+    font-weight: var(--fw-light);
+    font-size: rem(16);
+    line-height: rem(24);
+    font-family: var(--font-sec);
+  }
+
+  &__call {
+    display: none;
+  }
+
+  &__render {
+    position: relative;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAgMAAAAOFJJnAAAACVBMVEX6+vrn5+f09PSMzk0VAAAAGklEQVQY02MIYAADVoYECIOTYSQDWCDAgwUA204BfdYq8A4AAAAASUVORK5CYII=);
+    background-size: 15px;
+    overflow: hidden;
+  }
+
+  &__map {
+    opacity: 1;
+    filter: grayscale(90%) contrast(80%) invert(100%) hue-rotate(20deg);
+    transition: 0.2s opacity;
+    width: 100%;
+    height: 60vh;
+    max-height: rem(482);
+
+    &.hide {
+      opacity: 0;
+    }
+  }
+
+  @media all and (min-width: $bp4) {
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__call {
+      display: flex;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 100%;
+      width: rem(140);
+      height: rem(140);
+      font-weight: var(--fw-light);
+      font-size: rem(16);
+      line-height: rem(20);
+      font-family: var(--font-sec);
+
+      &::before {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation-play-state: paused;
+        transition:
+          border-radius 1.5s ease-in-out,
+          background-color 0.5s;
+        border-radius: 100%;
+        background-color: var(--prime-2);
+        width: rem(140);
+        height: rem(140);
+        content: '';
+      }
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+        &::before {
+          animation: contacts-jelly 3s linear 0s infinite alternate none;
+          transition:
+            border-radius 1s ease-in-out,
+            background-color 1s,
+            transform 3s;
+          background-color: var(--prime-3);
+        }
+      }
+
+      @keyframes contacts-jelly {
+        0% {
+          transform: scale(1) rotate(10deg);
+          border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+        }
+        10% {
+          transform: scale(1.02) rotate(5deg);
+          border-radius: 40% 60% 70% 30% / 60% 50% 40% 60%;
+        }
+        25% {
+          transform: scale(1.03) rotate(-10deg);
+          border-radius: 70% 30% 50% 50% / 50% 70% 30% 60%;
+        }
+        40% {
+          transform: scale(0.95) rotate(15deg);
+          border-radius: 40% 80% 30% 70% / 70% 40% 60% 50%;
+        }
+        60% {
+          border-radius: 60% 30% 80% 40% / 60% 50% 70% 40%;
+        }
+        80% {
+          transform: scale(0.95) rotate(15deg);
+          border-radius: 50% 60% 50% 60% / 50% 60% 50% 60%;
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+          border-radius: 60% 30% 80% 40% / 60% 50% 70% 40%;
+        }
+      }
+
+      span {
+        position: relative;
+        z-index: 10;
+        color: var(--prime-4);
+      }
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    &__content {
+      margin-right: rem(32);
+      margin-left: rem(32);
+      padding: rem(52) 0 rem(40) 0;
+    }
+
+    &__title {
+      margin-bottom: rem(32);
+      font-weight: var(--fw-medium);
+      font-size: rem(88);
+      line-height: rem(96);
+    }
+
+    &__mail {
+      margin-bottom: rem(24);
+      font-weight: var(--fw-medium);
+      font-size: rem(40);
+      line-height: rem(48);
+      font-family: var(--font-prime);
+    }
+
+    &__tel,
+    &__address {
+      font-weight: var(--fw-light);
+      font-size: rem(27);
+      line-height: rem(32);
+    }
+
+    &__call {
+      width: rem(196);
+      height: rem(196);
+
+      &::before {
+        width: rem(196);
+        height: rem(196);
+      }
+    }
+
+    &__map {
+      max-height: rem(669);
+
+      img {
+        width: 261%;
+        height: auto;
+        object-position: bottom 842px right 1191px;
+      }
+    }
+  }
+
+  @media all and (min-width: $bp0) {
+    &__mail,
+    &__tel,
+    &__address {
+      margin-left: rem(260);
+    }
+
+    &__tel {
+      margin-bottom: rem(14);
+    }
+
+    &__call {
+      margin-right: 6%;
+    }
+  }
+}

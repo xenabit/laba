@@ -1,0 +1,90 @@
+.Footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--prime-2);
+  padding: rem(16) rem(16) rem(16) rem(16);
+  color: var(--prime-1);
+  font-weight: var(--fw-light);
+  line-height: rem(24);
+  font-family: var(--font-sec);
+
+  a {
+    transition: 0.3s;
+    text-decoration: none;
+
+    &:hover {
+      transition: 0.5s;
+      color: var(--prime-3);
+    }
+  }
+
+  &__mail {
+    display: block;
+    margin-bottom: rem(24);
+    font-size: rem(32);
+    line-height: rem(48);
+    font-family: var(--font-prime);
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: rem(24);
+    margin-bottom: rem(48);
+  }
+
+  &__contact {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__bottom {
+    display: flex;
+    gap: rem(16);
+
+    div {
+      font-weight: var(--fw-regular);
+    }
+  }
+
+  @media all and (min-width: $bp4) {
+    &__mail {
+      display: block;
+      margin-bottom: rem(32);
+      font-weight: var(--fw-medium);
+      font-size: rem(56);
+      line-height: rem(64);
+      font-family: var(--font-prime);
+    }
+
+    &__contacts {
+      display: flex;
+      flex-direction: row;
+      gap: rem(124);
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    padding: rem(16) rem(32) rem(32) rem(32);
+  }
+
+  @media all and (min-width: $bp1) {
+    &__mail {
+      margin-bottom: rem(40);
+      font-size: rem(88);
+      line-height: rem(96);
+    }
+
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+    }
+
+    &__contacts {
+      margin: 0;
+    }
+  }
+}

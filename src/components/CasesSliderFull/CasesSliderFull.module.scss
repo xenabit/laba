@@ -1,0 +1,77 @@
+.CasesSliderFull {
+  $s: &;
+  @include sectionMarginMob;
+
+  &__container {
+    position: relative;
+  }
+
+  &__swiper {
+    @include containerMob;
+    transition: 0.3s;
+    overflow: visible !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+
+    img {
+      display: block;
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: rem(16);
+    margin: rem(24) 0;
+
+    &:global(.swiper-pagination-lock) {
+      display: none;
+    }
+  }
+
+  &__bullet {
+    display: inline-block;
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: var(--sec-5);
+    width: rem(8);
+    height: rem(8);
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &_active {
+      cursor: initial;
+      background-color: var(--sec-3);
+    }
+  }
+
+  @media all and (min-width: $bp0) {
+    @include sectionMarginDesk;
+
+    &__inner {
+      max-height: 100%;
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    &__swiper {
+      @include containerDesk;
+    }
+  }
+}

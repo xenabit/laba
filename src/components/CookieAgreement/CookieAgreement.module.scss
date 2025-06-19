@@ -1,0 +1,103 @@
+@property --x5 {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --y5 {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.CookieAgreement {
+  $s: &;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: rem(30);
+    background-color: var(--prime-4);
+    padding: 0 rem(32);
+    min-height: rem(88);
+    font-family: var(--font-sec);
+  }
+
+  &__text {
+    font-weight: var(--fw-light);
+  }
+
+  &__button {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    cursor: pointer;
+    border: none;
+    border-radius: rem(34);
+    background-color: var(--prime-3);
+    padding: rem(16) rem(40);
+    min-height: rem(56);
+    overflow: hidden;
+    color: var(--prime-1);
+    font-size: rem(16);
+
+    &::before {
+      position: absolute;
+      top: var(--y5);
+      left: var(--x5);
+      transform: translate(-50%, -50%);
+      transition:
+        width 0.5s,
+        height 0.5s;
+      border-radius: 50%;
+      background-color: var(--prime-2);
+      width: 0;
+      height: 0;
+      content: '';
+    }
+
+    &:hover {
+      color: var(--prime-4);
+      &::before {
+        width: rem(350);
+        height: rem(350);
+      }
+    }
+
+    @media (pointer: coarse) {
+      &:hover {
+        color: var(--prime-1);
+
+        &::before {
+          content: none;
+        }
+      }
+    }
+
+    span {
+      position: relative;
+      z-index: 10;
+    }
+  }
+
+  @media all and (max-width: $bp4) {
+    &__container {
+      flex-direction: column;
+      gap: rem(16);
+      padding: rem(16);
+    }
+
+    &__button {
+      padding: rem(10) rem(20);
+      min-height: rem(32);
+    }
+  }
+}

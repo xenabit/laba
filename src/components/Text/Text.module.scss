@@ -1,0 +1,54 @@
+.Text {
+  $s: &;
+  @include containerMob;
+  margin-top: rem(80);
+  margin-bottom: rem(80);
+  background-color: var(--prime-1);
+  font-weight: var(--fw-light);
+  font-family: var(--font-sec);
+
+  &__title {
+    margin-bottom: rem(24);
+    color: var(--sec-4);
+    line-height: 1.5;
+  }
+
+  &__text {
+    font-size: rem(24);
+    line-height: 1.33;
+
+    a {
+      font-weight: var(--fw-bold);
+      color: var(--prime-3);
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    @include containerDesk;
+  }
+
+  @media all and (min-width: $bp1) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    gap: rem(32);
+
+    &__container {
+      grid-column: 2 / span 2;
+      justify-self: center;
+    }
+  }
+
+  @media all and (min-width: $bp0) {
+    margin-top: rem(160);
+    margin-bottom: rem(160);
+
+    &__title {
+      font-size: clamp(rem(16), 1vw, rem(32));
+    }
+
+    &__text {
+      font-size: clamp(rem(24), 1.5vw, rem(48));
+    }
+  }
+}

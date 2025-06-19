@@ -1,0 +1,40 @@
+// Функция перерасчета px в rem
+@use 'sass:math';
+
+@function rem($pixel) {
+  @if math.is-unitless($pixel) {
+    @return math.div($pixel, 16) + rem;
+  } @else {
+    @error 'Не используйте единицы измерения при работе с функцией rem()! Передавайте аргументом только числа.';
+  }
+}
+
+/* Breakpoints */
+$bp: rem(1920);
+$bp0: rem(1600);
+$bp1: rem(1440);
+$bp2: rem(1280);
+$bp3: rem(1024);
+$bp4: rem(768);
+$bp5: rem(576);
+$bp6: rem(377);
+
+@mixin containerMob {
+  margin-right: rem(16);
+  margin-left: rem(16);
+}
+
+@mixin containerDesk {
+  margin-right: rem(32);
+  margin-left: rem(32);
+}
+
+@mixin sectionMarginMob {
+  margin-top: rem(80);
+  margin-bottom: rem(80);
+}
+
+@mixin sectionMarginDesk {
+  margin-top: rem(160);
+  margin-bottom: rem(160);
+}

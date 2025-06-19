@@ -1,0 +1,33 @@
+.BackgroundLetters {
+  position: absolute;
+
+  &__laba {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 52px;
+  }
+
+  &__letter {
+    svg {
+      display: block;
+    }
+
+    &_l {
+      margin-right: 19px;
+    }
+    &_a {
+      margin-left: 6px;
+    }
+    &_b {
+      margin-left: 19px;
+    }
+  }
+
+  &__spot {
+    width: 1.9vw;
+    height: 1.9vw;
+    display: block;
+    margin-left: 24px;
+  }
+}

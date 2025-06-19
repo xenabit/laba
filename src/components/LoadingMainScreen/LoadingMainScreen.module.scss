@@ -1,0 +1,12 @@
+.LoadingMainScreen {
+  &__container {
+    // opacity: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: white;
+    overflow: hidden;
+  }
+}

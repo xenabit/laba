@@ -1,0 +1,80 @@
+.CircleText {
+  $s: &;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
+  color: var(--prime-1);
+  backdrop-filter: blur(4px);
+  border-radius: 100%;
+  transition: transform 1s;
+
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 1s;
+  }
+
+  &__breaf {
+    font-family: var(--font-prime);
+    font-size: rem(20);
+    line-height: rem(25.4);
+    font-weight: 800;
+    text-align: center;
+  }
+
+  &__text {
+    position: absolute;
+    font-weight: bold;
+    user-select: none;
+    pointer-events: none;
+    animation: circle-text-animate 7.5s linear infinite;
+
+    $move: rem(95);
+
+    span {
+      display: inline-block;
+      position: absolute;
+      top: -$move;
+      transform-origin: 0 $move;
+      font-size: rem(12);
+      font-weight: normal;
+      font-family: var(--font-mono);
+    }
+  }
+
+  @keyframes circle-text-animate {
+    0% {
+      transform: rotate(360deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @media all and (min-width: $bp4) {
+    display: flex;
+  }
+
+  @media all and (min-width: $bp1) {
+    height: rem(250);
+    width: rem(250);
+
+    &__breaf {
+      font-size: rem(24);
+      line-height: 120%;
+    }
+
+    &__text {
+      $move: rem(118);
+
+      span {
+        top: -$move;
+        transform-origin: 0 $move;
+        font-size: rem(16);
+      }
+    }
+  }
+}
