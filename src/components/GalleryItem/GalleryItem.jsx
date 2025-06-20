@@ -6,7 +6,7 @@ const GalleryItem = forwardRef(function GalleryItem({ videoSrc, href, title, des
   return (
     <li ref={ref} className={styles.GalleryItem__item}>
       <Link to={href}>
-        <video {...videoProps} preload="auto" loop muted data-preload playsInline webkit-playsinline="true">
+        <video {...videoProps} preload="metadata" loop muted data-preload playsInline webkit-playsinline="true">
           <source src={videoSrc} type="video/mp4" />
         </video>
         <h2>
