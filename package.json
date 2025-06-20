@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "prod": "vite preview --port 3001 --open"
+    "prod": "vite preview --port 3001 --open",
+    "convert-images": "node convert-images.js"
   },
   "dependencies": {
     "dompurify": "^3.2.0",
