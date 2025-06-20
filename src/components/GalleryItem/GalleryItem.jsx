@@ -4,7 +4,7 @@ import styles from './GalleryItem.module.scss';
 
 const GalleryItem = forwardRef(function GalleryItem({ videoSrc, href, title, desc, videoProps }, ref) {
   return (
-    <li ref={ref} className={styles.GalleryItem__item}>
+    <div ref={ref} className={styles.GalleryItem__item}>
       <Link to={href}>
         <video {...videoProps} preload="metadata" loop muted data-preload playsInline webkit-playsinline="true">
           <source src={videoSrc} type="video/mp4" />
@@ -14,7 +14,7 @@ const GalleryItem = forwardRef(function GalleryItem({ videoSrc, href, title, des
           <span>{title}</span>
         </h2>
       </Link>
-    </li>
+    </div>
   );
 });
 
