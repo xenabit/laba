@@ -20,10 +20,6 @@ import case_intro_picture_jpg from '../assets/images/case-intro-markssite.jpg';
 import case_intro_picture_webp from '../assets/images/case-intro-markssite.webp';
 import case_intro_picture_avif from '../assets/images/case-intro-markssite.avif';
 
-import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-2.jpg';
-import reviews_slider_author_2_webp from '../assets/images/reviews-slider-2.webp';
-import reviews_slider_author_2_avif from '../assets/images/reviews-slider-2.avif';
-
 import case_slider_full_picture_1_1_jpg from '../assets/images/cases-slider-full-markssite-1-1.jpg';
 import case_slider_full_picture_1_1_webp from '../assets/images/cases-slider-full-markssite-1-1.webp';
 import case_slider_full_picture_1_1_avif from '../assets/images/cases-slider-full-markssite-1-1.avif';
@@ -310,11 +306,9 @@ const case_slider_full_content_2 = {
 };
 
 const contentPicture = {
-  picture: {
-    jpg: picture_jpg,
-    webp: picture_webp,
-    avif: picture_avif,
-  },
+  jpg: picture_jpg,
+  webp: picture_webp,
+  avif: picture_avif,
 };
 
 export default function CaseMarkssite() {
@@ -325,7 +319,7 @@ export default function CaseMarkssite() {
       <Softwar items={contentSoftwar} />
       <CasesSliderFull items={case_slider_full_content_1} />
       <Text title={contentText[1].title} text={contentText[1].text} />
-      <Picture src={contentPicture} />
+      <Picture src={contentPicture} />;
       <Text title={contentText[2].title} text={contentText[2].text} />
       <CasesSliderFull items={case_slider_full_content_2} />
       <Text title={contentText[3].title} text={contentText[3].text} />

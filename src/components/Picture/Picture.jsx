@@ -1,16 +1,13 @@
 import PropTypes from 'prop-types';
 import styles from './Picture.module.scss';
-
 function Picture({ src }) {
   return (
     <section className={styles.Picture}>
       <div className={styles.Picture__picture}>
         <picture>
-          <picture>
-            <source type="image/avif" srcSet={src.picture.avif} />
-            <source type="image/webp" srcSet={src.picture.webp} />
-            <img src={src.picture.jpg} loading="lazy" />
-          </picture>
+          {src?.avif && <source type="image/avif" srcSet={src.avif} />}
+          {src?.webp && <source type="image/webp" srcSet={src.webp} />}
+          <img src={src?.jpg} loading="lazy" />
         </picture>
       </div>
     </section>
@@ -18,7 +15,11 @@ function Picture({ src }) {
 }
 
 Picture.propTypes = {
-  src: PropTypes.string.isRequired,
+  src: PropTypes.shape({
+    jpg: PropTypes.string.isRequired,
+    webp: PropTypes.string,
+    avif: PropTypes.string,
+  }).isRequired,
 };
 
 export default Picture;
