@@ -87,10 +87,9 @@ export default function App() {
 
     const unlock = () => {
       vids.forEach((v) => {
+        v.preload = 'auto';
         v.muted = true;
-        v.play()
-          .catch(() => {})
-          .then(() => v.pause());
+        v.play().catch(()=>{}).then(() => v.pause());
         v.load();
       });
     };

@@ -18,7 +18,7 @@ export default function Gallery() {
     <video
       key={`preload-${item.id}`}
       src={item.video}
-      preload="auto"
+      preload="metadata"
       muted
       data-preload
       onLoadedData={handleLoaded}
@@ -51,7 +51,7 @@ export default function Gallery() {
                 autoPlay: true,
                 muted: true,
                 loop: true,
-                preload: 'auto',
+                preload: "metadata",
                 playsInline: true,
                 webkitplaysinline: 'true',
               };
