@@ -7,7 +7,7 @@ import styles from './CasesSliderVideo.module.scss';
 
 function CasesSliderVideo({ items }) {
   const swiperRef = useRef(null);
-  const paginationRef = useRef(null); // Добавляем ref для пагинации
+  const paginationRef = useRef(null);
 
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.swiper && paginationRef.current) {
@@ -82,7 +82,7 @@ function CasesSliderVideo({ items }) {
               <div className={styles.CasesSliderVideo__inner}>
                 <div className={`${styles.CasesSliderVideo__half} ${styles.CasesSliderVideo__half_left}`} onClick={() => handleSlide('prev')}>
                   <div className={styles.CasesSliderVideo__box}>
-                    <video className={styles.CasesSliderVideo__video} autoPlay muted loop preload="metadata" controls={false} loading="lazy">
+                    <video className={styles.CasesSliderVideo__video} autoPlay muted loop preload="metadata" data-preload playsInline controls={false} loading="lazy">
                       <source src={item.video_left} type="video/mp4" />
                       Ваш браузер не поддерживает видео.
                     </video>
@@ -90,7 +90,7 @@ function CasesSliderVideo({ items }) {
                 </div>
                 <div className={`${styles.CasesSliderVideo__half} ${styles.CasesSliderVideo__half_right}`} onClick={() => handleSlide('next')}>
                   <div className={styles.CasesSliderVideo__box}>
-                    <video className={styles.CasesSliderVideo__video} autoPlay muted loop preload="metadata" controls={false} loading="lazy">
+                    <video className={styles.CasesSliderVideo__video} autoPlay muted loop  preload="metadata" data-preload controls={false} loading="lazy">
                       <source src={item.video_right} type="video/mp4" />
                       Ваш браузер не поддерживает видео.
                     </video>

@@ -48,22 +48,5 @@
       background: var(--sec-4);
     }
   }
-
-  &__skeletonTextShort,
-  &__skeletonTextLong {
-    display: block;
-    background: var(--sec-4);
-  }
-
-  &__skeletonTextShort {
-    width: 40%;
-    height: 1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  &__skeletonTextLong {
-    width: 60%;
-    height: 1.5rem;
-  }
 }
 
