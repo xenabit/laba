@@ -60,8 +60,7 @@ function CasesSliderFull({ items }) {
                     <source type="image/avif" srcSet={item.picture.avif || ''} />
                     <source type="image/webp" srcSet={item.picture.webp || ''} />
                     <img
-                      src={item.picture.jpg || ''}
-                      alt={item.title || 'Slider image'}
+                      src={item.picture.img || ''}
                       loading="lazy"
                       style={{
                         width: item.sizes?.width || items.sizes.width,

@@ -134,14 +134,14 @@ function CasesCompareSlider({ items }) {
                     <picture>
                       <source type="image/avif" srcSet={item.picture_left.avif} />
                       <source type="image/webp" srcSet={item.picture_left.webp} />
-                      <img loading="lazy" src={item.picture_left.jpg} />
+                      <img loading="lazy" src={item.picture_left.img} />
                     </picture>
                   </div>
                   <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_right}`}>
                     <picture>
                       <source type="image/avif" srcSet={item.picture_right.avif} />
                       <source type="image/webp" srcSet={item.picture_right.webp} />
-                      <img loading="lazy" src={item.picture_right.jpg} />
+                      <img loading="lazy" src={item.picture_right.img} />
                     </picture>
                   </div>
                 </div>

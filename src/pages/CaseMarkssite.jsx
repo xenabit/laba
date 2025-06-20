@@ -86,7 +86,7 @@ const contentCasesIntro = {
     title: 'Перейти на сайт',
   },
   picture_intro: {
-    jpg: case_intro_picture_jpg,
+    img: case_intro_picture_jpg,
     webp: case_intro_picture_webp,
     avif: case_intro_picture_avif,
   },
@@ -149,7 +149,13 @@ const contentReviews = [
     title: 'Отзыв клиента',
     text: 'Отдельная благодарность за то, что делаете работу как для себя. Всё просто и понятно, без лишних терминов и с реальным вниманием к нашим словам',
     name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
-    picture: [{ logo: reviews_slider_author_1, title: 'Манагер' }],
+    picture: [
+      {
+        logo: {
+          img: reviews_slider_author_1,
+        },
+      },
+    ],
   },
 ];
 
@@ -159,12 +165,12 @@ const case_compare_slider_pictures_1 = {
     {
       id: '1_1',
       picture_left: {
-        jpg: case_compare_slider_picture_left_1_jpg,
+        img: case_compare_slider_picture_left_1_jpg,
         webp: case_compare_slider_picture_left_1_webp,
         avif: case_compare_slider_picture_left_1_avif,
       },
       picture_right: {
-        jpg: case_compare_slider_picture_right_1_jpg,
+        img: case_compare_slider_picture_right_1_jpg,
         webp: case_compareSlideshow_picture_right_1_webp,
         avif: case_compare_slider_picture_right_1_avif,
       },
@@ -172,12 +178,12 @@ const case_compare_slider_pictures_1 = {
     {
       id: '1_2',
       picture_left: {
-        jpg: case_compare_slider_picture_left_2_jpg,
+        img: case_compare_slider_picture_left_2_jpg,
         webp: case_compare_slider_picture_left_2_webp,
         avif: case_compare_slider_picture_left_2_avif,
       },
       picture_right: {
-        jpg: case_compare_slider_picture_right_2_jpg,
+        img: case_compare_slider_picture_right_2_jpg,
         webp: case_compare_slider_picture_right_2_webp,
         avif: case_compare_slider_picture_right_2_avif,
       },
@@ -197,7 +203,7 @@ const case_slider_full_content_1 = {
       },
       id: '1_1',
       picture: {
-        jpg: case_slider_full_picture_1_1_jpg,
+        img: case_slider_full_picture_1_1_jpg,
         webp: case_slider_full_picture_1_1_webp,
         avif: case_slider_full_picture_1_1_avif,
       },
@@ -209,7 +215,7 @@ const case_slider_full_content_1 = {
       },
       id: '1_2',
       picture: {
-        jpg: case_slider_full_picture_1_2_jpg,
+        img: case_slider_full_picture_1_2_jpg,
         webp: case_slider_full_picture_1_2_webp,
         avif: case_slider_full_picture_1_2_avif,
       },
@@ -221,7 +227,7 @@ const case_slider_full_content_1 = {
       },
       id: '1_3',
       picture: {
-        jpg: case_slider_full_picture_1_3_jpg,
+        img: case_slider_full_picture_1_3_jpg,
         webp: case_slider_full_picture_1_3_webp,
         avif: case_slider_full_picture_1_3_avif,
       },
@@ -229,7 +235,7 @@ const case_slider_full_content_1 = {
     {
       id: '1_4',
       picture: {
-        jpg: case_slider_full_picture_1_4_jpg,
+        img: case_slider_full_picture_1_4_jpg,
         webp: case_slider_full_picture_1_4_webp,
         avif: case_slider_full_picture_1_4_avif,
       },
@@ -241,7 +247,7 @@ const case_slider_full_content_1 = {
       },
       id: '1_5',
       picture: {
-        jpg: case_slider_full_picture_1_5_jpg,
+        img: case_slider_full_picture_1_5_jpg,
         webp: case_slider_full_picture_1_5_webp,
         avif: case_slider_full_picture_1_5_avif,
       },
@@ -253,7 +259,7 @@ const case_slider_full_content_1 = {
       },
       id: '1_6',
       picture: {
-        jpg: case_slider_full_picture_1_6_jpg,
+        img: case_slider_full_picture_1_6_jpg,
         webp: case_slider_full_picture_1_6_webp,
         avif: case_slider_full_picture_1_6_avif,
       },
@@ -273,7 +279,7 @@ const case_slider_full_content_2 = {
       },
       id: '2_1',
       picture: {
-        jpg: case_slider_full_picture_2_1_jpg,
+        img: case_slider_full_picture_2_1_jpg,
         webp: case_slider_full_picture_2_1_webp,
         avif: case_slider_full_picture_2_1_avif,
       },
@@ -285,7 +291,7 @@ const case_slider_full_content_2 = {
       },
       id: '2_2',
       picture: {
-        jpg: case_slider_full_picture_2_2_jpg,
+        img: case_slider_full_picture_2_2_jpg,
         webp: case_slider_full_picture_2_2_webp,
         avif: case_slider_full_picture_2_2_avif,
       },
@@ -297,7 +303,7 @@ const case_slider_full_content_2 = {
       },
       id: '2_3',
       picture: {
-        jpg: case_slider_full_picture_2_3_jpg,
+        img: case_slider_full_picture_2_3_jpg,
         webp: case_slider_full_picture_2_3_webp,
         avif: case_slider_full_picture_2_3_avif,
       },
@@ -306,7 +312,7 @@ const case_slider_full_content_2 = {
 };
 
 const contentPicture = {
-  jpg: picture_jpg,
+  img: picture_jpg,
   webp: picture_webp,
   avif: picture_avif,
 };

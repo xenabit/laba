@@ -10,29 +10,69 @@ import CasesCompareSlider from '../components/CasesCompareSlider/CasesCompareSli
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import softwarLogos from '../constants/softwarLogos';
 
-import case_intro_picture from '../assets/images/case-intro-markssite-hr.jpg';
+// Импорты изображений для CasesIntro
+import case_intro_picture_jpg from '../assets/images/case-intro-markssite-hr.jpg';
+import case_intro_picture_webp from '../assets/images/case-intro-markssite-hr.webp';
+import case_intro_picture_avif from '../assets/images/case-intro-markssite-hr.avif';
+
+// Импорты изображений для CasesCompareSlider
 import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-hr-1.svg';
+import case_compare_slider_picture_left_1_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-1.jpg';
+import case_compare_slider_picture_left_1_webp from '../assets/images/cases-compare-slider-markssite-hr-left-1.webp';
+import case_compare_slider_picture_left_1_avif from '../assets/images/cases-compare-slider-markssite-hr-left-1.avif';
+import case_compare_slider_picture_right_1_jpg from '../assets/images/cases-compare-slider-markssite-hr-right-1.jpg';
+import case_compare_slider_picture_right_1_webp from '../assets/images/cases-compare-slider-markssite-hr-right-1.webp';
+import case_compare_slider_picture_right_1_avif from '../assets/images/cases-compare-slider-markssite-hr-right-1.avif';
+import case_compare_slider_picture_left_2_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-2.jpg';
+import case_compare_slider_picture_left_2_webp from '../assets/images/cases-compare-slider-markssite-hr-left-2.webp';
+import case_compare_slider_picture_left_2_avif from '../assets/images/cases-compare-slider-markssite-hr-left-2.avif';
+import case_compare_slider_picture_right_2_jpg from '../assets/images/cases-compare-slider-markssite-hr-right-2.jpg';
+import case_compare_slider_picture_right_2_webp from '../assets/images/cases-compare-slider-markssite-hr-right-2.webp';
+import case_compare_slider_picture_right_2_avif from '../assets/images/cases-compare-slider-markssite-hr-right-2.avif';
+import case_compare_slider_picture_left_3_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-3.jpg';
+import case_compare_slider_picture_left_3_webp from '../assets/images/cases-compare-slider-markssite-hr-left-3.webp';
+import case_compare_slider_picture_left_3_avif from '../assets/images/cases-compare-slider-markssite-hr-left-3.avif';
+import case_compare_slider_picture_right_3_jpg from '../assets/images/cases-compare-slider-markssite-hr-right-3.jpg';
+import case_compare_slider_picture_right_3_webp from '../assets/images/cases-compare-slider-markssite-hr-right-3.webp';
+import case_compare_slider_picture_right_3_avif from '../assets/images/cases-compare-slider-markssite-hr-right-3.avif';
+import case_compare_slider_picture_left_4_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-4.jpg';
+import case_compare_slider_picture_left_4_webp from '../assets/images/cases-compare-slider-markssite-hr-left-4.webp';
+import case_compare_slider_picture_left_4_avif from '../assets/images/cases-compare-slider-markssite-hr-left-4.avif';
+import case_compare_slider_picture_right_4_jpg from '../assets/images/cases-compare-slider-markssite-hr-right-4.jpg';
+import case_compare_slider_picture_right_4_webp from '../assets/images/cases-compare-slider-markssite-hr-right-4.webp';
+import case_compare_slider_picture_right_4_avif from '../assets/images/cases-compare-slider-markssite-hr-right-4.avif';
 
-import case_compare_slider_picture_left_1 from '../assets/images/cases-compare-slider-markssite-hr-left-1.jpg';
-import case_compare_slider_picture_right_1 from '../assets/images/cases-compare-slider-markssite-hr-right-1.jpg';
-import case_compare_slider_picture_left_2 from '../assets/images/cases-compare-slider-markssite-hr-left-2.jpg';
-import case_compare_slider_picture_right_2 from '../assets/images/cases-compare-slider-markssite-hr-right-2.jpg';
-import case_compare_slider_picture_left_3 from '../assets/images/cases-compare-slider-markssite-hr-left-3.jpg';
-import case_compare_slider_picture_right_3 from '../assets/images/cases-compare-slider-markssite-hr-right-3.jpg';
-import case_compare_slider_picture_left_4 from '../assets/images/cases-compare-slider-markssite-hr-left-4.jpg';
-import case_compare_slider_picture_right_4 from '../assets/images/cases-compare-slider-markssite-hr-right-4.jpg';
+// Импорты изображений для CasesSliderFull
+import case_slider_full_picture_1_0_jpg from '../assets/images/cases-slider-full-markssite-hr-1-0.jpg';
+import case_slider_full_picture_1_0_webp from '../assets/images/cases-slider-full-markssite-hr-1-0.webp';
+import case_slider_full_picture_1_0_avif from '../assets/images/cases-slider-full-markssite-hr-1-0.avif';
+import case_slider_full_picture_1_1_jpg from '../assets/images/cases-slider-full-markssite-hr-1-1.jpg';
+import case_slider_full_picture_1_1_webp from '../assets/images/cases-slider-full-markssite-hr-1-1.webp';
+import case_slider_full_picture_1_1_avif from '../assets/images/cases-slider-full-markssite-hr-1-1.avif';
+import case_slider_full_picture_1_2_jpg from '../assets/images/cases-slider-full-markssite-hr-1-2.jpg';
+import case_slider_full_picture_1_2_webp from '../assets/images/cases-slider-full-markssite-hr-1-2.webp';
+import case_slider_full_picture_1_2_avif from '../assets/images/cases-slider-full-markssite-hr-1-2.avif';
+import case_slider_full_picture_1_3_jpg from '../assets/images/cases-slider-full-markssite-hr-1-3.jpg';
+import case_slider_full_picture_1_3_webp from '../assets/images/cases-slider-full-markssite-hr-1-3.webp';
+import case_slider_full_picture_1_3_avif from '../assets/images/cases-slider-full-markssite-hr-1-3.avif';
+import case_slider_full_picture_1_4_jpg from '../assets/images/cases-slider-full-markssite-hr-1-4.jpg';
+import case_slider_full_picture_1_4_webp from '../assets/images/cases-slider-full-markssite-hr-1-4.webp';
+import case_slider_full_picture_1_4_avif from '../assets/images/cases-slider-full-markssite-hr-1-4.avif';
+import case_slider_full_picture_2_1_jpg from '../assets/images/cases-slider-full-markssite-hr-2-1.jpg';
+import case_slider_full_picture_2_1_webp from '../assets/images/cases-slider-full-markssite-hr-2-1.webp';
+import case_slider_full_picture_2_1_avif from '../assets/images/cases-slider-full-markssite-hr-2-1.avif';
+import case_slider_full_picture_2_2_jpg from '../assets/images/cases-slider-full-markssite-hr-2-2.jpg';
+import case_slider_full_picture_2_2_webp from '../assets/images/cases-slider-full-markssite-hr-2-2.webp';
+import case_slider_full_picture_2_2_avif from '../assets/images/cases-slider-full-markssite-hr-2-2.avif';
+import case_slider_full_picture_2_3_jpg from '../assets/images/cases-slider-full-markssite-hr-2-3.jpg';
+import case_slider_full_picture_2_3_webp from '../assets/images/cases-slider-full-markssite-hr-2-3.webp';
+import case_slider_full_picture_2_3_avif from '../assets/images/cases-slider-full-markssite-hr-2-3.avif';
 
+// Импорты для ReviewsSlider
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
-import reviews_slider_author_2 from '../assets/images/reviews-slider-3.jpg';
-
-import case_slider_full_picture_1_0 from '../assets/images/cases-slider-full-markssite-hr-1-0.jpg';
-import case_slider_full_picture_1_1 from '../assets/images/cases-slider-full-markssite-hr-1-1.jpg';
-import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-markssite-hr-1-2.jpg';
-import case_slider_full_picture_1_3 from '../assets/images/cases-slider-full-markssite-hr-1-3.jpg';
-import case_slider_full_picture_1_4 from '../assets/images/cases-slider-full-markssite-hr-1-4.jpg';
-import case_slider_full_picture_2_1 from '../assets/images/cases-slider-full-markssite-hr-2-1.jpg';
-import case_slider_full_picture_2_2 from '../assets/images/cases-slider-full-markssite-hr-2-2.jpg';
-import case_slider_full_picture_2_3 from '../assets/images/cases-slider-full-markssite-hr-2-3.jpg';
+import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-3.jpg';
+import reviews_slider_author_2_webp from '../assets/images/reviews-slider-3.webp';
+import reviews_slider_author_2_avif from '../assets/images/reviews-slider-3.avif';
 
 const contentCasesIntro = {
   title: 'marksgroup.ru',
@@ -42,7 +82,11 @@ const contentCasesIntro = {
     url: 'https://marksgroup.ru/portal/vacanciesMain',
     title: 'Перейти на сайт',
   },
-  picture_intro: case_intro_picture,
+  picture_intro: {
+    img: case_intro_picture_jpg,
+    webp: case_intro_picture_webp,
+    avif: case_intro_picture_avif,
+  },
   about: [
     {
       topic: 'Клиент',
@@ -54,7 +98,7 @@ const contentCasesIntro = {
     },
     {
       topic: 'Команда',
-      desc: 'Разработчик full stack, верстальщик,<br> UX/UI дизайнер, PM, контент менеджер',
+      desc: 'Разработчик full stack, верстальщик, UX/UI дизайнер, PM, контент менеджер',
     },
     {
       topic: 'Что сделано',
@@ -68,23 +112,55 @@ const case_compare_slider_pictures_1 = {
   pictures: [
     {
       id: '1_1',
-      picture_left: case_compare_slider_picture_left_1,
-      picture_right: case_compare_slider_picture_right_1,
+      picture_left: {
+        img: case_compare_slider_picture_left_1_jpg,
+        webp: case_compare_slider_picture_left_1_webp,
+        avif: case_compare_slider_picture_left_1_avif,
+      },
+      picture_right: {
+        img: case_compare_slider_picture_right_1_jpg,
+        webp: case_compare_slider_picture_right_1_webp,
+        avif: case_compare_slider_picture_right_1_avif,
+      },
     },
     {
       id: '1_2',
-      picture_left: case_compare_slider_picture_left_2,
-      picture_right: case_compare_slider_picture_right_2,
+      picture_left: {
+        img: case_compare_slider_picture_left_2_jpg,
+        webp: case_compare_slider_picture_left_2_webp,
+        avif: case_compare_slider_picture_left_2_avif,
+      },
+      picture_right: {
+        img: case_compare_slider_picture_right_2_jpg,
+        webp: case_compare_slider_picture_right_2_webp,
+        avif: case_compare_slider_picture_right_2_avif,
+      },
     },
     {
       id: '1_3',
-      picture_left: case_compare_slider_picture_left_3,
-      picture_right: case_compare_slider_picture_right_3,
+      picture_left: {
+        img: case_compare_slider_picture_left_3_jpg,
+        webp: case_compare_slider_picture_left_3_webp,
+        avif: case_compare_slider_picture_left_3_avif,
+      },
+      picture_right: {
+        img: case_compare_slider_picture_right_3_jpg,
+        webp: case_compare_slider_picture_right_3_webp,
+        avif: case_compare_slider_picture_right_3_avif,
+      },
     },
     {
       id: '1_4',
-      picture_left: case_compare_slider_picture_left_4,
-      picture_right: case_compare_slider_picture_right_4,
+      picture_left: {
+        img: case_compare_slider_picture_left_4_jpg,
+        webp: case_compare_slider_picture_left_4_webp,
+        avif: case_compare_slider_picture_left_4_avif,
+      },
+      picture_right: {
+        img: case_compare_slider_picture_right_4_jpg,
+        webp: case_compare_slider_picture_right_4_webp,
+        avif: case_compare_slider_picture_right_4_avif,
+      },
     },
   ],
 };
@@ -95,11 +171,10 @@ const contentText = [
     text: (
       <>
         Разработать HR портал для компании MARKSGROUP с функционалом формирования и просмотра вакансий, отправки анкет, представления общей информации о карьере в компании, информации о преимуществах.
-        Портал интегрирован в корпоративный сайт компании.<Link to="/portfolio/markssite"> Подробнее о кейсе</Link>
+        Портал интегрирован в корпоративный сайт компании. <Link to="/portfolio/markssite">Подробнее о кейсе</Link>
       </>
     ),
   },
-
   {
     title: 'Главная страница',
     text: 'Знакомство с компанией, ценности, достижения, направления деятельности, география, актуальные вакансии и контакты',
@@ -110,7 +185,7 @@ const contentText = [
   },
   {
     title: 'Панель администратора',
-    text: 'Реализован конструктор для управления вакансиями(скрытие, добавление, приоритетность), добавления достижений (премии, конкурсы), отдельной информации (стажировки, конкурсы) без необходимости вмешательства разработчиков, автономно и оперативно только специалистами компании (HR, PR и т.д.)',
+    text: 'Реализован конструктор для управления вакансиями (скрытие, добавление, приоритетность), добавления достижений (премии, конкурсы), отдельной информации (стажировки, конкурсы) без необходимости вмешательства разработчиков, автономно и оперативно только специалистами компании (HR, PR и т.д.)',
   },
 ];
 
@@ -119,11 +194,22 @@ const contentSoftwar = [softwarLogos.react, softwarLogos.nodejs, softwarLogos.fi
 const contentReviews = [
   {
     title: 'Отзыв клиента',
-    text: 'Работа с&nbsp;HR-порталом на&nbsp;сайте стала для меня и&nbsp;для HR-команды ещё одним способом привлечения кандидатов. Платформа интуитивно понятна и&nbsp;удобна в&nbsp;использовании, опубликовать вакансии на&nbsp;портале не&nbsp;занимает большого количества времени. Лично мне нравится функция размещения горящих вакансий на&nbsp;главной странице портала на&nbsp;сайте. Сайт MARKS GROUP посещает множество специалистов из&nbsp;сферы проектирования и&nbsp;цифровых технологий, поэтому классно, что они сразу могут ознакомиться с&nbsp;нашими вакансиями через сайт, откликнуться и&nbsp;их&nbsp;резюме или контакты сразу попадают к&nbsp;нам на&nbsp;hr-почту, это очень удобно!',
+    text: 'Работа с HR-порталом на сайте стала для меня и для HR-команды ещё одним способом привлечения кандидатов. Платформа интуитивно понятна и удобна в использовании, опубликовать вакансии на портале не занимает большого количества времени. Лично мне нравится функция размещения горящих вакансий на главной странице портала на сайте. Сайт MARKS GROUP посещает множество специалистов из сферы проектирования и цифровых технологий, поэтому классно, что они сразу могут ознакомиться с нашими вакансиями через сайт, откликнуться и их резюме или контакты сразу попадают к нам на hr-почту, это очень удобно!',
     name: 'Полина Журавлева <br> Ведущий специалист по подбору персонала',
     picture: [
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
+      {
+        logo: {
+          img: reviews_slider_author_1,
+        },
+      },
+      {
+        logo: {
+          img: reviews_slider_author_2_jpg,
+          webp: reviews_slider_author_2_webp,
+          avif: reviews_slider_author_2_avif,
+        },
+        title: 'Клиент',
+      },
     ],
   },
 ];
@@ -132,7 +218,6 @@ const case_slider_full_content_1 = {
   sizes: {
     width: '100%',
   },
-
   pictures: [
     {
       sizes: {
@@ -140,7 +225,11 @@ const case_slider_full_content_1 = {
         height: '100%',
       },
       id: '1_0',
-      picture: case_slider_full_picture_1_0,
+      picture: {
+        img: case_slider_full_picture_1_0_jpg,
+        webp: case_slider_full_picture_1_0_webp,
+        avif: case_slider_full_picture_1_0_avif,
+      },
     },
     {
       sizes: {
@@ -148,15 +237,11 @@ const case_slider_full_content_1 = {
         height: '100%',
       },
       id: '1_1',
-      picture: case_slider_full_picture_1_1,
-    },
-    {
-      sizes: {
-        width: '100%',
-        height: '100%',
+      picture: {
+        img: case_slider_full_picture_1_1_jpg,
+        webp: case_slider_full_picture_1_1_webp,
+        avif: case_slider_full_picture_1_1_avif,
       },
-      id: '1_1',
-      picture: case_slider_full_picture_1_1,
     },
     {
       sizes: {
@@ -164,7 +249,11 @@ const case_slider_full_content_1 = {
         height: '100%',
       },
       id: '1_2',
-      picture: case_slider_full_picture_1_2,
+      picture: {
+        img: case_slider_full_picture_1_2_jpg,
+        webp: case_slider_full_picture_1_2_webp,
+        avif: case_slider_full_picture_1_2_avif,
+      },
     },
     {
       sizes: {
@@ -172,11 +261,23 @@ const case_slider_full_content_1 = {
         height: '100%',
       },
       id: '1_3',
-      picture: case_slider_full_picture_1_3,
+      picture: {
+        img: case_slider_full_picture_1_3_jpg,
+        webp: case_slider_full_picture_1_3_webp,
+        avif: case_slider_full_picture_1_3_avif,
+      },
     },
     {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
       id: '1_4',
-      picture: case_slider_full_picture_1_4,
+      picture: {
+        img: case_slider_full_picture_1_4_jpg,
+        webp: case_slider_full_picture_1_4_webp,
+        avif: case_slider_full_picture_1_4_avif,
+      },
     },
   ],
 };
@@ -185,7 +286,6 @@ const case_slider_full_content_2 = {
   sizes: {
     width: '100%',
   },
-
   pictures: [
     {
       sizes: {
@@ -193,7 +293,11 @@ const case_slider_full_content_2 = {
         height: '100%',
       },
       id: '2_1',
-      picture: case_slider_full_picture_2_1,
+      picture: {
+        img: case_slider_full_picture_2_1_jpg,
+        webp: case_slider_full_picture_2_1_webp,
+        avif: case_slider_full_picture_2_1_avif,
+      },
     },
     {
       sizes: {
@@ -201,7 +305,11 @@ const case_slider_full_content_2 = {
         height: '100%',
       },
       id: '2_2',
-      picture: case_slider_full_picture_2_2,
+      picture: {
+        img: case_slider_full_picture_2_2_jpg,
+        webp: case_slider_full_picture_2_2_webp,
+        avif: case_slider_full_picture_2_2_avif,
+      },
     },
     {
       sizes: {
@@ -209,12 +317,16 @@ const case_slider_full_content_2 = {
         height: '100%',
       },
       id: '2_3',
-      picture: case_slider_full_picture_2_3,
+      picture: {
+        img: case_slider_full_picture_2_3_jpg,
+        webp: case_slider_full_picture_2_3_webp,
+        avif: case_slider_full_picture_2_3_avif,
+      },
     },
   ],
 };
 
-export default function CaseMarkssite() {
+export default function CaseMarkssiteHr() {
   return (
     <main>
       <CasesIntro contentCasesIntro={contentCasesIntro} />
@@ -225,7 +337,7 @@ export default function CaseMarkssite() {
       <CasesCompareSlider items={case_compare_slider_pictures_1} />
       <Text title={contentText[2].title} text={contentText[2].text} />
       <CasesSliderFull items={case_slider_full_content_2} />
-      <Text title={contentText[3].title} text={contentText[2].text} />
+      <Text title={contentText[3].title} text={contentText[3].text} />
       <ReviewsSlider items={contentReviews} />
       <CasesItems type="web" excludeId="markssite-hr" />
     </main>

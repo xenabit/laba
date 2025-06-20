@@ -34,10 +34,13 @@ function CaseIframe({ iframeProps = {}, previewSrc, mobilePreviewSrc }) {
         {previewSrc && isPreviewVisible && (
           <picture>
             {mobilePreviewSrc && <source media="(max-width: 768px)" srcSet={mobilePreviewSrc} />}
+            <source type="image/avif" srcSet={previewSrc.avif} />
+            <source type="image/webp" srcSet={previewSrc.webp} />
             <img
-              src={previewSrc}
+              src={previewSrc.img}
               alt="Превью"
               className={styles.CaseIframe__preview}
+              loading="lazy"
               style={{
                 opacity: isActive ? 0 : 1,
                 transition: 'opacity 0.5s ease',

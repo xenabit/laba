@@ -26,7 +26,7 @@ function CasesIntro({ contentCasesIntro }) {
           <picture>
             <source type="image/avif" srcSet={picture_intro.avif} />
             <source type="image/webp" srcSet={picture_intro.webp} />
-            <img src={picture_intro.jpg} loading="lazy" />
+            <img src={picture_intro.img} loading="lazy" />
           </picture>
         </div>
         {src?.url && (

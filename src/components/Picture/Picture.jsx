@@ -7,7 +7,7 @@ function Picture({ src }) {
         <picture>
           {src?.avif && <source type="image/avif" srcSet={src.avif} />}
           {src?.webp && <source type="image/webp" srcSet={src.webp} />}
-          <img src={src?.jpg} loading="lazy" />
+          <img src={src?.img} loading="lazy" />
         </picture>
       </div>
     </section>
@@ -16,7 +16,7 @@ function Picture({ src }) {
 
 Picture.propTypes = {
   src: PropTypes.shape({
-    jpg: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
     webp: PropTypes.string,
     avif: PropTypes.string,
   }).isRequired,
