@@ -126,7 +126,7 @@ export default function AboutList() {
               <div className={styles.AboutList__video}>
                 <video
                   ref={videoRefs[idx]}
-                  preload="auto"
+                  preload="metadata"
                   loop
                   muted
                   playsInline
