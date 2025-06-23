@@ -7,7 +7,6 @@ import Softwar from '../components/Softwar/Softwar';
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import Picture from '../components/Picture/Picture';
 import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
-import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
 import CasesItems from '../components/CasesItems/CasesItems';
 import CasesCompareSlider from '../components/CasesCompareSlider/CasesCompareSlider';
 import softwarLogos from '../constants/softwarLogos';
@@ -74,8 +73,6 @@ import case_compare_slider_picture_right_2_avif from '../assets/images/cases-com
 
 import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-mg-1.svg';
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
-
-import video_horizontal from '../assets/videos/video-horizontal-markssite.mp4';
 
 const contentCasesIntro = {
   title: 'marksgroup.ru',
@@ -331,7 +328,6 @@ export default function CaseMarkssite() {
       <Text title={contentText[3].title} text={contentText[3].text} />
       <CasesCompareSlider items={case_compare_slider_pictures_1} />
       <Text title={contentText[4].title} text={contentText[4].text} />
-      <VideoHorizontal videoUrl={video_horizontal} />
       <Text title={contentText[5].title} text={contentText[5].text} />
       <ReviewsSlider items={contentReviews} />
       <CasesItems type="web" excludeId="markssite" />
