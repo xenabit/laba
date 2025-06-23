@@ -11,10 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ITEMS = [
   { n: 10, text: 'Направлений разработки' },
-  {
-    n: 30,
-    text: 'Завершённых проектов',
-  },
+  { n: 30, text: 'Завершённых проектов' },
   { n: 4000, text: 'Часов командной работы' },
   { n: 20, text: 'Специалистов с реальным опытом разработки' },
 ];
@@ -22,7 +19,7 @@ const ITEMS = [
 const Number = memo(function Number({ n }) {
   const { ref, inView } = useInView({
     threshold: 0.1,
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   const getStep = useCallback((num) => {
@@ -54,13 +51,16 @@ const Number = memo(function Number({ n }) {
     </animated.div>
   );
 });
-Number.propTypes = {
-  n: PropTypes.number.isRequired,
-};
+Number.propTypes = { n: PropTypes.number.isRequired };
 
 export default function Counter({ loadingStage }) {
   const sectionRef = useRef(null);
   const imageRef = useRef(null);
+
+  useEffect(() => {
+    const p = new Image();
+    p.src = img;
+  }, []);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   useEffect(() => {
@@ -71,7 +71,6 @@ export default function Counter({ loadingStage }) {
 
   useEffect(() => {
     if (isMobile || loadingStage !== 'complete') return;
-
     const ctx = gsap.context(() => {
       gsap.to(imageRef.current, {
         y: 150,
@@ -85,7 +84,6 @@ export default function Counter({ loadingStage }) {
         },
       });
     }, sectionRef);
-
     return () => ctx.revert();
   }, [isMobile, loadingStage]);
 
@@ -100,7 +98,7 @@ export default function Counter({ loadingStage }) {
         ))}
       </div>
       <div className={styles.Counter__picture}>
-        <img ref={imageRef} src={img} alt="Counter background" loading="lazy" />
+        <img ref={imageRef} src={img} alt="Counter background" loading="eager" decoding="async" fetchpriority="high" className={styles.Counter__img} />
       </div>
     </section>
   );
