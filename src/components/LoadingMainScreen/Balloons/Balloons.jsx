@@ -194,7 +194,7 @@ const BALLOONS_CONFIG = [
     uniqueClass: 'Balloons__item--cb1',
     anim: {
       from: { top: '128.89%', left: '49.88%', scale: 1, transformOrigin: 'center center' },
-      to: { top: '84%', left: '48.5%', scale: 1.2 },
+      to: { top: '86%', left: '49%', scale: 1.2 },
       change: { scale: 1.05, yPercent: 0, xPercent: -1 },
     },
   },
