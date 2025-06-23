@@ -42,7 +42,7 @@ export default function App() {
     if (isFirstVisit) sessionStorage.setItem('hasVisitedHome', 'true');
   }, [isFirstVisit]);
 
-   const smootherRef = useRef(null);
+  const smootherRef = useRef(null);
   useEffect(() => {
     if (loadingStage !== 'complete') return;
     const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
@@ -100,9 +100,7 @@ export default function App() {
       { rootMargin: '200px' }
     );
 
-    root
-      .querySelectorAll('video[data-preload]')
-      .forEach((v) => observer.observe(v));
+    root.querySelectorAll('video[data-preload]').forEach((v) => observer.observe(v));
 
     return () => observer.disconnect();
   }, []);
@@ -126,45 +124,19 @@ export default function App() {
       />
 
       {isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' && (
-        <LoadingMainScreen
-          headerRef={headerRef}
-          onStageChange={handleStageChange}
-          wrapperRef={wrapperRef}
-          loadingStage={loadingStage}
-          introRef={introRef}
-          projectsTileRef={projectsTileRef}
-        />
+        <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
       )}
 
       <div
         id="smooth-content"
         style={{
-          opacity:
-            isFirstVisit &&
-            location.pathname === '/' &&
-            loadingStage !== 'complete'
-              ? 0
-              : 1,
-          pointerEvents:
-            isFirstVisit &&
-            location.pathname === '/' &&
-            loadingStage !== 'complete'
-              ? 'none'
-              : 'auto',
+          opacity: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 0 : 1,
+          pointerEvents: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 'none' : 'auto',
           transition: 'opacity 0.3s ease',
         }}
       >
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                introRef={introRef}
-                projectsTileRef={projectsTileRef}
-                loadingStage={loadingStage}
-              />
-            }
-          />
+          <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
           <Route path="/portfolio" element={<GalleryTabs />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />
