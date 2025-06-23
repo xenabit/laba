@@ -52,6 +52,7 @@ export default function Gallery() {
                 muted: true,
                 loop: true,
                 preload: "metadata",
+                "data-preload": true,  
                 playsInline: true,
                 webkitplaysinline: 'true',
               };

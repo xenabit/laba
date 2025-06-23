@@ -1,5 +1,5 @@
+import React, { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
@@ -34,31 +34,36 @@ export default function App() {
 
   const [isFirstVisit] = useState(() => {
     if (typeof window === 'undefined') return false;
-    const has = sessionStorage.getItem('hasVisitedHome');
-    return !has && location.pathname === '/';
+    return !sessionStorage.getItem('hasVisitedHome') && location.pathname === '/';
   });
   const [loadingStage, setLoadingStage] = useState(isFirstVisit ? 'initial' : 'complete');
 
   useEffect(() => {
-    if (isFirstVisit) {
-      sessionStorage.setItem('hasVisitedHome', 'true');
-    }
+    if (isFirstVisit) sessionStorage.setItem('hasVisitedHome', 'true');
   }, [isFirstVisit]);
 
   const smootherRef = useRef(null);
   useEffect(() => {
-    if (loadingStage === 'complete') {
-      const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
-      if (!isIOS) {
-        smootherRef.current = ScrollSmoother.create({
-          wrapper: '#smooth-wrapper',
-          content: '#smooth-content',
-          smooth: 1.5,
-          effects: true,
-        });
-        ScrollTrigger.refresh();
-      }
+    if (loadingStage !== 'complete') return;
+    const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
+    if (isIOS) return;
+
+    const create = () => {
+      smootherRef.current = ScrollSmoother.create({
+        wrapper: '#smooth-wrapper',
+        content: '#smooth-content',
+        smooth: 1.5,
+        effects: true,
+      });
+      ScrollTrigger.refresh();
+    };
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(create);
+    } else {
+      setTimeout(create, 0);
     }
+
     return () => {
       if (smootherRef.current) {
         smootherRef.current.kill();
@@ -79,27 +84,25 @@ export default function App() {
   }, [location.pathname, loadingStage]);
 
   useEffect(() => {
-    if (!/iP(hone|ad|od)/.test(navigator.userAgent)) return;
     const root = document.getElementById('smooth-content');
     if (!root) return;
-    const vids = root.querySelectorAll('video[data-preload]');
-    if (!vids.length) return;
 
-    const unlock = () => {
-      vids.forEach((v) => {
-        v.preload = 'auto';
-        v.muted = true;
-        v.play().catch(()=>{}).then(() => v.pause());
-        v.load();
-      });
-    };
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach(({ isIntersecting, target }) => {
+          if (!isIntersecting) return;
+          const v = target;
+          v.preload = 'auto';
+          v.load();
+          obs.unobserve(v);
+        });
+      },
+      { rootMargin: '200px' }
+    );
 
-    window.addEventListener('touchstart', unlock, { once: true });
-    window.addEventListener('click', unlock, { once: true });
-    return () => {
-      window.removeEventListener('touchstart', unlock);
-      window.removeEventListener('click', unlock);
-    };
+    root.querySelectorAll('video[data-preload]').forEach((v) => observer.observe(v));
+
+    return () => observer.disconnect();
   }, []);
 
   const handleStageChange = (stage) => {

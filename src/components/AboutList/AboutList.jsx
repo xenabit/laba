@@ -127,7 +127,6 @@ export default function AboutList() {
                 <video
                   ref={videoRefs[idx]}
                   preload="metadata"
-                  data-preload
                   loop
                   muted
                   playsInline
