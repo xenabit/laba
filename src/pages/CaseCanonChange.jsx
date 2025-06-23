@@ -86,8 +86,10 @@ import case_slider_scroll_picture_3_2_avif from '../assets/images/case-slider-sc
 const contentCasesIntro = {
   title: 'Канон перемен',
   subtitle: 'Приложение с игровой механикой',
+
   src: {
-    // title: 'Перейти на сайт',
+    url: 'https://www.rustore.ru/catalog/app/ru.laba.iching',
+    title: 'Скачать из RuStore',
   },
   tags: ['Android, IOS', 'Unreal Engine', 'UX/UI'],
   picture_intro: {

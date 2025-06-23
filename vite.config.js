@@ -20,7 +20,7 @@ export default defineConfig({
           dest: 'assets/docs', // Копируем PDF
         },
         {
-          src: 'src/assets/videos/*.mp4',
+          src: 'src/assets/videos/*.{mp4,webm}',
           dest: 'assets/videos', // Копируем видео
         },
       ],

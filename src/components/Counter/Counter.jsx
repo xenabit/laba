@@ -10,14 +10,13 @@ import styles from './Counter.module.scss';
 gsap.registerPlugin(ScrollTrigger);
 
 const ITEMS = [
-  { n: 130, text: 'Создано рилсов и видео роликов' },
+  { n: 10, text: 'Направлений разработки' },
   {
-    n: 85,
-    text:
-      'Серверов в собственном дата-центре<br>для просчета компьютерной графики',
+    n: 30,
+    text: 'Завершённых проектов',
   },
-  { n: 1000, text: '3д моделей' },
-  { n: 7, text: 'Лет на рынке 3D графики' },
+  { n: 4000, text: 'Часов командной работы' },
+  { n: 20, text: 'Специалистов с реальным опытом разработки' },
 ];
 
 const Number = memo(function Number({ n }) {
@@ -44,10 +43,7 @@ const Number = memo(function Number({ n }) {
   });
 
   return (
-    <animated.div
-      ref={ref}
-      style={{ display: 'flex', alignItems: 'baseline', opacity }}
-    >
+    <animated.div ref={ref} style={{ display: 'flex', alignItems: 'baseline', opacity }}>
       <animated.span style={{ marginRight: 4, opacity }}>+</animated.span>
       <animated.div style={{ opacity }}>
         {number.to((val) => {
@@ -97,24 +93,14 @@ export default function Counter({ loadingStage }) {
     <section className={styles.Counter} ref={sectionRef}>
       <div className={styles.Counter__items}>
         {ITEMS.map(({ n, text }, idx) => (
-          <div
-            key={idx}
-            className={`${styles.Counter__item} ${
-              isMobile ? styles.active : ''
-            }`}
-          >
+          <div key={idx} className={`${styles.Counter__item} ${isMobile ? styles.active : ''}`}>
             <Number n={n} />
             <p dangerouslySetInnerHTML={{ __html: text }} />
           </div>
         ))}
       </div>
       <div className={styles.Counter__picture}>
-        <img
-          ref={imageRef}
-          src={img}
-          alt="Counter background"
-          loading="lazy"
-        />
+        <img ref={imageRef} src={img} alt="Counter background" loading="lazy" />
       </div>
     </section>
   );
