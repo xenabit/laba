@@ -37,7 +37,7 @@ function Explain({ loadingStage }) {
 
   return (
     <div ref={animate} className={styles.Explain}>
-      <div>Scroll to see more!</div>
+      <div>Прокрутите вниз, чтобы увидеть больше</div>
       <div></div>
     </div>
   );
