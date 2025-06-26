@@ -1,15 +1,15 @@
-import video_1 from '../assets/videos/gallery-1.mp4';
-import video_2 from '../assets/videos/gallery-2.mp4';
-import video_3 from '../assets/videos/gallery-3.mp4';
-import video_4 from '../assets/videos/gallery-4.mp4';
-import video_5 from '../assets/videos/gallery-5.mp4';
-import video_6 from '../assets/videos/gallery-6.mp4';
-import video_7 from '../assets/videos/gallery-7.mp4';
-import video_8 from '../assets/videos/gallery-8.mp4';
-import video_9 from '../assets/videos/gallery-9.mp4';
-import video_10 from '../assets/videos/gallery-10.mp4';
-import video_11 from '../assets/videos/gallery-11.mp4';
-import video_12 from '../assets/videos/gallery-12.mp4';
+import video_1_mp4 from '../assets/videos/gallery-1.mp4';
+import video_1_webm from '../assets/videos/gallery-1.webm';
+import video_2_mp4 from '../assets/videos/gallery-2.mp4';
+import video_2_webm from '../assets/videos/gallery-2.webm';
+import video_3_mp4 from '../assets/videos/gallery-3.mp4';
+import video_3_webm from '../assets/videos/gallery-3.webm';
+import video_4_mp4 from '../assets/videos/gallery-4.mp4';
+import video_4_webm from '../assets/videos/gallery-4.webm';
+import video_5_mp4 from '../assets/videos/gallery-5.mp4';
+import video_5_webm from '../assets/videos/gallery-5.webm';
+import video_6_mp4 from '../assets/videos/gallery-6.mp4';
+import video_6_webm from '../assets/videos/gallery-6.webm';
 
 export const projectsTypes = [
   { id: 'all', title: 'Все', type: 'all' },
@@ -24,7 +24,10 @@ const validTypes = new Set(projectsTypes.map((item) => item.type));
 export const projects = [
   {
     id: 'markssite',
-    video: video_2,
+    video: {
+      mp4: video_2_mp4,
+      webm: video_2_webm,
+    },
     src: '/portfolio/markssite',
     title: 'marksgroup.ru',
     desc: 'Корпоративный сайт компании',
@@ -32,7 +35,10 @@ export const projects = [
   },
   {
     id: 'markssite-hr',
-    video: video_3,
+    video: {
+      mp4: video_3_mp4,
+      webm: video_3_webm,
+    },
     src: '/portfolio/markssite-hr',
     title: 'HR портал',
     desc: 'HR портал компании',
@@ -40,7 +46,10 @@ export const projects = [
   },
   {
     id: 'markstour',
-    video: video_1,
+    video: {
+      mp4: video_3_mp4,
+      webm: video_3_webm,
+    },
     src: '/portfolio/markstour',
     title: 'Шоурум-тур',
     desc: 'Панорама 360° с WEB интерфейсом, VR',
@@ -48,7 +57,10 @@ export const projects = [
   },
   {
     id: 'canon-change',
-    video: video_4,
+    video: {
+      mp4: video_4_mp4,
+      webm: video_4_webm,
+    },
     src: '/portfolio/canon-change',
     title: 'Канон перемен',
     desc: 'Приложение с игровой механикой',
@@ -56,7 +68,10 @@ export const projects = [
   },
   {
     id: 'tamagotchi',
-    video: video_5,
+    video: {
+      mp4: video_5_mp4,
+      webm: video_5_webm,
+    },
     src: '/portfolio/tamagotchi',
     title: 'Тамагочи',
     desc: 'Гиперказуальная игра',
@@ -64,7 +79,10 @@ export const projects = [
   },
   {
     id: 'markscity',
-    video: video_6,
+    video: {
+      mp4: video_6_mp4,
+      webm: video_6_webm,
+    },
     src: '/portfolio/markscity',
     title: 'MARKS-CITY',
     desc: 'Десктоп игра для интерактивного стола. Зодчество 2023',
