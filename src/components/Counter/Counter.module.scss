@@ -27,9 +27,9 @@
       display: flex;
       align-self: center;
       font-family: var(--font-prime);
-      font-size: rem(88);
+      font-size: clamp(rem(80), 5.5vw, rem(160));
       font-weight: var(--fw-medium);
-      line-height: rem(96);
+      line-height: 1.1;
     }
 
     p {
@@ -113,7 +113,7 @@
         border-left: 1px solid var(--sec-5);
         grid-column: 2 / 3;
         grid-row: 2 / 3;
-        min-width: 33%;
+        min-width: 35%;
       }
 
       &:nth-child(4) {
@@ -128,13 +128,6 @@
     &__items {
       height: rem(327);
       grid-template-rows: rem(327) rem(327);
-    }
-
-    &__item {
-      div {
-        font-size: rem(128);
-        line-height: rem(128);
-      }
     }
 
     &__picture {

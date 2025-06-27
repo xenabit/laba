@@ -75,7 +75,7 @@ export default function ProjectsTile({ projectsTileRef }) {
     window.addEventListener('resize', resetAnimation);
     let timer;
     if (window.innerWidth <= 1280) {
-      timer = setInterval(resetAnimation, 6000);
+      timer = setInterval(resetAnimation, 10000);
     }
     return () => {
       window.removeEventListener('resize', resetAnimation);

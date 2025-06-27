@@ -10,17 +10,40 @@ export default function GalleryTabs() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialFilter = searchParams.get('filter') || 'all';
   const [activeFilter, setActiveFilter] = useState(initialFilter);
-
   const [loadedIds, setLoadedIds] = useState(new Set());
 
   const nodeRefs = useRef({});
+
+  const preloads = projects.map((item) => (
+    <video
+      key={`preload-${item.id}`}
+      preload="metadata"
+      muted
+      data-preload
+      onLoadedData={() => {
+        setLoadedIds((prev) => new Set(prev).add(item.id));
+      }}
+      style={{
+        position: 'absolute',
+        width: 0,
+        height: 0,
+        overflow: 'hidden',
+        opacity: 0,
+      }}
+      playsInline
+      webkit-playsinline="true"
+    >
+      {item.video.webm && <source src={item.video.webm} type="video/webm" />}
+      {item.video.mp4 && <source src={item.video.mp4} type="video/mp4" />}
+    </video>
+  ));
 
   useEffect(() => {
     const f = searchParams.get('filter') || 'all';
     if (f !== activeFilter) {
       setActiveFilter(f);
     }
-  }, [searchParams]);
+  }, [searchParams, activeFilter]);
 
   const handleFilterChange = useCallback(
     (type) => {
@@ -37,10 +60,15 @@ export default function GalleryTabs() {
   }, []);
 
   const handleMouseEnter = useCallback((video) => {
-    video.play().catch(() => {});
+    if (video) {
+      video.play().catch((err) => console.error(`Play error for ${video.src}:`, err));
+    }
   }, []);
+
   const handleMouseLeave = useCallback((video) => {
-    video.pause();
+    if (video) {
+      video.pause();
+    }
   }, []);
 
   const onVideoLoaded = useCallback((id) => {
@@ -68,6 +96,7 @@ export default function GalleryTabs() {
 
   return (
     <section className={styles.GalleryTabs}>
+      <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>{preloads}</div>
       <div className={styles.GalleryTabs__header}>
         <h1 className={styles.GalleryTabs__title}>ПОРТФОЛИО</h1>
         <div className={styles.GalleryTabs__links}>
@@ -81,11 +110,7 @@ export default function GalleryTabs() {
         <ul>
           {projectsTypes.map((el) => (
             <li key={el.id}>
-              <button
-                onMouseMove={handleMouseMove}
-                onClick={() => handleFilterChange(el.type)}
-                className={`${styles.filterBtn} ${activeFilter === el.type ? styles.active : ''}`}
-              >
+              <button onMouseMove={handleMouseMove} onClick={() => handleFilterChange(el.type)} className={`${styles.filterBtn} ${activeFilter === el.type ? styles.active : ''}`}>
                 <span>{el.title}</span>
               </button>
             </li>
@@ -94,30 +119,40 @@ export default function GalleryTabs() {
       </nav>
 
       <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
-        {filteredItems.map((item) => {
+        {filteredItems.map((item, index) => {
           const key = item.id;
           if (!nodeRefs.current[key]) {
             nodeRefs.current[key] = createRef();
           }
           const nodeRef = nodeRefs.current[key];
 
-          const videoProps = {
-            autoPlay: true,
-            muted: true,
-            loop: true,
-            preload: "metadata",
-            "data-preload": true,
-            playsInline: true,
-            onLoadedData: () => onVideoLoaded(item.id),
-            onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
-            onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
-          };
+          const videoProps =
+            index % 2 === 1
+              ? {
+                  autoPlay: true,
+                  muted: true,
+                  loop: true,
+                  preload: 'metadata',
+                  'data-preload': true,
+                  playsInline: true,
+                  onLoadedData: () => onVideoLoaded(item.id),
+                }
+              : {
+                  muted: true,
+                  loop: true,
+                  preload: 'metadata',
+                  'data-preload': true,
+                  playsInline: true,
+                  onLoadedData: () => onVideoLoaded(item.id),
+                  onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
+                  onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
+                };
 
           return (
             <CSSTransition key={key} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
               <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
                 {!loadedIds.has(item.id) && <div className={styles.GalleryTabs__skeletonVideo} />}
-                <GalleryItem videoSrc={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
+                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
               </li>
             </CSSTransition>
           );

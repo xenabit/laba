@@ -30,7 +30,7 @@ function CasesIntro({ contentCasesIntro }) {
           </picture>
         </div>
         {src?.url && (
-          <a href={src.url} className={styles.CasesIntro__button}>
+          <a target="_blank" rel="noopener noreferrer" href={src.url} className={styles.CasesIntro__button}>
             {src.title || 'Перейти на сайт'}
           </a>
         )}

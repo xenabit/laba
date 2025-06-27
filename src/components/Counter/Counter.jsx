@@ -4,7 +4,9 @@ import { useInView } from 'react-intersection-observer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import PropTypes from 'prop-types';
-import img from '../../assets/images/counter-img.jpg';
+import counterImgJpg from '../../assets/images/counter-img.jpg';
+import counterImgWebp from '../../assets/images/counter-img.webp';
+import counterImgAvif from '../../assets/images/counter-img.avif';
 import styles from './Counter.module.scss';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -58,8 +60,12 @@ export default function Counter({ loadingStage }) {
   const imageRef = useRef(null);
 
   useEffect(() => {
-    const p = new Image();
-    p.src = img;
+    const jpg = new Image();
+    jpg.src = counterImgJpg;
+    const webp = new Image();
+    webp.src = counterImgWebp;
+    const avif = new Image();
+    avif.src = counterImgAvif;
   }, []);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -98,7 +104,11 @@ export default function Counter({ loadingStage }) {
         ))}
       </div>
       <div className={styles.Counter__picture}>
-        <img ref={imageRef} src={img} alt="Counter background" loading="eager" decoding="async" fetchpriority="high" className={styles.Counter__img} />
+        <picture>
+          <source type="image/avif" srcSet={counterImgAvif} />
+          <source type="image/webp" srcSet={counterImgWebp} />
+          <img ref={imageRef} src={counterImgJpg} alt="Counter background" loading="eager" decoding="async" fetchpriority="high" className={styles.Counter__img} />
+        </picture>
       </div>
     </section>
   );

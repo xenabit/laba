@@ -8,16 +8,25 @@ export default function Gallery() {
   const total = 6;
   const [loadedCount, setLoadedCount] = useState(0);
 
-  const handleLoaded = () => setLoadedCount(c => c + 1);
+  const handleLoaded = () => {
+    setLoadedCount((c) => {
+      const newCount = c + 1;
+      return newCount;
+    });
+  };
+
   const showSkeleton = loadedCount < total;
 
-  const handleMouseEnter = (video) => video.play();
-  const handleMouseLeave = (video) => video.pause();
+  const handleMouseEnter = (video) => {
+    video.play().catch((err) => console.error('Play error:', err));
+  };
+  const handleMouseLeave = (video) => {
+    video.pause();
+  };
 
   const preloads = projects.slice(0, total).map((item) => (
     <video
       key={`preload-${item.id}`}
-      src={item.video}
       preload="metadata"
       muted
       data-preload
@@ -31,9 +40,11 @@ export default function Gallery() {
       }}
       playsInline
       webkit-playsinline="true"
-    />
+    >
+      {item.video.webm && <source src={item.video.webm} type="video/webm" />}
+      {item.video.mp4 && <source src={item.video.mp4} type="video/mp4" />}
+    </video>
   ));
-
 
   return (
     <section className={styles.Gallery}>
@@ -51,8 +62,8 @@ export default function Gallery() {
                 autoPlay: true,
                 muted: true,
                 loop: true,
-                preload: "metadata",
-                "data-preload": true,  
+                preload: 'metadata',
+                'data-preload': true,
                 playsInline: true,
                 webkitplaysinline: 'true',
               };
@@ -62,12 +73,14 @@ export default function Gallery() {
                   ? baseVideoProps
                   : {
                       ...baseVideoProps,
-                      onLoadedMetadata: (e) => e.currentTarget.pause(),
+                      onLoadedMetadata: (e) => {
+                        e.currentTarget.pause();
+                      },
                       onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
                       onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
                     };
 
-              return <GalleryItem key={item.id} videoSrc={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />;
+              return <GalleryItem key={item.id} video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />;
             })}
       </ul>
     </section>
