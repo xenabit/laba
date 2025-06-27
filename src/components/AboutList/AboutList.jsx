@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import styles from './AboutList.module.scss';
 
-import videoSrc from '../../assets/videos/about-list.mp4';
+import video from '../../assets/videos/about-list.mp4';
+import videoWebM from '../../assets/videos/about-list.webm';
 import num1 from '../../assets/images/about-list-num-1.svg';
 import num2 from '../../assets/images/about-list-num-2.svg';
 import num3 from '../../assets/images/about-list-num-3.svg';
@@ -10,21 +11,33 @@ const ITEMS = [
   {
     title: 'Всегда в&nbsp;контакте <br>с&nbsp;заказчиком',
     desc: 'Работаем двухнедельными спринтами, визуализируем прогресс и&nbsp;всегда готовы поделиться статусом проекта',
-    video: videoSrc,
+
+    video: {
+      mp4: video,
+      webm: videoWebM,
+    },
     num: num1,
     startTime: 0,
   },
   {
     title: 'Ищем лучшие решения <br>ваших задач',
     desc: 'Работаем от&nbsp;идеи&nbsp;&mdash; проводим глубокий анализ задачи и&nbsp;предлагаем несколько вариантов развития',
-    video: videoSrc,
+
+    video: {
+      mp4: video,
+      webm: videoWebM,
+    },
     num: num2,
     startTime: 3,
   },
   {
     title: 'Верим <br>в&nbsp;договоренности',
     desc: 'Пользуемся гибкой методологией Agile, стремимся быть не&nbsp;просто исполнителями, а&nbsp;партнёрами',
-    video: videoSrc,
+
+    video: {
+      mp4: video,
+      webm: videoWebM,
+    },
     num: num3,
     startTime: 6,
   },
@@ -33,14 +46,8 @@ const ITEMS = [
 export default function AboutList() {
   const [animated, setAnimated] = useState(() => ITEMS.map(() => false));
 
-  const listRefs = useMemo(
-    () => ITEMS.map(() => React.createRef()),
-    []
-  );
-  const videoRefs = useMemo(
-    () => ITEMS.map(() => React.createRef()),
-    []
-  );
+  const listRefs = useMemo(() => ITEMS.map(() => React.createRef()), []);
+  const videoRefs = useMemo(() => ITEMS.map(() => React.createRef()), []);
 
   useEffect(() => {
     videoRefs.forEach((ref, idx) => {
@@ -85,54 +92,20 @@ export default function AboutList() {
         {ITEMS.map((el, idx) => {
           const isAnimated = animated[idx];
           return (
-            <li
-              key={idx}
-              data-index={idx}
-              ref={listRefs[idx]}
-              className={[
-                styles.AboutList__item,
-                isAnimated && styles.animate,
-              ]
-                .filter(Boolean)
-                .join(' ')}
-            >
+            <li key={idx} data-index={idx} ref={listRefs[idx]} className={[styles.AboutList__item, isAnimated && styles.animate].filter(Boolean).join(' ')}>
               <div className={styles.AboutList__text}>
-                <div
-                  className={[
-                    styles.AboutList__header,
-                    isAnimated && styles.animate,
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                >
+                <div className={[styles.AboutList__header, isAnimated && styles.animate].filter(Boolean).join(' ')}>
                   <div className={styles.AboutList__num}>
                     <img loading="lazy" src={el.num} alt="Номер этапа" />
                   </div>
-                  <div
-                    className={styles.AboutList__subtitle}
-                    dangerouslySetInnerHTML={{ __html: el.title }}
-                  />
+                  <div className={styles.AboutList__subtitle} dangerouslySetInnerHTML={{ __html: el.title }} />
                 </div>
-                <div
-                  className={[
-                    styles.AboutList__desc,
-                    isAnimated && styles.animate,
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                  dangerouslySetInnerHTML={{ __html: el.desc }}
-                />
+                <div className={[styles.AboutList__desc, isAnimated && styles.animate].filter(Boolean).join(' ')} dangerouslySetInnerHTML={{ __html: el.desc }} />
               </div>
               <div className={styles.AboutList__video}>
-                <video
-                  ref={videoRefs[idx]}
-                  preload="metadata"
-                  loop
-                  muted
-                  playsInline
-                  webkit-playsinline="true"
-                >
-                  <source src={el.video} type="video/mp4" />
+                <video ref={videoRefs[idx]} preload="metadata" loop muted playsInline webkit-playsinline="true">
+                  {el.video.webm && <source src={el.video.webm} type="video/webm" />}
+                  {el.video.mp4 && <source src={el.video.mp4} type="video/mp4" />}
                 </video>
               </div>
             </li>

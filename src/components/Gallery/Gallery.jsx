@@ -65,7 +65,7 @@ export default function Gallery() {
                 preload: 'metadata',
                 'data-preload': true,
                 playsInline: true,
-                webkitPlaysinline: 'true',
+                webkitplaysinline: 'true',
               };
 
               const videoProps =

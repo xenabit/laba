@@ -25,8 +25,8 @@ export const projects = [
   {
     id: 'markssite',
     video: {
-      mp4: video_2_mp4,
-      webm: video_2_webm,
+      mp4: video_1_mp4,
+      webm: video_1_webm,
     },
     src: '/portfolio/markssite',
     title: 'marksgroup.ru',
@@ -36,8 +36,8 @@ export const projects = [
   {
     id: 'markssite-hr',
     video: {
-      mp4: video_3_mp4,
-      webm: video_3_webm,
+      mp4: video_2_mp4,
+      webm: video_2_webm,
     },
     src: '/portfolio/markssite-hr',
     title: 'HR портал',
