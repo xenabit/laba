@@ -8,6 +8,7 @@ import { projects, projectsTypes } from '../../constants/projects';
 import useVideoPreload from '../../constants/useVideoPreload.js';
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024;
+
 export default function GalleryTabs() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialFilter = searchParams.get('filter') || 'all';
@@ -82,6 +83,7 @@ export default function GalleryTabs() {
       }}
       playsInline
       webkit-playsinline="true"
+      poster={item.video.poster}
     >
       {isMobile ? (
         item.video.mp4 && <source src={item.video.mp4} type="video/mp4" />
@@ -94,6 +96,16 @@ export default function GalleryTabs() {
     </video>
   ));
 
+  const nodeRefs = useRef({});
+
+  const transitionClassNames = {
+    enter: styles.itemEnter,
+    enterActive: styles.itemEnterActive,
+    exit: styles.itemExit,
+    exitActive: styles.itemExitActive,
+    exitDone: styles.itemExitDone,
+  };
+
   const filteredItems = useMemo(() => {
     if (activeFilter === 'all') return projects;
     return projects.filter((it) => {
@@ -102,19 +114,18 @@ export default function GalleryTabs() {
     });
   }, [activeFilter]);
 
-  const transitionClassNames = {
-    enter: styles.itemEnter,
-    enterActive: styles.itemEnterActive,
-    exit: styles.itemExit,
-    exitActive: styles.itemExitActive,
-  };
-
-  const nodeRefs = useRef({});
-
   return (
     <section className={styles.GalleryTabs}>
-      <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>{preloads}</div>
-
+      <div
+        style={{
+          position: 'absolute',
+          width: 0,
+          height: 0,
+          overflow: 'hidden',
+        }}
+      >
+        {preloads}
+      </div>
       <div className={styles.GalleryTabs__header}>
         <h1 className={styles.GalleryTabs__title}>ПОРТФОЛИО</h1>
         <div className={styles.GalleryTabs__links}>
@@ -123,7 +134,6 @@ export default function GalleryTabs() {
           <a href="tel:+79690639323">+7 (969) 063-93-23</a>
         </div>
       </div>
-
       <nav className={styles.GalleryTabs__filters}>
         <ul>
           {projectsTypes.map((el) => (
@@ -135,7 +145,6 @@ export default function GalleryTabs() {
           ))}
         </ul>
       </nav>
-
       <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
         {filteredItems.map((item, index) => {
           const id = item.id;
@@ -143,18 +152,17 @@ export default function GalleryTabs() {
             nodeRefs.current[id] = createRef();
           }
           const nodeRef = nodeRefs.current[id];
-
           const baseVideoProps = {
-           autoPlay: true,
+            autoPlay: true,
             muted: true,
             loop: true,
             preload: 'none',
             'data-preload': true,
             playsInline: true,
             webkitplaysinline: 'true',
+            poster: item.video.poster,
             onLoadedData: () => onVideoLoaded(id),
           };
-
           const videoProps =
             index % 2 === 1
               ? baseVideoProps
@@ -164,9 +172,8 @@ export default function GalleryTabs() {
                   onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
                   onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
                 };
-
           return (
-            <CSSTransition key={id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
+            <CSSTransition key={id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames} unmountOnExit={false} mountOnEnter={false}>
               <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
                 {!loadedIds.has(id) && <div className={styles.GalleryTabs__skeletonVideo} />}
                 <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
