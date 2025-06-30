@@ -1,57 +1,54 @@
-import { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
+
+import Header from './components/Header/Header.jsx';
+import Footer from './components/Footer/Footer.jsx';
+import PageNotFound from './components/PageNotFound/PageNotFound.jsx';
+import GalleryTabs from './components/GalleryTabs/GalleryTabs.jsx';
+import Contacts from './components/Contacts/Contacts.jsx';
+import FormBrief from './components/FormBrief/FormBrief.jsx';
+import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
+import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.jsx';
+
+import Home from './pages/Home.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+import CaseMarksTour from './pages/CaseMarksTour.jsx';
+import CaseMarkssite from './pages/CaseMarkssite.jsx';
+import CaseMarkssiteHR from './pages/CaseMarkssiteHR.jsx';
+import CaseCanonChange from './pages/CaseCanonChange.jsx';
+import CaseTamagotchi from './pages/CaseTamagotchi.jsx';
+import CaseMarksCity from './pages/CaseMarksCity.jsx';
+
 import './App.scss';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-const Header = lazy(() => import('./components/Header/Header.jsx'));
-const Footer = lazy(() => import('./components/Footer/Footer.jsx'));
-const LoadingMainScreen = lazy(() => import('./components/LoadingMainScreen/LoadingMainScreen.jsx'));
-const CookieAgreement = lazy(() => import('./components/CookieAgreement/CookieAgreement.jsx'));
-
-const Home = lazy(() => import('./pages/Home.jsx'));
-const GalleryTabs = lazy(() => import('./components/GalleryTabs/GalleryTabs.jsx'));
-const Contacts = lazy(() => import('./components/Contacts/Contacts.jsx'));
-const FormBrief = lazy(() => import('./components/FormBrief/FormBrief.jsx'));
-const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'));
-const CaseMarksTour = lazy(() => import('./pages/CaseMarksTour.jsx'));
-const CaseMarkssite = lazy(() => import('./pages/CaseMarkssite.jsx'));
-const CaseMarkssiteHR = lazy(() => import('./pages/CaseMarkssiteHR.jsx'));
-const CaseCanonChange = lazy(() => import('./pages/CaseCanonChange.jsx'));
-const CaseTamagotchi = lazy(() => import('./pages/CaseTamagotchi.jsx'));
-const CaseMarksCity = lazy(() => import('./pages/CaseMarksCity.jsx'));
-const PageNotFound = lazy(() => import('./components/PageNotFound/PageNotFound.jsx'));
-
 export default function App() {
-  const location = useLocation();
+  const headerRef = useRef(null);
   const wrapperRef = useRef(null);
   const introRef = useRef(null);
   const projectsTileRef = useRef(null);
-  const headerRef = useRef(null);
+  const location = useLocation();
 
   const [isFirstVisit] = useState(() => {
     if (typeof window === 'undefined') return false;
     return !sessionStorage.getItem('hasVisitedHome') && location.pathname === '/';
   });
   const [loadingStage, setLoadingStage] = useState(isFirstVisit ? 'initial' : 'complete');
-  useEffect(() => {
-    if (isFirstVisit) {
-      sessionStorage.setItem('hasVisitedHome', 'true');
-    }
-  }, [isFirstVisit]);
 
-  const connection = navigator.connection || {};
-  const slowNetwork = connection.saveData === true || ['slow-2g', '2g', '3g'].includes(connection.effectiveType);
-  const lowPowerCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4;
-  const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
+  useEffect(() => {
+    if (isFirstVisit) sessionStorage.setItem('hasVisitedHome', 'true');
+  }, [isFirstVisit]);
 
   const smootherRef = useRef(null);
   useEffect(() => {
-    if (loadingStage !== 'complete' || isIOS || slowNetwork || lowPowerCPU) return;
+    if (loadingStage !== 'complete') return;
+    const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
+    if (isIOS) return;
 
-    const createSmooth = () => {
+    const create = () => {
       smootherRef.current = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
@@ -62,20 +59,20 @@ export default function App() {
     };
 
     if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(createSmooth);
+      window.requestIdleCallback(create);
     } else {
-      setTimeout(createSmooth, 0);
+      setTimeout(create, 0);
     }
 
     return () => {
       if (smootherRef.current) {
         smootherRef.current.kill();
         smootherRef.current = null;
-        ScrollTrigger.refresh();
-        document.body.style.overflow = '';
       }
+      ScrollTrigger.refresh();
+      document.body.style.overflow = '';
     };
-  }, [loadingStage, isIOS, slowNetwork, lowPowerCPU]);
+  }, [loadingStage]);
 
   useEffect(() => {
     if (loadingStage === 'complete' && smootherRef.current) {
@@ -90,7 +87,6 @@ export default function App() {
     const root = document.getElementById('smooth-content');
     if (!root) return;
 
-    const rootMargin = slowNetwork ? '100px' : '300px';
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach(({ isIntersecting, target }) => {
@@ -101,13 +97,13 @@ export default function App() {
           obs.unobserve(v);
         });
       },
-      { rootMargin }
+      { rootMargin: '200px' }
     );
 
     root.querySelectorAll('video[data-preload]').forEach((v) => observer.observe(v));
 
     return () => observer.disconnect();
-  }, [slowNetwork]);
+  }, []);
 
   const handleStageChange = (stage) => {
     setLoadingStage(stage);
@@ -119,20 +115,16 @@ export default function App() {
 
   return (
     <div id="smooth-wrapper" ref={wrapperRef}>
-      <Suspense fallback={null}>
-        <Header
-          ref={headerRef}
-          loadingStage={loadingStage}
-          onBalloonsToCenterComplete={handleBalloonsToCenterComplete}
-          onMaxBalloonSize={handleMaxBalloonSize}
-          onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
-        />
-      </Suspense>
+      <Header
+        ref={headerRef}
+        loadingStage={loadingStage}
+        onBalloonsToCenterComplete={handleBalloonsToCenterComplete}
+        onMaxBalloonSize={handleMaxBalloonSize}
+        onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
+      />
 
       {isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' && (
-        <Suspense fallback={null}>
-          <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
-        </Suspense>
+        <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
       )}
 
       <div
@@ -143,27 +135,24 @@ export default function App() {
           transition: 'opacity 0.3s ease',
         }}
       >
-        <Suspense fallback={<div></div>}>
-          <Routes>
-            <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
-            <Route path="/portfolio" element={<GalleryTabs />} />
-            <Route path="/contact" element={<Contacts />} />
-            <Route path="/form" element={<FormBrief />} />
-            <Route path="/information" element={<PrivacyPolicy />} />
-            <Route path="/portfolio/markstour" element={<CaseMarksTour />} />
-            <Route path="/portfolio/markssite" element={<CaseMarkssite />} />
-            <Route path="/portfolio/markssite-hr" element={<CaseMarkssiteHR />} />
-            <Route path="/portfolio/canon-change" element={<CaseCanonChange />} />
-            <Route path="/portfolio/tamagotchi" element={<CaseTamagotchi />} />
-            <Route path="/portfolio/markscity" element={<CaseMarksCity />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          <Footer />
-        </Suspense>
+        <Routes>
+          <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
+          <Route path="/portfolio" element={<GalleryTabs />} />
+          <Route path="/contact" element={<Contacts />} />
+          <Route path="/form" element={<FormBrief />} />
+          <Route path="/information" element={<PrivacyPolicy />} />
+          <Route path="/portfolio/markstour" element={<CaseMarksTour />} />
+          <Route path="/portfolio/markssite" element={<CaseMarkssite />} />
+          <Route path="/portfolio/markssite-hr" element={<CaseMarkssiteHR />} />
+          <Route path="/portfolio/canon-change" element={<CaseCanonChange />} />
+          <Route path="/portfolio/tamagotchi" element={<CaseTamagotchi />} />
+          <Route path="/portfolio/markscity" element={<CaseMarksCity />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        <Footer />
       </div>
-      <Suspense fallback={null}>
-        <CookieAgreement loadingStage={loadingStage} />
-      </Suspense>
+
+      <CookieAgreement loadingStage={loadingStage} />
     </div>
   );
 }
