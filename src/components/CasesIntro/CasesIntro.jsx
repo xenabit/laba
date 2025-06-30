@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function CasesIntro({ contentCasesIntro }) {
   const { title, subtitle, tags, src, picture_intro, about } = contentCasesIntro;
   return (
-    <section className={`${styles.CasesIntro}`}>
+    <section className={styles.CasesIntro}>
       <div className={styles.CasesIntro__header}>
         <Link to="/portfolio" className={styles.CasesIntro__return}>
           Смотреть все кейсы
@@ -15,32 +15,34 @@ function CasesIntro({ contentCasesIntro }) {
             <div className={styles.CasesIntro__subtitle} dangerouslySetInnerHTML={{ __html: subtitle }}></div>
           </div>
           <ul className={styles.CasesIntro__tags}>
-            {tags.map((tag, index) => {
-              return <li key={index} dangerouslySetInnerHTML={{ __html: tag }}></li>;
-            })}
+            {tags.map((tag, index) => (
+              <li key={index} dangerouslySetInnerHTML={{ __html: tag }}></li>
+            ))}
           </ul>
         </div>
       </div>
       <div className={styles.CasesIntro__body}>
         <div className={styles.CasesIntro__picture}>
-          <img src={picture_intro} loading="lazy"></img>
+          <picture>
+            <source type="image/avif" srcSet={picture_intro.avif} />
+            <source type="image/webp" srcSet={picture_intro.webp} />
+            <img src={picture_intro.img} loading="lazy" />
+          </picture>
         </div>
         {src?.url && (
-          <a href={src.url} className={styles.CasesIntro__button}>
+          <a target="_blank" rel="noopener noreferrer" href={src.url} className={styles.CasesIntro__button}>
             {src.title || 'Перейти на сайт'}
           </a>
         )}
       </div>
       <div className={styles.CasesIntro__footer}>
         <div className={styles.CasesIntro__cols}>
-          {about.map((item, index) => {
-            return (
-              <div key={index} className={styles.CasesIntro__col}>
-                <div className={styles.CasesIntro__topic} dangerouslySetInnerHTML={{ __html: item.topic }}></div>
-                <div className={styles.CasesIntro__desc} dangerouslySetInnerHTML={{ __html: item.desc }}></div>
-              </div>
-            );
-          })}
+          {about.map((item, index) => (
+            <div key={index} className={styles.CasesIntro__col}>
+              <div className={styles.CasesIntro__topic} dangerouslySetInnerHTML={{ __html: item.topic }}></div>
+              <div className={styles.CasesIntro__desc} dangerouslySetInnerHTML={{ __html: item.desc }}></div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

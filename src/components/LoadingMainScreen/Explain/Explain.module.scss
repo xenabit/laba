@@ -1,0 +1,32 @@
+.Explain {
+  font-family: var(--font-sec);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: clamp(rem(8), 1vw, rem(16));
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  div:first-child {
+    font-size: clamp(rem(16), 1vw, rem(32));
+    display: inline-block;
+    color: #27292f;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  div:last-child {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxOSAxMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAuODY5MTQxIDAuNjMxNTkyTDkuNTAwNzYgOS4yNjMyMUwxOC4xMzI0IDAuNjMxNTkyIiBzdHJva2U9IiMyNzI5MkYiIHN0cm9rZS13aWR0aD0iMS4xIi8+Cjwvc3ZnPgo=');
+  }
+
+  @media all and (min-width: $bp) {
+    top: 80%;
+  }
+}

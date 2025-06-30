@@ -68,7 +68,11 @@ function CasesSliderScroll({ items }) {
           {items.pictures?.map((item) => (
             <SwiperSlide className={styles.CasesSliderScroll__slide} key={item.id}>
               <div className={styles.CasesSliderScroll__inner}>
-                <img loading="lazy" src={item.picture} alt={item.title} />
+                <picture>
+                  <source type="image/avif" srcSet={item.picture.avif} />
+                  <source type="image/webp" srcSet={item.picture.webp} />
+                  <img src={item.picture.img} loading="lazy" />
+                </picture>
               </div>
             </SwiperSlide>
           ))}

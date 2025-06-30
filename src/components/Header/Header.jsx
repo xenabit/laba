@@ -231,7 +231,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         scale: 1,
         ease: 'linear',
         overwrite: 'all',
-        onStart: () => console.log('Starting balloon fade-out animation'),
       });
     }
 
@@ -312,7 +311,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
         ease: 'sine.out',
         delay: 0.2,
         overwrite: false,
-        onStart: () => console.log('Scrolling animation started'),
         onComplete: () => {
           const headerContainer = header.querySelector(`.${styles.Header__container}`);
           if (headerContainer) {
@@ -483,7 +481,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
                 <img src={headerMenuImg} />
               </picture>
             </div>
-             <NavLinks activeTab={activeTab} onTabClick={handleTabClick}/>
+            <NavLinks activeTab={activeTab} onTabClick={handleTabClick} />
             <ul className={styles.Header__links}>
               <li>
                 <a href={presentationPdf} target="_blank" rel="noopener noreferrer">

@@ -12,15 +12,28 @@ import CasesItems from '../components/CasesItems/CasesItems';
 
 import softwarLogos from '../constants/softwarLogos';
 
-import case_intro_picture from '../assets/images/case-intro-canon-change.jpg';
+// Импорты изображений для CasesIntro
+import case_intro_picture_jpg from '../assets/images/case-intro-canon-change.jpg';
+import case_intro_picture_webp from '../assets/images/case-intro-canon-change.webp';
+import case_intro_picture_avif from '../assets/images/case-intro-canon-change.avif';
 
+// Импорты изображений для CaseIframe
+import case_iframe_preview_image_jpg from '../assets/images/case-iframe-canon.jpg';
+import case_iframe_preview_image_webp from '../assets/images/case-iframe-canon.webp';
+import case_iframe_preview_image_avif from '../assets/images/case-iframe-canon.avif';
+
+// Импорты изображений для ReviewsSlider
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
-import reviews_slider_author_2 from '../assets/images/reviews-slider-2.jpg';
+import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-2.jpg';
+import reviews_slider_author_2_webp from '../assets/images/reviews-slider-2.webp';
+import reviews_slider_author_2_avif from '../assets/images/reviews-slider-2.avif';
 
+// Импорты фоновых изображений
 import case_slider_bg from '../assets/images/case-slider-bg-canon-change-1.svg';
 import case_slider_full_bg from '../assets/images/case-slider-full-bg-canon-change-1.svg';
 import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-mg-1.svg';
 
+// Импорты видео для CasesSliderVideo
 import case_slider_video_left_1 from '../assets/videos/cases-slider-video-canon-change-left-1.mp4';
 import case_slider_video_right_1 from '../assets/videos/cases-slider-video-canon-change-right-1.mp4';
 import case_slider_video_left_2 from '../assets/videos/cases-slider-video-canon-change-left-2.mp4';
@@ -28,31 +41,62 @@ import case_slider_video_right_2 from '../assets/videos/cases-slider-video-canon
 import case_slider_video_left_3 from '../assets/videos/cases-slider-video-canon-change-left-3.mp4';
 import case_slider_video_right_3 from '../assets/videos/cases-slider-video-canon-change-right-3.mp4';
 
-import case_slider_full_picture_1 from '../assets/images/cases-slider-full-1.jpg';
-import case_slider_full_picture_2 from '../assets/images/cases-slider-full-2.jpg';
-import case_slider_full_picture_3 from '../assets/images/cases-slider-full-3.jpg';
-import case_slider_full_picture_4 from '../assets/images/cases-slider-full-4.jpg';
-import case_slider_full_picture_5 from '../assets/images/cases-slider-full-5.jpg';
+// Импорты изображений для CasesSliderFull (первый набор)
+import case_slider_full_picture_1_jpg from '../assets/images/cases-slider-full-1.jpg';
+import case_slider_full_picture_1_webp from '../assets/images/cases-slider-full-1.webp';
+import case_slider_full_picture_1_avif from '../assets/images/cases-slider-full-1.avif';
+import case_slider_full_picture_2_jpg from '../assets/images/cases-slider-full-2.jpg';
+import case_slider_full_picture_2_webp from '../assets/images/cases-slider-full-2.webp';
+import case_slider_full_picture_2_avif from '../assets/images/cases-slider-full-2.avif';
+import case_slider_full_picture_3_jpg from '../assets/images/cases-slider-full-3.jpg';
+import case_slider_full_picture_3_webp from '../assets/images/cases-slider-full-3.webp';
+import case_slider_full_picture_3_avif from '../assets/images/cases-slider-full-3.avif';
+import case_slider_full_picture_4_jpg from '../assets/images/cases-slider-full-4.jpg';
+import case_slider_full_picture_4_webp from '../assets/images/cases-slider-full-4.webp';
+import case_slider_full_picture_4_avif from '../assets/images/cases-slider-full-4.avif';
+import case_slider_full_picture_5_jpg from '../assets/images/cases-slider-full-5.jpg';
+import case_slider_full_picture_5_webp from '../assets/images/cases-slider-full-5.webp';
+import case_slider_full_picture_5_avif from '../assets/images/cases-slider-full-5.avif';
 
-import case_slider_full_picture_1_2 from '../assets/images/cases-slider-full-1-2.png';
-import case_slider_full_picture_2_2 from '../assets/images/cases-slider-full-2-2.png';
-import case_slider_full_picture_3_2 from '../assets/images/cases-slider-full-3-2.png';
-import case_slider_full_picture_4_2 from '../assets/images/cases-slider-full-4-2.png';
+// Импорты изображений для CasesSliderFull (второй набор)
+import case_slider_full_picture_1_2_png from '../assets/images/cases-slider-full-1-2.png';
+import case_slider_full_picture_1_2_webp from '../assets/images/cases-slider-full-1-2.webp';
+import case_slider_full_picture_1_2_avif from '../assets/images/cases-slider-full-1-2.avif';
+import case_slider_full_picture_2_2_png from '../assets/images/cases-slider-full-2-2.png';
+import case_slider_full_picture_2_2_webp from '../assets/images/cases-slider-full-2-2.webp';
+import case_slider_full_picture_2_2_avif from '../assets/images/cases-slider-full-2-2.avif';
+import case_slider_full_picture_3_2_png from '../assets/images/cases-slider-full-3-2.png';
+import case_slider_full_picture_3_2_webp from '../assets/images/cases-slider-full-3-2.webp';
+import case_slider_full_picture_3_2_avif from '../assets/images/cases-slider-full-3-2.avif';
+import case_slider_full_picture_4_2_png from '../assets/images/cases-slider-full-4-2.png';
+import case_slider_full_picture_4_2_webp from '../assets/images/cases-slider-full-4-2.webp';
+import case_slider_full_picture_4_2_avif from '../assets/images/cases-slider-full-4-2.avif';
 
-import case_slider_scroll_picture_1_2 from '../assets/images/case-slider-scroll-1.png';
-import case_slider_scroll_picture_2_2 from '../assets/images/case-slider-scroll-2.png';
-import case_slider_scroll_picture_3_2 from '../assets/images/case-slider-scroll-3.png';
-
-import case_iframe_preview_image from '../assets/images/case-iframe-canon.jpg';
+// Импорты изображений для CasesSliderScroll
+import case_slider_scroll_picture_1_2_png from '../assets/images/case-slider-scroll-1.png';
+import case_slider_scroll_picture_1_2_webp from '../assets/images/case-slider-scroll-1.webp';
+import case_slider_scroll_picture_1_2_avif from '../assets/images/case-slider-scroll-1.avif';
+import case_slider_scroll_picture_2_2_png from '../assets/images/case-slider-scroll-2.png';
+import case_slider_scroll_picture_2_2_webp from '../assets/images/case-slider-scroll-2.webp';
+import case_slider_scroll_picture_2_2_avif from '../assets/images/case-slider-scroll-2.avif';
+import case_slider_scroll_picture_3_2_png from '../assets/images/case-slider-scroll-3.png';
+import case_slider_scroll_picture_3_2_webp from '../assets/images/case-slider-scroll-3.webp';
+import case_slider_scroll_picture_3_2_avif from '../assets/images/case-slider-scroll-3.avif';
 
 const contentCasesIntro = {
   title: 'Канон перемен',
   subtitle: 'Приложение с игровой механикой',
+
   src: {
-    // title: 'Перейти на сайт',
+    url: 'https://www.rustore.ru/catalog/app/ru.laba.iching',
+    title: 'Скачать из RuStore',
   },
   tags: ['Android, IOS', 'Unreal Engine', 'UX/UI'],
-  picture_intro: case_intro_picture,
+  picture_intro: {
+    img: case_intro_picture_jpg,
+    webp: case_intro_picture_webp,
+    avif: case_intro_picture_avif,
+  },
   about: [
     {
       topic: 'Клиент',
@@ -92,11 +136,11 @@ const contentText = [
   },
   {
     title: 'Разработка',
-    text: 'О кроссплатворме анриле и тд.',
+    text: 'О кроссплатформе анриле и тд.',
   },
   {
     title: 'Результаты',
-    text: 'Функционал монетизации: приложение имеет возможность локального сохранения гексаграмм на устройство пользователя, результат сопровождается описанием/комментарием пользователя с визуальными маркерами и возможностью удаления, редактирования. Возможность «поделится» результата  доступна пользователю в любом сценарии ведущем к результату  — «гексаграмме».',
+    text: 'Функционал монетизации: приложение имеет возможность локального сохранения гексаграмм на устройство пользователя, результат сопровождается описанием/комментарием пользователя с визуальными маркерами и возможностью удаления, редактирования. Возможность «поделится» результата доступна пользователю в любом сценарии ведущем к результату — «гексаграмме».',
   },
 ];
 
@@ -123,6 +167,12 @@ const cases_slider_video_content = {
   ],
 };
 
+const caseIframePreview = {
+  img: case_iframe_preview_image_jpg,
+  webp: case_iframe_preview_image_webp,
+  avif: case_iframe_preview_image_avif,
+};
+
 const case_slider_full_content_1 = {
   sizes: {
     width: '100%',
@@ -133,49 +183,79 @@ const case_slider_full_content_1 = {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '1_1',
-      picture: case_slider_full_picture_1,
+      picture: {
+        img: case_slider_full_picture_1_jpg,
+        webp: case_slider_full_picture_1_webp,
+        avif: case_slider_full_picture_1_avif,
+      },
     },
     {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '1_2',
-      picture: case_slider_full_picture_2,
+      picture: {
+        img: case_slider_full_picture_2_jpg,
+        webp: case_slider_full_picture_2_webp,
+        avif: case_slider_full_picture_2_avif,
+      },
     },
     {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '1_3',
-      picture: case_slider_full_picture_3,
+      picture: {
+        img: case_slider_full_picture_3_jpg,
+        webp: case_slider_full_picture_3_webp,
+        avif: case_slider_full_picture_3_avif,
+      },
     },
     {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '1_4',
-      picture: case_slider_full_picture_4,
+      picture: {
+        img: case_slider_full_picture_4_jpg,
+        webp: case_slider_full_picture_4_webp,
+        avif: case_slider_full_picture_4_avif,
+      },
     },
     {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '1_5',
-      picture: case_slider_full_picture_5,
+      picture: {
+        img: case_slider_full_picture_5_jpg,
+        webp: case_slider_full_picture_5_webp,
+        avif: case_slider_full_picture_5_avif,
+      },
     },
     {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '1_6',
-      picture: case_slider_full_picture_1,
+      picture: {
+        img: case_slider_full_picture_1_jpg,
+        webp: case_slider_full_picture_1_webp,
+        avif: case_slider_full_picture_1_avif,
+      },
     },
   ],
 };
@@ -186,33 +266,53 @@ const case_slider_full_content_2 = {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '2_1',
-      picture: case_slider_full_picture_1_2,
+      picture: {
+        img: case_slider_full_picture_1_2_png,
+        webp: case_slider_full_picture_1_2_webp,
+        avif: case_slider_full_picture_1_2_avif,
+      },
     },
     {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '2_2',
-      picture: case_slider_full_picture_2_2,
+      picture: {
+        img: case_slider_full_picture_2_2_png,
+        webp: case_slider_full_picture_2_2_webp,
+        avif: case_slider_full_picture_2_2_avif,
+      },
     },
     {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '2_3',
-      picture: case_slider_full_picture_3_2,
+      picture: {
+        img: case_slider_full_picture_3_2_png,
+        webp: case_slider_full_picture_3_2_webp,
+        avif: case_slider_full_picture_3_2_avif,
+      },
     },
     {
       sizes: {
         width: '100%',
         height: 'auto',
+        objectFit: 'cover',
       },
       id: '2_4',
-      picture: case_slider_full_picture_4_2,
+      picture: {
+        img: case_slider_full_picture_4_2_png,
+        webp: case_slider_full_picture_4_2_webp,
+        avif: case_slider_full_picture_4_2_avif,
+      },
     },
   ],
 };
@@ -222,15 +322,27 @@ const case_slider_scroll_content = {
   pictures: [
     {
       id: '1',
-      picture: case_slider_scroll_picture_1_2,
+      picture: {
+        img: case_slider_scroll_picture_1_2_png,
+        webp: case_slider_scroll_picture_1_2_webp,
+        avif: case_slider_scroll_picture_1_2_avif,
+      },
     },
     {
       id: '2',
-      picture: case_slider_scroll_picture_2_2,
+      picture: {
+        img: case_slider_scroll_picture_2_2_png,
+        webp: case_slider_scroll_picture_2_2_webp,
+        avif: case_slider_scroll_picture_2_2_avif,
+      },
     },
     {
       id: '3',
-      picture: case_slider_scroll_picture_3_2,
+      picture: {
+        img: case_slider_scroll_picture_3_2_png,
+        webp: case_slider_scroll_picture_3_2_webp,
+        avif: case_slider_scroll_picture_3_2_avif,
+      },
     },
   ],
 };
@@ -241,11 +353,11 @@ const contentReviews = [
     text: 'Создать MGSite 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
     name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
     picture: [
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-      { logo: reviews_slider_author_1, title: 'Манагер' },
-      { logo: reviews_slider_author_2, title: 'Клиент' },
-      { logo: reviews_slider_author_1, title: 'Манагер' },
+      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
+      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Клиент' },
+      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
+      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Клиент' },
+      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
     ],
   },
   {
@@ -253,8 +365,8 @@ const contentReviews = [
     text: 'Создать MGSite  3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
     name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
     picture: [
-      { logo: reviews_slider_author_1, title: 'Ололо' },
-      { logo: reviews_slider_author_2, title: 'Алала' },
+      { logo: { img: reviews_slider_author_1 }, title: 'Ололо' },
+      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Алала' },
     ],
   },
   {
@@ -262,8 +374,8 @@ const contentReviews = [
     text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
     name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
     picture: [
-      { logo: reviews_slider_author_1, title: 'Тырым пырым' },
-      { logo: reviews_slider_author_2, title: 'Пхпхппх' },
+      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
+      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
     ],
   },
   {
@@ -271,8 +383,8 @@ const contentReviews = [
     text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
     name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
     picture: [
-      { logo: reviews_slider_author_1, title: 'Тырым пырым' },
-      { logo: reviews_slider_author_2, title: 'Пхпхппх' },
+      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
+      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
     ],
   },
   {
@@ -280,8 +392,8 @@ const contentReviews = [
     text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
     name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
     picture: [
-      { logo: reviews_slider_author_1, title: 'Тырым пырым' },
-      { logo: reviews_slider_author_2, title: 'Пхпхппх' },
+      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
+      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
     ],
   },
 ];
@@ -297,10 +409,11 @@ export default function CaseMarkssite() {
       <CaseIframe
         iframeProps={{
           src: 'https://embed.figma.com/board/9TbTy2tieMNVOZgKzqwa9q/%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE.-%D0%A1%D0%B0%D0%B9%D1%82-LABA.?node-id=0-1&embed-host=share',
+          sandbox: 'allow-same-origin allow-scripts',
           allowFullScreen: true,
         }}
-        previewSrc={case_iframe_preview_image}
-        mobilePreviewSrc={case_iframe_preview_image}
+        previewSrc={caseIframePreview}
+        mobilePreviewSrc={caseIframePreview}
       />
       <Text title={contentText[2].title} text={contentText[2].text} />
       <CasesSliderFull items={case_slider_full_content_1} />

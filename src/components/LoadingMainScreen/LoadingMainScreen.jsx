@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import BackgroundLetters from './BackgroundLetters/BackgroundLetters';
 import Balloons from './Balloons/Balloons';
 import FlareComponent from './FlareComponent/FlareComponent';
+import Explain from './Explain/Explain';
 import { gsap } from 'gsap';
 import styles from './LoadingMainScreen.module.scss';
 
@@ -166,6 +167,7 @@ function LoadingMainScreen({ headerRef, onStageChange, wrapperRef, loadingStage,
           <>
             <BackgroundLetters containerRef={containerRef} />
             <FlareComponent />
+            <Explain loadingStage={loadingStage} />
           </>
         )}
       </div>

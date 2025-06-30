@@ -16,7 +16,7 @@ function Footer() {
 
           <div className={styles.Footer__contact}>
             Адрес:
-            <a href="https://yandex.ru/profile/1116551737" target="_black">
+            <a href="https://yandex.ru/maps/-/CHcqeR7U" target="_black">
               125124, город Москва, ул 3-я Ямского Поля, д.&nbsp;2 к.&nbsp;13
             </a>
           </div>

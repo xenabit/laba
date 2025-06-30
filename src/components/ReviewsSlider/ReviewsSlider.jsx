@@ -68,7 +68,11 @@ function ReviewsSlider({ items }) {
                   <div className="ReviewsSlider__pictures">
                     {item.picture.map((pic, picIndex) => (
                       <div className="ReviewsSlider__picture" key={picIndex}>
-                        <img src={pic.logo} alt={pic.title} loading="lazy" />
+                        <picture>
+                          <source type="image/avif" srcSet={pic.logo.avif} />
+                          <source type="image/webp" srcSet={pic.logo.webp} />
+                          <img src={pic.logo.img} loading="lazy" />
+                        </picture>
                       </div>
                     ))}
                   </div>

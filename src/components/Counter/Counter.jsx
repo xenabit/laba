@@ -4,26 +4,24 @@ import { useInView } from 'react-intersection-observer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import PropTypes from 'prop-types';
-import img from '../../assets/images/counter-img.jpg';
+import counterImgJpg from '../../assets/images/counter-img.jpg';
+import counterImgWebp from '../../assets/images/counter-img.webp';
+import counterImgAvif from '../../assets/images/counter-img.avif';
 import styles from './Counter.module.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ITEMS = [
-  { n: 130, text: 'Создано рилсов и видео роликов' },
-  {
-    n: 85,
-    text:
-      'Серверов в собственном дата-центре<br>для просчета компьютерной графики',
-  },
-  { n: 1000, text: '3д моделей' },
-  { n: 7, text: 'Лет на рынке 3D графики' },
+  { n: 10, text: 'Направлений разработки' },
+  { n: 30, text: 'Завершённых проектов' },
+  { n: 4000, text: 'Часов командной работы' },
+  { n: 20, text: 'Специалистов с реальным опытом разработки' },
 ];
 
 const Number = memo(function Number({ n }) {
   const { ref, inView } = useInView({
     threshold: 0.1,
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   const getStep = useCallback((num) => {
@@ -44,10 +42,7 @@ const Number = memo(function Number({ n }) {
   });
 
   return (
-    <animated.div
-      ref={ref}
-      style={{ display: 'flex', alignItems: 'baseline', opacity }}
-    >
+    <animated.div ref={ref} style={{ display: 'flex', alignItems: 'baseline', opacity }}>
       <animated.span style={{ marginRight: 4, opacity }}>+</animated.span>
       <animated.div style={{ opacity }}>
         {number.to((val) => {
@@ -58,13 +53,20 @@ const Number = memo(function Number({ n }) {
     </animated.div>
   );
 });
-Number.propTypes = {
-  n: PropTypes.number.isRequired,
-};
+Number.propTypes = { n: PropTypes.number.isRequired };
 
 export default function Counter({ loadingStage }) {
   const sectionRef = useRef(null);
   const imageRef = useRef(null);
+
+  useEffect(() => {
+    const jpg = new Image();
+    jpg.src = counterImgJpg;
+    const webp = new Image();
+    webp.src = counterImgWebp;
+    const avif = new Image();
+    avif.src = counterImgAvif;
+  }, []);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   useEffect(() => {
@@ -75,7 +77,6 @@ export default function Counter({ loadingStage }) {
 
   useEffect(() => {
     if (isMobile || loadingStage !== 'complete') return;
-
     const ctx = gsap.context(() => {
       gsap.to(imageRef.current, {
         y: 150,
@@ -89,7 +90,6 @@ export default function Counter({ loadingStage }) {
         },
       });
     }, sectionRef);
-
     return () => ctx.revert();
   }, [isMobile, loadingStage]);
 
@@ -97,24 +97,18 @@ export default function Counter({ loadingStage }) {
     <section className={styles.Counter} ref={sectionRef}>
       <div className={styles.Counter__items}>
         {ITEMS.map(({ n, text }, idx) => (
-          <div
-            key={idx}
-            className={`${styles.Counter__item} ${
-              isMobile ? styles.active : ''
-            }`}
-          >
+          <div key={idx} className={`${styles.Counter__item} ${isMobile ? styles.active : ''}`}>
             <Number n={n} />
             <p dangerouslySetInnerHTML={{ __html: text }} />
           </div>
         ))}
       </div>
       <div className={styles.Counter__picture}>
-        <img
-          ref={imageRef}
-          src={img}
-          alt="Counter background"
-          loading="lazy"
-        />
+        <picture>
+          <source type="image/avif" srcSet={counterImgAvif} />
+          <source type="image/webp" srcSet={counterImgWebp} />
+          <img ref={imageRef} src={counterImgJpg} alt="Counter background" loading="eager" decoding="async" fetchpriority="high" className={styles.Counter__img} />
+        </picture>
       </div>
     </section>
   );

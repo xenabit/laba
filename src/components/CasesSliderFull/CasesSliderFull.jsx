@@ -41,46 +41,38 @@ function CasesSliderFull({ items }) {
             pauseOnMouseEnter: true,
           }}
           breakpoints={{
-            320: {
-              spaceBetween: 32,
-              slidesPerView: 1,
-              loop: true,
-            },
-            1024: {
-              spaceBetween: 32,
-              slidesPerView: 1,
-              loop: true,
-            },
-            1920: {
-              spaceBetween: 40,
-              slidesPerView: 1,
-              loop: true,
-            },
-            2560: {
-              spaceBetween: 52,
-              slidesPerView: 1,
-              loop: true,
-            },
+            320: { spaceBetween: 32, slidesPerView: 1, loop: true },
+            1024: { spaceBetween: 32, slidesPerView: 1, loop: true },
+            1920: { spaceBetween: 40, slidesPerView: 1, loop: true },
+            2560: { spaceBetween: 52, slidesPerView: 1, loop: true },
           }}
           role="region"
           aria-label="Карусель изображений"
         >
-          {items.pictures?.map((item) => (
-            <SwiperSlide className={styles.CasesSliderFull__slide} key={item.id}>
-              <div className={styles.CasesSliderFull__inner}>
-                <img
-                  loading="lazy"
-                  src={item.picture}
-                  alt={item.title}
-                  style={{
-                    width: item.sizes?.width || items.sizes.width,
-                    height: item.sizes?.height || 'auto',
-                    objectFit: item.sizes?.objectfit || 'contain',
-                  }}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
+          {items.pictures?.map((item) => {
+            if (!item.picture) {
+              return null;
+            }
+            return (
+              <SwiperSlide className={styles.CasesSliderFull__slide} key={item.id}>
+                <div className={styles.CasesSliderFull__inner}>
+                  <picture>
+                    <source type="image/avif" srcSet={item.picture.avif || ''} />
+                    <source type="image/webp" srcSet={item.picture.webp || ''} />
+                    <img
+                      src={item.picture.img || ''}
+                      loading="lazy"
+                      style={{
+                        width: item.sizes?.width || items.sizes.width,
+                        height: item.sizes?.height || 'auto',
+                        objectFit: item.sizes?.objectFit || 'contain',
+                      }}
+                    />
+                  </picture>
+                </div>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
         <div ref={paginationRef} className={styles.CasesSliderFull__pagination}></div>
       </div>
