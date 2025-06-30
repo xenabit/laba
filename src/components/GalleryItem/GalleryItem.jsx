@@ -13,8 +13,8 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
             video.mp4 && <source src={video.mp4} type="video/mp4" />
           ) : (
             <>
-              {video.mp4 && <source src={video.mp4} type="video/mp4" />}
               {video.webm && <source src={video.webm} type="video/webm" />}
+              {video.mp4 && <source src={video.mp4} type="video/mp4" />}
             </>
           )}
         </video>
