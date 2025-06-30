@@ -137,7 +137,7 @@ export default function App() {
       >
         <Routes>
           <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
-          <Route path="/portfolio" element={<GalleryTabs />} />
+           <Route path="/portfolio" element={<GalleryTabs loadingStage={loadingStage} />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />
           <Route path="/information" element={<PrivacyPolicy />} />
