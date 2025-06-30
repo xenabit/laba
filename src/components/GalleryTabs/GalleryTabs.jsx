@@ -89,8 +89,8 @@ export default function GalleryTabs() {
         item.video.mp4 && <source src={item.video.mp4} type="video/mp4" />
       ) : (
         <>
-          {item.video.mp4 && <source src={item.video.mp4} type="video/mp4" />}
           {item.video.webm && <source src={item.video.webm} type="video/webm" />}
+          {item.video.mp4 && <source src={item.video.mp4} type="video/mp4" />}
         </>
       )}
     </video>
