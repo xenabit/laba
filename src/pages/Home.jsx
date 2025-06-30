@@ -82,7 +82,7 @@ export default function Home({ introRef, projectsTileRef, loadingStage }) {
       <Ticker />
       <Counter loadingStage={loadingStage} />
       <TextEffect />
-      <Gallery />
+      <Gallery loadingStage={loadingStage} />
       <Ticker />
       <AboutList />
       <Partners />

@@ -5,16 +5,13 @@ import styles from './GalleryTabs.module.scss';
 import itemStyles from '../GalleryItem/GalleryItem.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { projects, projectsTypes } from '../../constants/projects';
-import useVideoPreload from '../../constants/useVideoPreload.js';
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024;
 
-export default function GalleryTabs() {
+export default function GalleryTabs({ loadingStage }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialFilter = searchParams.get('filter') || 'all';
-  const [activeFilter, setActiveFilter] = useState(initialFilter);
-
-  useVideoPreload();
+  const initial = searchParams.get('filter') || 'all';
+  const [activeFilter, setActiveFilter] = useState(initial);
 
   const [loadedIds, setLoadedIds] = useState(() => {
     try {
@@ -23,7 +20,6 @@ export default function GalleryTabs() {
       return new Set();
     }
   });
-
   const markLoaded = useCallback((id) => {
     setLoadedIds((prev) => {
       if (prev.has(id)) return prev;
@@ -37,7 +33,6 @@ export default function GalleryTabs() {
     const f = searchParams.get('filter') || 'all';
     if (f !== activeFilter) setActiveFilter(f);
   }, [searchParams, activeFilter]);
-
   const handleFilterChange = useCallback(
     (type) => {
       setActiveFilter(type);
@@ -46,58 +41,12 @@ export default function GalleryTabs() {
     [setSearchParams]
   );
 
-  const handleMouseMove = useCallback((e) => {
-    const { left, top } = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty('--x4', `${e.clientX - left}px`);
-    e.currentTarget.style.setProperty('--y4', `${e.clientY - top}px`);
-  }, []);
+  const handleMouseEnter = useCallback((v) => v.play().catch(() => {}), []);
+  const handleMouseLeave = useCallback((v) => v.pause(), []);
 
-  const handleMouseEnter = useCallback((video) => {
-    video.play().catch(() => {});
-  }, []);
-
-  const handleMouseLeave = useCallback((video) => {
-    video.pause();
-  }, []);
-
-  const onVideoLoaded = useCallback(
-    (id) => {
-      markLoaded(id);
-    },
-    [markLoaded]
-  );
-
-  const preloads = projects.map((item) => (
-    <video
-      key={`preload-${item.id}`}
-      preload="none"
-      muted
-      data-preload
-      onLoadedData={() => onVideoLoaded(item.id)}
-      style={{
-        position: 'absolute',
-        width: 0,
-        height: 0,
-        overflow: 'hidden',
-        opacity: 0,
-      }}
-      playsInline
-      webkit-playsinline="true"
-      poster={item.video.poster}
-    >
-      {isMobile ? (
-        item.video.mp4 && <source src={item.video.mp4} type="video/mp4" />
-      ) : (
-        <>
-          {item.video.webm && <source src={item.video.webm} type="video/webm" />}
-          {item.video.mp4 && <source src={item.video.mp4} type="video/mp4" />}
-        </>
-      )}
-    </video>
-  ));
+  const filtered = useMemo(() => (activeFilter === 'all' ? projects : projects.filter((it) => (Array.isArray(it.type) ? it.type : [it.type]).includes(activeFilter))), [activeFilter]);
 
   const nodeRefs = useRef({});
-
   const transitionClassNames = {
     enter: styles.itemEnter,
     enterActive: styles.itemEnterActive,
@@ -106,26 +55,8 @@ export default function GalleryTabs() {
     exitDone: styles.itemExitDone,
   };
 
-  const filteredItems = useMemo(() => {
-    if (activeFilter === 'all') return projects;
-    return projects.filter((it) => {
-      const types = Array.isArray(it.type) ? it.type : [it.type];
-      return types.includes(activeFilter);
-    });
-  }, [activeFilter]);
-
   return (
     <section className={styles.GalleryTabs}>
-      <div
-        style={{
-          position: 'absolute',
-          width: 0,
-          height: 0,
-          overflow: 'hidden',
-        }}
-      >
-        {preloads}
-      </div>
       <div className={styles.GalleryTabs__header}>
         <h1 className={styles.GalleryTabs__title}>ПОРТФОЛИО</h1>
         <div className={styles.GalleryTabs__links}>
@@ -138,50 +69,68 @@ export default function GalleryTabs() {
         <ul>
           {projectsTypes.map((el) => (
             <li key={el.id}>
-              <button onMouseMove={handleMouseMove} onClick={() => handleFilterChange(el.type)} className={`${styles.filterBtn} ${activeFilter === el.type ? styles.active : ''}`}>
+              <button
+                onMouseMove={(e) => {
+                  const { left, top } = e.currentTarget.getBoundingClientRect();
+                  e.currentTarget.style.setProperty('--x4', `${e.clientX - left}px`);
+                  e.currentTarget.style.setProperty('--y4', `${e.clientY - top}px`);
+                }}
+                onClick={() => handleFilterChange(el.type)}
+                className={`${styles.filterBtn} ${activeFilter === el.type ? styles.active : ''}`}
+              >
                 <span>{el.title}</span>
               </button>
             </li>
           ))}
         </ul>
       </nav>
-      <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
-        {filteredItems.map((item, index) => {
-          const id = item.id;
-          if (!nodeRefs.current[id]) {
-            nodeRefs.current[id] = createRef();
-          }
-          const nodeRef = nodeRefs.current[id];
-          const baseVideoProps = {
-            autoPlay: true,
-            muted: true,
-            loop: true,
-            preload: 'none',
-            'data-preload': true,
-            playsInline: true,
-            webkitplaysinline: 'true',
-            poster: item.video.poster,
-            onLoadedData: () => onVideoLoaded(id),
-          };
-          const videoProps =
-            index % 2 === 1
-              ? baseVideoProps
-              : {
-                  ...baseVideoProps,
-                  onLoadedMetadata: (e) => e.currentTarget.pause(),
-                  onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
-                  onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
-                };
-          return (
-            <CSSTransition key={id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames} unmountOnExit={false} mountOnEnter={false}>
-              <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
-                {!loadedIds.has(id) && <div className={styles.GalleryTabs__skeletonVideo} />}
-                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
-              </li>
-            </CSSTransition>
-          );
-        })}
-      </TransitionGroup>
+
+      {loadingStage !== 'complete' ? (
+        <ul className={styles.GalleryTabs__items}>
+          {filtered.map((_, i) => (
+            <li className={itemStyles.GalleryItem__item} key={i}>
+              <div className={styles.GalleryTabs__skeletonVideo} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
+          {filtered.map((item, idx) => {
+            const id = item.id;
+            if (!nodeRefs.current[id]) nodeRefs.current[id] = createRef();
+            const nodeRef = nodeRefs.current[id];
+
+            const baseProps = {
+              autoPlay: true,
+              muted: true,
+              loop: true,
+              preload: 'metadata',
+              playsInline: true,
+              webkitplaysinline: 'true',
+              poster: item.video.poster,
+              onLoadedData: () => markLoaded(id),
+            };
+            const videoProps =
+              idx % 2 === 1
+                ? baseProps
+                : {
+                    ...baseProps,
+                    onLoadedMetadata: (e) => e.currentTarget.pause(),
+                    onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
+                    onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
+                  };
+
+            return (
+              <CSSTransition key={id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
+                <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
+                  {!loadedIds.has(id) && <div className={styles.GalleryTabs__skeletonVideo} />}
+                  <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} isMobile={isMobile} />
+                </li>
+              </CSSTransition>
+            );
+          })}
+        </TransitionGroup>
+      )}
     </section>
   );
 }
