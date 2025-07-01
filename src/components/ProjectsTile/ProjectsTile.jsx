@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ProjectsTile.module.scss';
 
@@ -44,6 +44,21 @@ export default function ProjectsTile({ projectsTileRef }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1440);
 
+  useEffect(() => {
+    items.forEach(({ picture }) => {
+      const low = new Image();
+      low.src = picture[0];
+      const hi = new Image();
+      hi.src = picture[1];
+    });
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => setIsDesktop(window.innerWidth > 1440);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   const resetAnimation = () => {
     if (!animationRef.current) return;
     if (window.innerWidth <= 1280) {
@@ -55,13 +70,6 @@ export default function ProjectsTile({ projectsTileRef }) {
       animationRef.current.classList.remove(styles.animate);
     }
   };
-
-  useEffect(() => {
-    const onResize = () => setIsDesktop(window.innerWidth > 1440);
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
   useEffect(() => {
     resetAnimation();
     window.addEventListener('resize', resetAnimation);
@@ -80,63 +88,35 @@ export default function ProjectsTile({ projectsTileRef }) {
       <div className={styles.ProjectsTile__container}>
         <div className={`${styles.ProjectsTile__layer} ${styles.ProjectsTile__layer_bot}`}>
           <div ref={animationRef} className={`${styles.ProjectsTile__items} ${styles.animate}`}>
-            {items.map(({ id, picture }) => (
-              <div
-                key={id}
-                className={styles.ProjectsTile__item}
-                style={{
-                  backgroundImage: `url(${isDesktop ? picture[1] : picture[0]})`,
-                }}
-              >
-                <img
-                  src={isDesktop ? picture[1] : picture[0]}
-                  srcSet={`${picture[0]} 1x, ${picture[1]} 2x`}
-                  loading={id === 1 ? 'eager' : 'lazy'}
-                  alt=""
-                  width="640"
-                  height="400"
-                  style={{
-                    width: 0,
-                    height: 0,
-                    position: 'absolute',
-                    opacity: 0,
-                    pointerEvents: 'none',
-                  }}
-                  aria-hidden="true"
-                />
-              </div>
-            ))}
+            {items.map(({ id, picture, src }) => {
+              const bg = `url(${isDesktop ? picture[1] : picture[0]})`;
+              return (
+                <div key={id} className={styles.ProjectsTile__item} style={{ backgroundImage: bg }}>
+                  <Link to={src} className={styles.ProjectsTile__link}>
+                    <div className={styles.ProjectsTile__text}>
+                      <div className={styles.ProjectsTile__num}>{String(id).padStart(2, '0')}</div>
+                      <div className={styles.ProjectsTile__title} dangerouslySetInnerHTML={{ __html: items[id - 1].title }} />
+                    </div>
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className={`${styles.ProjectsTile__images} ${hoveredIndex !== null ? styles[`active${hoveredIndex + 1}`] : ''}`}>
-          {items.map(({ id, picture }, idx) => (
-            <div
-              key={id}
-              className={styles.ProjectsTile__image}
-              style={{
-                backgroundImage: `url(${isDesktop ? picture[1] : picture[0]})`,
-              }}
-            />
-          ))}
+          {items.map(({ id, picture }, idx) => {
+            const bg = `url(${isDesktop ? picture[1] : picture[0]})`;
+            return <div key={id} className={styles.ProjectsTile__image} style={{ backgroundImage: bg }} />;
+          })}
         </div>
         <div className={`${styles.ProjectsTile__layer} ${styles.ProjectsTile__layer_top}`}>
           <div className={styles.ProjectsTile__items}>
-            {items.map(({ id, src, title }, idx) => (
-              <div
-                key={id}
-                className={styles.ProjectsTile__item}
-                onMouseEnter={() => setHoveredIndex(idx)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
+            {items.map(({ id, src }, idx) => (
+              <div key={id} className={styles.ProjectsTile__item} onMouseEnter={() => setHoveredIndex(idx)} onMouseLeave={() => setHoveredIndex(null)}>
                 <Link to={src} className={styles.ProjectsTile__link}>
                   <div className={styles.ProjectsTile__text}>
-                    <div className={styles.ProjectsTile__num}>
-                      {String(id).padStart(2, '0')}
-                    </div>
-                    <div
-                      className={styles.ProjectsTile__title}
-                      dangerouslySetInnerHTML={{ __html: title }}
-                    />
+                    <div className={styles.ProjectsTile__num}>{String(id).padStart(2, '0')}</div>
+                    <div className={styles.ProjectsTile__title} dangerouslySetInnerHTML={{ __html: items[id - 1].title }} />
                   </div>
                 </Link>
               </div>
