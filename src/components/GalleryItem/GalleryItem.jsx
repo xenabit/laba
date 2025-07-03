@@ -8,7 +8,7 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
   return (
     <div ref={ref} className={styles.GalleryItem__item}>
       <Link to={href}>
-        <video {...videoProps}>
+        <video data-preload {...videoProps}>
           {isMobile ? (
             video.mp4 && <source src={video.mp4} type="video/mp4" />
           ) : (

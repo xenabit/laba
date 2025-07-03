@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useRef, createRef } from 'react';
+import { useState, useCallback, useMemo, useRef, createRef, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useSearchParams } from 'react-router-dom';
 import styles from './GalleryTabs.module.scss';
@@ -10,29 +10,14 @@ const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024;
 
 export default function GalleryTabs({ loadingStage }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initial = searchParams.get('filter') || 'all';
-  const [activeFilter, setActiveFilter] = useState(initial);
-
-  const [loadedIds, setLoadedIds] = useState(() => {
-    try {
-      return new Set(JSON.parse(sessionStorage.getItem('galleryTabsLoadedIds') || '[]'));
-    } catch {
-      return new Set();
-    }
-  });
-  const markLoaded = useCallback((id) => {
-    setLoadedIds((prev) => {
-      if (prev.has(id)) return prev;
-      const next = new Set(prev).add(id);
-      sessionStorage.setItem('galleryTabsLoadedIds', JSON.stringify(Array.from(next)));
-      return next;
-    });
-  }, []);
+  const initialFilter = searchParams.get('filter') || 'all';
+  const [activeFilter, setActiveFilter] = useState(initialFilter);
 
   useEffect(() => {
     const f = searchParams.get('filter') || 'all';
     if (f !== activeFilter) setActiveFilter(f);
   }, [searchParams, activeFilter]);
+
   const handleFilterChange = useCallback(
     (type) => {
       setActiveFilter(type);
@@ -65,6 +50,7 @@ export default function GalleryTabs({ loadingStage }) {
           <a href="tel:+79690639323">+7 (969) 063-93-23</a>
         </div>
       </div>
+
       <nav className={styles.GalleryTabs__filters}>
         <ul>
           {projectsTypes.map((el) => (
@@ -88,7 +74,7 @@ export default function GalleryTabs({ loadingStage }) {
       {loadingStage !== 'complete' ? (
         <ul className={styles.GalleryTabs__items}>
           {filtered.map((_, i) => (
-            <li className={itemStyles.GalleryItem__item} key={i}>
+            <li key={i} className={itemStyles.GalleryItem__item}>
               <div className={styles.GalleryTabs__skeletonVideo} />
             </li>
           ))}
@@ -96,34 +82,31 @@ export default function GalleryTabs({ loadingStage }) {
       ) : (
         <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
           {filtered.map((item, idx) => {
-            const id = item.id;
-            if (!nodeRefs.current[id]) nodeRefs.current[id] = createRef();
-            const nodeRef = nodeRefs.current[id];
+            if (!nodeRefs.current[item.id]) nodeRefs.current[item.id] = createRef();
+            const nodeRef = nodeRefs.current[item.id];
 
-            const baseProps = {
+            const baseVideoProps = {
               autoPlay: true,
               muted: true,
               loop: true,
               preload: 'metadata',
               playsInline: true,
-              webkitplaysinline: 'true',
+              webkitPlaysInline: 'true',
               poster: item.video.poster,
-              onLoadedData: () => markLoaded(id),
             };
             const videoProps =
               idx % 2 === 1
-                ? baseProps
+                ? baseVideoProps
                 : {
-                    ...baseProps,
+                    ...baseVideoProps,
                     onLoadedMetadata: (e) => e.currentTarget.pause(),
                     onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
                     onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
                   };
 
             return (
-              <CSSTransition key={id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
+              <CSSTransition key={item.id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
                 <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
-                  {!loadedIds.has(id) && <div className={styles.GalleryTabs__skeletonVideo} />}
                   <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} isMobile={isMobile} />
                 </li>
               </CSSTransition>

@@ -97,13 +97,13 @@ export default function App() {
           obs.unobserve(v);
         });
       },
-      { rootMargin: '200px' }
+      { rootMargin: '300px' }
     );
 
     root.querySelectorAll('video[data-preload]').forEach((v) => observer.observe(v));
 
     return () => observer.disconnect();
-  }, []);
+   }, [location.pathname]);
 
   const handleStageChange = (stage) => {
     setLoadingStage(stage);
