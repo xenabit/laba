@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useRef, createRef, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef, createRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useSearchParams } from 'react-router-dom';
 import styles from './GalleryTabs.module.scss';
@@ -30,6 +30,29 @@ export default function GalleryTabs({ loadingStage }) {
   const handleMouseLeave = useCallback((v) => v.pause(), []);
 
   const filtered = useMemo(() => (activeFilter === 'all' ? projects : projects.filter((it) => (Array.isArray(it.type) ? it.type : [it.type]).includes(activeFilter))), [activeFilter]);
+
+  const videoPropsList = useMemo(() => {
+    return filtered.map((item, idx) => {
+      const base = {
+        autoPlay: true,
+        muted: true,
+        loop: true,
+        preload: 'metadata',
+        playsInline: true,
+        webkitPlaysInline: 'true',
+        poster: item.video.poster,
+      };
+      if (idx % 2 === 1) {
+        return base;
+      }
+      return {
+        ...base,
+        onLoadedMetadata: (e) => e.currentTarget.pause(),
+        onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
+        onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
+      };
+    });
+  }, [filtered, handleMouseEnter, handleMouseLeave]);
 
   const nodeRefs = useRef({});
   const transitionClassNames = {
@@ -82,27 +105,12 @@ export default function GalleryTabs({ loadingStage }) {
       ) : (
         <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
           {filtered.map((item, idx) => {
-            if (!nodeRefs.current[item.id]) nodeRefs.current[item.id] = createRef();
+            if (!nodeRefs.current[item.id]) {
+              nodeRefs.current[item.id] = createRef();
+            }
             const nodeRef = nodeRefs.current[item.id];
 
-            const baseVideoProps = {
-              autoPlay: true,
-              muted: true,
-              loop: true,
-              preload: 'metadata',
-              playsInline: true,
-              webkitPlaysInline: 'true',
-              poster: item.video.poster,
-            };
-            const videoProps =
-              idx % 2 === 1
-                ? baseVideoProps
-                : {
-                    ...baseVideoProps,
-                    onLoadedMetadata: (e) => e.currentTarget.pause(),
-                    onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
-                    onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
-                  };
+            const videoProps = videoPropsList[idx];
 
             return (
               <CSSTransition key={item.id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
