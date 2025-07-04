@@ -594,3 +594,12 @@
     }
   }
 }
+
+.Header_solid {
+  .Header__main {
+    background-color: var(--prime-1);
+  }
+  // .Header__border {
+  //   display: none;
+  // }
+}

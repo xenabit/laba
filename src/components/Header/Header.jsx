@@ -36,6 +36,8 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const hasScrolled = useRef(false);
 
   const shouldRenderBalloon = location.pathname === '/' && loadingStage !== 'complete';
+  const isHome = location.pathname === '/';
+  const isSolid = !isHome || loadingStage === 'complete';
 
   useEffect(() => {
     const currentPath = location.pathname;
@@ -453,7 +455,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   };
 
   return (
-    <header className={styles.Header} ref={containerRef}>
+    <header ref={containerRef} className={`${styles.Header} ${isSolid ? styles.Header_solid : ''}`}>
       <div ref={ref} id="main-tool-bar" className={`${styles.Header__main}`}>
         <div className={`${styles.Header__container} ${isActive ? styles.active : ''}`}>
           <div className={styles.Header__loading}>
