@@ -33,11 +33,12 @@ export default function GalleryTabs({ loadingStage }) {
 
   const videoPropsList = useMemo(() => {
     return filtered.map((item, idx) => {
+      const preloadValue = isMobile ? 'metadata' : 'auto';
       const base = {
         autoPlay: true,
         muted: true,
         loop: true,
-        preload: 'metadata',
+        preload: preloadValue,
         playsInline: true,
         webkitPlaysInline: 'true',
         poster: item.video.poster,
@@ -94,34 +95,35 @@ export default function GalleryTabs({ loadingStage }) {
         </ul>
       </nav>
 
-      {loadingStage !== 'complete' ? (
-        <ul className={styles.GalleryTabs__items}>
-          {filtered.map((_, i) => (
-            <li key={i} className={itemStyles.GalleryItem__item}>
-              <div className={styles.GalleryTabs__skeletonVideo} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
-          {filtered.map((item, idx) => {
-            if (!nodeRefs.current[item.id]) {
-              nodeRefs.current[item.id] = createRef();
-            }
-            const nodeRef = nodeRefs.current[item.id];
+     <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
+        {filtered.map((item, idx) => {
+          if (!nodeRefs.current[item.id]) {
+            nodeRefs.current[item.id] = createRef();
+          }
+          const nodeRef = nodeRefs.current[item.id];
+          const videoProps = videoPropsList[idx];
 
-            const videoProps = videoPropsList[idx];
-
-            return (
-              <CSSTransition key={item.id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
-                <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
-                  <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} isMobile={isMobile} />
-                </li>
-              </CSSTransition>
-            );
-          })}
-        </TransitionGroup>
-      )}
+          return (
+            <CSSTransition
+              key={item.id}
+              nodeRef={nodeRef}
+              timeout={600}
+              classNames={transitionClassNames}
+            >
+              <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
+                <GalleryItem
+                  video={item.video}
+                  href={item.src}
+                  title={item.title}
+                  desc={item.desc}
+                  videoProps={videoProps}
+                  isMobile={isMobile}
+                />
+              </li>
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
     </section>
   );
 }
