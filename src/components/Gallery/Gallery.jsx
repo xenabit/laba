@@ -14,11 +14,12 @@ export default function Gallery() {
 
   const videoPropsList = useMemo(() => {
     return projects.slice(0, total).map((item, idx) => {
+      const preloadValue = isMobile ? 'metadata' : 'auto';
       const base = {
         autoPlay: true,
         muted: true,
         loop: true,
-        preload: 'metadata',
+        preload: preloadValue,
         playsInline: true,
         webkitPlaysInline: 'true',
         poster: item.video.poster,
@@ -31,7 +32,7 @@ export default function Gallery() {
         onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
       };
     });
-  }, [total, handleMouseEnter, handleMouseLeave]);
+  }, [handleMouseEnter, handleMouseLeave]);
 
   return (
     <section className={styles.Gallery}>
