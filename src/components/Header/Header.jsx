@@ -35,6 +35,8 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const isInitialRender = useRef(true);
   const hasScrolled = useRef(false);
 
+  const shouldRenderBalloon = location.pathname === '/' && loadingStage !== 'complete';
+
   useEffect(() => {
     const currentPath = location.pathname;
     setActiveTab(currentPath);
@@ -196,7 +198,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       balloon,
       {
         scale: 1,
-        left: ' calc(50% - 12px)',
+        left: 'calc(50% - 12px)',
         top: '50%',
         duration: 1.5,
         ease: 'power2.inOut',
@@ -209,6 +211,11 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
 
   // useEffect для анимации шара
   useEffect(() => {
+    if (!shouldRenderBalloon) {
+      gsap.killTweensOf([balloonRef.current, logoRef.current]);
+      return;
+    }
+
     if (!balloonRef.current || !logoRef.current || !containerRef.current) {
       console.warn('Balloon, logo, or container ref is not ready');
       return;
@@ -237,7 +244,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     return () => {
       gsap.killTweensOf([balloonRef.current, logoRef.current]);
     };
-  }, [loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete]);
+  }, [loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete, shouldRenderBalloon]);
 
   // useEffect для обработки изменений размера окна
   useEffect(() => {
@@ -450,9 +457,11 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       <div ref={ref} id="main-tool-bar" className={`${styles.Header__main}`}>
         <div className={`${styles.Header__container} ${isActive ? styles.active : ''}`}>
           <div className={styles.Header__loading}>
-            <div ref={balloonRef} className={styles.Header__baloon}>
-              <img src={Baloon_c} alt="balloon-c" aria-hidden="true" />
-            </div>
+            {shouldRenderBalloon && (
+              <div ref={balloonRef} className={styles.Header__baloon}>
+                <img src={Baloon_c} alt="balloon-c" aria-hidden="true" />
+              </div>
+            )}
             <div ref={logoRef} className={styles.Header__logo}>
               <picture>
                 <img src={logoImg} alt="Логотип Laba" />
