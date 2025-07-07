@@ -74,6 +74,14 @@ export default function App() {
     };
   }, [loadingStage]);
 
+  // App.jsx
+  useEffect(() => {
+    if (location.pathname !== '/' && loadingStage !== 'complete') {
+      setLoadingStage('complete');
+      ScrollTrigger.refresh();
+    }
+  }, [location.pathname, loadingStage]);
+
   useEffect(() => {
     if (loadingStage === 'complete' && smootherRef.current) {
       smootherRef.current.scrollTo(0, true);
@@ -103,7 +111,7 @@ export default function App() {
     root.querySelectorAll('video[data-preload]').forEach((v) => observer.observe(v));
 
     return () => observer.disconnect();
-   }, [location.pathname]);
+  }, [location.pathname]);
 
   const handleStageChange = (stage) => {
     setLoadingStage(stage);
@@ -137,7 +145,7 @@ export default function App() {
       >
         <Routes>
           <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
-           <Route path="/portfolio" element={<GalleryTabs loadingStage={loadingStage} />} />
+          <Route path="/portfolio" element={<GalleryTabs loadingStage={loadingStage} />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />
           <Route path="/information" element={<PrivacyPolicy />} />
