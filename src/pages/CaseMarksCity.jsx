@@ -71,7 +71,6 @@ import case_slider_full_picture_7_2_jpg from '../assets/images/cases-slider-full
 import case_slider_full_picture_7_2_webp from '../assets/images/cases-slider-full-markscity-7-2.webp';
 import case_slider_full_picture_7_2_avif from '../assets/images/cases-slider-full-markscity-7-2.avif';
 
-// Импорт видео
 import video from '../assets/videos/vr.mp4';
 
 const contentCasesIntro = {
@@ -111,7 +110,7 @@ const contentText = [
   },
   {
     title: 'Поиски образа',
-    text: 'Проведена большая работа по выбору и оформлению механики игры, визуализации образа города и формирования процесса игры и целей игрока',
+    text: 'Проведена большая работа по выбору и оформлению механики игры, визуализации образа города и формирования процесса игры и целей игрока. Oзнакомится с творческими поисками <a href="#caseiframe">можно ниже.</a> ',
   },
   {
     title: 'Визуальный симбиоз',

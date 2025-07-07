@@ -27,7 +27,7 @@ function CaseIframe({ iframeProps = {}, previewSrc, mobilePreviewSrc }) {
   const mergedIframeProps = { ...defaultIframeProps, ...iframeProps };
 
   return (
-    <section className={`${styles.CaseIframe} ${isActive ? styles.active : ''}`}>
+    <section id="caseiframe" className={`${styles.CaseIframe} ${isActive ? styles.active : ''}`}>
       <div className={styles.CaseIframe__container} onClick={handleButtonClick}>
         {!isActive && <button className={styles.CaseIframe__button}>Начать взаимодействие</button>}
 

@@ -7,7 +7,6 @@ import CasesSliderVideo from '../components/CasesSliderVideo/CasesSliderVideo';
 import CaseIframe from '../components/CaseIframe/CaseIframe';
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import CasesSliderScroll from '../components/CasesSliderScroll/CasesSliderScroll';
-import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import CasesItems from '../components/CasesItems/CasesItems';
 
 import softwarLogos from '../constants/softwarLogos';
@@ -79,9 +78,6 @@ import case_slider_scroll_picture_1_2_avif from '../assets/images/case-slider-sc
 import case_slider_scroll_picture_2_2_png from '../assets/images/case-slider-scroll-2.png';
 import case_slider_scroll_picture_2_2_webp from '../assets/images/case-slider-scroll-2.webp';
 import case_slider_scroll_picture_2_2_avif from '../assets/images/case-slider-scroll-2.avif';
-import case_slider_scroll_picture_3_2_png from '../assets/images/case-slider-scroll-3.png';
-import case_slider_scroll_picture_3_2_webp from '../assets/images/case-slider-scroll-3.webp';
-import case_slider_scroll_picture_3_2_avif from '../assets/images/case-slider-scroll-3.avif';
 
 const contentCasesIntro = {
   title: 'Канон перемен',
@@ -120,23 +116,23 @@ const contentCasesIntro = {
 const contentText = [
   {
     title: 'Задача',
-    text: 'Создать приложение с игровой механикой на основе традиционного китайского текста «Книга перемен» датируемого 700 г до н.э. и предназначенного для «гадания», текст состоит из 64 гексаграмм. Стиль приложения должен соответствовать заявленной тематики. Иллюстративная, живая подача с анимациями.',
+    text: '<p>Создать приложение с игровой механикой на основе традиционного китайского текста «Книга перемен» датируемого 700 г до н.э. и предназначенного для «гадания», текст состоит из 64 гексаграмм.</p><br><p>Стиль приложения должен соответствовать заявленной тематики. Иллюстративная, живая подача с анимациями.</p>',
   },
   {
     title: 'Анализ рынка',
-    text: 'Был проведен анализ приложений на платформах Android и IOS, приложения с большим скачиванием проанализировали детально, выявляя основные пользовательские пути, фитчи. Особое внимание уделили комментариям пользователей от релиза к релизу конкурентов. Подробнее с анализом можно ознакомится ниже. ',
+    text: 'Был проведен анализ приложений на платформах Android и IOS, приложения с большим скачиванием проанализировали детально, выявляя основные пользовательские пути, фитчи. Особое внимание уделили комментариям пользователей от релиза к релизу конкурентов. Подробнее с анализом можно <a href="#caseiframe">ознакомится ниже.</a> ',
   },
   {
     title: 'Дизайн',
-    text: 'Для согласования было проработано 7 разноплановых концептов, команда искала золотую середину между каноном и чем-то еще? Посмотреть презентацию дизайн-концептов можно тут. В результате получилось живое приложение с решением в 4х цветовых темах утро/день/вечер/ночь. Зд взаимодействием и плавной умиротворяющей анимацией??????',
+    text: 'Для согласования было проработано 7 разноплановых концептов, команда искала золотую середину между каноном и чем-то еще? <a href="#caseiframe">Посмотреть презентацию дизайн-концептов можно тут.</a> <br><br><p>В результате реализован умиротворяющий интерфейс и взаимодействие, а атмосфера приложения получилась живой.</p>',
   },
   {
-    title: 'Административная панель',
+    title: 'Иллюстрации',
     text: 'В рамках разработки дизайна приложения были отрисованы тематические иллюстрации, которые стали символическим тандемом китайской акварельной подачи и абстрактной бумажной аппликации.  Иллюстрации легко разбираются для создания пространственной анимации и благодаря монохромному решению легко подстраиваются под цветовые темы приложения.',
   },
   {
     title: 'Разработка',
-    text: 'О кроссплатформе анриле и тд.',
+    text: 'Процесс разработки строился на Unreal engine, реализованы собственные ассеты, проведена оптимизация производительности, проведено тестирование, приложение скомпилировано и опубликовано',
   },
   {
     title: 'Результаты',
@@ -336,67 +332,8 @@ const case_slider_scroll_content = {
         avif: case_slider_scroll_picture_2_2_avif,
       },
     },
-    {
-      id: '3',
-      picture: {
-        img: case_slider_scroll_picture_3_2_png,
-        webp: case_slider_scroll_picture_3_2_webp,
-        avif: case_slider_scroll_picture_3_2_avif,
-      },
-    },
   ],
 };
-
-const contentReviews = [
-  {
-    title: 'Отзыв клиента MG',
-    text: 'Создать MGSite 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Клиент' },
-      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Клиент' },
-      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 2',
-    text: 'Создать MGSite  3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Ололо' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Алала' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 3',
-    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв  MGSite клиента 4',
-    text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 5',
-    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
-    ],
-  },
-];
 
 export default function CaseMarkssite() {
   return (
@@ -422,7 +359,6 @@ export default function CaseMarkssite() {
       <Text title={contentText[4].title} text={contentText[4].text} />
       <CasesSliderScroll items={case_slider_scroll_content} />
       <Text title={contentText[5].title} text={contentText[5].text} />
-      <ReviewsSlider items={contentReviews} />
       <CasesItems type={['game', 'mobile']} excludeId="canon-change" />
     </main>
   );

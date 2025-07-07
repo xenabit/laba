@@ -11,6 +11,17 @@ import CasesItems from '../components/CasesItems/CasesItems';
 import CasesCompareSlider from '../components/CasesCompareSlider/CasesCompareSlider';
 import softwarLogos from '../constants/softwarLogos';
 
+import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
+
+import video from '../assets/videos/video-horizontal-markssite.mp4';
+import videoWebm from '../assets/videos/video-horizontal-markssite.webm';
+
+const videoUrl = {
+  url: null,
+  mp4: video,
+  webm: videoWebm,
+};
+
 import picture_jpg from '../assets/images/picture-markssite.jpg';
 import picture_webp from '../assets/images/picture-markssite.webp';
 import picture_avif from '../assets/images/picture-markssite.avif';
@@ -322,12 +333,13 @@ export default function CaseMarkssite() {
       <Softwar items={contentSoftwar} />
       <CasesSliderFull items={case_slider_full_content_1} />
       <Text title={contentText[1].title} text={contentText[1].text} />
-      <Picture src={contentPicture} />;
+      <Picture src={contentPicture} />
       <Text title={contentText[2].title} text={contentText[2].text} />
       <CasesSliderFull items={case_slider_full_content_2} />
       <Text title={contentText[3].title} text={contentText[3].text} />
       <CasesCompareSlider items={case_compare_slider_pictures_1} />
       <Text title={contentText[4].title} text={contentText[4].text} />
+      <VideoHorizontal videoUrl={videoUrl}></VideoHorizontal>
       <Text title={contentText[5].title} text={contentText[5].text} />
       <ReviewsSlider items={contentReviews} />
       <CasesItems type="web" excludeId="markssite" />

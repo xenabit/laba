@@ -102,17 +102,22 @@ const contentCasesIntro = {
 };
 
 const contentText = [
-  { title: 'Задача', text: 'Создать гиперказуальную игру Тамагочи.???? ' },
+  {
+    title: 'Задача',
+    text: 'Создать мобильную игру на основе идеи тамагочи. Разнообразить игровой процесс мини-играми и реализовать функцию совместного ухода за персонажем. Интегрировать возможность персонализации и систему платежей.',
+  },
   {
     title: 'Поиски оьраза',
-    text: 'Команда провела большую работу, что бы подобрать и оформить механику игры, найти образ персонажа который призван умилять и забавлять пользователей, ознакомится с творческими поисками можно ниже. ',
+    text: 'Команда провела большую работу, что бы подобрать и оформить механику игры, найти образ персонажа который призван умилять и забавлять пользователей, ознакомится с творческими поисками <a href="#caseiframe">можно ниже.</a> ',
   },
   {
     title: 'Дизайн',
-    text: 'Мы за гибкость, поэтому для игры разработано 4 цветовые темы, 3 рассчитаны на любителей пастельных тонов, а четверная тема сезонная приуроченная к игровым событиям, ивентам. Пользователь сам может этим управлять.????',
+    text: 'Мы за гибкость, поэтому для игры разработано 4 цветовые темы, 3 рассчитаны на любителей пастельных тонов, а четверная тема сезонная приуроченная к игровым событиям, ивентам. Пользователь сам может этим управлять.',
   },
-  { title: 'Разработка', text: 'О кроссплатформе анриле и тд.' },
-  { title: 'Результаты', text: '??????' },
+  {
+    title: 'Разработка',
+    text: 'Процесс разработки строился на Unreal engine, созданы модели и анимации персонажа, разработаны мини-игры, реализован магазин аксессуаров, проведена оптимизация производительности.',
+  },
 ];
 
 const contentSoftwar = [softwarLogos.unreal, softwarLogos.blender, softwarLogos.figma];
@@ -126,57 +131,6 @@ const caseIframePreview = {
   webp: case_iframe_preview_image_webp,
   avif: case_iframe_preview_image_avif,
 };
-
-const contentReviews = [
-  {
-    title: 'Отзыв клиента MG',
-    text: 'Создать MGSite 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Клиент' },
-      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Клиент' },
-      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 2',
-    text: 'Создать MGSite  3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Ололо' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Алала' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 3',
-    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв  MGSite клиента 4',
-    text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 5',
-    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
-    ],
-  },
-];
 
 const case_slider_full_content_1 = {
   sizes: {
@@ -367,9 +321,6 @@ export default function CaseTamagotchi() {
       <Text title={contentText[2].title} text={contentText[2].text} />
       <CasesSliderFull items={case_slider_full_content_2} />
       <Text title={contentText[3].title} text={contentText[3].text} />
-      <Picture src={contentPicture} />
-      <Text title={contentText[4].title} text={contentText[4].text} />
-      <ReviewsSlider items={contentReviews} />
       <CasesItems type={['game', 'mobile']} excludeId="tamagotchi" />
     </main>
   );
