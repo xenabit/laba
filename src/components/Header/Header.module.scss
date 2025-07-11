@@ -19,6 +19,10 @@
     }
   }
 
+  &__bg {
+    display: none;
+  }
+
   &__logo {
     display: none;
     position: absolute;
@@ -510,6 +514,10 @@
       padding: 20px 0 16px 0;
     }
 
+    &__bg {
+      display: block;
+    }
+
     &__logo {
       display: block;
     }
@@ -571,7 +579,7 @@
       }
     }
     nav {
-      padding: 21% 0 16px 51.5%;
+      padding: 15% 0 16px 51.5%;
     }
 
     &__links {

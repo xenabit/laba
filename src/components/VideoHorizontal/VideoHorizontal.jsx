@@ -1,10 +1,10 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, forwardRef } from 'react';
 import styles from './VideoHorizontal.module.scss';
 import PropTypes from 'prop-types';
 
 const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
 
-function VideoHorizontal({ videoUrl }) {
+const VideoHorizontal = forwardRef(({ videoUrl }, ref) => {
   const videoRef = useRef(null);
 
   const getYouTubeId = useCallback((url) => {
@@ -22,7 +22,6 @@ function VideoHorizontal({ videoUrl }) {
   }, []);
 
   const renderVideoPlayer = useCallback(() => {
-    // Проверка для YouTube или Rutube
     if (videoUrl.url) {
       const isYouTube = /youtube\.com|youtu\.be/.test(videoUrl.url);
       const isRutube = /rutube\.ru/.test(videoUrl.url);
@@ -44,7 +43,7 @@ function VideoHorizontal({ videoUrl }) {
 
         return (
           <iframe
-            ref={videoRef}
+            ref={ref}
             className={styles.VideoHorizontal__video}
             src={src}
             frameBorder="0"
@@ -52,7 +51,7 @@ function VideoHorizontal({ videoUrl }) {
             allowFullScreen
             loading="lazy"
             onLoad={() => {
-              if (!isIOS) sendPlayerCommands(videoRef.current);
+              if (!isIOS) sendPlayerCommands(ref.current);
             }}
           />
         );
@@ -66,7 +65,7 @@ function VideoHorizontal({ videoUrl }) {
 
         return (
           <iframe
-            ref={videoRef}
+            ref={ref}
             className={styles.VideoHorizontal__video}
             src={src}
             frameBorder="0"
@@ -74,7 +73,7 @@ function VideoHorizontal({ videoUrl }) {
             allowFullScreen
             loading="lazy"
             onLoad={() => {
-              if (!isIOS) sendPlayerCommands(videoRef.current);
+              if (!isIOS) sendPlayerCommands(ref.current);
             }}
           />
         );
@@ -84,7 +83,7 @@ function VideoHorizontal({ videoUrl }) {
     if (videoUrl.mp4 || videoUrl.webm) {
       return (
         <video
-          ref={videoRef}
+          ref={ref}
           className={styles.VideoHorizontal__video}
           controls={false}
           autoPlay={!isIOS}
@@ -110,7 +109,7 @@ function VideoHorizontal({ videoUrl }) {
       <div className={styles.VideoHorizontal__container}>{renderVideoPlayer()}</div>
     </section>
   );
-}
+});
 
 VideoHorizontal.propTypes = {
   videoUrl: PropTypes.shape({

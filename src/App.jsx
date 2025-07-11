@@ -20,6 +20,7 @@ import CaseMarkssiteHR from './pages/CaseMarkssiteHR.jsx';
 import CaseCanonChange from './pages/CaseCanonChange.jsx';
 import CaseTamagotchi from './pages/CaseTamagotchi.jsx';
 import CaseMarksCity from './pages/CaseMarksCity.jsx';
+import About from './pages/About.jsx';
 
 import './App.scss';
 
@@ -149,6 +150,7 @@ export default function App() {
           <Route path="/contact" element={<Contacts />} />
           <Route path="/form" element={<FormBrief />} />
           <Route path="/information" element={<PrivacyPolicy />} />
+          <Route path="/about" element={<About />} />
           <Route path="/portfolio/markstour" element={<CaseMarksTour />} />
           <Route path="/portfolio/markssite" element={<CaseMarkssite />} />
           <Route path="/portfolio/markssite-hr" element={<CaseMarkssiteHR />} />

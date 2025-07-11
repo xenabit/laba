@@ -10,7 +10,7 @@ function CookieAgreement({ loadingStage }) {
 
   useEffect(() => {
     try {
-       const agreement = localStorage.getItem('cookieAgreement');
+      const agreement = localStorage.getItem('cookieAgreement');
       if (agreement === 'true') {
         setIsAgreed(true);
       }
@@ -75,7 +75,7 @@ function CookieAgreement({ loadingStage }) {
   return (
     <section ref={cookieRef} className={styles.CookieAgreement}>
       <div className={styles.CookieAgreement__container}>
-        <div className={styles.CookieAgreement__text}>OOO «Media» использует файлы cookie и инструменты аналитики на сайте</div>
+        <div className={styles.CookieAgreement__text}>ООО &laquo;ЛАБА&raquo; использует файлы cookie и инструменты аналитики на сайте</div>
         <div onMouseMove={handleMouseMove} onClick={handleAgreement} className={styles.CookieAgreement__button}>
           <span>Понятно</span>
         </div>

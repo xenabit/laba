@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 const NAV_ITEMS = [
-  { path: '/',         label: 'Главная'    },
-  { path: '/portfolio',label: 'Портфолио'  },
-  { path: '/contact',  label: 'Контакты'   },
+  { path: '/', label: 'Главная' },
+  { path: '/portfolio', label: 'Портфолио' },
+  { path: '/contact', label: 'Контакты' },
+  { path: '/about', label: 'О компании' },
 ];
 
 export default memo(function NavLinks({ activeTab, onTabClick }) {
@@ -14,11 +15,7 @@ export default memo(function NavLinks({ activeTab, onTabClick }) {
       <ul>
         {NAV_ITEMS.map(({ path, label }) => (
           <li key={path}>
-            <Link
-              className={activeTab === path ? styles.active : ''}
-              to={path}
-              onClick={() => onTabClick(path)}
-            >
+            <Link className={activeTab === path ? styles.active : ''} to={path} onClick={() => onTabClick(path)}>
               {label}
             </Link>
           </li>

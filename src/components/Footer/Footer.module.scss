@@ -1,7 +1,6 @@
 .Footer {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   background-color: var(--prime-2);
   padding: rem(16) rem(16) rem(16) rem(16);
   color: var(--prime-1);
@@ -27,6 +26,17 @@
     font-family: var(--font-prime);
   }
 
+  &__requisites {
+    font-size: rem(16);
+    line-height: 1.5;
+    color: var(--sec-4);
+    margin-top: rem(22);
+
+    ul li {
+      margin-bottom: 8px;
+    }
+  }
+
   &__contacts {
     display: flex;
     flex-direction: column;
@@ -39,8 +49,9 @@
     flex-direction: column;
   }
 
-  &__bottom {
+  &__privacy {
     display: flex;
+    justify-content: space-between;
     gap: rem(16);
 
     div {
@@ -67,6 +78,18 @@
 
   @media all and (min-width: $bp3) {
     padding: rem(16) rem(32) rem(32) rem(32);
+    justify-content: space-between;
+    flex-direction: row;
+
+    &__privacy {
+      div {
+        display: none;
+      }
+    }
+
+    &__right {
+      max-width: rem(238);
+    }
   }
 
   @media all and (min-width: $bp1) {

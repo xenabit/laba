@@ -1,0 +1,43 @@
+.AboutText {
+  $s: &;
+  @include containerMob;
+  margin-top: rem(60);
+  margin-bottom: rem(60);
+
+  &__title {
+    font-size: clamp(rem(40), 8vw, rem(160));
+    line-height: 1.2;
+    font-weight: var(--fw-medium);
+    margin-bottom: rem(32);
+  }
+
+  &__text {
+    font-family: var(--font-sec);
+    font-weight: var(--fw-light);
+    font-size: clamp(rem(24), 1.5vw, rem(48));
+    line-height: 1.33;
+
+    p {
+      margin-bottom: 40px;
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    @include containerDesk;
+    margin-top: rem(100);
+    margin-bottom: rem(120);
+
+    &__title {
+      text-transform: uppercase;
+    }
+
+    &__text {
+      max-width: rem(768);
+    }
+  }
+
+  @media all and (min-width: $bp0) {
+    margin-bottom: 4rem;
+    margin-top: 4rem;
+  }
+}

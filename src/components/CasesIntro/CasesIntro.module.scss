@@ -51,6 +51,9 @@
     font-weight: var(--fw-medium);
     font-size: rem(56);
     line-height: 1.18;
+    hyphens: auto;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
     font-family: var(--font-prime);
   }
 
@@ -126,6 +129,11 @@
     line-height: 1.77;
   }
 
+  @media all and (min-width: $bp3) {
+    &__title {
+      font-size: rem(56);
+    }
+  }
   @media all and (min-width: $bp3) {
     &__header {
       @include containerDesk;
