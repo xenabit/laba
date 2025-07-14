@@ -6,6 +6,10 @@
   background-color: var(--prime-1);
 
   &.active {
+    #{$s}__container:hover {
+      cursor: auto;
+    }
+
     #{$s}__iframe {
       pointer-events: auto;
     }
