@@ -17,7 +17,8 @@ function AboutText() {
         <p>
           Работаем от&nbsp;идеи до&nbsp;реализации, предоставляя полный спектр услуг&nbsp;&mdash; от&nbsp;консультаций на&nbsp;стадии планирования до&nbsp;прототипирования и&nbsp;тестирования
           продуктов.
-        </p>{' '}
+        </p>
+        <p>Наш стек: Unreal Engine, Blender, 3Ds Max, Figma, Python, Node.js, Flutter, React, Adobe After Effect, Adobe Illustrator, Adobe Photoshop</p>
       </div>
     </section>
   );
