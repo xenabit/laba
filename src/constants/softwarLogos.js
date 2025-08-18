@@ -43,6 +43,14 @@ const softwarLogos = {
     src: new URL('../assets/images/softwar-github.svg', import.meta.url).href,
     title: 'GitHub',
   },
+  python: {
+    src: new URL('../assets/images/softwar-python.svg', import.meta.url).href,
+    title: 'Python',
+  },
+  flutter: {
+    src: new URL('../assets/images/softwar-flutter.svg', import.meta.url).href,
+    title: 'Flutter',
+  },
 };
 
 export default softwarLogos;
