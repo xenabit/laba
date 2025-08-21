@@ -3,11 +3,11 @@ import styles from './Gallery.module.scss';
 import itemStyles from '../GalleryItem/GalleryItem.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { projects } from '../../constants/projects';
-
-const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024;
+import useIsMobile from '../../hooks/useIsMobile';
 
 export default function Gallery() {
   const total = 6;
+  const isMobile = useIsMobile();
 
   const handleMouseEnter = useCallback((video) => video.play().catch(() => {}), []);
   const handleMouseLeave = useCallback((video) => video.pause(), []);
@@ -21,7 +21,6 @@ export default function Gallery() {
         loop: true,
         preload: preloadValue,
         playsInline: true,
-        webkitPlaysInline: 'true',
         poster: item.video.poster,
       };
       if (idx % 2 === 1) return base;
@@ -32,7 +31,7 @@ export default function Gallery() {
         onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
       };
     });
-  }, [handleMouseEnter, handleMouseLeave]);
+  }, [isMobile, handleMouseEnter, handleMouseLeave]);
 
   return (
     <section className={styles.Gallery}>
@@ -41,7 +40,7 @@ export default function Gallery() {
           const videoProps = videoPropsList[idx];
           return (
             <li key={item.id} className={itemStyles.GalleryItem__item}>
-              <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} isMobile={isMobile} />
+              <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
             </li>
           );
         })}

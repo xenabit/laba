@@ -1,4 +1,4 @@
-import { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import { forwardRef, memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -29,11 +29,21 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const [activeTab, setActiveTab] = useState('/');
   const [isDesktop, setIsDesktop] = useState(typeof window !== 'undefined' ? window.matchMedia('(min-width: 1440px)').matches : false);
   const location = useLocation();
+
   const balloonRef = useRef(null);
   const logoRef = useRef(null);
   const containerRef = useRef(null);
+
   const isInitialRender = useRef(true);
   const hasScrolled = useRef(false);
+
+  const isActiveRef = useRef(isActive);
+  const showAnimRef = useRef(null);
+  const borderAnimRef = useRef(null);
+
+  useEffect(() => {
+    isActiveRef.current = isActive;
+  }, [isActive]);
 
   const shouldRenderBalloon = location.pathname === '/' && loadingStage !== 'complete';
   const isHome = location.pathname === '/';
@@ -45,7 +55,12 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     localStorage.setItem('activeTab', currentPath);
   }, [location.pathname]);
 
-  // Анимация шара с эффектом примагничивания
+  useEffect(() => {
+    const img = new Image();
+    img.src = headerMenuImg;
+    if (img.decode) img.decode().catch(() => {});
+  }, []);
+
   const balloonsEntryAnimate = () => {
     const balloon = balloonRef.current;
     const container = containerRef.current;
@@ -72,7 +87,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       ANIMATION_CONFIG.BALOON_MOVE_DURATION
     );
 
-    // Эффект примагничивания
     let isMagnetActive = loadingStage === 'initial';
     const handleMouseMove = throttle((e) => {
       if (!isMagnetActive || hasScrolled.current || loadingStage !== 'initial') return;
@@ -86,7 +100,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       });
     }, 32);
 
-    // Сброс эффекта примагничивания при скроллинге
     const handleScroll = () => {
       if (loadingStage !== 'initial' || hasScrolled.current) return;
       hasScrolled.current = true;
@@ -101,7 +114,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       container.removeEventListener('mousemove', handleMouseMove);
     };
 
-    // Активируем эффект примагничивания после начальной анимации
     const magnetTimeout = setTimeout(
       () => {
         if (!hasScrolled.current && loadingStage === 'initial') {
@@ -211,8 +223,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     );
   };
 
-  // useEffect для анимации шара
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!shouldRenderBalloon) {
       gsap.killTweensOf([balloonRef.current, logoRef.current]);
       return;
@@ -248,7 +259,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     };
   }, [loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete, shouldRenderBalloon]);
 
-  // useEffect для обработки изменений размера окна
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 1440px)');
     const handleResize = () => {
@@ -260,7 +270,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!ref.current) {
       console.warn('Header ref is not ready');
       return;
@@ -295,13 +305,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     const setHeaderVisible = () => {
       gsap.set([headerTop, border, toggle, desc, logo], { opacity: 1 });
     };
-
-    if (isActive) {
-      gsap.set([logo, toggle, desc, border, headerTop], { opacity: 1 });
-      gsap.set(border, { backgroundColor: 'var(--prime-1)' });
-      gsap.set(loading, { height: '100%' });
-      return;
-    }
 
     if (loadingStage === 'initial') {
       gsap.set(loading, { height: '100vh' });
@@ -389,14 +392,18 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       }
     );
 
-    ScrollTrigger.create({
+    showAnimRef.current = showAnim;
+    borderAnimRef.current = borderAnim;
+
+    const st = ScrollTrigger.create({
       trigger: '#smooth-content',
       start: 'top top+=50',
       end: 'bottom top',
       onUpdate: (self) => {
         const scrollPos = self.scroll();
         if (loadingStage !== 'complete') return;
-        if (isActive) {
+
+        if (isActiveRef.current) {
           showAnim.pause();
           borderAnim.pause();
           gsap.set(header, { yPercent: 0 });
@@ -431,10 +438,12 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     ScrollTrigger.refresh();
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      st?.kill();
+      showAnim.kill();
+      borderAnim.kill();
       gsap.killTweensOf([header, border, logo, toggle, desc, headerTop, loading]);
     };
-  }, [ref, isActive, loadingStage, isDesktop]);
+  }, [ref, loadingStage, isDesktop]);
 
   useEffect(() => {
     const savedTab = localStorage.getItem('activeTab') || location.pathname;
@@ -489,7 +498,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
           <div className={styles.Header__inner}>
             <div className={styles.Header__bg}>
               <picture>
-                <img src={headerMenuImg} />
+                <img src={headerMenuImg} alt="" decoding="async" />
               </picture>
             </div>
             <NavLinks activeTab={activeTab} onTabClick={handleTabClick} />

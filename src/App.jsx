@@ -1,26 +1,27 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, Suspense, lazy } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
 import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
-import PageNotFound from './components/PageNotFound/PageNotFound.jsx';
-import GalleryTabs from './components/GalleryTabs/GalleryTabs.jsx';
-import Contacts from './components/Contacts/Contacts.jsx';
-import FormBrief from './components/FormBrief/FormBrief.jsx';
 import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
 import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.jsx';
 
-import Home from './pages/Home.jsx';
-import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
-import CaseMarksTour from './pages/CaseMarksTour.jsx';
-import CaseMarkssite from './pages/CaseMarkssite.jsx';
-import CaseMarkssiteHR from './pages/CaseMarkssiteHR.jsx';
-import CaseCanonChange from './pages/CaseCanonChange.jsx';
-import CaseTamagotchi from './pages/CaseTamagotchi.jsx';
-import CaseMarksCity from './pages/CaseMarksCity.jsx';
-import About from './pages/About.jsx';
+const PageNotFound = lazy(() => import('./components/PageNotFound/PageNotFound.jsx'));
+const GalleryTabs = lazy(() => import('./components/GalleryTabs/GalleryTabs.jsx'));
+const Contacts = lazy(() => import('./components/Contacts/Contacts.jsx'));
+const FormBrief = lazy(() => import('./components/FormBrief/FormBrief.jsx'));
+
+const Home = lazy(() => import('./pages/Home.jsx'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'));
+const CaseMarksTour = lazy(() => import('./pages/CaseMarksTour.jsx'));
+const CaseMarkssite = lazy(() => import('./pages/CaseMarkssite.jsx'));
+const CaseMarkssiteHR = lazy(() => import('./pages/CaseMarkssiteHR.jsx'));
+const CaseCanonChange = lazy(() => import('./pages/CaseCanonChange.jsx'));
+const CaseTamagotchi = lazy(() => import('./pages/CaseTamagotchi.jsx'));
+const CaseMarksCity = lazy(() => import('./pages/CaseMarksCity.jsx'));
+const About = lazy(() => import('./pages/About.jsx'));
 
 import './App.scss';
 
@@ -31,6 +32,7 @@ export default function App() {
   const wrapperRef = useRef(null);
   const introRef = useRef(null);
   const projectsTileRef = useRef(null);
+  const smootherRef = useRef(null);
   const location = useLocation();
 
   const [isFirstVisit] = useState(() => {
@@ -43,7 +45,18 @@ export default function App() {
     if (isFirstVisit) sessionStorage.setItem('hasVisitedHome', 'true');
   }, [isFirstVisit]);
 
-  const smootherRef = useRef(null);
+  useEffect(() => {
+    const preload = () => {
+      import('./components/GalleryTabs/GalleryTabs.jsx');
+      import('./pages/About.jsx');
+    };
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(preload);
+    } else {
+      setTimeout(preload, 0);
+    }
+  }, []);
+
   useEffect(() => {
     if (loadingStage !== 'complete') return;
     const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
@@ -59,8 +72,8 @@ export default function App() {
       ScrollTrigger.refresh();
     };
 
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(create);
+    if ('requestAnimationFrame' in window) {
+      window.requestAnimationFrame(create);
     } else {
       setTimeout(create, 0);
     }
@@ -75,7 +88,6 @@ export default function App() {
     };
   }, [loadingStage]);
 
-  // App.jsx
   useEffect(() => {
     if (location.pathname !== '/' && loadingStage !== 'complete') {
       setLoadingStage('complete');
@@ -96,20 +108,50 @@ export default function App() {
     const root = document.getElementById('smooth-content');
     if (!root) return;
 
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
+
+    const saveData = !!(conn && conn.saveData);
+    const eff = (conn && conn.effectiveType) || '4g';
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+
+    const rootMargin = saveData ? '120px' : isMobile ? (/(^|-)2g/.test(eff) ? '150px' : '220px') : /(^|-)3g/.test(eff) ? '300px' : '800px';
+
     const observer = new IntersectionObserver(
       (entries, obs) => {
-        entries.forEach(({ isIntersecting, target }) => {
-          if (!isIntersecting) return;
-          const v = target;
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+
+          const v = entry.target;
+          if (!(v && v.tagName === 'VIDEO')) {
+            obs.unobserve(v);
+            continue;
+          }
+
+          if (v.dataset.preloaded === '1' || v.readyState >= 2) {
+            obs.unobserve(v);
+            continue;
+          }
+
           v.preload = 'auto';
-          v.load();
+          try {
+            v.load();
+          } catch (e) {}
+          v.dataset.preloaded = '1';
           obs.unobserve(v);
-        });
+        }
       },
-      { rootMargin: '300px' }
+      { rootMargin, threshold: 0.01 }
     );
 
-    root.querySelectorAll('video[data-preload]').forEach((v) => observer.observe(v));
+    const startObserve = () => {
+      root.querySelectorAll('video[data-preload]:not([data-preloaded="1"])').forEach((el) => observer.observe(el));
+    };
+
+    if ('requestAnimationFrame' in window) {
+      requestAnimationFrame(startObserve);
+    } else {
+      setTimeout(startObserve, 0);
+    }
 
     return () => observer.disconnect();
   }, [location.pathname]);
@@ -132,35 +174,37 @@ export default function App() {
         onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
       />
 
-      {isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' && (
-        <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
-      )}
+      <Suspense fallback={null}>
+        {isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' && (
+          <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
+        )}
 
-      <div
-        id="smooth-content"
-        style={{
-          opacity: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 0 : 1,
-          pointerEvents: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 'none' : 'auto',
-          transition: 'opacity 0.3s ease',
-        }}
-      >
-        <Routes>
-          <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
-          <Route path="/portfolio" element={<GalleryTabs loadingStage={loadingStage} />} />
-          <Route path="/contact" element={<Contacts />} />
-          <Route path="/form" element={<FormBrief />} />
-          <Route path="/information" element={<PrivacyPolicy />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/portfolio/markstour" element={<CaseMarksTour />} />
-          <Route path="/portfolio/markssite" element={<CaseMarkssite />} />
-          <Route path="/portfolio/markssite-hr" element={<CaseMarkssiteHR />} />
-          <Route path="/portfolio/canon-change" element={<CaseCanonChange />} />
-          <Route path="/portfolio/tamagotchi" element={<CaseTamagotchi />} />
-          <Route path="/portfolio/markscity" element={<CaseMarksCity />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-        <Footer />
-      </div>
+        <div
+          id="smooth-content"
+          style={{
+            opacity: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 0 : 1,
+            pointerEvents: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 'none' : 'auto',
+            transition: 'opacity 0.3s ease',
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
+            <Route path="/portfolio" element={<GalleryTabs loadingStage={loadingStage} />} />
+            <Route path="/contact" element={<Contacts />} />
+            <Route path="/form" element={<FormBrief />} />
+            <Route path="/information" element={<PrivacyPolicy />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/portfolio/markstour" element={<CaseMarksTour />} />
+            <Route path="/portfolio/markssite" element={<CaseMarkssite />} />
+            <Route path="/portfolio/markssite-hr" element={<CaseMarkssiteHR />} />
+            <Route path="/portfolio/canon-change" element={<CaseCanonChange />} />
+            <Route path="/portfolio/tamagotchi" element={<CaseTamagotchi />} />
+            <Route path="/portfolio/markscity" element={<CaseMarksCity />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Suspense>
 
       <CookieAgreement loadingStage={loadingStage} />
     </div>

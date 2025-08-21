@@ -5,13 +5,13 @@ import styles from './GalleryTabs.module.scss';
 import itemStyles from '../GalleryItem/GalleryItem.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { projects, projectsTypes } from '../../constants/projects';
+import useIsMobile from '../../hooks/useIsMobile';
 
-const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024;
-
-export default function GalleryTabs({ loadingStage }) {
+export default function GalleryTabs() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialFilter = searchParams.get('filter') || 'all';
   const [activeFilter, setActiveFilter] = useState(initialFilter);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const f = searchParams.get('filter') || 'all';
@@ -40,7 +40,6 @@ export default function GalleryTabs({ loadingStage }) {
         loop: true,
         preload: preloadValue,
         playsInline: true,
-        webkitPlaysInline: 'true',
         poster: item.video.poster,
       };
       if (idx % 2 === 1) {
@@ -53,7 +52,7 @@ export default function GalleryTabs({ loadingStage }) {
         onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
       };
     });
-  }, [filtered, handleMouseEnter, handleMouseLeave]);
+  }, [filtered, isMobile, handleMouseEnter, handleMouseLeave]);
 
   const nodeRefs = useRef({});
   const transitionClassNames = {
@@ -95,30 +94,16 @@ export default function GalleryTabs({ loadingStage }) {
         </ul>
       </nav>
 
-     <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
+      <TransitionGroup component="ul" className={styles.GalleryTabs__items}>
         {filtered.map((item, idx) => {
-          if (!nodeRefs.current[item.id]) {
-            nodeRefs.current[item.id] = createRef();
-          }
+          if (!nodeRefs.current[item.id]) nodeRefs.current[item.id] = createRef();
           const nodeRef = nodeRefs.current[item.id];
           const videoProps = videoPropsList[idx];
 
           return (
-            <CSSTransition
-              key={item.id}
-              nodeRef={nodeRef}
-              timeout={600}
-              classNames={transitionClassNames}
-            >
+            <CSSTransition key={item.id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
               <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
-                <GalleryItem
-                  video={item.video}
-                  href={item.src}
-                  title={item.title}
-                  desc={item.desc}
-                  videoProps={videoProps}
-                  isMobile={isMobile}
-                />
+                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
               </li>
             </CSSTransition>
           );

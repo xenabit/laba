@@ -12,6 +12,8 @@ import picture2_2x from '../../assets/images/project-tile-2-x2.jpg';
 import picture3_2x from '../../assets/images/project-tile-3-x2.jpg';
 import picture4_2x from '../../assets/images/project-tile-4-x2.jpg';
 
+import { preloadImage, ensurePreloadLink } from '../../utils/imageCache';
+
 const items = [
   {
     id: 1,
@@ -42,21 +44,14 @@ const items = [
 export default function ProjectsTile({ projectsTileRef }) {
   const animationRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1440);
 
   useEffect(() => {
-    items.forEach(({ picture }) => {
-      const low = new Image();
-      low.src = picture[0];
-      const hi = new Image();
-      hi.src = picture[1];
+    const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+    const urls = items.map(({ picture }) => (dpr >= 1.5 ? picture[1] : picture[0]));
+    urls.forEach((url) => {
+      ensurePreloadLink(url);
+      preloadImage(url, 'high');
     });
-  }, []);
-
-  useEffect(() => {
-    const onResize = () => setIsDesktop(window.innerWidth > 1440);
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   const resetAnimation = () => {
@@ -70,6 +65,7 @@ export default function ProjectsTile({ projectsTileRef }) {
       animationRef.current.classList.remove(styles.animate);
     }
   };
+
   useEffect(() => {
     resetAnimation();
     window.addEventListener('resize', resetAnimation);
@@ -79,36 +75,38 @@ export default function ProjectsTile({ projectsTileRef }) {
     }
     return () => {
       window.removeEventListener('resize', resetAnimation);
-      timer && clearInterval(timer);
+      if (timer) clearInterval(timer);
     };
   }, []);
+
+  const bgSet = (p1x, p2x) => ({
+    backgroundImage: `image-set(url(${p1x}) 1x, url(${p2x}) 2x)`,
+  });
 
   return (
     <section className={styles.ProjectsTile} ref={projectsTileRef}>
       <div className={styles.ProjectsTile__container}>
         <div className={`${styles.ProjectsTile__layer} ${styles.ProjectsTile__layer_bot}`}>
           <div ref={animationRef} className={`${styles.ProjectsTile__items} ${styles.animate}`}>
-            {items.map(({ id, picture, src }) => {
-              const bg = `url(${isDesktop ? picture[1] : picture[0]})`;
-              return (
-                <div key={id} className={styles.ProjectsTile__item} style={{ backgroundImage: bg }}>
-                  <Link to={src} className={styles.ProjectsTile__link}>
-                    <div className={styles.ProjectsTile__text}>
-                      <div className={styles.ProjectsTile__num}>{String(id).padStart(2, '0')}</div>
-                      <div className={styles.ProjectsTile__title} dangerouslySetInnerHTML={{ __html: items[id - 1].title }} />
-                    </div>
-                  </Link>
-                </div>
-              );
-            })}
+            {items.map(({ id, picture, src }) => (
+              <div key={id} className={styles.ProjectsTile__item} style={bgSet(picture[0], picture[1])}>
+                <Link to={src} className={styles.ProjectsTile__link}>
+                  <div className={styles.ProjectsTile__text}>
+                    <div className={styles.ProjectsTile__num}>{String(id).padStart(2, '0')}</div>
+                    <div className={styles.ProjectsTile__title} dangerouslySetInnerHTML={{ __html: items[id - 1].title }} />
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
+
         <div className={`${styles.ProjectsTile__images} ${hoveredIndex !== null ? styles[`active${hoveredIndex + 1}`] : ''}`}>
-          {items.map(({ id, picture }, idx) => {
-            const bg = `url(${isDesktop ? picture[1] : picture[0]})`;
-            return <div key={id} className={styles.ProjectsTile__image} style={{ backgroundImage: bg }} />;
-          })}
+          {items.map(({ id, picture }) => (
+            <div key={id} className={styles.ProjectsTile__image} style={bgSet(picture[0], picture[1])} />
+          ))}
         </div>
+
         <div className={`${styles.ProjectsTile__layer} ${styles.ProjectsTile__layer_top}`}>
           <div className={styles.ProjectsTile__items}>
             {items.map(({ id, src }, idx) => (
