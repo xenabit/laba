@@ -7,36 +7,51 @@ import path from 'path';
 export default defineConfig({
   plugins: [
     react(),
-    svgr(),
-    // Убираем ViteImageOptimizer, так как изображения уже оптимизированы
+
+    svgr({
+      svgrOptions: {},
+      svgo: true,
+      svgoConfig: {
+        multipass: true,
+        plugins: [
+          'preset-default',
+          { name: 'removeViewBox', active: false },
+          { name: 'cleanupIds', params: { minify: true } },
+          { name: 'convertPathData', params: { floatPrecision: 2 } },
+        ],
+      },
+    }),
+
     viteStaticCopy({
       targets: [
         {
-          src: 'src/assets/images/**/*.{jpg,png,jpeg,webp,avif,svg}', // Копируем все изображения
-          dest: 'assets/images', // В dist/assets/images
+          src: 'src/assets/images/**/*.{jpg,jpeg,png,webp,avif,svg}',
+          dest: 'assets/images',
         },
         {
           src: 'src/assets/docs/*.pdf',
-          dest: 'assets/docs', // Копируем PDF
+          dest: 'assets/docs',
         },
         {
           src: 'src/assets/videos/*.{mp4,webm}',
-          dest: 'assets/videos', // Копируем видео
+          dest: 'assets/videos',
         },
       ],
     }),
   ],
+
   server: {
-    historyApiFallback: true,
     port: 3001,
     open: true,
   },
-  base: './', // Относительные пути для билда
+  base: './',
+
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // Алиас для src
+      '@': path.resolve(__dirname, './src'),
     },
   },
+
   css: {
     preprocessorOptions: {
       scss: {
@@ -44,21 +59,21 @@ export default defineConfig({
       },
     },
   },
+
   build: {
     outDir: 'dist',
-    assetsDir: 'assets', // Папка для статических ресурсов
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
-          // Сохраняем структуру папок для изображений, видео и других активов
-          const extType = assetInfo.name.split('.').pop();
-          if (/png|jpg|jpeg|webp|avif|svg/i.test(extType)) {
-            return 'assets/images/[name].[ext]';
+          const ext = path.extname(assetInfo.name || '').slice(1).toLowerCase();
+          if (/png|jpe?g|webp|avif|svg/.test(ext)) {
+            return 'assets/images/[name]-[hash][extname]';
           }
-          if (/mp4/i.test(extType)) {
-            return 'assets/videos/[name].[ext]';
+          if (/mp4|webm/.test(ext)) {
+            return 'assets/videos/[name]-[hash][extname]';
           }
-          return 'assets/[name].[ext]';
+          return 'assets/[name]-[hash][extname]';
         },
       },
     },

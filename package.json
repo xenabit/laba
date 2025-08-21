@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run optimize:svg && vite build",
     "prod": "vite preview --port 3001 --open",
+    "optimize:svg": "svgo -f src/assets/images -r --config=svgo.config.js",
+    "optimize:svg:check": "svgo -f src/assets/images -r -n --config=svgo.config.js",
     "convert-images": "node convert-images.js",
-    "convert-videos": "node convert-videos.js"
+    "convert-videos": "node convert-videos.js",
+    "convert:heavy": "npm run --if-present convert-images && npm run --if-present convert-videos"
   },
   "dependencies": {
     "dompurify": "^3.2.0",
@@ -22,13 +25,13 @@
     "react-router-dom": "^6.26.2",
     "react-spring": "^9.7.4",
     "react-transition-group": "^4.4.5",
-    "sharp": "^0.33.5",
     "swiper": "^11.2.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "esbuild": "^0.25.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
@@ -39,12 +42,13 @@
     "postcss-cli": "^11.0.0",
     "prettier-plugin-css-order": "^2.1.2",
     "sass": "^1.89.2",
-    "vite": "^5.4.8",
-    "vite-imagetools": "^7.1.0",
+    "sharp": "^0.34.3",
+    "sharp-cli": "^5.2.0",
+    "svgo": "^4.0.0",
+    "vite": "^7.1.3",
     "vite-plugin-html": "^3.2.2",
     "vite-plugin-image-optimizer": "^1.1.9",
-    "vite-plugin-imagemin": "^0.6.1",
-    "vite-plugin-static-copy": "^1.0.0",
-    "vite-plugin-svgr": "^4.2.0"
+    "vite-plugin-static-copy": "^3.1.2",
+    "vite-plugin-svgr": "^4.3.0"
   }
 }
