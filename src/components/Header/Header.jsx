@@ -1,4 +1,4 @@
-import { forwardRef, memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { forwardRef, memo, useEffect, useLayoutEffect, useRef, useState, startTransition } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -24,7 +24,7 @@ const BALLOON_C_CONFIG = {
   },
 };
 
-const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete }, ref) => {
+const Header = forwardRef(function Header({ loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete }, ref) {
   const [isActive, setIsActive] = useState(false);
   const [activeTab, setActiveTab] = useState('/');
   const [isDesktop, setIsDesktop] = useState(typeof window !== 'undefined' ? window.matchMedia('(min-width: 1440px)').matches : false);
@@ -50,9 +50,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   const isSolid = !isHome || loadingStage === 'complete';
 
   useEffect(() => {
-    const currentPath = location.pathname;
-    setActiveTab(currentPath);
-    localStorage.setItem('activeTab', currentPath);
+    setActiveTab(location.pathname);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -60,6 +58,14 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     img.src = headerMenuImg;
     if (img.decode) img.decode().catch(() => {});
   }, []);
+
+  const refreshST = () => {
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(() => ScrollTrigger.refresh());
+    } else {
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    }
+  };
 
   const balloonsEntryAnimate = () => {
     const balloon = balloonRef.current;
@@ -124,8 +130,8 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       (ANIMATION_CONFIG.MAIN_ENTRY_ANIM + ANIMATION_CONFIG.BALOON_MOVE_DURATION) * 1000
     );
 
-    window.addEventListener('wheel', handleScroll, { passive: false });
-    window.addEventListener('touchmove', handleScroll, { passive: false });
+    window.addEventListener('wheel', handleScroll, { passive: true });
+    window.addEventListener('touchmove', handleScroll, { passive: true });
 
     return () => {
       clearTimeout(magnetTimeout);
@@ -228,7 +234,6 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
       gsap.killTweensOf([balloonRef.current, logoRef.current]);
       return;
     }
-
     if (!balloonRef.current || !logoRef.current || !containerRef.current) {
       console.warn('Balloon, logo, or container ref is not ready');
       return;
@@ -260,13 +265,9 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
   }, [loadingStage, onBalloonsToCenterComplete, onMaxBalloonSize, onBalloonsShrinkComplete, shouldRenderBalloon]);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1440px)');
-    const handleResize = () => {
-      setIsDesktop(mediaQuery.matches);
-    };
-
+    const mq = window.matchMedia('(min-width: 1440px)');
+    const handleResize = () => setIsDesktop(mq.matches);
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -278,21 +279,14 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
 
     const header = ref.current;
     const headerTop = header.querySelector(`.${styles.Header__top}`);
-    const border = headerTop.querySelector(`.${styles.Header__border}`);
+    const border = headerTop?.querySelector(`.${styles.Header__border}`);
     const toggle = header.querySelector(`.${styles.Header__toggle}`);
     const desc = header.querySelector(`.${styles.Header__desc}`);
     const logo = logoRef.current;
     const loading = header.querySelector(`.${styles.Header__loading}`);
 
     if (!headerTop || !border || !logo || !toggle || !desc || !loading) {
-      console.warn('Header elements missing', {
-        headerTop,
-        border,
-        logo,
-        toggle,
-        desc,
-        loading,
-      });
+      console.warn('Header elements missing', { headerTop, border, logo, toggle, desc, loading });
       return;
     }
 
@@ -364,103 +358,78 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
     }
 
     const borderHeight = isDesktop ? 3 : 2;
+    gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-2)' });
 
-    gsap.set(border, {
-      height: borderHeight,
-      backgroundColor: 'var(--prime-2)',
-    });
+    const skipST = window.matchMedia('(pointer: coarse)').matches;
 
-    const showAnim = gsap.fromTo(
-      header,
-      { yPercent: 0 },
-      {
-        yPercent: -100,
-        paused: true,
-        duration: 0.2,
-        ease: 'power1.out',
-      }
-    );
+    let st = null;
+    let showAnim = null;
+    let borderAnim = null;
 
-    const borderAnim = gsap.fromTo(
-      border,
-      { height: borderHeight },
-      {
-        height: 0,
-        duration: 0.2,
-        ease: 'power1.out',
-        paused: true,
-      }
-    );
+    if (!skipST) {
+      showAnim = gsap.fromTo(header, { yPercent: 0 }, { yPercent: -100, paused: true, duration: 0.2, ease: 'power1.out' });
+      borderAnim = gsap.fromTo(border, { height: borderHeight }, { height: 0, duration: 0.2, ease: 'power1.out', paused: true });
 
-    showAnimRef.current = showAnim;
-    borderAnimRef.current = borderAnim;
+      showAnimRef.current = showAnim;
+      borderAnimRef.current = borderAnim;
 
-    const st = ScrollTrigger.create({
-      trigger: '#smooth-content',
-      start: 'top top+=50',
-      end: 'bottom top',
-      onUpdate: (self) => {
-        const scrollPos = self.scroll();
-        if (loadingStage !== 'complete') return;
+      st = ScrollTrigger.create({
+        trigger: '#smooth-content',
+        start: 'top top+=50',
+        end: 'bottom top',
+        onUpdate: (self) => {
+          const scrollPos = self.scroll();
+          if (loadingStage !== 'complete') return;
 
-        if (isActiveRef.current) {
-          showAnim.pause();
-          borderAnim.pause();
-          gsap.set(header, { yPercent: 0 });
-          gsap.set([headerTop, toggle, border, logo], { opacity: 1 });
-          gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
-          gsap.set(loading, { height: '100%' });
-        } else if (scrollPos <= 50) {
-          showAnim.reverse();
-          borderAnim.reverse();
-          gsap.set(border, { backgroundColor: 'var(--prime-2)' });
-        } else {
-          if (self.direction === -1) {
+          if (isActiveRef.current) {
+            showAnim.pause();
+            borderAnim.pause();
+            gsap.set(header, { yPercent: 0 });
+            gsap.set([headerTop, toggle, border, logo], { opacity: 1 });
+            gsap.set(border, { height: borderHeight, backgroundColor: 'var(--prime-1)' });
+            gsap.set(loading, { height: '100%' });
+          } else if (scrollPos <= 50) {
             showAnim.reverse();
-            borderAnim.play();
+            borderAnim.reverse();
+            gsap.set(border, { backgroundColor: 'var(--prime-2)' });
           } else {
-            showAnim.play();
-            borderAnim.play();
+            if (self.direction === -1) {
+              showAnim.reverse();
+              borderAnim.play();
+            } else {
+              showAnim.play();
+              borderAnim.play();
+            }
           }
-        }
-      },
-      scrub: true,
-    });
+        },
+        scrub: true,
+      });
 
-    if (loadingStage === 'complete' && window.scrollY > 50) {
-      showAnim.play();
-      borderAnim.play();
-    } else {
-      showAnim.reverse();
-      borderAnim.reverse();
+      if (loadingStage === 'complete' && window.scrollY > 50) {
+        showAnim.play();
+        borderAnim.play();
+      } else {
+        showAnim.reverse();
+        borderAnim.reverse();
+      }
+      refreshST();
     }
-
-    ScrollTrigger.refresh();
 
     return () => {
       st?.kill();
-      showAnim.kill();
-      borderAnim.kill();
+      showAnim?.kill?.();
+      borderAnim?.kill?.();
       gsap.killTweensOf([header, border, logo, toggle, desc, headerTop, loading]);
     };
   }, [ref, loadingStage, isDesktop]);
-
-  useEffect(() => {
-    const savedTab = localStorage.getItem('activeTab') || location.pathname;
-    setActiveTab(savedTab);
-  }, [location.pathname]);
 
   useEffect(() => {
     document.body.style.overflow = isActive ? 'hidden' : '';
     return () => (document.body.style.overflow = '');
   }, [isActive]);
 
-  const handleTabClick = (path) => {
-    if (path !== activeTab) {
-      setActiveTab(path);
-      localStorage.setItem('activeTab', path);
-    }
-    setIsActive(false);
+  const handleTabClick = () => {
+    startTransition(() => setIsActive(false));
   };
 
   return (
@@ -479,29 +448,36 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
               </picture>
             </div>
           </div>
+
           <div className={styles.Header__top}>
-            <Link to="/" className={styles.Header__desc} onClick={() => handleTabClick('/')}>
+            <Link to="/" className={styles.Header__desc} onPointerDown={handleTabClick} onClick={(e) => e.currentTarget.blur()}>
               digital agency
             </Link>
-            <Link to="/" className={styles.Header__logomob} onClick={() => handleTabClick('/')}>
+
+            <Link to="/" className={styles.Header__logomob} onPointerDown={handleTabClick} onClick={(e) => e.currentTarget.blur()}>
               <picture>
                 <img src={logoImg} alt="Логотип Laba" />
               </picture>
             </Link>
+
             <button className={styles.Header__toggle} onClick={() => setIsActive((prev) => !prev)} aria-label={isActive ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={isActive}>
               <span></span>
               <span></span>
               <span></span>
             </button>
+
             <div className={styles.Header__border} aria-hidden="true"></div>
           </div>
+
           <div className={styles.Header__inner}>
             <div className={styles.Header__bg}>
               <picture>
                 <img src={headerMenuImg} alt="" decoding="async" />
               </picture>
             </div>
+
             <NavLinks activeTab={activeTab} onTabClick={handleTabClick} />
+
             <ul className={styles.Header__links}>
               <li>
                 <a href={presentationPdf} target="_blank" rel="noopener noreferrer">
@@ -509,6 +485,7 @@ const Header = forwardRef(({ loadingStage, onBalloonsToCenterComplete, onMaxBall
                 </a>
               </li>
             </ul>
+
             <div className={styles.Header__contacts}>
               <a className={styles.Header__mail} href="mailto:info@laba-laba.ru">
                 info@laba-laba.ru

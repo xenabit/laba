@@ -13,6 +13,23 @@ export default function GalleryTabs() {
   const [activeFilter, setActiveFilter] = useState(initialFilter);
   const isMobile = useIsMobile();
 
+  const supportsHover = typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  const rafRef = useRef(0);
+
+  const handleFilterBtnMove = useCallback((e) => {
+    const el = e.currentTarget;
+    const { clientX, clientY } = e;
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const { left, top } = el.getBoundingClientRect();
+      el.style.setProperty('--x4', `${clientX - left}px`);
+      el.style.setProperty('--y4', `${clientY - top}px`);
+    });
+  }, []);
+
+  useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
+
   useEffect(() => {
     const f = searchParams.get('filter') || 'all';
     if (f !== activeFilter) setActiveFilter(f);
@@ -26,33 +43,7 @@ export default function GalleryTabs() {
     [setSearchParams]
   );
 
-  const handleMouseEnter = useCallback((v) => v.play().catch(() => {}), []);
-  const handleMouseLeave = useCallback((v) => v.pause(), []);
-
   const filtered = useMemo(() => (activeFilter === 'all' ? projects : projects.filter((it) => (Array.isArray(it.type) ? it.type : [it.type]).includes(activeFilter))), [activeFilter]);
-
-  const videoPropsList = useMemo(() => {
-    return filtered.map((item, idx) => {
-      const preloadValue = isMobile ? 'metadata' : 'auto';
-      const base = {
-        autoPlay: true,
-        muted: true,
-        loop: true,
-        preload: preloadValue,
-        playsInline: true,
-        poster: item.video.poster,
-      };
-      if (idx % 2 === 1) {
-        return base;
-      }
-      return {
-        ...base,
-        onLoadedMetadata: (e) => e.currentTarget.pause(),
-        onMouseEnter: (e) => handleMouseEnter(e.currentTarget),
-        onMouseLeave: (e) => handleMouseLeave(e.currentTarget),
-      };
-    });
-  }, [filtered, isMobile, handleMouseEnter, handleMouseLeave]);
 
   const nodeRefs = useRef({});
   const transitionClassNames = {
@@ -79,11 +70,7 @@ export default function GalleryTabs() {
           {projectsTypes.map((el) => (
             <li key={el.id}>
               <button
-                onMouseMove={(e) => {
-                  const { left, top } = e.currentTarget.getBoundingClientRect();
-                  e.currentTarget.style.setProperty('--x4', `${e.clientX - left}px`);
-                  e.currentTarget.style.setProperty('--y4', `${e.clientY - top}px`);
-                }}
+                onPointerMove={supportsHover ? handleFilterBtnMove : undefined}
                 onClick={() => handleFilterChange(el.type)}
                 className={`${styles.filterBtn} ${activeFilter === el.type ? styles.active : ''}`}
               >
@@ -98,12 +85,14 @@ export default function GalleryTabs() {
         {filtered.map((item, idx) => {
           if (!nodeRefs.current[item.id]) nodeRefs.current[item.id] = createRef();
           const nodeRef = nodeRefs.current[item.id];
-          const videoProps = videoPropsList[idx];
+
+          const hoverPlayable = idx % 2 === 0;
+          const preload = isMobile ? 'metadata' : 'auto';
 
           return (
             <CSSTransition key={item.id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
               <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
-                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
+                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} hoverPlayable={hoverPlayable} preload={preload} />
               </li>
             </CSSTransition>
           );

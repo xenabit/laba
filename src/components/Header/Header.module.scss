@@ -607,14 +607,10 @@
   .Header__main {
     background-color: var(--prime-1);
   }
-  // .Header__border {
-  //   display: none;
-  // }
 }
 
-/* чтобы не пересчитывать лишнее при открытии */
-// .Header__inner, .Header__bg { will-change: transform, opacity; }
-// .Header__bg { contain: paint; }
-// html.no-scroll { overflow: hidden; }
+
+
+
 
 

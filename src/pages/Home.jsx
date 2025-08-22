@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import '../App.scss';
 import Intro2 from '../components/Intro2/Intro2';

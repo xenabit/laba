@@ -7,6 +7,7 @@ import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
 import LoadingMainScreen from './components/LoadingMainScreen/LoadingMainScreen.jsx';
+import { attachVideoBlobPagehideCleanup, setVideoBlobCacheLimit } from './utils/useVideoBlob';
 
 const PageNotFound = lazy(() => import('./components/PageNotFound/PageNotFound.jsx'));
 const GalleryTabs = lazy(() => import('./components/GalleryTabs/GalleryTabs.jsx'));
@@ -40,6 +41,11 @@ export default function App() {
     return !sessionStorage.getItem('hasVisitedHome') && location.pathname === '/';
   });
   const [loadingStage, setLoadingStage] = useState(isFirstVisit ? 'initial' : 'complete');
+
+  useEffect(() => {
+    attachVideoBlobPagehideCleanup();
+    setVideoBlobCacheLimit(14);
+  }, []);
 
   useEffect(() => {
     if (isFirstVisit) sessionStorage.setItem('hasVisitedHome', 'true');
@@ -144,7 +150,7 @@ export default function App() {
     );
 
     const startObserve = () => {
-      root.querySelectorAll('video[data-preload]:not([data-preloaded="1"])').forEach((el) => observer.observe(el));
+      root.querySelectorAll('video[data-preload]:not([data-preloaded="1"]):not([data-blob-managed="1"])').forEach((el) => observer.observe(el));
     };
 
     if ('requestAnimationFrame' in window) {
