@@ -63,12 +63,21 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => {
-    if (loadingStage !== 'complete') return;
-    const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
-    if (isIOS) return;
+useEffect(() => {
+  if (loadingStage !== 'complete') return;
+  const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
+  if (isIOS) return;
 
-    const create = () => {
+  let rafId;
+
+  const createWhenReady = () => {
+    const wrapper = document.getElementById('smooth-wrapper');
+    const content = document.getElementById('smooth-content');
+    if (!wrapper || !content) {
+      rafId = requestAnimationFrame(createWhenReady);
+      return;
+    }
+    try {
       smootherRef.current = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
@@ -76,23 +85,20 @@ export default function App() {
         effects: true,
       });
       ScrollTrigger.refresh();
-    };
+    } catch {}
+  };
 
-    if ('requestAnimationFrame' in window) {
-      window.requestAnimationFrame(create);
-    } else {
-      setTimeout(create, 0);
+  rafId = requestAnimationFrame(createWhenReady);
+
+  return () => {
+    cancelAnimationFrame(rafId);
+    if (smootherRef.current) {
+      smootherRef.current.kill();
+      smootherRef.current = null;
     }
+  };
+}, [loadingStage]);
 
-    return () => {
-      if (smootherRef.current) {
-        smootherRef.current.kill();
-        smootherRef.current = null;
-      }
-      ScrollTrigger.refresh();
-      document.body.style.overflow = '';
-    };
-  }, [loadingStage]);
 
   useEffect(() => {
     if (location.pathname !== '/' && loadingStage !== 'complete') {

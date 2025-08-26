@@ -12,32 +12,34 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
   const videoEl = useRef(null);
 
   const useMp4 = isIOS || isMobile;
-  const mp4Src = useMp4 ? video?.mp4 : undefined;
+  const mp4Src  = useMp4 ? video?.mp4  : undefined;
   const webmSrc = !useMp4 ? video?.webm : undefined;
+  const allowBlob = !isIOS && !isMobile;
 
   const [blobEnabled, setBlobEnabled] = useState(false);
 
   useEffect(() => {
+    if (!allowBlob) return;
     const el = videoEl.current;
     if (!el || typeof IntersectionObserver === 'undefined') {
       setBlobEnabled(true);
       return;
     }
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setBlobEnabled(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: '400px', threshold: 0.01 }
-    );
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        setBlobEnabled(true);
+        io.disconnect();
+      }
+    }, { rootMargin: '400px', threshold: 0.01 });
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [allowBlob]);
 
-  const mp4 = useVideoBlob(mp4Src, blobEnabled);
-  const webm = useVideoBlob(webmSrc, blobEnabled);
+  const mp4Blob  = useVideoBlob(mp4Src,  allowBlob && blobEnabled);
+  const webmBlob = useVideoBlob(webmSrc, allowBlob && blobEnabled);
+
+  const mp4  = allowBlob ? mp4Blob  : mp4Src;
+  const webm = allowBlob ? webmBlob : webmSrc;
 
   const onMouseEnter = useCallback(() => {
     if (!hoverPlayable || !videoEl.current) return;
@@ -55,25 +57,40 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
     }
   }, [hoverPlayable]);
 
+    const onPointerDownLink = useCallback((e) => {
+       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+    const v = videoEl.current;
+    if (!v) return;
+    v.muted = true;
+    v.playsInline = true;
+    v.webkitPlaysInline = true;
+    try { v.play(); } catch {}
+  }, []);
+
   return (
     <div ref={ref} className={styles.GalleryItem__item}>
-      <Link to={href} state={{ from: location }}>
+       <Link to={href} state={{ from: location }} onPointerDown={onPointerDownLink} onClick={(e) => e.currentTarget.blur()}>
         <video
           ref={videoEl}
           data-preload
-          data-blob-managed="1"
+          {...(allowBlob ? { 'data-blob-managed': '1' } : {})}
           autoPlay={!hoverPlayable}
           muted
           loop
           playsInline
+          webkit-playsinline="true"
           preload={preload}
           poster={video?.poster}
+          controls={false}
+          disablePictureInPicture
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onLoadedMetadata={onLoadedMetadata}
         >
           {webm && !useMp4 && <source src={webm} type="video/webm" />}
-          {mp4 && <source src={mp4} type="video/mp4" />}
+          {mp4  && <source src={mp4}  type="video/mp4"  />}
         </video>
         <h2>
           <span>{desc}</span>
