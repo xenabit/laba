@@ -1,0 +1,9 @@
+.LoadingMainScreen__container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+}/*# sourceMappingURL=LoadingMainScreen.module.css.map */

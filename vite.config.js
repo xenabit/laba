@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 
 export default defineConfig({
@@ -13,12 +14,7 @@ export default defineConfig({
       svgo: true,
       svgoConfig: {
         multipass: true,
-        plugins: [
-          'preset-default',
-          { name: 'removeViewBox', active: false },
-          { name: 'cleanupIds', params: { minify: true } },
-          { name: 'convertPathData', params: { floatPrecision: 2 } },
-        ],
+        plugins: ['preset-default', { name: 'removeViewBox', active: false }, { name: 'cleanupIds', params: { minify: true } }, { name: 'convertPathData', params: { floatPrecision: 2 } }],
       },
     }),
 
@@ -37,6 +33,36 @@ export default defineConfig({
           dest: 'assets/videos',
         },
       ],
+    }),
+
+    VitePWA({
+      registerType: 'autoUpdate',
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.js',
+
+      injectManifest: {
+        globPatterns: [
+          '**/*.{js,css,html,ico}',
+          'assets/images/*.{svg,ico}',
+          // 'assets/fonts/*.{woff2,woff}',
+        ],
+        globIgnores: [
+          'sw.js',
+          '**/sw.js',
+          '**/assets/videos/**',
+          '**/assets/images/**/*.png',
+          '**/assets/images/**/*.jpg',
+          '**/assets/images/**/*.jpeg',
+          '**/assets/images/**/*.webp',
+          '**/assets/images/**/*.avif',
+          '**/assets/images/header-menu*.svg',
+          '**/assets/images/case-slider-*.svg',
+          '**/assets/images/case-iframe-*.{jpg,png}',
+          '**/assets/images/cases-slider-full-*.*',
+        ],
+      },
+      devOptions: { enabled: true, type: 'module' },
     }),
   ],
 
@@ -66,7 +92,10 @@ export default defineConfig({
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
-          const ext = path.extname(assetInfo.name || '').slice(1).toLowerCase();
+          const ext = path
+            .extname(assetInfo.name || '')
+            .slice(1)
+            .toLowerCase();
           if (/png|jpe?g|webp|avif|svg/.test(ext)) {
             return 'assets/images/[name]-[hash][extname]';
           }

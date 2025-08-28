@@ -1,0 +1,27 @@
+.BackgroundLetters {
+  position: absolute;
+}
+.BackgroundLetters__laba {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 52px;
+}
+.BackgroundLetters__letter svg {
+  display: block;
+}
+.BackgroundLetters__letter_l {
+  margin-right: 19px;
+}
+.BackgroundLetters__letter_a {
+  margin-left: 6px;
+}
+.BackgroundLetters__letter_b {
+  margin-left: 19px;
+}
+.BackgroundLetters__spot {
+  width: 1.9vw;
+  height: 1.9vw;
+  display: block;
+  margin-left: 24px;
+}/*# sourceMappingURL=BackgroundLetters.module.css.map */

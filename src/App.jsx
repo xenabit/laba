@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
+import KeepAliveOutlet from './KeepAliveOutlet.jsx';
 import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
@@ -63,42 +64,41 @@ export default function App() {
     }
   }, []);
 
-useEffect(() => {
-  if (loadingStage !== 'complete') return;
-  const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
-  if (isIOS) return;
+  useEffect(() => {
+    if (loadingStage !== 'complete') return;
+    const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
+    if (isIOS) return;
 
-  let rafId;
+    let rafId;
 
-  const createWhenReady = () => {
-    const wrapper = document.getElementById('smooth-wrapper');
-    const content = document.getElementById('smooth-content');
-    if (!wrapper || !content) {
-      rafId = requestAnimationFrame(createWhenReady);
-      return;
-    }
-    try {
-      smootherRef.current = ScrollSmoother.create({
-        wrapper: '#smooth-wrapper',
-        content: '#smooth-content',
-        smooth: 1.5,
-        effects: true,
-      });
-      ScrollTrigger.refresh();
-    } catch {}
-  };
+    const createWhenReady = () => {
+      const wrapper = document.getElementById('smooth-wrapper');
+      const content = document.getElementById('smooth-content');
+      if (!wrapper || !content) {
+        rafId = requestAnimationFrame(createWhenReady);
+        return;
+      }
+      try {
+        smootherRef.current = ScrollSmoother.create({
+          wrapper: '#smooth-wrapper',
+          content: '#smooth-content',
+          smooth: 1.5,
+          effects: true,
+        });
+        ScrollTrigger.refresh();
+      } catch {}
+    };
 
-  rafId = requestAnimationFrame(createWhenReady);
+    rafId = requestAnimationFrame(createWhenReady);
 
-  return () => {
-    cancelAnimationFrame(rafId);
-    if (smootherRef.current) {
-      smootherRef.current.kill();
-      smootherRef.current = null;
-    }
-  };
-}, [loadingStage]);
-
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (smootherRef.current) {
+        smootherRef.current.kill();
+        smootherRef.current = null;
+      }
+    };
+  }, [loadingStage]);
 
   useEffect(() => {
     if (location.pathname !== '/' && loadingStage !== 'complete') {
@@ -120,13 +120,28 @@ useEffect(() => {
     const root = document.getElementById('smooth-content');
     if (!root) return;
 
+    const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
     const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
 
     const saveData = !!(conn && conn.saveData);
     const eff = (conn && conn.effectiveType) || '4g';
     const isMobile = window.matchMedia('(max-width: 1024px)').matches;
 
+    if (isIOS) {
+      const vids = root.querySelectorAll('video[data-preload]:not([data-preloaded="1"])');
+      vids.forEach((v) => {
+        try {
+          if (v.preload !== 'auto') v.preload = 'auto';
+          if (v.readyState < 2) v.load();
+          v.dataset.preloaded = '1';
+        } catch {}
+      });
+      return;
+    }
+
     const rootMargin = saveData ? '120px' : isMobile ? (/(^|-)2g/.test(eff) ? '150px' : '220px') : /(^|-)3g/.test(eff) ? '300px' : '800px';
+
+    let seq = 0;
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
@@ -139,17 +154,23 @@ useEffect(() => {
             continue;
           }
 
-          if (v.dataset.preloaded === '1' || v.readyState >= 2) {
+          if (!v.isConnected || v.dataset.preloaded === '1' || v.readyState >= 2) {
             obs.unobserve(v);
             continue;
           }
 
-          v.preload = 'auto';
-          try {
-            v.load();
-          } catch (e) {}
-          v.dataset.preloaded = '1';
-          obs.unobserve(v);
+          const delay = Math.min(seq * 60, 360);
+          seq += 1;
+
+          setTimeout(() => {
+            if (!v.isConnected) return;
+            v.preload = 'auto';
+            try {
+              v.load();
+            } catch {}
+            v.dataset.preloaded = '1';
+            obs.unobserve(v);
+          }, delay);
         }
       },
       { rootMargin, threshold: 0.01 }
@@ -159,11 +180,8 @@ useEffect(() => {
       root.querySelectorAll('video[data-preload]:not([data-preloaded="1"]):not([data-blob-managed="1"])').forEach((el) => observer.observe(el));
     };
 
-    if ('requestAnimationFrame' in window) {
-      requestAnimationFrame(startObserve);
-    } else {
-      setTimeout(startObserve, 0);
-    }
+    if ('requestAnimationFrame' in window) requestAnimationFrame(startObserve);
+    else setTimeout(startObserve, 0);
 
     return () => observer.disconnect();
   }, [location.pathname]);
@@ -201,7 +219,11 @@ useEffect(() => {
         >
           <Routes>
             <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
-            <Route path="/portfolio" element={<GalleryTabs loadingStage={loadingStage} />} />
+
+            <Route element={<KeepAliveOutlet />}>
+              <Route path="/portfolio" element={<GalleryTabs loadingStage={loadingStage} />} />
+            </Route>
+
             <Route path="/contact" element={<Contacts />} />
             <Route path="/form" element={<FormBrief />} />
             <Route path="/information" element={<PrivacyPolicy />} />

@@ -6,14 +6,18 @@ import useIsMobile from '../../hooks/useIsMobile';
 
 const isIOS = typeof navigator !== 'undefined' && /iP(hone|ad|od)/.test(navigator.userAgent);
 
-const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, hoverPlayable, preload }, ref) {
+const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, hoverPlayable, preload, fallbackPoster }, ref) {
   const location = useLocation();
   const isMobile = useIsMobile();
   const videoEl = useRef(null);
 
+  const autoPlay = !hoverPlayable && !isIOS;
+  const effectivePreload = isIOS ? 'auto' : preload;
+
   const useMp4 = isIOS || isMobile;
-  const mp4Src  = useMp4 ? video?.mp4  : undefined;
+  const mp4Src = useMp4 ? video?.mp4 : undefined;
   const webmSrc = !useMp4 ? video?.webm : undefined;
+
   const allowBlob = !isIOS && !isMobile;
 
   const [blobEnabled, setBlobEnabled] = useState(false);
@@ -25,20 +29,23 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
       setBlobEnabled(true);
       return;
     }
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some((e) => e.isIntersecting)) {
-        setBlobEnabled(true);
-        io.disconnect();
-      }
-    }, { rootMargin: '400px', threshold: 0.01 });
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setBlobEnabled(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '400px', threshold: 0.01 }
+    );
     io.observe(el);
     return () => io.disconnect();
   }, [allowBlob]);
 
-  const mp4Blob  = useVideoBlob(mp4Src,  allowBlob && blobEnabled);
+  const mp4Blob = useVideoBlob(mp4Src, allowBlob && blobEnabled);
   const webmBlob = useVideoBlob(webmSrc, allowBlob && blobEnabled);
 
-  const mp4  = allowBlob ? mp4Blob  : mp4Src;
+  const mp4 = allowBlob ? mp4Blob : mp4Src;
   const webm = allowBlob ? webmBlob : webmSrc;
 
   const onMouseEnter = useCallback(() => {
@@ -57,8 +64,8 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
     }
   }, [hoverPlayable]);
 
-    const onPointerDownLink = useCallback((e) => {
-       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const onPointerDownLink = useCallback((e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if (e.pointerType === 'mouse' && e.button !== 0) return;
 
     const v = videoEl.current;
@@ -66,23 +73,25 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
     v.muted = true;
     v.playsInline = true;
     v.webkitPlaysInline = true;
-    try { v.play(); } catch {}
+    try {
+      v.play();
+    } catch {}
   }, []);
 
   return (
     <div ref={ref} className={styles.GalleryItem__item}>
-       <Link to={href} state={{ from: location }} onPointerDown={onPointerDownLink} onClick={(e) => e.currentTarget.blur()}>
+      <Link to={href} state={{ from: location }} onPointerDown={onPointerDownLink} onClick={(e) => e.currentTarget.blur()}>
         <video
           ref={videoEl}
           data-preload
           {...(allowBlob ? { 'data-blob-managed': '1' } : {})}
-          autoPlay={!hoverPlayable}
+          autoPlay={autoPlay}
           muted
           loop
           playsInline
           webkit-playsinline="true"
-          preload={preload}
-          poster={video?.poster}
+          preload={effectivePreload}
+          poster={video?.poster || fallbackPoster}
           controls={false}
           disablePictureInPicture
           onMouseEnter={onMouseEnter}
@@ -90,7 +99,7 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
           onLoadedMetadata={onLoadedMetadata}
         >
           {webm && !useMp4 && <source src={webm} type="video/webm" />}
-          {mp4  && <source src={mp4}  type="video/mp4"  />}
+          {mp4 && <source src={mp4} type="video/mp4" />}
         </video>
         <h2>
           <span>{desc}</span>
@@ -110,7 +119,8 @@ function areEqual(prev, next) {
     prev.hoverPlayable === next.hoverPlayable &&
     prev.video?.webm === next.video?.webm &&
     prev.video?.mp4 === next.video?.mp4 &&
-    prev.video?.poster === next.video?.poster
+    prev.video?.poster === next.video?.poster &&
+    prev.fallbackPoster === next.fallbackPoster
   );
 }
 

@@ -1,0 +1,63 @@
+.Balloons__container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.Balloons__item {
+  position: absolute;
+  will-change: transform;
+  transform-origin: center center;
+}
+.Balloons__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.Balloons__item--cb2 {
+  width: 37vw;
+}
+.Balloons__item--lb2 {
+  width: 23vw;
+}
+.Balloons__item--r {
+  width: 6.3vw;
+}
+.Balloons__item--lt1 {
+  width: 34vw;
+}
+.Balloons__item--rb2 {
+  width: 22vw;
+}
+.Balloons__item--rt3 {
+  width: 21vw;
+}
+.Balloons__item--ct1 {
+  width: 11vw;
+}
+.Balloons__item--rt2 {
+  width: 7vw;
+}
+.Balloons__item--rt1 {
+  width: 12vw;
+}
+.Balloons__item--rb1 {
+  width: 8vw;
+}
+.Balloons__item--rb3 {
+  width: 18vw;
+}
+.Balloons__item--ct2 {
+  width: 8vw;
+}
+.Balloons__item--ct3 {
+  width: 5vw;
+}
+.Balloons__item--lb1 {
+  width: 21.6vw;
+}
+.Balloons__item--lt2 {
+  width: 25vw;
+}
+.Balloons__item--cb1 {
+  width: 7.4vw;
+}/*# sourceMappingURL=Balloons.module.css.map */
