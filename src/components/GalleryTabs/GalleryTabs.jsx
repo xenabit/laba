@@ -6,7 +6,7 @@ import itemStyles from '../GalleryItem/GalleryItem.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { projects, projectsTypes } from '../../constants/projects';
 import useIsMobile from '../../hooks/useIsMobile';
-import posters from '@/assets/videos/posters.js';
+// import posters from '@/assets/videos/posters.js';
 
 export default function GalleryTabs() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -89,12 +89,12 @@ export default function GalleryTabs() {
 
           const hoverPlayable = idx % 2 === 0;
           const preload = isMobile ? 'metadata' : 'auto';
-          const fallbackPoster = posters[idx % posters.length];
+          // const fallbackPoster = posters[idx % posters.length];
 
           return (
             <CSSTransition key={item.id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
               <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
-                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} hoverPlayable={hoverPlayable} preload={preload} fallbackPoster={fallbackPoster} />
+                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} hoverPlayable={hoverPlayable} preload={preload} />
               </li>
             </CSSTransition>
           );
