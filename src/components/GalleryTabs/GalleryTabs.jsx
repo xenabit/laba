@@ -6,7 +6,6 @@ import itemStyles from '../GalleryItem/GalleryItem.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { projects, projectsTypes } from '../../constants/projects';
 import useIsMobile from '../../hooks/useIsMobile';
-// import posters from '@/assets/videos/posters.js';
 
 export default function GalleryTabs() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -45,6 +44,12 @@ export default function GalleryTabs() {
   );
 
   const filtered = useMemo(() => (activeFilter === 'all' ? projects : projects.filter((it) => (Array.isArray(it.type) ? it.type : [it.type]).includes(activeFilter))), [activeFilter]);
+  const visibleCount = filtered.length;
+  
+  const isHoverPlayable = useCallback(
+    (idx) => (visibleCount === 1 ? false : idx % 2 === 0),
+    [visibleCount]
+  );
 
   const nodeRefs = useRef({});
   const transitionClassNames = {
@@ -87,14 +92,14 @@ export default function GalleryTabs() {
           if (!nodeRefs.current[item.id]) nodeRefs.current[item.id] = createRef();
           const nodeRef = nodeRefs.current[item.id];
 
-          const hoverPlayable = idx % 2 === 0;
+          const hoverPlayable = isHoverPlayable(idx);
           const preload = isMobile ? 'metadata' : 'auto';
-          // const fallbackPoster = posters[idx % posters.length];
+          const fallbackPoster = item.video?.poster;
 
           return (
             <CSSTransition key={item.id} nodeRef={nodeRef} timeout={600} classNames={transitionClassNames}>
               <li ref={nodeRef} className={itemStyles.GalleryItem__item}>
-                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} hoverPlayable={hoverPlayable} preload={preload} />
+                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} hoverPlayable={hoverPlayable} preload={preload} fallbackPoster={fallbackPoster} />
               </li>
             </CSSTransition>
           );

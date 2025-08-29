@@ -1,4 +1,4 @@
-const files = import.meta.glob('@/assets/videos/poster-*.{jpg,jpeg,png,webp,avif}', {
+const files = import.meta.glob('@/assets/images/poster-*.{jpg,jpeg,png,webp,avif}', {
   eager: true,
   query: '?url',
   import: 'default',

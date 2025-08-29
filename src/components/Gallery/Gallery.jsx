@@ -1,12 +1,11 @@
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import styles from './Gallery.module.scss';
 import itemStyles from '../GalleryItem/GalleryItem.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { projects } from '../../constants/projects';
 import useIsMobile from '../../hooks/useIsMobile';
-import posters from '@/assets/videos/posters.js';
 
-export default function Gallery() {
+function Gallery() {
   const total = 6;
   const isMobile = useIsMobile();
   const isIOS = typeof navigator !== 'undefined' && /iP(hone|ad|od)/.test(navigator.userAgent);
@@ -19,7 +18,7 @@ export default function Gallery() {
         {list.map((item, idx) => {
           const hoverPlayable = idx % 2 === 0;
           const preload = isIOS ? 'auto' : isMobile ? 'metadata' : 'auto';
-          const fallbackPoster = posters[idx % posters.length];
+          const fallbackPoster = item.video?.poster;
 
           return (
             <li key={item.id} className={itemStyles.GalleryItem__item}>
@@ -31,3 +30,5 @@ export default function Gallery() {
     </section>
   );
 }
+
+export default memo(Gallery);

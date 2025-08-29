@@ -1,5 +1,5 @@
-import { forwardRef, useCallback, useRef, useState, useEffect, memo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { forwardRef, useCallback, useRef, useState, useEffect, memo, useMemo } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './GalleryItem.module.scss';
 import { useVideoBlob } from '../../utils/useVideoBlob';
 import useIsMobile from '../../hooks/useIsMobile';
@@ -8,10 +8,13 @@ const isIOS = typeof navigator !== 'undefined' && /iP(hone|ad|od)/.test(navigato
 
 const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, hoverPlayable, preload, fallbackPoster }, ref) {
   const location = useLocation();
+  const navigate = useNavigate();
   const isMobile = useIsMobile();
   const videoEl = useRef(null);
 
-  const autoPlay = !hoverPlayable && !isIOS;
+  const supportsHover = useMemo(() => typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches, []);
+
+  const autoPlay = !hoverPlayable;
   const effectivePreload = isIOS ? 'auto' : preload;
 
   const useMp4 = isIOS || isMobile;
@@ -49,14 +52,14 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
   const webm = allowBlob ? webmBlob : webmSrc;
 
   const onMouseEnter = useCallback(() => {
-    if (!hoverPlayable || !videoEl.current) return;
+    if (!supportsHover || !hoverPlayable || !videoEl.current) return;
     videoEl.current.play().catch(() => {});
-  }, [hoverPlayable]);
+  }, [supportsHover, hoverPlayable]);
 
   const onMouseLeave = useCallback(() => {
-    if (!hoverPlayable || !videoEl.current) return;
+    if (!supportsHover || !hoverPlayable || !videoEl.current) return;
     videoEl.current.pause();
-  }, [hoverPlayable]);
+  }, [supportsHover, hoverPlayable]);
 
   const onLoadedMetadata = useCallback(() => {
     if (hoverPlayable && videoEl.current) {
@@ -64,23 +67,93 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
     }
   }, [hoverPlayable]);
 
-  const onPointerDownLink = useCallback((e) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
+  const onCardClick = useCallback(
+    (e) => {
+      if (supportsHover) return;
+      if (!hoverPlayable) return;
 
+      const v = videoEl.current;
+
+      e.preventDefault();
+
+      if (!v) {
+        navigate(href, { state: { from: location } });
+        return;
+      }
+
+      v.muted = true;
+      v.playsInline = true;
+      v.webkitPlaysInline = true;
+
+      let navigated = false;
+      const go = () => {
+        if (navigated) return;
+        navigated = true;
+        navigate(href, { state: { from: location } });
+      };
+
+      const afterFirstFrame = () => {
+        requestAnimationFrame(go);
+      };
+
+      const onFirstFrame = () => {
+        v.removeEventListener('playing', onFirstFrame);
+        v.removeEventListener('timeupdate', onFirstFrame);
+        requestAnimationFrame(afterFirstFrame);
+      };
+
+      v.addEventListener('playing', onFirstFrame, { once: true });
+      v.addEventListener('timeupdate', onFirstFrame, { once: true });
+
+      try {
+        const p = v.play();
+        if (p && typeof p.then === 'function') {
+          p.catch(() => requestAnimationFrame(go));
+        } else {
+          requestAnimationFrame(go);
+        }
+      } catch {
+        requestAnimationFrame(go);
+      }
+    },
+    [supportsHover, hoverPlayable, navigate, href, location]
+  );
+
+  useEffect(() => {
+    if (!autoPlay || !videoEl.current) return;
+    const v = videoEl.current;
+    const tryPlay = () => v.play().catch(() => {});
+    if (v.readyState >= 2) tryPlay();
+    else v.addEventListener('loadeddata', tryPlay, { once: true });
+    return () => v.removeEventListener('loadeddata', tryPlay);
+  }, [autoPlay]);
+
+  useEffect(() => {
     const v = videoEl.current;
     if (!v) return;
-    v.muted = true;
-    v.playsInline = true;
-    v.webkitPlaysInline = true;
-    try {
-      v.play();
-    } catch {}
-  }, []);
+
+    if (hoverPlayable) {
+      try {
+        v.pause();
+      } catch {}
+      return;
+    }
+
+    const tryPlay = () => {
+      v.play().catch(() => {});
+    };
+
+    if (v.readyState >= 2) {
+      tryPlay();
+    } else {
+      v.addEventListener('loadeddata', tryPlay, { once: true });
+      return () => v.removeEventListener('loadeddata', tryPlay);
+    }
+  }, [hoverPlayable]);
 
   return (
     <div ref={ref} className={styles.GalleryItem__item}>
-      <Link to={href} state={{ from: location }} onPointerDown={onPointerDownLink} onClick={(e) => e.currentTarget.blur()}>
+      <Link to={href} state={{ from: location }} onClick={onCardClick} onPointerDown={(e) => e.currentTarget.blur()}>
         <video
           ref={videoEl}
           data-preload
