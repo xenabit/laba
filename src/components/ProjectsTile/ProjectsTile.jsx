@@ -23,7 +23,7 @@ const items = [
 
 function pick2xAllowed() {
   const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
+  const conn = (typeof navigator !== 'undefined' && (navigator.connection || navigator.mozConnection || navigator.webkitConnection)) || null;
   const saveData = !!(conn && conn.saveData);
   const eff = (conn && conn.effectiveType) || '4g';
   const slow = /(^|-)2g|(^|-)3g/i.test(eff);
@@ -39,33 +39,43 @@ export default function ProjectsTile({ projectsTileRef }) {
 
     const use2x = pick2xAllowed();
     const urls = items.map(({ picture }) => (use2x ? picture[1] : picture[0]));
-    const aboveFold = urls.slice(0, 2);
+    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
 
-    aboveFold.forEach((url) => {
+    const highPriority = isMobile ? urls : urls.slice(0, 2);
+    highPriority.forEach((url) => {
       ensurePreloadLink(url, { importance: 'high' });
       preloadImage(url, { priority: 'high' }).catch(() => {});
     });
 
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(() => warmImages(urls.slice(2), { priority: 'auto' }));
-    } else {
-      setTimeout(() => warmImages(urls.slice(2), { priority: 'auto' }), 0);
+    const rest = urls.filter((u) => !highPriority.includes(u));
+    if (rest.length) {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => warmImages(rest, { priority: 'auto' }));
+      } else {
+        setTimeout(() => warmImages(rest, { priority: 'auto' }), 0);
+      }
     }
   }, []);
 
   useEffect(() => {
-    const use2x = pick2xAllowed();
-
     const applyBg = (el) => {
       if (!el || el.dataset.bgApplied === '1') return;
       const url1x = el.dataset.bg1x;
       const url2x = el.dataset.bg2x;
-      const url = use2x ? url2x : url1x;
-      if (!url) return;
-
+      if (!url1x || !url2x) return;
       el.style.backgroundImage = `image-set(url(${url1x}) 1x, url(${url2x}) 2x)`;
       el.dataset.bgApplied = '1';
     };
+
+    const root = (projectsTileRef && projectsTileRef.current) || document;
+    const candidates = root.querySelectorAll(`.${styles.ProjectsTile__item}[data-bg1x], .${styles.ProjectsTile__image}[data-bg1x]`);
+
+    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
+
+    if (isMobile) {
+      candidates.forEach(applyBg);
+      return;
+    }
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -79,10 +89,7 @@ export default function ProjectsTile({ projectsTileRef }) {
       { rootMargin: '600px', threshold: 0.01 }
     );
 
-    const root = projectsTileRef?.current || document;
-    const candidates = root.querySelectorAll(`.${styles.ProjectsTile__item}[data-bg1x], .${styles.ProjectsTile__image}[data-bg1x]`);
     candidates.forEach((el) => io.observe(el));
-
     return () => io.disconnect();
   }, [projectsTileRef]);
 

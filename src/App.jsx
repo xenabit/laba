@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
 import KeepAliveOutlet from './KeepAliveOutlet.jsx';
+import Home from './pages/Home.jsx';
 import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import CookieAgreement from './components/CookieAgreement/CookieAgreement.jsx';
@@ -15,7 +16,6 @@ const GalleryTabs = lazy(() => import('./components/GalleryTabs/GalleryTabs.jsx'
 const Contacts = lazy(() => import('./components/Contacts/Contacts.jsx'));
 const FormBrief = lazy(() => import('./components/FormBrief/FormBrief.jsx'));
 
-const Home = lazy(() => import('./pages/Home.jsx'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'));
 const CaseMarksTour = lazy(() => import('./pages/CaseMarksTour.jsx'));
 const CaseMarkssite = lazy(() => import('./pages/CaseMarkssite.jsx'));
