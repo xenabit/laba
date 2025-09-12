@@ -83,6 +83,30 @@ export const projects = [
     desc: 'Десктоп игра для интерактивного стола. Зодчество 2023',
     type: ['desktop', 'game'],
   },
+  {
+    id: 'suburban-residence',
+    video: {
+      mp4: getAsset('gallery-11.mp4'),
+      webm: getAsset('gallery-11.webm'),
+      poster: getAsset('poster-11.jpg'),
+    },
+    src: '/portfolio/suburban-residence',
+    title: 'Suburban Residence',
+    desc: 'Дизайн-концепция',
+    type: ['desktop', 'web'],
+  },
+  {
+    id: 'case-marksjornal',
+    video: {
+      mp4: getAsset('gallery-9.mp4'),
+      webm: getAsset('gallery-9.webm'),
+      poster: getAsset('poster-9.jpg'),
+    },
+    src: '/portfolio/case-marksjornal',
+    title: 'Marks jornal',
+    desc: 'Научный журнал',
+    type: ['desktop', 'web'],
+  },
 ];
 
 projects.forEach((project) => {

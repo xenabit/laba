@@ -23,6 +23,8 @@ const CaseMarkssiteHR = lazy(() => import('./pages/CaseMarkssiteHR.jsx'));
 const CaseCanonChange = lazy(() => import('./pages/CaseCanonChange.jsx'));
 const CaseTamagotchi = lazy(() => import('./pages/CaseTamagotchi.jsx'));
 const CaseMarksCity = lazy(() => import('./pages/CaseMarksCity.jsx'));
+const CaseSuburbanResidence = lazy(() => import('./pages/CaseSuburbanResidence.jsx'));
+const CaseMarksJornal = lazy(() => import('./pages/CaseMarksJornal.jsx'));
 const About = lazy(() => import('./pages/About.jsx'));
 
 import './App.scss';
@@ -234,6 +236,8 @@ export default function App() {
             <Route path="/portfolio/canon-change" element={<CaseCanonChange />} />
             <Route path="/portfolio/tamagotchi" element={<CaseTamagotchi />} />
             <Route path="/portfolio/markscity" element={<CaseMarksCity />} />
+            <Route path="/portfolio/suburban-residence" element={<CaseSuburbanResidence />} />
+            <Route path="/portfolio/case-marksjornal" element={<CaseMarksJornal />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Footer />

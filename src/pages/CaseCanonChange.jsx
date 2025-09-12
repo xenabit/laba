@@ -84,8 +84,8 @@ const contentCasesIntro = {
   subtitle: 'Приложение с игровой механикой',
 
   src: {
-    url: 'https://www.rustore.ru/catalog/app/ru.laba.iching',
-    title: 'Скачать из RuStore',
+    url: 'https://iching.laba-laba.ru/',
+    title: 'Скачать приложение',
   },
   tags: ['Android, IOS', 'Unreal Engine', 'UX/UI'],
   picture_intro: {

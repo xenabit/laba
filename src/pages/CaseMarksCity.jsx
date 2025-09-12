@@ -4,7 +4,6 @@ import CasesIntro from '../components/CasesIntro/CasesIntro';
 import Text from '../components/Text/Text';
 import Softwar from '../components/Softwar/Softwar';
 import Picture from '../components/Picture/Picture';
-import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import CasesItems from '../components/CasesItems/CasesItems';
 import CaseIframe from '../components/CaseIframe/CaseIframe';
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
@@ -82,6 +81,7 @@ const contentCasesIntro = {
     img: case_intro_picture_jpg,
     webp: case_intro_picture_webp,
     avif: case_intro_picture_avif,
+    position: '92% 0',
   },
   about: [
     {
@@ -135,57 +135,6 @@ const caseIframePreview = {
   webp: case_iframe_preview_image_webp,
   avif: case_iframe_preview_image_avif,
 };
-
-const contentReviews = [
-  {
-    title: 'Отзыв клиента MG',
-    text: 'Создать MGSite 10 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Потугин<br> менеджер проекта MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Клиент' },
-      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Клиент' },
-      { logo: { img: reviews_slider_author_1 }, title: 'Манагер' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 2',
-    text: 'Создать MGSite  3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Ололо' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Алала' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 3',
-    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв  MGSite клиента 4',
-    text: 'Создать 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
-    ],
-  },
-  {
-    title: 'Отзыв клиента 5',
-    text: 'Создать MGSite 3453450 ракурсов 3D визуализации, монтаж анимационного ролика для рекламных целей, создание интерактивной модели, для офиса продаж «Панорама 360°», дизайн и верстка многостраничного сайта.',
-    name: 'Виктор Поdfgdfgтугин менеджер проекта <br> MARKS GROUP',
-    picture: [
-      { logo: { img: reviews_slider_author_1 }, title: 'Тырым пырым' },
-      { logo: { img: reviews_slider_author_2_jpg, webp: reviews_slider_author_2_webp, avif: reviews_slider_author_2_avif }, title: 'Пхпхппх' },
-    ],
-  },
-];
 
 const case_slider_full_content_1 = {
   sizes: {
@@ -359,7 +308,6 @@ export default function CaseMarksCity() {
       <CasesSliderFull items={case_slider_full_content_1} />
       <Text title={contentText[2].title} text={contentText[2].text} />
       <CasesSliderFull items={case_slider_full_content_2} />
-      <ReviewsSlider items={contentReviews} />
       <VideoHorizontal videoUrl={video} />
       <CasesItems type={['game', 'desktop']} excludeId="markscity" />
     </main>

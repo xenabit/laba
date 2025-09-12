@@ -7,23 +7,24 @@ import styles from './CasesCompareSlider.module.scss';
 
 function CasesCompareSlider({ items }) {
   const swiperRef = useRef(null);
-  const paginationRef = useRef(null); // Добавляем ref для пагинации
+  const paginationRef = useRef(null);
   const dividerRefs = useRef([]);
+
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     const swiperInstance = swiperRef.current?.swiper;
 
     if (swiperInstance && paginationRef.current) {
-      // Привязываем пагинацию к уникальному элементу через ref
       swiperInstance.params.pagination.el = paginationRef.current;
       swiperInstance.pagination.init();
       swiperInstance.pagination.render();
       swiperInstance.pagination.update();
     }
 
+    // Обрабатываем только слайды с divider (для сравнения)
     dividerRefs.current.forEach((divider, index) => {
-      if (!divider) return; // Пропускаем, если divider не существует
+      if (!divider) return;
 
       const wrapper = divider.closest(`.${styles.CasesCompareSlider__wrapper}`);
       const halfLeft = wrapper.querySelector(`.${styles.CasesCompareSlider__half_left}`);
@@ -111,11 +112,6 @@ function CasesCompareSlider({ items }) {
             bulletActiveClass: `${styles.CasesCompareSlider__bullet_active}`,
             renderBullet: (index, className) => `<span class="${className}"></span>`,
           }}
-          // autoplay={{
-          //   delay: 2500,
-          //   disableOnInteraction: true,
-          //   pauseOnMouseEnter: true,
-          // }}
           breakpoints={{
             320: { spaceBetween: 16, slidesPerView: 1, loop: true },
             1024: { spaceBetween: 32, slidesPerView: 1, loop: true },
@@ -126,29 +122,41 @@ function CasesCompareSlider({ items }) {
           {items.pictures?.map((item, index) => (
             <SwiperSlide className={styles.CasesCompareSlider__slide} key={item.id}>
               <div className={styles.CasesCompareSlider__bg}>
-                <img loading="lazy" src={items.bg}></img>
+                <img loading="lazy" src={items.bg} alt="Background" />
               </div>
               <div className={styles.CasesCompareSlider__wrapper}>
-                <div className={styles.CasesCompareSlider__pictures}>
-                  <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_left}`}>
+                {item.picture ? (
+                  // Одиночная картинка
+                  <div className={styles.CasesCompareSlider__single}>
                     <picture>
-                      <source type="image/avif" srcSet={item.picture_left.avif} />
-                      <source type="image/webp" srcSet={item.picture_left.webp} />
-                      <img loading="lazy" src={item.picture_left.img} />
+                      <source type="image/avif" srcSet={item.picture.avif} />
+                      <source type="image/webp" srcSet={item.picture.webp} />
+                      <img loading="lazy" src={item.picture.img} alt="Slide image" />
                     </picture>
                   </div>
-                  <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_right}`}>
-                    <picture>
-                      <source type="image/avif" srcSet={item.picture_right.avif} />
-                      <source type="image/webp" srcSet={item.picture_right.webp} />
-                      <img loading="lazy" src={item.picture_right.img} />
-                    </picture>
+                ) : (
+                  // Сравнение (две картинки)
+                  <div className={styles.CasesCompareSlider__pictures}>
+                    <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_left}`}>
+                      <picture>
+                        <source type="image/avif" srcSet={item.picture_left.avif} />
+                        <source type="image/webp" srcSet={item.picture_left.webp} />
+                        <img loading="lazy" src={item.picture_left.img} alt="Left image" />
+                      </picture>
+                    </div>
+                    <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_right}`}>
+                      <picture>
+                        <source type="image/avif" srcSet={item.picture_right.avif} />
+                        <source type="image/webp" srcSet={item.picture_right.webp} />
+                        <img loading="lazy" src={item.picture_right.img} alt="Right image" />
+                      </picture>
+                    </div>
+                    <div className={styles.CasesCompareSlider__divider} ref={(el) => (dividerRefs.current[index] = el)}>
+                      <button className={`${styles.CasesCompareSlider__toggle} ${styles.CasesCompareSlider__toggle_left}`} aria-label="Move divider left"></button>
+                      <button className={`${styles.CasesCompareSlider__toggle} ${styles.CasesCompareSlider__toggle_right}`} aria-label="Move divider right"></button>
+                    </div>
                   </div>
-                </div>
-                <div className={styles.CasesCompareSlider__divider} ref={(el) => (dividerRefs.current[index] = el)}>
-                  <button className={`${styles.CasesCompareSlider__toggle} ${styles.CasesCompareSlider__toggle_left}`}></button>
-                  <button className={`${styles.CasesCompareSlider__toggle} ${styles.CasesCompareSlider__toggle_right}`}></button>
-                </div>
+                )}
               </div>
             </SwiperSlide>
           ))}

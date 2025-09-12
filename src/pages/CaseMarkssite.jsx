@@ -89,7 +89,7 @@ import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-mg-1
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
 
 const contentCasesIntro = {
-  title: 'marksgroup.ru',
+  title: 'marks<wbr>group.ru',
   subtitle: 'Корпоративный сайт компании',
   tags: ['WEB интерфейс', 'UX/UI', 'Custom CMS', 'Fastify'],
   src: {

@@ -75,7 +75,7 @@ import reviews_slider_author_2_webp from '../assets/images/reviews-slider-3.webp
 import reviews_slider_author_2_avif from '../assets/images/reviews-slider-3.avif';
 
 const contentCasesIntro = {
-  title: 'marksgroup.ru',
+  title: 'marks<wbr>group.ru',
   subtitle: 'HR портал компании',
   tags: ['WEB интерфейс', 'UX/UI', 'Custom CMS'],
   src: {

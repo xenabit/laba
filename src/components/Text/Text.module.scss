@@ -28,6 +28,8 @@
   }
 
   @media all and (min-width: $bp1) {
+    margin-top: rem(160);
+    margin-bottom: rem(160);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     place-items: center;
@@ -40,9 +42,6 @@
   }
 
   @media all and (min-width: $bp0) {
-    margin-top: rem(160);
-    margin-bottom: rem(160);
-
     &__title {
       font-size: clamp(rem(16), 1vw, rem(32));
     }
