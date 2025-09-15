@@ -14,9 +14,7 @@
     "convert:heavy": "npm run --if-present convert-images && npm run --if-present convert-videos"
   },
   "dependencies": {
-    "dompurify": "^3.2.0",
     "framer-motion": "^11.18.2",
-    "fslightbox-react": "^1.7.6",
     "gsap": "^3.12.5",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
