@@ -98,7 +98,7 @@ import case_slider_full_picture_1_8_jpg from '../assets/images/cases-slider-full
 import case_slider_full_picture_1_8_webp from '../assets/images/cases-slider-full-residence-1-8.webp';
 import case_slider_full_picture_1_8_avif from '../assets/images/cases-slider-full-residence-1-8.avif';
 
-import case_slider_full_picture_1_9_jpg from '../assets/images/cases-slider-full-residence-1-9.jpg';
+import case_slider_full_picture_1_9_svg from '../assets/images/cases-slider-full-residence-1-9.svg';
 import case_slider_full_picture_1_9_webp from '../assets/images/cases-slider-full-residence-1-9.webp';
 import case_slider_full_picture_1_9_avif from '../assets/images/cases-slider-full-residence-1-9.avif';
 
@@ -136,7 +136,7 @@ import case_slider_full_picture_2_9_jpg from '../assets/images/cases-slider-full
 import case_slider_full_picture_2_9_webp from '../assets/images/cases-slider-full-residence-2-9.webp';
 import case_slider_full_picture_2_9_avif from '../assets/images/cases-slider-full-residence-2-9.avif';
 
-import case_slider_full_picture_2_10_jpg from '../assets/images/cases-slider-full-residence-2-10.jpg';
+import case_slider_full_picture_2_10_svg from '../assets/images/cases-slider-full-residence-2-10.svg';
 import case_slider_full_picture_2_10_webp from '../assets/images/cases-slider-full-residence-2-10.webp';
 import case_slider_full_picture_2_10_avif from '../assets/images/cases-slider-full-residence-2-10.avif';
 
@@ -446,7 +446,7 @@ const case_slider_full_content_1 = {
       },
       id: '1_9',
       picture: {
-        img: case_slider_full_picture_1_9_jpg,
+        img: case_slider_full_picture_1_9_svg,
         webp: case_slider_full_picture_1_9_webp,
         avif: case_slider_full_picture_1_9_avif,
       },
@@ -574,7 +574,7 @@ const case_slider_full_content_2 = {
       },
       id: '2_10',
       picture: {
-        img: case_slider_full_picture_2_10_jpg,
+        img: case_slider_full_picture_2_10_svg,
         webp: case_slider_full_picture_2_10_webp,
         avif: case_slider_full_picture_2_10_avif,
       },
