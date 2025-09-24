@@ -28,7 +28,7 @@ function CaseVideo({ videoUrl, previewSrc, mobilePreviewSrc }) {
   return (
     <section className={`${styles.CaseVideo} ${isActive ? styles.active : ''}`}>
       <div className={styles.CaseVideo__container} onClick={handleButtonClick}>
-        {!isActive && <button className={styles.CaseVideo__button}>Начать взаимодействие</button>}
+        {!isActive && <button className={styles.CaseVideo__button}>Запустить видео</button>}
 
         {previewSrc && isPreviewVisible && (
           <picture>

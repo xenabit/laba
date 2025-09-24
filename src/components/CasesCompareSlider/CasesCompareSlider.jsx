@@ -125,38 +125,40 @@ function CasesCompareSlider({ items }) {
                 <img loading="lazy" src={items.bg} alt="Background" />
               </div>
               <div className={styles.CasesCompareSlider__wrapper}>
-                {item.picture ? (
-                  // Одиночная картинка
-                  <div className={styles.CasesCompareSlider__single}>
-                    <picture>
-                      <source type="image/avif" srcSet={item.picture.avif} />
-                      <source type="image/webp" srcSet={item.picture.webp} />
-                      <img loading="lazy" src={item.picture.img} alt="Slide image" />
-                    </picture>
-                  </div>
-                ) : (
-                  // Сравнение (две картинки)
-                  <div className={styles.CasesCompareSlider__pictures}>
-                    <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_left}`}>
+                <div className={styles.CasesCompareSlider__border}>
+                  {item.picture ? (
+                    // Одиночная картинка
+                    <div className={styles.CasesCompareSlider__single}>
                       <picture>
-                        <source type="image/avif" srcSet={item.picture_left.avif} />
-                        <source type="image/webp" srcSet={item.picture_left.webp} />
-                        <img loading="lazy" src={item.picture_left.img} alt="Left image" />
+                        <source type="image/avif" srcSet={item.picture.avif} />
+                        <source type="image/webp" srcSet={item.picture.webp} />
+                        <img loading="lazy" src={item.picture.img} alt="Slide image" />
                       </picture>
                     </div>
-                    <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_right}`}>
-                      <picture>
-                        <source type="image/avif" srcSet={item.picture_right.avif} />
-                        <source type="image/webp" srcSet={item.picture_right.webp} />
-                        <img loading="lazy" src={item.picture_right.img} alt="Right image" />
-                      </picture>
+                  ) : (
+                    // Сравнение (две картинки)
+                    <div className={styles.CasesCompareSlider__pictures}>
+                      <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_left}`}>
+                        <picture>
+                          <source type="image/avif" srcSet={item.picture_left.avif} />
+                          <source type="image/webp" srcSet={item.picture_left.webp} />
+                          <img loading="lazy" src={item.picture_left.img} alt="Left image" />
+                        </picture>
+                      </div>
+                      <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_right}`}>
+                        <picture>
+                          <source type="image/avif" srcSet={item.picture_right.avif} />
+                          <source type="image/webp" srcSet={item.picture_right.webp} />
+                          <img loading="lazy" src={item.picture_right.img} alt="Right image" />
+                        </picture>
+                      </div>
+                      <div className={styles.CasesCompareSlider__divider} ref={(el) => (dividerRefs.current[index] = el)}>
+                        <button className={`${styles.CasesCompareSlider__toggle} ${styles.CasesCompareSlider__toggle_left}`} aria-label="Move divider left"></button>
+                        <button className={`${styles.CasesCompareSlider__toggle} ${styles.CasesCompareSlider__toggle_right}`} aria-label="Move divider right"></button>
+                      </div>
                     </div>
-                    <div className={styles.CasesCompareSlider__divider} ref={(el) => (dividerRefs.current[index] = el)}>
-                      <button className={`${styles.CasesCompareSlider__toggle} ${styles.CasesCompareSlider__toggle_left}`} aria-label="Move divider left"></button>
-                      <button className={`${styles.CasesCompareSlider__toggle} ${styles.CasesCompareSlider__toggle_right}`} aria-label="Move divider right"></button>
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </SwiperSlide>
           ))}

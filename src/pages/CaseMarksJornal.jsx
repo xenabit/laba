@@ -9,6 +9,7 @@ import Picture from '../components/Picture/Picture';
 import CasesCompareSlider from '../components/CasesCompareSlider/CasesCompareSlider';
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import softwarLogos from '../constants/softwarLogos';
+import CasesItems from '../components/CasesItems/CasesItems';
 
 // Импорты изображений для CasesIntro
 import case_intro_picture_jpg from '../assets/images/case-jornal.jpg';
@@ -28,18 +29,21 @@ import case_compare_slider_picture_left_1_avif from '../assets/images/cases-comp
 import case_compare_slider_picture_right_1_jpg from '../assets/images/cases-compare-slider-jornal-right-1.jpg';
 import case_compare_slider_picture_right_1_webp from '../assets/images/cases-compare-slider-jornal-right-1.webp';
 import case_compare_slider_picture_right_1_avif from '../assets/images/cases-compare-slider-jornal-right-1.avif';
+
 import case_compare_slider_picture_left_2_jpg from '../assets/images/cases-compare-slider-jornal-left-2.jpg';
 import case_compare_slider_picture_left_2_webp from '../assets/images/cases-compare-slider-jornal-left-2.webp';
 import case_compare_slider_picture_left_2_avif from '../assets/images/cases-compare-slider-jornal-left-2.avif';
 import case_compare_slider_picture_right_2_jpg from '../assets/images/cases-compare-slider-jornal-right-2.jpg';
 import case_compare_slider_picture_right_2_webp from '../assets/images/cases-compare-slider-jornal-right-2.webp';
 import case_compare_slider_picture_right_2_avif from '../assets/images/cases-compare-slider-jornal-right-2.avif';
+
 import case_compare_slider_picture_left_3_jpg from '../assets/images/cases-compare-slider-jornal-left-3.jpg';
 import case_compare_slider_picture_left_3_webp from '../assets/images/cases-compare-slider-jornal-left-3.webp';
 import case_compare_slider_picture_left_3_avif from '../assets/images/cases-compare-slider-jornal-left-3.avif';
 import case_compare_slider_picture_right_3_jpg from '../assets/images/cases-compare-slider-jornal-right-3.jpg';
 import case_compare_slider_picture_right_3_webp from '../assets/images/cases-compare-slider-jornal-right-3.webp';
 import case_compare_slider_picture_right_3_avif from '../assets/images/cases-compare-slider-jornal-right-3.avif';
+
 import case_compare_slider_picture_left_4_jpg from '../assets/images/cases-compare-slider-jornal-left-4.jpg';
 import case_compare_slider_picture_left_4_webp from '../assets/images/cases-compare-slider-jornal-left-4.webp';
 import case_compare_slider_picture_left_4_avif from '../assets/images/cases-compare-slider-jornal-left-4.avif';
@@ -47,10 +51,14 @@ import case_compare_slider_picture_right_4_jpg from '../assets/images/cases-comp
 import case_compare_slider_picture_right_4_webp from '../assets/images/cases-compare-slider-jornal-right-4.webp';
 import case_compare_slider_picture_right_4_avif from '../assets/images/cases-compare-slider-jornal-right-4.avif';
 
+import case_compare_slider_picture_left_5_jpg from '../assets/images/cases-compare-slider-jornal-left-5.jpg';
+import case_compare_slider_picture_left_5_webp from '../assets/images/cases-compare-slider-jornal-left-5.webp';
+import case_compare_slider_picture_left_5_avif from '../assets/images/cases-compare-slider-jornal-left-5.avif';
+import case_compare_slider_picture_right_5_jpg from '../assets/images/cases-compare-slider-jornal-right-5.jpg';
+import case_compare_slider_picture_right_5_webp from '../assets/images/cases-compare-slider-jornal-right-5.webp';
+import case_compare_slider_picture_right_5_avif from '../assets/images/cases-compare-slider-jornal-right-5.avif';
+
 // Импорты изображений для CasesSliderFull
-import case_slider_full_picture_1_0_jpg from '../assets/images/cases-slider-full-jornal-1-0.jpg';
-import case_slider_full_picture_1_0_webp from '../assets/images/cases-slider-full-jornal-1-0.webp';
-import case_slider_full_picture_1_0_avif from '../assets/images/cases-slider-full-jornal-1-0.avif';
 import case_slider_full_picture_1_1_jpg from '../assets/images/cases-slider-full-jornal-1-1.jpg';
 import case_slider_full_picture_1_1_webp from '../assets/images/cases-slider-full-jornal-1-1.webp';
 import case_slider_full_picture_1_1_avif from '../assets/images/cases-slider-full-jornal-1-1.avif';
@@ -73,15 +81,19 @@ import case_slider_full_picture_1_6_avif from '../assets/images/cases-slider-ful
 import case_slider_full_picture_2_1_jpg from '../assets/images/cases-slider-full-jornal-2-1.jpg';
 import case_slider_full_picture_2_1_webp from '../assets/images/cases-slider-full-jornal-2-1.webp';
 import case_slider_full_picture_2_1_avif from '../assets/images/cases-slider-full-jornal-2-1.avif';
+
 import case_slider_full_picture_2_2_jpg from '../assets/images/cases-slider-full-jornal-2-2.jpg';
 import case_slider_full_picture_2_2_webp from '../assets/images/cases-slider-full-jornal-2-2.webp';
 import case_slider_full_picture_2_2_avif from '../assets/images/cases-slider-full-jornal-2-2.avif';
+
 import case_slider_full_picture_2_3_jpg from '../assets/images/cases-slider-full-jornal-2-3.jpg';
 import case_slider_full_picture_2_3_webp from '../assets/images/cases-slider-full-jornal-2-3.webp';
 import case_slider_full_picture_2_3_avif from '../assets/images/cases-slider-full-jornal-2-3.avif';
+
 import case_slider_full_picture_2_4_jpg from '../assets/images/cases-slider-full-jornal-2-4.jpg';
 import case_slider_full_picture_2_4_webp from '../assets/images/cases-slider-full-jornal-2-4.webp';
 import case_slider_full_picture_2_4_avif from '../assets/images/cases-slider-full-jornal-2-4.avif';
+
 import case_slider_full_picture_2_5_jpg from '../assets/images/cases-slider-full-jornal-2-5.jpg';
 import case_slider_full_picture_2_5_webp from '../assets/images/cases-slider-full-jornal-2-5.webp';
 import case_slider_full_picture_2_5_avif from '../assets/images/cases-slider-full-jornal-2-5.avif';
@@ -196,6 +208,19 @@ const case_compare_slider_pictures_1 = {
         avif: case_compare_slider_picture_right_4_avif,
       },
     },
+    {
+      id: '1_5',
+      picture_left: {
+        img: case_compare_slider_picture_left_5_jpg,
+        webp: case_compare_slider_picture_left_5_webp,
+        avif: case_compare_slider_picture_left_5_avif,
+      },
+      picture_right: {
+        img: case_compare_slider_picture_right_5_jpg,
+        webp: case_compare_slider_picture_right_5_webp,
+        avif: case_compare_slider_picture_right_5_avif,
+      },
+    },
   ],
 };
 
@@ -261,18 +286,6 @@ const case_slider_full_content_1 = {
     width: '100%',
   },
   pictures: [
-    {
-      sizes: {
-        width: '100%',
-        height: '100%',
-      },
-      id: '1_0',
-      picture: {
-        img: case_slider_full_picture_1_0_jpg,
-        webp: case_slider_full_picture_1_0_webp,
-        avif: case_slider_full_picture_1_0_avif,
-      },
-    },
     {
       sizes: {
         width: '100%',
@@ -500,6 +513,7 @@ export default function CaseMarksJornal() {
       <Text title={contentText[4].title} text={contentText[4].text} />
       <CasesCompareSlider items={case_compare_slider_pictures_1} />
       {/* <ReviewsSlider items={contentReviews} /> */}
+      <CasesItems type={['desktop', 'web']} excludeId="case-marksjornal" />
     </main>
   );
 }
