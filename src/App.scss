@@ -82,6 +82,7 @@ main {
 
 html {
   $s: &;
+  background-color: var(--prime-1);
   scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1);
   /* Уменьшение толщины полосы прокрутки в Firefox */
   scrollbar-width: thin;
