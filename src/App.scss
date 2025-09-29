@@ -82,7 +82,9 @@ main {
 
 html {
   $s: &;
+  height: 100%;
   background-color: var(--prime-1);
+  color-scheme: light dark;
   scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1);
   /* Уменьшение толщины полосы прокрутки в Firefox */
   scrollbar-width: thin;
@@ -98,6 +100,14 @@ html {
 
   @media all and (min-width: 2560px) {
     font-size: 26px;
+  }
+}
+
+// Для overscroll области (iOS-specific)
+@supports (-webkit-overflow-scrolling: touch) {
+  html,
+  body {
+    background-color: var(--prime-1);
   }
 }
 

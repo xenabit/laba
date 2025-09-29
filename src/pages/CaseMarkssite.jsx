@@ -291,18 +291,18 @@ const case_slider_full_content_1 = {
         avif: case_slider_full_picture_1_6_avif,
       },
     },
-    // {
-    //   sizes: {
-    //     width: '100%',
-    //     height: '100%',
-    //   },
-    //   id: '1_7',
-    //   picture: {
-    //     img: case_slider_full_picture_1_7_jpg,
-    //     webp: case_slider_full_picture_1_7_webp,
-    //     avif: case_slider_full_picture_1_7_avif,
-    //   },
-    // },
+    {
+      sizes: {
+        width: '100%',
+        height: '100%',
+      },
+      id: '1_7',
+      picture: {
+        img: case_slider_full_picture_1_7_jpg,
+        webp: case_slider_full_picture_1_7_webp,
+        avif: case_slider_full_picture_1_7_avif,
+      },
+    },
   ],
 };
 
