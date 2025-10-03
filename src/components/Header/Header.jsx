@@ -373,14 +373,12 @@ const Header = forwardRef(function Header({ loadingStage, onBalloonsToCenterComp
       showAnimRef.current = showAnim;
       borderAnimRef.current = borderAnim;
 
-      st = ScrollTrigger.create({
+      ScrollTrigger.create({
         trigger: '#smooth-content',
         start: 'top top+=50',
         end: 'bottom top',
         onUpdate: (self) => {
           const scrollPos = self.scroll();
-          if (loadingStage !== 'complete') return;
-
           if (isActiveRef.current) {
             showAnim.pause();
             borderAnim.pause();
