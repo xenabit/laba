@@ -79,7 +79,7 @@ const contentCasesIntro = {
   subtitle: 'HR портал компании',
   tags: ['WEB интерфейс', 'UX/UI', 'Custom CMS'],
   src: {
-    url: 'https://marksgroup.ru/portal/vacanciesMain',
+    url: 'https://marksgroup.ru/hr/home',
     title: 'Перейти на сайт',
   },
   picture_intro: {

@@ -437,12 +437,12 @@ const Header = forwardRef(function Header({ loadingStage, onBalloonsToCenterComp
           <div className={styles.Header__loading}>
             {shouldRenderBalloon && (
               <div ref={balloonRef} className={styles.Header__baloon}>
-                <img src={Baloon_c} alt="balloon-c" aria-hidden="true" />
+                <img src={Baloon_c} alt="" aria-hidden="true" />
               </div>
             )}
             <div ref={logoRef} className={styles.Header__logo}>
               <picture>
-                <img src={logoImg} alt="Логотип Laba" />
+                <img src={logoImg} alt="" />
               </picture>
             </div>
           </div>
