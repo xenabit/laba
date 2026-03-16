@@ -1,0 +1,85 @@
+.ButtonCall {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 100%;
+  width: clamp(rem(196), 12.25vw, 100vmin);
+  height: clamp(rem(196), 12.25vw, 100vmin);
+  font-weight: var(--fw-light);
+  font-size: 1rem;
+  line-height: 1.25;
+  font-family: var(--font-sec);
+
+  &::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation-play-state: paused;
+    transition:
+      border-radius 1.5s ease-in-out,
+      background-color 0.5s;
+    border-radius: 100%;
+    background-color: var(--prime-2);
+    width: clamp(rem(196), 12.25vw, 100vmin);
+    height: clamp(rem(196), 12.25vw, 100vmin);
+    content: '';
+  }
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    &::before {
+      animation: contacts-jelly 3s linear 0s infinite alternate none;
+      transition:
+        border-radius 1s ease-in-out,
+        background-color 1s,
+        transform 3s;
+      background-color: var(--prime-3);
+    }
+  }
+
+  @keyframes contacts-jelly {
+    0% {
+      transform: scale(1) rotate(10deg);
+      border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    }
+    10% {
+      transform: scale(1.02) rotate(5deg);
+      border-radius: 40% 60% 70% 30% / 60% 50% 40% 60%;
+    }
+    25% {
+      transform: scale(1.03) rotate(-10deg);
+      border-radius: 70% 30% 50% 50% / 50% 70% 30% 60%;
+    }
+    40% {
+      transform: scale(0.95) rotate(15deg);
+      border-radius: 40% 80% 30% 70% / 70% 40% 60% 50%;
+    }
+    60% {
+      border-radius: 60% 30% 80% 40% / 60% 50% 70% 40%;
+    }
+    80% {
+      transform: scale(0.95) rotate(15deg);
+      border-radius: 50% 60% 50% 60% / 50% 60% 50% 60%;
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      border-radius: 60% 30% 80% 40% / 60% 50% 70% 40%;
+    }
+  }
+
+  span {
+    position: relative;
+    z-index: 10;
+    color: var(--prime-4);
+  }
+
+  @media all and (min-width: $bp1) {
+    span {
+      font-size: clamp(rem(16), 1vw, 100vmax);
+    }
+  }
+}

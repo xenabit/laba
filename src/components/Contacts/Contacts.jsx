@@ -1,6 +1,7 @@
 import styles from './Contacts.module.scss';
 import geoPoint from '../../assets/images/geo-point.svg';
 import YandexMap from './YandexMap';
+import ButtonCall from '../ui/ButtonCall/ButtonCall';
 
 // // Пример использования компонента
 const mapPoints = [
@@ -33,9 +34,10 @@ export default function Contacts() {
           </a> */}
           <span className={styles.Contacts__address}>125124, город Москва, ул 3-я Ямского Поля, д. 2 к. 13</span>
         </div>
-        <a href="tel:+79161958226" className={styles.Contacts__call}>
-          <span>Связаться</span>
-        </a>
+
+        <div className={styles.Contacts__call}>
+          <ButtonCall />
+        </div>
       </div>
       <div className={styles.Contacts__render}>
         <div>
