@@ -28,6 +28,7 @@ const CaseMarksJornal = lazy(() => import('./pages/CaseMarksJornal.jsx'));
 const About = lazy(() => import('./pages/About.jsx'));
 
 import './App.scss';
+import './root.scss';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
