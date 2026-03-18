@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, Suspense, lazy } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
+import { MobileProvider } from './contexts/MobileContext.jsx';
 
 import KeepAliveOutlet from './KeepAliveOutlet.jsx';
 import Home from './pages/Home.jsx';
@@ -198,54 +199,56 @@ export default function App() {
   const handleMaxBalloonSize = () => {};
 
   return (
-    <div id="smooth-wrapper" ref={wrapperRef}>
-      <Header
-        ref={headerRef}
-        loadingStage={loadingStage}
-        onBalloonsToCenterComplete={handleBalloonsToCenterComplete}
-        onMaxBalloonSize={handleMaxBalloonSize}
-        onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
-      />
+    <MobileProvider>
+      <div id="smooth-wrapper" ref={wrapperRef}>
+        <Header
+          ref={headerRef}
+          loadingStage={loadingStage}
+          onBalloonsToCenterComplete={handleBalloonsToCenterComplete}
+          onMaxBalloonSize={handleMaxBalloonSize}
+          onBalloonsShrinkComplete={handleBalloonsShrinkComplete}
+        />
 
-      <Suspense fallback={null}>
-        {isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' && (
-          <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
-        )}
+        <Suspense fallback={null}>
+          {isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' && (
+            <LoadingMainScreen headerRef={headerRef} onStageChange={handleStageChange} wrapperRef={wrapperRef} loadingStage={loadingStage} introRef={introRef} projectsTileRef={projectsTileRef} />
+          )}
 
-        <div
-          id="smooth-content"
-          style={{
-            opacity: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 0 : 1,
-            pointerEvents: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 'none' : 'auto',
-            transition: 'opacity 0.3s ease',
-          }}
-        >
-          <Routes>
-            <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
+          <div
+            id="smooth-content"
+            style={{
+              opacity: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 0 : 1,
+              pointerEvents: isFirstVisit && location.pathname === '/' && loadingStage !== 'complete' ? 'none' : 'auto',
+              transition: 'opacity 0.3s ease',
+            }}
+          >
+            <Routes>
+              <Route path="/" element={<Home introRef={introRef} projectsTileRef={projectsTileRef} loadingStage={loadingStage} />} />
 
-            <Route element={<KeepAliveOutlet />}>
-              <Route path="/portfolio" element={<GalleryTabs loadingStage={loadingStage} />} />
-            </Route>
+              <Route element={<KeepAliveOutlet />}>
+                <Route path="/portfolio" element={<GalleryTabs loadingStage={loadingStage} />} />
+              </Route>
 
-            <Route path="/contact" element={<Contacts />} />
-            <Route path="/form" element={<FormBrief />} />
-            <Route path="/information" element={<PrivacyPolicy />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/portfolio/markstour" element={<CaseMarksTour />} />
-            <Route path="/portfolio/markssite" element={<CaseMarkssite />} />
-            <Route path="/portfolio/markssite-hr" element={<CaseMarkssiteHR />} />
-            <Route path="/portfolio/canon-change" element={<CaseCanonChange />} />
-            <Route path="/portfolio/tamagotchi" element={<CaseTamagotchi />} />
-            <Route path="/portfolio/markscity" element={<CaseMarksCity />} />
-            <Route path="/portfolio/suburban-residence" element={<CaseSuburbanResidence />} />
-            <Route path="/portfolio/case-marksjornal" element={<CaseMarksJornal />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          <Footer />
-        </div>
-      </Suspense>
+              <Route path="/contact" element={<Contacts />} />
+              <Route path="/form" element={<FormBrief />} />
+              <Route path="/information" element={<PrivacyPolicy />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/portfolio/markstour" element={<CaseMarksTour />} />
+              <Route path="/portfolio/markssite" element={<CaseMarkssite />} />
+              <Route path="/portfolio/markssite-hr" element={<CaseMarkssiteHR />} />
+              <Route path="/portfolio/canon-change" element={<CaseCanonChange />} />
+              <Route path="/portfolio/tamagotchi" element={<CaseTamagotchi />} />
+              <Route path="/portfolio/markscity" element={<CaseMarksCity />} />
+              <Route path="/portfolio/suburban-residence" element={<CaseSuburbanResidence />} />
+              <Route path="/portfolio/case-marksjornal" element={<CaseMarksJornal />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Suspense>
 
-      <CookieAgreement loadingStage={loadingStage} />
-    </div>
+        <CookieAgreement loadingStage={loadingStage} />
+      </div>
+    </MobileProvider>
   );
 }
