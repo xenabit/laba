@@ -5,6 +5,24 @@ import { useState, useEffect, useRef } from 'react';
 import circle_1 from '../../assets/images/partners-ico-1.png';
 import circle_2 from '../../assets/images/partners-ico-2.png';
 
+import logo_1 from '../../assets/images/partners-1.svg';
+import logo_2 from '../../assets/images/partners-2.svg';
+import logo_3 from '../../assets/images/partners-3.svg';
+import logo_4 from '../../assets/images/partners-4.svg';
+import logo_5 from '../../assets/images/partners-5.svg';
+import logo_6 from '../../assets/images/partners-6.svg';
+import logo_7 from '../../assets/images/partners-7.svg';
+
+const items = [
+  { src: logo_1, title: 'MARKSDIGITAL' },
+  { src: logo_2, title: '+1D' },
+  { src: logo_3, title: 'ФИНМАРК' },
+  { src: logo_4, title: 'ПЕЛИСКЕР' },
+  { src: logo_5, title: 'INPY' },
+  { src: logo_6, title: 'MARKSENGINEERING' },
+  { src: logo_7, title: 'ПОДЗЕМПРОЕКТ' },
+];
+
 function Partners() {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -36,7 +54,7 @@ function Partners() {
           <img loading="lazy" src={circle_2} />
         </div>
       </div>
-      <SwiperLogos isVisible={isVisible} />
+      <SwiperLogos isVisible={isVisible} items={items} />
     </section>
   );
 }
