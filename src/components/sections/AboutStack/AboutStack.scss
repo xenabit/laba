@@ -1,0 +1,243 @@
+.AboutStack {
+  $s: &;
+  position: relative;
+  margin-bottom: rem(48);
+  position: relative;
+  z-index: 10;
+
+  &__header {
+    @include containerMob;
+    font-family: var(--font-sec);
+
+    h2 {
+      font-size: rem(28);
+    }
+
+    p {
+      font-weight: var(--fw-light);
+      font-size: rem(16);
+      line-height: 1.5;
+      margin-top: 1rem;
+    }
+
+    margin-top: rem(48);
+    margin-bottom: rem(48);
+  }
+
+  &__rows {
+    display: flex;
+    flex-direction: column;
+    gap: rem(24);
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    list-style: none;
+  }
+
+  &__row {
+    position: relative;
+    width: 100%;
+    height: rem(170);
+    overflow: hidden;
+
+    &:nth-child(odd) #{$s}__track {
+      transform: translateX(-80%);
+      transition: transform 1.5s ease-in-out;
+      direction: rtl;
+    }
+
+    &:nth-child(even) #{$s}__track {
+      transform: translateX(80%);
+      transition: transform 1.5s ease-in-out;
+    }
+  }
+
+  &__track {
+    display: flex;
+    gap: rem(32);
+    width: 100%;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    border: 1px solid #dcddde;
+    width: rem(252);
+    height: rem(170);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      transition: 0.3s;
+      filter: blur(35px);
+      background-image: url('/src/assets/images/partners-bg.png');
+    }
+  }
+
+  &__picture {
+    width: 100%;
+
+    img {
+      width: 20%;
+      aspect-ratio: 1 / 1;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  &__title {
+    width: 100%;
+    margin-top: 1em;
+    font-size: rem(26);
+    text-align: center;
+  }
+
+  // Для ленты
+  @keyframes about-entry-first {
+    0% {
+      transform: translateX(-80%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes about-scroll-first {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(1000%);
+    }
+  }
+
+  @keyframes about-scroll-second {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-1000%);
+    }
+  }
+
+  @keyframes about-entry-second {
+    0% {
+      transform: translateX(80%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  &.animate {
+    #{$s}__row {
+      &:nth-child(odd) #{$s}__track {
+        animation:
+          about-entry-first 1.5s ease-in-out backwards,
+          about-scroll-first 30s linear 1.5s infinite;
+      }
+
+      &:nth-child(even) #{$s}__track {
+        animation:
+          about-entry-second 1.5s ease-in-out backwards,
+          about-scroll-second 30s linear 1.5s infinite;
+      }
+    }
+  }
+
+  @media all and (min-width: $bp3) {
+    &__header {
+      max-width: 50%;
+      margin-top: rem(80);
+      margin-bottom: rem(80);
+      @include containerDesk;
+
+      h2 {
+        font-size: rem(56);
+      }
+    }
+
+    &__picture {
+      img {
+        width: 16.25%;
+      }
+    }
+
+    @keyframes about-scroll-first {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(300%);
+      }
+    }
+
+    @keyframes about-scroll-second {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-300%);
+      }
+    }
+  }
+
+  @media all and (min-width: $bp2) {
+    &__header {
+      margin-top: rem(200);
+    }
+  }
+
+  @media all and (min-width: $bp0) {
+    &__header {
+      h2 {
+        font-size: clamp(rem(64), 4vw, rem(128));
+      }
+
+      p {
+        font-size: clamp(rem(24), 1.5vw, rem(48));
+        margin-top: 1em;
+      }
+
+      margin-top: 12.5em;
+      margin-bottom: 5em;
+    }
+
+    &__row {
+      height: auto;
+    }
+
+    &__item {
+      width: 30%;
+      height: auto;
+      aspect-ratio: 480 / 285;
+    }
+
+    &__rows {
+      gap: rem(40);
+    }
+    &__track {
+      gap: rem(40);
+    }
+
+    &__title {
+      font-size: clamp(rem(39), 2.4vw, rem(80));
+    }
+  }
+}
