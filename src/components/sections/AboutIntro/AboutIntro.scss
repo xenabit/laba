@@ -101,7 +101,6 @@
     font-weight: var(--fw-light);
     color: black;
     transition: none;
-    aspect-ratio: 542 / 224;
     border-bottom: 1px solid var(--sec-5);
 
     div {
@@ -134,6 +133,10 @@
 
     &__items {
       flex-direction: row;
+    }
+
+    &__item {
+      aspect-ratio: 542 / 224;
     }
 
     &__title {
