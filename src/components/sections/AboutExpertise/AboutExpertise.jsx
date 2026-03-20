@@ -1,6 +1,6 @@
 import './AboutExpertise.scss';
 import { gsap } from 'gsap';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import img_1 from '../../../assets/images/about-expertise-1-img.jpg';
 import img_1_webp from '../../../assets/images/about-expertise-1-img.webp';
@@ -30,6 +30,8 @@ function AboutExpertise() {
   const slidesRef = useRef([]);
   const picturesRef = useRef([]);
   const contentsRef = useRef([]);
+  const sectionRef = useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   const items = [
     {
@@ -87,6 +89,28 @@ function AboutExpertise() {
   ];
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          startAnimation();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [hasAnimated]);
+
+  const startAnimation = () => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ repeat: -1 });
 
@@ -136,13 +160,13 @@ function AboutExpertise() {
 
       // Пауза перед новым циклом
       tl.to({}, { duration: delay });
-    }, []);
+    }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  };
 
   return (
-    <section className="AboutExpertise">
+    <section className="AboutExpertise" ref={sectionRef}>
       <div className="AboutExpertise__header">
         <div>Области</div>
         <div>экспертизы</div>
@@ -169,7 +193,7 @@ function AboutExpertise() {
                   <source type="image/webp" srcSet={img.imgAvif} media="(min-width: 768px)" />
                   <source type="image/avif" srcSet={img.imgMobAvif} />
                   <source type="image/webp" srcSet={img.imgMobWebp} />
-                  <img src={img} alt={alt} loading="eager" decoding="async" fetchpriority="high" />
+                  <img src={img.img} alt={alt} loading="eager" decoding="async" fetchpriority="high" />
                 </picture>
               </div>
             </div>
