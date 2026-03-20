@@ -374,7 +374,7 @@ const Header = forwardRef(function Header({ loadingStage, onBalloonsToCenterComp
       borderAnimRef.current = borderAnim;
 
       ScrollTrigger.create({
-        trigger: '#smooth-content',
+        trigger: document.body,
         start: 'top top+=50',
         end: 'bottom top',
         onUpdate: (self) => {
