@@ -24,9 +24,14 @@ $bp6: rem(377);
   margin-left: rem(16);
 }
 
+@mixin invertContainerMob {
+  margin-right: rem(-16);
+  margin-left: rem(-16);
+}
+
 @mixin containerDesk {
-  margin-right: rem(32);
-  margin-left: rem(32);
+  margin-right: clamp(rem(32), 2vw, rem(100));
+  margin-left: clamp(rem(32), 2vw, rem(100));
 }
 
 @mixin sectionMarginMob {
