@@ -36,8 +36,10 @@
 
   &__list {
     width: 100%;
+    font-size: rem(22);
     font-family: var(--font-sec);
     font-weight: var(--fw-light);
+    line-height: 1.33;
     box-sizing: border-box;
     display: grid;
     backdrop-filter: blur(18px);
@@ -48,12 +50,6 @@
     grid-template-columns: 25% 75%;
     width: 100%;
     box-sizing: border-box;
-
-    &_header {
-      font-size: rem(24);
-      line-height: 1.33;
-      font-weight: var(--fw-light);
-    }
   }
 
   &__code {
@@ -68,8 +64,6 @@
 
   &__code,
   &__desc {
-    font-size: rem(22);
-    line-height: 1.33;
     text-align: left;
     border-top: 1px solid #dcddde;
     border-bottom: 1px solid #dcddde;
@@ -88,7 +82,8 @@
 
     &__ball {
       &:first-child {
-        top: 11.5%;
+        top: auto;
+        bottom: 74%;
         left: 2%;
       }
     }
@@ -125,7 +120,7 @@
       }
 
       &:first-child {
-        top: 20vw;
+        bottom: 65%;
         left: -2vw;
         opacity: 1;
         width: rem(227);
@@ -144,6 +139,8 @@
     }
 
     &__list {
+      font-size: rem(22);
+      line-height: 1.33;
       gap: 20px 0;
       backdrop-filter: none;
       position: relative;
@@ -155,19 +152,32 @@
     }
 
     &__title {
-      font-size: rem(56);
+      font-size: rem(88);
       margin-bottom: rem(106);
+      line-height: 1.09;
+
+      span:nth-child(1),
+      span:nth-child(2),
+      span:nth-child(3) {
+        transform: none;
+      }
+
+      span:first-child {
+        align-self: center;
+      }
+
+      span:nth-child(2) {
+        align-self: flex-start;
+      }
 
       span:last-child {
-        transform: translateX(rem(165));
+        align-self: flex-end;
       }
     }
 
     &__code,
     &__desc {
       padding: 56px;
-      font-size: rem(22);
-      line-height: 1.33;
       background-color: rgba(240, 242, 245, 0.55);
     }
 
@@ -177,16 +187,22 @@
     }
   }
 
-  @media all and (min-width: $bp0) {
+  @media all and (min-width: $bp1) {
     @include sectionMarginDesk;
-    margin-right: rem(90);
-    margin-left: rem(90);
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    @include containerDesk;
+
+    &__title {
+      font-size: clamp(rem(128), 8vw, rem(256));
+      line-height: 1;
+      margin-bottom: rem(70);
+    }
 
     &__ball {
       &:first-child {
+        top: auto;
+        bottom: 74.5%;
         width: 15vw;
+        left: -2%;
       }
       &:nth-child(2) {
         width: 20vw;
@@ -200,13 +216,20 @@
       }
     }
 
+    &__list {
+      font-size: clamp(rem(24), 1.5vw, rem(48));
+      gap: 0.83em 0;
+    }
+
     &__row {
       grid-template-columns: 12% 88%;
     }
 
-    &__title {
-      font-size: clamp(rem(88), 5.5vw, rem(160));
-      margin-bottom: rem(70);
+    &__code,
+    &__desc {
+      padding: 2.25em;
+      line-height: 1.33;
+      background-color: rgba(240, 242, 245, 0.55);
     }
   }
 }

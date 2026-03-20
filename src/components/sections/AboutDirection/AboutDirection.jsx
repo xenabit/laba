@@ -1,8 +1,8 @@
 import styles from './AboutDirection.module.scss';
 
-import ball_1 from '../../assets/images/about-direction-1.png';
-import ball_2 from '../../assets/images/about-direction-2.png';
-import ball_3 from '../../assets/images/about-direction-3.png';
+import ball_1 from '../../../assets/images/about-direction-1.png';
+import ball_2 from '../../../assets/images/about-direction-2.png';
+import ball_3 from '../../../assets/images/about-direction-3.png';
 
 const activities = [
   { code: '62.01', description: 'Разработка компьютерного программного обеспечения' },
