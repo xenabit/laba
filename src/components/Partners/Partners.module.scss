@@ -84,6 +84,29 @@
     }
   }
 
+  // Для ленты
+  @keyframes partners-entry-first {
+    0% {
+      transform: translateX(-80%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes partners-entry-second {
+    0% {
+      transform: translateX(80%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
   &.animate {
     #{$s}__icon {
       &:first-child {
