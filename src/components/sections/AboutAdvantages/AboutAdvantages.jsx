@@ -24,17 +24,23 @@ function AboutAdvantages() {
     {
       count: '01',
       subtitle: 'Гибкое управление',
-      items: ['Быстро реагируем на изменения', 'Адаптируемся под требования заказчика или рынка', 'Строим кросс-функциональные команды'],
+      items: ['Быстро реагируем на&nbsp;изменения', 'Адаптируемся под требования заказчика или рынка', 'Строим кросс-функциональные команды'],
     },
     {
       count: '02',
-      subtitle: 'Уверенность в результате',
-      items: ['Предлагаем сопровождение и масштабируемость проектов', 'Доступ к глобальному рынку', 'Пост-релизная поддержка'],
+      subtitle: 'Уверенность в&nbsp;результате',
+      items: [
+        'Предлагаем сопровождение и&nbsp;масштабируемость проектов',
+        'Доступ к&nbsp;глобальному рынку',
+        'Эффективность команды',
+        'Делимся результатами после&nbsp;каждого спринта',
+        'Подбираем команду заказчику',
+      ],
     },
     {
       count: '03',
       subtitle: 'Полный жизненный цикл',
-      items: ['Создаем концепцию продукта', 'Прорабатываем CJM', 'Предоставляем прототипы и макеты в Figma', 'Тестируем прототипы и решения на ЦА'],
+      items: ['Создаем концепцию продукта', 'Прорабатываем CJM', 'Предоставляем прототипы и&nbsp;макеты в Figma', 'Тестируем прототипы и&nbsp;решения на&nbsp;ЦА'],
     },
   ];
 
@@ -70,21 +76,24 @@ function AboutAdvantages() {
         <div className="AboutAdvantages__title">
           <h2>
             <span>Преимущества </span>
-            <span>работы c LABA </span>
+            <span>работы c&nbsp;LABA </span>
           </h2>
-          <p>Работаем от идеи до реализации, предоставляя полный спектр услуг — от консультаций на стадии планирования до прототипирования и тестирования продуктов</p>
+          <p>
+            Работаем от&nbsp;идеи до&nbsp;реализации, предоставляя полный спектр услуг&nbsp;&mdash; от&nbsp;консультаций на&nbsp;стадии планирования до&nbsp;прототипирования и&nbsp;тестирования
+            продуктов
+          </p>
         </div>
         <div className="AboutAdvantages__spoilers">
           {spoilersData.map((spoiler, index) => (
             <button key={index} className={`AboutAdvantages__spoiler ${!isMobile && activeIndex === index ? 'active' : ''}`} onClick={() => toggleSpoiler(index)}>
               <div className="AboutAdvantages__header">
-                <div className="AboutAdvantages__count">{spoiler.count}</div>
-                <div className="AboutAdvantages__subtitle">{spoiler.subtitle}</div>
+                <div className="AboutAdvantages__count" dangerouslySetInnerHTML={{ __html: spoiler.count }}></div>
+                <div className="AboutAdvantages__subtitle" dangerouslySetInnerHTML={{ __html: spoiler.subtitle }}></div>
               </div>
               <div className="AboutAdvantages__body">
                 <ul>
                   {spoiler.items.map((item, itemIndex) => (
-                    <li key={itemIndex}>{item}</li>
+                    <li key={itemIndex} dangerouslySetInnerHTML={{ __html: item }}></li>
                   ))}
                 </ul>
               </div>

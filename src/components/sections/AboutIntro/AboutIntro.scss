@@ -127,6 +127,10 @@
   }
 
   @media all and (min-width: $bp3) {
+    &__wrap {
+      position: static;
+    }
+
     &__box {
       @include containerDesk;
     }
@@ -146,16 +150,22 @@
     &__text {
       max-width: rem(768);
     }
-  }
-
-  @media all and (min-width: $bp2) {
-    &__wrap {
-      position: static;
-    }
 
     &__top {
       position: relative;
+    }
 
+    &__button {
+      position: absolute;
+      top: 0;
+      left: auto;
+      right: rem(32);
+      transform: none;
+    }
+  }
+
+  @media all and (min-width: $bp2) {
+    &__top {
       p {
         br {
           display: block;
@@ -165,14 +175,6 @@
 
     &__box {
       padding-right: rem(calc(196 + 120));
-    }
-
-    &__button {
-      position: absolute;
-      top: 0;
-      left: auto;
-      right: rem(32);
-      transform: none;
     }
   }
 

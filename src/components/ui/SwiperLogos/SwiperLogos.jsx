@@ -5,7 +5,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-function SwiperLogos({ isVisible, items, title = false, width }) {
+function SwiperLogos({ isVisible, items, title = false }) {
   const isMobile = useMobile();
 
   const repeatItems = (array, targetCount) => {
@@ -16,7 +16,7 @@ function SwiperLogos({ isVisible, items, title = false, width }) {
     return result.slice(0, targetCount);
   };
 
-  const targetLength = 30;
+  const targetLength = 40;
 
   const splitItems = [repeatItems(items, targetLength), repeatItems(items, targetLength)];
 

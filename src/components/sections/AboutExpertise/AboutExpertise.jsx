@@ -1,6 +1,7 @@
 import './AboutExpertise.scss';
 import { gsap } from 'gsap';
 import { useEffect, useRef, useState } from 'react';
+import useIsMobile from '../../../hooks/useIsMobile';
 
 import img_1 from '../../../assets/images/about-expertise-1-img.jpg';
 import img_1_webp from '../../../assets/images/about-expertise-1-img.webp';
@@ -32,13 +33,23 @@ function AboutExpertise() {
   const contentsRef = useRef([]);
   const sectionRef = useRef(null);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const isMobile = useIsMobile();
 
   const items = [
     {
       id: 1,
       title: 'WEB приложения\nСайты',
       alt: '',
-      stack: ['React', 'Node.js', 'Figma', 'Three.js', 'Django', 'Redux', 'Markdown'],
+      stack: `
+        <span>React</span>
+        <span>Node.js</span>
+        <span>Figma</span>
+        <br>
+        <span class="hidden">Three.js</span>
+        <span>Django</span>
+        <span>Redux</span>
+        <span>Markdown</span>
+      `,
       img: {
         img: img_1,
         imgWebp: img_1_webp,
@@ -51,7 +62,13 @@ function AboutExpertise() {
       id: 2,
       title: 'IOS\nANDROID\nPC',
       alt: '',
-      stack: ['Unreal Engine', 'Figma', 'Blender', 'Adobe Illustrator'],
+      stack: `
+        <span>Unreal Engine</span>
+        <span>Figma</span>
+        <br>
+        <span>Blender</span>
+        <span>Adobe Illustrator</span>
+      `,
       img: {
         img: img_2,
         imgWebp: img_2_webp,
@@ -64,7 +81,14 @@ function AboutExpertise() {
       id: 3,
       title: 'VR / AR\n360° ПАНОРАМЫ',
       alt: '',
-      stack: ['3Ds Max', 'Unreal Engine', 'Figma', 'GitHub', 'Blender', 'Adobe Illustrator'],
+      stack: `
+        <span>3Ds Max</span>
+        <span>Unreal Engine</span>
+        <br>
+        <span>Figma</span>
+        <span>Blender</span>
+        <span>Adobe Illustrator</span>
+      `,
       img: {
         img: img_3,
         imgWebp: img_3_webp,
@@ -77,7 +101,15 @@ function AboutExpertise() {
       id: 4,
       title: 'ВИЗУАЛИЗАЦИИ\nАНИМАЦИИ',
       alt: '',
-      stack: ['3Ds Max', 'Unreal Engine', 'Figma', 'GitHub', 'Blender', 'Adobe Illustrator'],
+      stack: `
+        <span>3Ds Max</span>
+        <span>Unreal Engine</span>
+        <br>
+        <span>Figma</span>
+        <span>Blender</span>
+        <span>Adobe Photoshop</span>
+      `,
+
       img: {
         img: img_4,
         imgWebp: img_4_webp,
@@ -170,7 +202,7 @@ function AboutExpertise() {
       <div className="AboutExpertise__header">
         <div>Области</div>
         <div>экспертизы</div>
-        <div>В разработке программного обеспечения мы предлагаем создание индивидуальных решений, включая ERP-системы, CRM-системы и другие внутренние инструменты для бизнеса </div>
+        <div>В&nbsp;разработке программного обеспечения мы&nbsp;предлагаем создание индивидуальных решений, включая ERP-системы, CRM-системы и&nbsp;другие внутренние инструменты для бизнеса </div>
       </div>
       <div className="AboutExpertise__container">
         {items.map(({ id, title, alt, stack, img }, index) => {
@@ -181,11 +213,7 @@ function AboutExpertise() {
                   <div className="AboutExpertise__num">0{id}</div>
                   <div className="AboutExpertise__title">{title}</div>
                 </div>
-                <ul className="AboutExpertise__stack">
-                  {stack.map((el) => {
-                    return <li key={el}>{el}</li>;
-                  })}
-                </ul>
+                <div className="AboutExpertise__stack" dangerouslySetInnerHTML={{ __html: stack }} />
               </div>
               <div ref={(el) => (picturesRef.current[index] = el)} className="AboutExpertise__picture">
                 <picture>

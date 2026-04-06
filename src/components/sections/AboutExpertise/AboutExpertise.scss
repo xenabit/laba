@@ -46,8 +46,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: rem(22);
-    aspect-ratio: 375 / 339;
+    padding: rem(16);
+    aspect-ratio: 375 / 350;
 
     &:not(:first-child) {
       position: absolute;
@@ -58,10 +58,6 @@
 
     &:nth-child(1) {
       z-index: 10;
-
-      #{$s}__stack li:nth-child(4) {
-        display: none;
-      }
     }
 
     &:nth-child(2) {
@@ -70,35 +66,17 @@
 
     &:nth-child(3) {
       z-index: 30;
-
-      #{$s}__stack li {
-        &:nth-child(1) {
-          display: none;
-        }
-        &:nth-child(4) {
-          display: none;
-        }
-      }
     }
 
     &:nth-child(4) {
       z-index: 40;
-
-      #{$s}__stack li {
-        &:nth-child(2) {
-          display: none;
-        }
-
-        &:nth-child(4) {
-          display: none;
-        }
-      }
     }
   }
 
   &__box {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     height: 100%;
     transform: translateY(0);
     position: relative;
@@ -127,16 +105,22 @@
     margin-top: auto;
     font-family: var(--font-sec);
     position: relative;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
     gap: rem(12);
     font-size: rem(14);
+    text-align: left;
+    margin: 0 -6px;
 
-    li {
+    span {
+      margin: 6px 4px;
+      display: inline-block;
+      width: max-content;
       background-color: var(--prime-1);
-      padding: rem(9) rem(24);
+      padding: rem(9) rem(18);
       border-radius: rem(25);
+
+      .hidden {
+        display: none;
+      }
     }
   }
 
@@ -185,7 +169,8 @@
         font-weight: var(--fw-medium);
         font-size: clamp(rem(88), 5.5vw, 100vmax);
         line-height: 1.09;
-        text-align: right;
+        text-align: left;
+        padding-left: rem(32);
       }
 
       div:nth-child(2) {
@@ -221,8 +206,14 @@
     }
 
     &__stack {
-      width: 39%;
+      width: 50%;
+      align-self: flex-end;
       justify-content: flex-end;
+      text-align: right;
+
+      &:nth-child(7) {
+        display: inline-block;
+      }
     }
   }
 
@@ -254,35 +245,6 @@
     &__slide {
       aspect-ratio: 1600 / 530;
       padding: 1.8vw 3.125vw;
-
-      &:nth-child(1) {
-        #{$s}__stack li:nth-child(4) {
-          display: block;
-        }
-      }
-
-      &:nth-child(3) {
-        #{$s}__stack li {
-          &:nth-child(1) {
-            display: block;
-          }
-          &:nth-child(4) {
-            display: block;
-          }
-        }
-      }
-
-      &:nth-child(4) {
-        #{$s}__stack li {
-          &:nth-child(2) {
-            display: block;
-          }
-
-          &:nth-child(4) {
-            display: block;
-          }
-        }
-      }
     }
 
     &__num {
@@ -300,10 +262,14 @@
       font-size: clamp(rem(16), 1vw, 100vmax);
       gap: 0.75em;
 
-      li {
+      span {
         background-color: var(--prime-1);
         padding: 1em 2.5em;
         border-radius: 1.5em;
+
+        .hidden {
+          display: inline-block;
+        }
       }
     }
   }
