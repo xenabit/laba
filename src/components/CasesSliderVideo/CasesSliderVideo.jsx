@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -9,26 +9,61 @@ function CasesSliderVideo({ items }) {
   const swiperRef = useRef(null);
   const paginationRef = useRef(null);
 
-  useEffect(() => {
-    if (swiperRef.current && swiperRef.current.swiper && paginationRef.current) {
-      const swiper = swiperRef.current.swiper;
+  const leftVideoRefs = useRef([]);
+  const rightVideoRefs = useRef([]);
 
-      swiper.params.pagination.el = paginationRef.current;
-      swiper.pagination.init();
-      swiper.pagination.render();
-      swiper.pagination.update();
-    }
-  }, [items]);
+  const pauseAllVideos = useCallback(() => {
+    [...leftVideoRefs.current, ...rightVideoRefs.current].forEach((video) => {
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
+  }, []);
+
+  const playCurrentVideos = useCallback(
+    (swiper) => {
+      if (!swiper) return;
+
+      const activeIndex = swiper.realIndex; // важно при loop: true
+
+      pauseAllVideos();
+
+      const leftVideo = leftVideoRefs.current[activeIndex];
+      const rightVideo = rightVideoRefs.current[activeIndex];
+
+      if (leftVideo) leftVideo.play().catch(() => {});
+      if (rightVideo) rightVideo.play().catch(() => {});
+    },
+    [pauseAllVideos]
+  );
+
+  useEffect(() => {
+    const swiper = swiperRef.current?.swiper;
+    if (!swiper || !paginationRef.current) return;
+
+    swiper.params.pagination.el = paginationRef.current;
+    swiper.pagination.init();
+    swiper.pagination.render();
+    swiper.pagination.update();
+
+    playCurrentVideos(swiper);
+  }, [items, playCurrentVideos]);
 
   const handleSlide = (direction) => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      if (direction === 'prev') {
-        swiperRef.current.swiper.slidePrev();
-      } else if (direction === 'next') {
-        swiperRef.current.swiper.slideNext();
-      }
-    }
+    const swiper = swiperRef.current?.swiper;
+    if (!swiper) return;
+
+    if (direction === 'prev') swiper.slidePrev();
+    else swiper.slideNext();
   };
+
+  const handleSlideChangeTransitionEnd = useCallback(
+    (swiper) => {
+      playCurrentVideos(swiper);
+    },
+    [playCurrentVideos]
+  );
 
   return (
     <section className={styles.CasesSliderVideo}>
@@ -51,46 +86,53 @@ function CasesSliderVideo({ items }) {
             disableOnInteraction: true,
             pauseOnMouseEnter: true,
           }}
+          onSlideChangeTransitionEnd={handleSlideChangeTransitionEnd}
           breakpoints={{
-            320: {
-              spaceBetween: 16,
-              slidesPerView: 1,
-              loop: true,
-            },
-            1024: {
-              spaceBetween: 32,
-              slidesPerView: 1,
-              loop: true,
-            },
-            1920: {
-              spaceBetween: 40,
-              slidesPerView: 1,
-              loop: true,
-            },
-            2560: {
-              spaceBetween: 52,
-              slidesPerView: 1,
-              loop: true,
-            },
+            320: { spaceBetween: 16, slidesPerView: 1, loop: true },
+            1024: { spaceBetween: 32, slidesPerView: 1, loop: true },
+            1920: { spaceBetween: 40, slidesPerView: 1, loop: true },
+            2560: { spaceBetween: 52, slidesPerView: 1, loop: true },
           }}
         >
-          {items.videos?.map((item) => (
+          {items.videos?.map((item, index) => (
             <SwiperSlide className={styles.CasesSliderVideo__slide} key={item.id}>
               <div className={styles.CasesSliderVideo__bg}>
-                <img loading="lazy" src={items.bg} alt="Before"></img>
+                <img loading="lazy" src={items.bg} alt="" aria-hidden="true" />
               </div>
+
               <div className={styles.CasesSliderVideo__inner}>
                 <div className={`${styles.CasesSliderVideo__half} ${styles.CasesSliderVideo__half_left}`} onClick={() => handleSlide('prev')}>
                   <div className={styles.CasesSliderVideo__box}>
-                    <video className={styles.CasesSliderVideo__video} autoPlay muted loop preload="auto" playsInline controls={false} loading="lazy">
+                    <video
+                      ref={(el) => {
+                        leftVideoRefs.current[index] = el;
+                      }}
+                      className={styles.CasesSliderVideo__video}
+                      muted
+                      loop
+                      preload="metadata"
+                      playsInline
+                      controls={false}
+                    >
                       <source src={item.video_left} type="video/mp4" />
                       Ваш браузер не поддерживает видео.
                     </video>
                   </div>
                 </div>
+
                 <div className={`${styles.CasesSliderVideo__half} ${styles.CasesSliderVideo__half_right}`} onClick={() => handleSlide('next')}>
                   <div className={styles.CasesSliderVideo__box}>
-                    <video className={styles.CasesSliderVideo__video} autoPlay muted loop preload="auto" controls={false} loading="lazy">
+                    <video
+                      ref={(el) => {
+                        rightVideoRefs.current[index] = el;
+                      }}
+                      className={styles.CasesSliderVideo__video}
+                      muted
+                      loop
+                      preload="metadata"
+                      playsInline
+                      controls={false}
+                    >
                       <source src={item.video_right} type="video/mp4" />
                       Ваш браузер не поддерживает видео.
                     </video>
@@ -100,7 +142,8 @@ function CasesSliderVideo({ items }) {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div ref={paginationRef} className={styles.CasesSliderVideo__pagination}></div>
+
+        <div ref={paginationRef} className={styles.CasesSliderVideo__pagination} />
       </div>
     </section>
   );
