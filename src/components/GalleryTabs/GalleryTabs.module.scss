@@ -68,19 +68,11 @@
 
     &::before {
       right: 0;
-      background-image: linear-gradient(
-        to left,
-        white,
-        rgba(255, 255, 255, 0)
-      );
+      background-image: linear-gradient(to left, white, rgba(255, 255, 255, 0));
     }
     &::after {
       left: 0;
-      background-image: linear-gradient(
-        to right,
-        white,
-        rgba(255, 255, 255, 0)
-      );
+      background-image: linear-gradient(to right, white, rgba(255, 255, 255, 0));
     }
 
     ul {
@@ -128,28 +120,9 @@
           border-radius: 50%;
           width: 0;
           height: 0;
-          transition: width 1s, height 1s;
-        }
-
-        @media (pointer: coarse) {
-          &:hover {
-            border-color: var(--prime-2);
-            color: var(--prime-2);
-            &::before {
-              content: none;
-            }
-          }
-        }
-
-        &:hover {
-          border-color: var(--prime-3);
-          color: var(--prime-1);
-          &::before {
-            border: 1px solid var(--prime-3);
-            background-color: var(--prime-3);
-            width: rem(700);
-            height: rem(700);
-          }
+          transition:
+            width 1s,
+            height 1s;
         }
 
         &.active {
@@ -177,7 +150,7 @@
       grid-template-columns: 1fr 1fr 1fr;
     }
 
-    > li:nth-child(odd)  .GalleryTabs__skeletonVideo {
+    > li:nth-child(odd) .GalleryTabs__skeletonVideo {
       background: var(--sec-5);
     }
     > li:nth-child(even) .GalleryTabs__skeletonVideo {
@@ -245,10 +218,24 @@
         line-height: rem(24);
         font-family: var(--font-sec);
         text-align: right;
-        &:hover {
-          color: var(--prime-3);
-        }
       }
+    }
+  }
+
+  @media (min-width: $bp2) {
+    &__filters ul .filterBtn:hover {
+      border-color: var(--prime-3);
+      color: var(--prime-1);
+      &::before {
+        border: 1px solid var(--prime-3);
+        background-color: var(--prime-3);
+        width: rem(700);
+        height: rem(700);
+      }
+    }
+
+    &__links a:hover {
+      color: var(--prime-3);
     }
   }
 
@@ -261,7 +248,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -272,4 +260,3 @@
 .itemExitDone {
   display: none;
 }
-
