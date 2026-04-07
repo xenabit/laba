@@ -20,9 +20,9 @@ import case_intro_picture_avif from '../assets/images/case-intro-tamtam.avif';
 import picture_svg from '../assets/images/picture-tamtam.svg';
 
 // Импорты изображений для CaseIframe
-import case_iframe_preview_image_jpg from '../assets/images/case-iframe-canon.jpg';
-import case_iframe_preview_image_webp from '../assets/images/case-iframe-canon.webp';
-import case_iframe_preview_image_avif from '../assets/images/case-iframe-canon.avif';
+import case_iframe_preview_image_jpg from '../assets/images/case-iframe-tamtam.jpg';
+import case_iframe_preview_image_webp from '../assets/images/case-iframe-tamtam.webp';
+import case_iframe_preview_image_avif from '../assets/images/case-iframe-tamtam.avif';
 
 // Импорты изображений для ReviewsSlider
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
