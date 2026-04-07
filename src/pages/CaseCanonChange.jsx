@@ -147,13 +147,13 @@ const cases_slider_video_content = {
   videos: [
     {
       id: '1_1',
-      video_left: case_slider_video_left_1,
-      video_right: case_slider_video_right_1,
+      video_left: case_slider_video_left_2,
+      video_right: case_slider_video_right_2,
     },
     {
       id: '1_2',
-      video_left: case_slider_video_left_2,
-      video_right: case_slider_video_right_2,
+      video_left: case_slider_video_left_1,
+      video_right: case_slider_video_right_1,
     },
     {
       id: '1_3',
