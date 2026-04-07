@@ -423,6 +423,10 @@
     height: 100vh;
     color: var(--prime-1);
 
+    #{$s}__inner {
+      background-color: var(--prime-2);
+    }
+
     #{$s}__top {
       #{$s}__border {
         background-color: var(--prime-1);
@@ -562,7 +566,7 @@
 
     &__inner {
       position: relative;
-      min-height: 95vh;
+      min-height: calc(100% - 50px);
       max-height: 1025px;
     }
     &__bg {
@@ -608,9 +612,3 @@
     background-color: var(--prime-1);
   }
 }
-
-
-
-
-
-
