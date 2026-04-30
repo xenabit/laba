@@ -41,7 +41,7 @@ function AboutDirection() {
       <div className={styles.AboutDirection__list}>
         <div className={`${styles.AboutDirection__row} ${styles.AboutDirection__row_header}`}>
           <div className={styles.AboutDirection__code}>Код</div>
-          <div className={styles.AboutDirection__desc}>Виды деятельности в области информационных технологий</div>
+          <div className={styles.AboutDirection__desc}>Виды деятельности в&nbsp;области информационных технологий</div>
         </div>
         {activities.map((activity) => (
           <div key={activity.code} className={styles.AboutDirection__row}>

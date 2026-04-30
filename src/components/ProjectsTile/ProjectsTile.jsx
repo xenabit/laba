@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ProjectsTile.module.scss';
 
@@ -33,6 +33,36 @@ function pick2xAllowed() {
 export default function ProjectsTile({ projectsTileRef }) {
   const animationRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const isDesktopRef = useRef(false);
+  const resetTimerRef = useRef(null);
+  const animationIntervalRef = useRef(null);
+
+  // Определяем десктоп/мобайл один раз и при изменении брейкпоинта
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      const isDesktop = window.innerWidth > 1280;
+      isDesktopRef.current = isDesktop;
+
+      // На мобильных сбрасываем hoveredIndex
+      if (!isDesktop && hoveredIndex !== null) {
+        setHoveredIndex(null);
+      }
+    };
+
+    checkIsDesktop();
+
+    const handleResize = () => {
+      const wasDesktop = isDesktopRef.current;
+      checkIsDesktop();
+
+      if (wasDesktop && !isDesktopRef.current && hoveredIndex !== null) {
+        setHoveredIndex(null);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [hoveredIndex]);
 
   useEffect(() => {
     attachImageCachePagehideCleanup();
@@ -93,27 +123,53 @@ export default function ProjectsTile({ projectsTileRef }) {
     return () => io.disconnect();
   }, [projectsTileRef]);
 
-  const resetAnimation = () => {
+  const resetAnimation = useCallback(() => {
     if (!animationRef.current) return;
     if (window.innerWidth <= 1280) {
+      if (resetTimerRef.current) {
+        clearTimeout(resetTimerRef.current);
+      }
+
       animationRef.current.classList.remove(styles.animate);
-      setTimeout(() => animationRef.current.classList.add(styles.animate), 50);
+
+      resetTimerRef.current = setTimeout(() => {
+        if (animationRef.current) {
+          animationRef.current.classList.add(styles.animate);
+        }
+        resetTimerRef.current = null;
+      }, 50);
     } else {
       animationRef.current.classList.remove(styles.animate);
     }
-  };
+  }, []);
 
   useEffect(() => {
     resetAnimation();
-    window.addEventListener('resize', resetAnimation);
-    let timer;
+
     if (window.innerWidth <= 1280) {
-      timer = setInterval(resetAnimation, 11000);
+      animationIntervalRef.current = setInterval(resetAnimation, 11000);
     }
+
     return () => {
-      window.removeEventListener('resize', resetAnimation);
-      if (timer) clearInterval(timer);
+      if (animationIntervalRef.current) {
+        clearInterval(animationIntervalRef.current);
+      }
+      if (resetTimerRef.current) {
+        clearTimeout(resetTimerRef.current);
+      }
     };
+  }, [resetAnimation]);
+
+  const handleMouseEnter = useCallback((idx) => {
+    if (isDesktopRef.current) {
+      setHoveredIndex(idx);
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (isDesktopRef.current) {
+      setHoveredIndex(null);
+    }
   }, []);
 
   const itemAttrs = (p1x, p2x) => ({
@@ -148,7 +204,13 @@ export default function ProjectsTile({ projectsTileRef }) {
         <div className={`${styles.ProjectsTile__layer} ${styles.ProjectsTile__layer_top}`}>
           <div className={styles.ProjectsTile__items}>
             {items.map(({ id, src }, idx) => (
-              <div key={id} className={styles.ProjectsTile__item} onMouseEnter={() => setHoveredIndex(idx)} onMouseLeave={() => setHoveredIndex(null)}>
+              <div
+                key={id}
+                className={styles.ProjectsTile__item}
+                onMouseEnter={handleMouseEnter.bind(null, idx)}
+                onMouseLeave={handleMouseLeave}
+                onTouchStart={(e) => e.preventDefault()}
+              >
                 <Link to={src} className={styles.ProjectsTile__link}>
                   <div className={styles.ProjectsTile__text}>
                     <div className={styles.ProjectsTile__num}>{String(id).padStart(2, '0')}</div>

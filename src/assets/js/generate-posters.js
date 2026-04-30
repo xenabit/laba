@@ -1,31 +1,26 @@
-import { readdir, writeFile, mkdir, unlink } from 'fs/promises';
-import { createWriteStream, existsSync } from 'fs';
-import { join, parse, dirname } from 'path';
-import { spawn } from 'child_process';
-import { fileURLToPath } from 'url';
+const { readdir, mkdir, unlink } = require("fs/promises");
+const { existsSync } = require("fs");
+const { join, parse } = require("path");
+const { spawn } = require("child_process");
 
-// Получаем текущую директорию
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const CURRENT_DIR = __dirname;
+const VIDEOS_DIR = CURRENT_DIR;
+const POSTERS_DIR = join(CURRENT_DIR, "posters");
 
-const ASSETS_DIR = join(__dirname, '..');
-const VIDEOS_DIR = join(ASSETS_DIR, 'videos');
-const POSTERS_DIR = join(ASSETS_DIR, 'posters');
-const THUMBNAIL_SIZE = 1280;
-const QUALITY = 85;
+const THUMBNAIL_SIZE = 1280; // ширина постера
+const QUALITY = 85; // качество (для jpg и webp)
 
-// Функция для проверки существования ffmpeg на Windows
+// Проверка ffmpeg
 async function checkFFmpeg() {
   return new Promise((resolve) => {
-    const test = spawn('ffmpeg', ['-version']);
-    test.on('close', (code) => {
+    const test = spawn("ffmpeg", ["-version"]);
+    test.on("close", (code) => {
       if (code !== 0) {
-        console.error('❌ FFmpeg not found!');
-        console.log('📥 Download from: https://ffmpeg.org/download.html');
-        console.log('🔧 Or install with chocolatey: choco install ffmpeg');
+        console.error("❌ FFmpeg не найден!");
+        console.log("📥 Скачай с https://ffmpeg.org/download.html");
         resolve(false);
       } else {
-        console.log('✅ FFmpeg found');
+        console.log("✅ FFmpeg найден");
         resolve(true);
       }
     });
@@ -35,49 +30,79 @@ async function checkFFmpeg() {
 async function ensureDir(dir) {
   if (!existsSync(dir)) {
     await mkdir(dir, { recursive: true });
-    console.log(`📁 Created directory: ${dir}`);
+    console.log(`📁 Создана папка: ${dir}`);
   }
 }
 
 async function getVideoFiles() {
-  try {
-    const files = await readdir(VIDEOS_DIR);
-    const videoFiles = files.filter((file) => /\.(mp4|webm|mov|avi|mkv|MP4|WEBM)$/i.test(file));
-    console.log(`📹 Found ${videoFiles.length} video files:`);
-    videoFiles.forEach((f) => console.log(`   - ${f}`));
-    return videoFiles;
-  } catch (error) {
-    console.error(`❌ Can't read videos directory: ${VIDEOS_DIR}`);
-    console.error(`   Error: ${error.message}`);
-    return [];
-  }
+  const files = await readdir(VIDEOS_DIR);
+  const videoFiles = files.filter((file) =>
+    /\.(mp4|webm|mov|avi|mkv)$/i.test(file),
+  );
+  console.log(`📹 Найдено видео: ${videoFiles.length} шт.`);
+  videoFiles.forEach((f) => console.log(`   - ${f}`));
+  return videoFiles;
 }
 
-async function extractFirstFrame(videoPath, outputPath) {
-  return new Promise((resolve, reject) => {
-    const ffmpeg = spawn('ffmpeg', ['-i', videoPath, '-ss', '0', '-vframes', '1', '-vf', `scale=${THUMBNAIL_SIZE}:-2`, '-q:v', '2', '-y', outputPath]);
+async function createPoster(videoPath, videoName) {
+  const jpgPath = join(POSTERS_DIR, `${videoName}.jpg`);
+  const webpPath = join(POSTERS_DIR, `${videoName}.webp`);
 
-    ffmpeg.on('close', (code) => {
-      if (code === 0) resolve(outputPath);
-      else reject(new Error(`FFmpeg error code ${code}`));
-    });
+  console.log(`   → Создаём постеры для ${videoName}`);
 
-    ffmpeg.on('error', reject);
+  // 1. JPG (первый кадр)
+  await new Promise((resolve, reject) => {
+    const proc = spawn("ffmpeg", [
+      "-i",
+      videoPath,
+      "-ss",
+      "0",
+      "-vframes",
+      "1",
+      "-vf",
+      `scale=${THUMBNAIL_SIZE}:-2`,
+      "-q:v",
+      "2",
+      "-y",
+      jpgPath,
+    ]);
+    proc.on("close", (code) =>
+      code === 0 ? resolve() : reject(new Error(`FFmpeg JPG code ${code}`)),
+    );
+    proc.on("error", reject);
   });
+  console.log(`     ✅ ${videoName}.jpg`);
+
+  // 2. WebP (первый кадр)
+  await new Promise((resolve, reject) => {
+    const proc = spawn("ffmpeg", [
+      "-i",
+      videoPath,
+      "-ss",
+      "0",
+      "-vframes",
+      "1",
+      "-vf",
+      `scale=${THUMBNAIL_SIZE}:-2`,
+      "-c:v",
+      "libwebp",
+      "-quality",
+      QUALITY.toString(),
+      "-y",
+      webpPath,
+    ]);
+    proc.on("close", (code) =>
+      code === 0 ? resolve() : reject(new Error(`FFmpeg WebP code ${code}`)),
+    );
+    proc.on("error", reject);
+  });
+  console.log(`     ✅ ${videoName}.webp`);
 }
 
 async function generatePosters() {
-  console.log('\n🚀 Starting poster generation...\n');
-  console.log(`📂 Videos folder: ${VIDEOS_DIR}`);
-  console.log(`📂 Posters folder: ${POSTERS_DIR}\n`);
-
-  if (!existsSync(VIDEOS_DIR)) {
-    console.error(`❌ Videos folder not found: ${VIDEOS_DIR}`);
-    console.log('💡 Creating videos folder...');
-    await ensureDir(VIDEOS_DIR);
-    console.log('📹 Please add video files to the folder and run again');
-    return;
-  }
+  console.log("=".repeat(60));
+  console.log("🎬 ГЕНЕРАТОР ПОСТЕРОВ (имя = имя видео)");
+  console.log("=".repeat(60));
 
   const hasFFmpeg = await checkFFmpeg();
   if (!hasFFmpeg) return;
@@ -86,66 +111,31 @@ async function generatePosters() {
 
   const videos = await getVideoFiles();
   if (videos.length === 0) {
-    console.log('⚠️  No video files found!');
-    console.log(`💡 Add videos to: ${VIDEOS_DIR}`);
+    console.log("⚠️ Нет видео в папке!");
     return;
   }
 
-  const results = [];
+  let success = 0;
 
   for (let i = 0; i < videos.length; i++) {
     const videoFile = videos[i];
     const videoName = parse(videoFile).name;
     const videoPath = join(VIDEOS_DIR, videoFile);
 
-    console.log(`\n🎬 [${i + 1}/${videos.length}] Processing: ${videoFile}`);
-
-    const tempFrame = join(POSTERS_DIR, `temp-${Date.now()}-${i}.jpg`);
+    console.log(`\n🎬 [${i + 1}/${videos.length}] ${videoFile}`);
 
     try {
-      await extractFirstFrame(videoPath, tempFrame);
-      console.log(`  ✅ Frame extracted`);
-
-      const posterWebp = join(POSTERS_DIR, `poster-${videoName}.webp`);
-      const posterJpg = join(POSTERS_DIR, `poster-${videoName}.jpg`);
-
-      const sharp = await import('sharp');
-      await sharp.default(tempFrame).jpeg({ quality: QUALITY }).toFile(posterJpg);
-
-      await sharp.default(tempFrame).webp({ quality: QUALITY }).toFile(posterWebp);
-
-      console.log(`  ✅ Generated: poster-${videoName}.webp`);
-      console.log(`  ✅ Generated: poster-${videoName}.jpg`);
-
-      await unlink(tempFrame);
-
-      results.push({
-        video: videoFile,
-        name: videoName,
-        posterWebp: `poster-${videoName}.webp`,
-        posterJpg: `poster-${videoName}.jpg`,
-      });
-    } catch (error) {
-      console.error(`  ❌ Error: ${error.message}`);
+      await createPoster(videoPath, videoName);
+      success++;
+    } catch (err) {
+      console.error(`   ❌ Ошибка: ${err.message}`);
+      // продолжаем с остальными файлами
     }
   }
 
-  console.log('\n✨ ========== GENERATION COMPLETE ==========');
-  console.log(`📊 Generated ${results.length} posters`);
-  console.log(`📁 Posters saved to: ${POSTERS_DIR}`);
-
-  if (results.length > 0) {
-    console.log('\n📋 Generated posters:');
-    results.forEach((r) => {
-      console.log(`   - ${r.posterWebp} (from ${r.video})`);
-    });
-  }
-
-  return results;
+  console.log("\n✨ ========== ГОТОВО ==========");
+  console.log(`📊 Успешно создано: ${success} постеров`);
+  console.log(`📁 Папка: ${POSTERS_DIR}`);
 }
-
-console.log('='.repeat(50));
-console.log('🎬 VIDEO POSTER GENERATOR');
-console.log('='.repeat(50));
 
 generatePosters().catch(console.error);

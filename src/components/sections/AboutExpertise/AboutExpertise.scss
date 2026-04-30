@@ -143,48 +143,7 @@
     &__header {
       div:nth-child(1),
       div:nth-child(2) {
-        font-size: rem(45);
-      }
-    }
-  }
-
-  @media all and (min-width: $bp3) {
-    &__header {
-      flex-direction: row;
-      column-gap: rem(37);
-      flex-wrap: wrap;
-      margin-bottom: rem(60);
-
-      div:nth-child(1),
-      div:nth-child(2),
-      div:nth-child(3) {
-        width: auto;
-        margin: 0;
-      }
-
-      div:nth-child(1) {
-        padding-right: 0;
-        order: 1;
-        width: 48%;
-        font-weight: var(--fw-medium);
         font-size: clamp(rem(88), 5.5vw, 100vmax);
-        line-height: 1.09;
-        text-align: left;
-        padding-left: rem(32);
-      }
-
-      div:nth-child(2) {
-        padding-left: 0;
-        order: 3;
-        width: 100%;
-        font-weight: var(--fw-medium);
-        font-size: clamp(rem(88), 5.5vw, 100vmax);
-        line-height: 1.09;
-      }
-
-      div:nth-child(3) {
-        order: 2;
-        width: 48%;
       }
     }
 
@@ -217,7 +176,48 @@
     }
   }
 
-  @media all and (min-width: $bp2) {
+  @media all and (min-width: $bp3) {
+    &__header {
+      flex-direction: row;
+      column-gap: rem(37);
+      flex-wrap: wrap;
+      margin-bottom: rem(60);
+      justify-content: space-between;
+
+      div:nth-child(1),
+      div:nth-child(2),
+      div:nth-child(3) {
+        width: auto;
+        margin: 0;
+      }
+
+      div:nth-child(1) {
+        padding-right: 0;
+        order: 1;
+        width: 48%;
+        font-weight: var(--fw-medium);
+        line-height: 1.09;
+        text-align: left;
+        padding-left: rem(32);
+      }
+
+      div:nth-child(2) {
+        padding-left: 0;
+        order: 3;
+        width: 100%;
+        font-weight: var(--fw-medium);
+        font-size: clamp(rem(88), 5.5vw, 100vmax);
+        line-height: 1.09;
+      }
+
+      div:nth-child(3) {
+        order: 2;
+        width: 45%;
+      }
+    }
+  }
+
+  @media all and (min-width: $bp1) {
     padding-top: rem(140);
 
     &__header {
