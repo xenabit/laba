@@ -19,6 +19,7 @@
     width: min-content;
 
     h1 {
+      text-transform: uppercase;
       font-size: clamp(rem(46), 8vw, rem(160));
       line-height: 1.2;
       font-weight: var(--fw-medium);

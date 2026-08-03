@@ -75,7 +75,10 @@ const contentCasesIntro = {
   title: 'Тамагочи',
   subtitle: 'Гиперказуальная игра',
   tags: ['WEB интерфейс', 'UX/UI', 'Административная панель'],
-  src: {},
+  src: {
+    url: 'https://www.rustore.ru/catalog/app/ru.laba.tamtam',
+    title: 'Перейти на stor',
+  },
   picture_intro: {
     img: case_intro_picture_jpg,
     webp: case_intro_picture_webp,
@@ -88,11 +91,11 @@ const contentCasesIntro = {
     },
     {
       topic: 'Платформа',
-      desc: 'Кроссплатформенное',
+      desc: 'Мобильные',
     },
     {
       topic: 'Команда',
-      desc: 'Разработчик Unreal Engine, PM, UX/UI дизайнеры',
+      desc: 'Разработчик Unreal Engine, моделлер,<br> PM, Арт-дир, UX/UI дизайнер, иллюстратор',
     },
     {
       topic: 'Что сделано',
