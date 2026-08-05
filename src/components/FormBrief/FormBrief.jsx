@@ -114,7 +114,7 @@ function FormBrief() {
       </div>
       <form noValidate ref={formRef} action="https://echo.htmlacademy.ru/" method="post" className={isFormSubmitted ? styles.success : ''} onSubmit={handleSubmit}>
         <p>
-          Выберете подходящие вам услуги, либо звоните, мы&nbsp;пообщаемся <br></br>и&nbsp;подберем лучшее решение для вашей компании
+          Выберете подходящие вам услуги, либо звоните, мы&nbsp;пообщаемся <br></br>и&nbsp;подберем лучшее решение для&nbsp;вашей компании
         </p>
         <div className={styles.FormBrief__services}>
           <div className={styles.FormBrief__dropdown}>

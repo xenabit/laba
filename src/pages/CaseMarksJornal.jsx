@@ -11,17 +11,17 @@ import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import softwarLogos from '../constants/softwarLogos';
 import CasesItems from '../components/CasesItems/CasesItems';
 
-// Импорты изображений для CasesIntro
+// Импорты изображений CasesIntro
 import case_intro_picture_jpg from '../assets/images/case-jornal.jpg';
 import case_intro_picture_webp from '../assets/images/case-jornal.webp';
 import case_intro_picture_avif from '../assets/images/case-jornal.avif';
 
-// Импорты изображений для Picture
+// Импорты изображений Picture
 import picture_jpg from '../assets/images/picture-jornal.jpg';
 import picture_webp from '../assets/images/picture-jornal.webp';
 import picture_avif from '../assets/images/picture-jornal.avif';
 
-// Импорты изображений для CasesCompareSlider
+// Импорты изображений CasesCompareSlider
 import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-hr-1.svg';
 import case_compare_slider_picture_left_1_jpg from '../assets/images/cases-compare-slider-jornal-left-1.jpg';
 import case_compare_slider_picture_left_1_webp from '../assets/images/cases-compare-slider-jornal-left-1.webp';
@@ -58,7 +58,7 @@ import case_compare_slider_picture_right_5_jpg from '../assets/images/cases-comp
 import case_compare_slider_picture_right_5_webp from '../assets/images/cases-compare-slider-jornal-right-5.webp';
 import case_compare_slider_picture_right_5_avif from '../assets/images/cases-compare-slider-jornal-right-5.avif';
 
-// Импорты изображений для CasesSliderFull
+// Импорты изображений CasesSliderFull
 import case_slider_full_picture_1_1_jpg from '../assets/images/cases-slider-full-jornal-1-1.jpg';
 import case_slider_full_picture_1_1_webp from '../assets/images/cases-slider-full-jornal-1-1.webp';
 import case_slider_full_picture_1_1_avif from '../assets/images/cases-slider-full-jornal-1-1.avif';
@@ -114,7 +114,7 @@ import case_slider_full_picture_3_5_jpg from '../assets/images/cases-slider-full
 import case_slider_full_picture_3_5_webp from '../assets/images/cases-slider-full-jornal-3-5.webp';
 import case_slider_full_picture_3_5_avif from '../assets/images/cases-slider-full-jornal-3-5.avif';
 
-// Импорты для ReviewsSlider
+// Импорты ReviewsSlider
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
 import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-3.jpg';
 import reviews_slider_author_2_webp from '../assets/images/reviews-slider-3.webp';
@@ -148,7 +148,7 @@ const contentCasesIntro = {
     },
     {
       topic: 'Что сделано',
-      desc: 'Cервис для публикации научных статей',
+      desc: 'Cервис для&nbsp;публикации научных статей',
     },
   ],
 };
@@ -227,7 +227,7 @@ const case_compare_slider_pictures_1 = {
 const contentText = [
   {
     title: 'Задача',
-    text: 'Разработать онлайн-сервис для публикации научных статей, который будет включать функционал для работы со&nbsp;сложными математическими формулами и&nbsp;таблицами.<br><br>Необходимо внедрить возможность предварительного просмотра аннотаций прямо с&nbsp;главной страницы портала. Система редактирования статей должна обладать интуитивно понятным интерфейсом, обеспечивающим комфортное взаимодействие с&nbsp;контентом для авторов любого уровня технической подготовки.',
+    text: 'Разработать онлайн-сервис для&nbsp;публикации научных статей, который будет включать функционал для&nbsp;работы со&nbsp;сложными математическими формулами и&nbsp;таблицами.<br><br>Необходимо внедрить возможность предварительного просмотра аннотаций прямо с&nbsp;главной страницы портала. Система редактирования статей должна обладать интуитивно понятным интерфейсом, обеспечивающим комфортное взаимодействие с&nbsp;контентом для&nbsp;авторов любого уровня технической подготовки.',
   },
   {
     title: 'Поиск и фильтрация',
@@ -240,7 +240,7 @@ const contentText = [
   },
   {
     title: 'Тело статьи',
-    text: 'Административная панель, оснащённая технологией Markdown, предоставляет широкие возможности для работы с&nbsp;контентом: авторы могут легко вставлять и&nbsp;редактировать формулы, таблицы любой степени сложности.<br><br>Благодаря встроенным стилям оформления, материалы автоматически выводятся в&nbsp;едином, профессионально оформленном виде, что обеспечивает их&nbsp;презентабельный внешний вид.',
+    text: 'Административная панель, оснащённая технологией Markdown, предоставляет широкие возможности для&nbsp;работы с&nbsp;контентом: авторы могут легко вставлять и&nbsp;редактировать формулы, таблицы любой степени сложности.<br><br>Благодаря встроенным стилям оформления, материалы автоматически выводятся в&nbsp;едином, профессионально оформленном виде, что обеспечивает их&nbsp;презентабельный внешний вид.',
   },
   {
     title: 'Административная панель',
@@ -261,7 +261,7 @@ const contentPicture = [
 const contentReviews = [
   {
     title: 'Отзыв клиента',
-    text: 'Работа с HR-порталом на сайте стала для меня и для HR-команды ещё одним способом привлечения кандидатов. Платформа интуитивно понятна и удобна в использовании, опубликовать вакансии на портале не занимает большого количества времени. Лично мне нравится функция размещения горящих вакансий на главной странице портала на сайте. Сайт MARKS GROUP посещает множество специалистов из сферы проектирования и цифровых технологий, поэтому классно, что они сразу могут ознакомиться с нашими вакансиями через сайт, откликнуться и их резюме или контакты сразу попадают к нам на hr-почту, это очень удобно!',
+    text: 'Работа с HR-порталом на сайте стала для&nbsp;меня и для&nbsp;HR-команды ещё одним способом привлечения кандидатов. Платформа интуитивно понятна и удобна в использовании, опубликовать вакансии на портале не занимает большого количества времени. Лично мне нравится функция размещения горящих вакансий на главной странице портала на сайте. Сайт MARKS GROUP посещает множество специалистов из сферы проектирования и цифровых технологий, поэтому классно, что они сразу могут ознакомиться с нашими вакансиями через сайт, откликнуться и их резюме или контакты сразу попадают к нам на hr-почту, это очень удобно!',
     name: 'Мария<br> Ведущий специалист',
     picture: [
       {

@@ -202,7 +202,9 @@ function AboutExpertise() {
       <div className="AboutExpertise__header">
         <div>Области</div>
         <div>экспертизы</div>
-        <div>В&nbsp;разработке программного обеспечения мы&nbsp;предлагаем создание индивидуальных решений, включая ERP-системы, CRM-системы и&nbsp;другие внутренние инструменты для бизнеса </div>
+        <div>
+          В&nbsp;разработке программного обеспечения мы&nbsp;предлагаем создание индивидуальных решений, включая ERP-системы, CRM-системы и&nbsp;другие внутренние инструменты для&nbsp;бизнеса{' '}
+        </div>
       </div>
       <div className="AboutExpertise__container">
         {items.map(({ id, title, alt, stack, img }, index) => {

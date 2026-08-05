@@ -11,20 +11,20 @@ import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 
 import softwarLogos from '../constants/softwarLogos';
 
-// Импорты изображений для CasesIntro
+// Импорты изображений CasesIntro
 import case_intro_picture_jpg from '../assets/images/case-intro-tamtam.jpg';
 import case_intro_picture_webp from '../assets/images/case-intro-tamtam.webp';
 import case_intro_picture_avif from '../assets/images/case-intro-tamtam.avif';
 
-// Импорты изображений для Picture
+// Импорты изображений Picture
 import picture_svg from '../assets/images/picture-tamtam.svg';
 
-// Импорты изображений для CaseIframe
+// Импорты изображений CaseIframe
 import case_iframe_preview_image_jpg from '../assets/images/case-iframe-tamtam.jpg';
 import case_iframe_preview_image_webp from '../assets/images/case-iframe-tamtam.webp';
 import case_iframe_preview_image_avif from '../assets/images/case-iframe-tamtam.avif';
 
-// Импорты изображений для ReviewsSlider
+// Импорты изображений ReviewsSlider
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
 import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-2.jpg';
 import reviews_slider_author_2_webp from '../assets/images/reviews-slider-2.webp';
@@ -34,7 +34,7 @@ import reviews_slider_author_2_avif from '../assets/images/reviews-slider-2.avif
 import case_slider_bg from '../assets/images/case-slider-bg-tamtam-1.svg';
 import case_slider_full_bg from '../assets/images/case-slider-full-bg-tamtam-1.svg';
 
-// Импорты изображений для CasesSliderFull (первый набор)
+// Импорты изображений CasesSliderFull (первый набор)
 import case_slider_full_picture_1 from '../assets/images/cases-slider-full-tamtam-1.svg';
 import case_slider_full_picture_2_jpg from '../assets/images/cases-slider-full-tamtam-2.jpg';
 import case_slider_full_picture_2_webp from '../assets/images/cases-slider-full-tamtam-2.webp';
@@ -49,7 +49,7 @@ import case_slider_full_picture_5_jpg from '../assets/images/cases-slider-full-t
 import case_slider_full_picture_5_webp from '../assets/images/cases-slider-full-tamtam-5.webp';
 import case_slider_full_picture_5_avif from '../assets/images/cases-slider-full-tamtam-5.avif';
 
-// Импорты изображений для CasesSliderFull (второй набор)
+// Импорты изображений CasesSliderFull (второй набор)
 import case_slider_full_picture_1_2_jpg from '../assets/images/cases-slider-full-tamtam-1-2.jpg';
 import case_slider_full_picture_1_2_webp from '../assets/images/cases-slider-full-tamtam-1-2.webp';
 import case_slider_full_picture_1_2_avif from '../assets/images/cases-slider-full-tamtam-1-2.avif';
@@ -60,7 +60,7 @@ import case_slider_full_picture_3_2_jpg from '../assets/images/cases-slider-full
 import case_slider_full_picture_3_2_webp from '../assets/images/cases-slider-full-tamtam-3-2.webp';
 import case_slider_full_picture_3_2_avif from '../assets/images/cases-slider-full-tamtam-3-2.avif';
 
-// Импорты изображений для CasesSliderFull (третий набор)
+// Импорты изображений CasesSliderFull (третий набор)
 import case_slider_full_picture_1_3_jpg from '../assets/images/cases-slider-full-tamtam-1-3.jpg';
 import case_slider_full_picture_1_3_webp from '../assets/images/cases-slider-full-tamtam-1-3.webp';
 import case_slider_full_picture_1_3_avif from '../assets/images/cases-slider-full-tamtam-1-3.avif';
@@ -115,7 +115,7 @@ const contentText = [
   },
   {
     title: 'Дизайн',
-    text: 'Мы за гибкость, поэтому для игры разработано 4 цветовые темы, 3 рассчитаны на любителей пастельных тонов, а четверная тема сезонная приуроченная к игровым событиям, ивентам. Пользователь сам может этим управлять.',
+    text: 'Мы за гибкость, поэтому для&nbsp;игры разработано 4 цветовые темы, 3 рассчитаны на любителей пастельных тонов, а четверная тема сезонная приуроченная к игровым событиям, ивентам. Пользователь сам может этим управлять.',
   },
   {
     title: 'Разработка',

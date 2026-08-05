@@ -72,6 +72,8 @@ export default defineConfig({
   },
   base: './',
 
+  // base: '/laba-prod-test/',
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

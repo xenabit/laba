@@ -80,7 +80,7 @@ export const projects = [
     },
     src: '/portfolio/markscity',
     title: 'MARKS-CITY',
-    desc: 'Десктоп игра для интерактивного стола. Зодчество 2023',
+    desc: 'Десктоп игра для&nbsp;интерактивного стола. Зодчество 2023',
     type: ['desktop', 'game'],
   },
   {

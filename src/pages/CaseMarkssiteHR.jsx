@@ -10,12 +10,12 @@ import CasesCompareSlider from '../components/CasesCompareSlider/CasesCompareSli
 import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import softwarLogos from '../constants/softwarLogos';
 
-// Импорты изображений для CasesIntro
+// Импорты изображений CasesIntro
 import case_intro_picture_jpg from '../assets/images/case-intro-markssite-hr.jpg';
 import case_intro_picture_webp from '../assets/images/case-intro-markssite-hr.webp';
 import case_intro_picture_avif from '../assets/images/case-intro-markssite-hr.avif';
 
-// Импорты изображений для CasesCompareSlider
+// Импорты изображений CasesCompareSlider
 import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-hr-1.svg';
 import case_compare_slider_picture_left_1_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-1.jpg';
 import case_compare_slider_picture_left_1_webp from '../assets/images/cases-compare-slider-markssite-hr-left-1.webp';
@@ -42,7 +42,7 @@ import case_compare_slider_picture_right_4_jpg from '../assets/images/cases-comp
 import case_compare_slider_picture_right_4_webp from '../assets/images/cases-compare-slider-markssite-hr-right-4.webp';
 import case_compare_slider_picture_right_4_avif from '../assets/images/cases-compare-slider-markssite-hr-right-4.avif';
 
-// Импорты изображений для CasesSliderFull
+// Импорты изображений CasesSliderFull
 import case_slider_full_picture_1_0_jpg from '../assets/images/cases-slider-full-markssite-hr-1-0.jpg';
 import case_slider_full_picture_1_0_webp from '../assets/images/cases-slider-full-markssite-hr-1-0.webp';
 import case_slider_full_picture_1_0_avif from '../assets/images/cases-slider-full-markssite-hr-1-0.avif';
@@ -68,7 +68,7 @@ import case_slider_full_picture_2_3_jpg from '../assets/images/cases-slider-full
 import case_slider_full_picture_2_3_webp from '../assets/images/cases-slider-full-markssite-hr-2-3.webp';
 import case_slider_full_picture_2_3_avif from '../assets/images/cases-slider-full-markssite-hr-2-3.avif';
 
-// Импорты для ReviewsSlider
+// Импорты ReviewsSlider
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
 import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-3.jpg';
 import reviews_slider_author_2_webp from '../assets/images/reviews-slider-3.webp';
@@ -170,14 +170,14 @@ const contentText = [
     title: 'Задача',
     text: (
       <>
-        Разработать HR-портал для компании MARKSGROUP с&nbsp;функционалом публикации и&nbsp;просмотра вакансий, отправки анкет, представления информации о&nbsp;карьере в&nbsp;компании
+        Разработать HR-портал для&nbsp;компании MARKSGROUP с&nbsp;функционалом публикации и&nbsp;просмотра вакансий, отправки анкет, представления информации о&nbsp;карьере в&nbsp;компании
         и&nbsp;её&nbsp;преимуществах. Портал интегрирован в&nbsp;корпоративный сайт компании&nbsp;&mdash;
         <Link target="_blank" rel="noopener noreferrer" to="/portfolio/markssite">
           {' '}
           подробнее о&nbsp;кейсе.{' '}
         </Link>{' '}
         <br></br>
-        <br></br>Дополнительно реализовать отдельную административную зону для HR-команды с&nbsp;разграничением доступа и&nbsp;возможностью самостоятельного управления контентом: создания
+        <br></br>Дополнительно реализовать отдельную административную зону для&nbsp;HR-команды с&nbsp;разграничением доступа и&nbsp;возможностью самостоятельного управления контентом: создания
         и&nbsp;редактирования вакансий, настройки ранжирования и&nbsp;фильтрации, управления отображением позиций, а&nbsp;также наполнения информационных страниц HR-портала без участия разработчиков.
       </>
     ),
@@ -188,11 +188,11 @@ const contentText = [
   },
   {
     title: 'Размещение вакансий',
-    text: 'Реализована кастомная система управления вакансиями с&nbsp;гибким конструктором для HR-специалистов. Система позволяет настраивать параметры каждой вакансии: географию, направление, бонусы, условия и&nbsp;другие характеристики. На&nbsp;основе ё&nbsp;этих данных формируется удобная система фильтрации, помогающая кандидатам быстро находить подходящие предложения по&nbsp;своим предпочтениям.',
+    text: 'Реализована кастомная система управления вакансиями с&nbsp;гибким конструктором для&nbsp;HR-специалистов. Система позволяет настраивать параметры каждой вакансии: географию, направление, бонусы, условия и&nbsp;другие характеристики. На&nbsp;основе этих данных формируется удобная система фильтрации, помогающая кандидатам быстро находить подходящие предложения по&nbsp;своим предпочтениям.',
   },
   {
     title: 'Панель администратора',
-    text: 'Реализован конструктор для управления вакансиями (скрытие, добавление, приоритетность), добавления достижений (премии, конкурсы), отдельной информации (стажировки, конкурсы) без&nbsp;необходимости вмешательства разработчиков, автономно и&nbsp;оперативно только специалистами компании (HR, PR&nbsp;и&nbsp;т.д.)',
+    text: 'Реализован конструктор для&nbsp;управления вакансиями (скрытие, добавление, приоритетность), добавления достижений (премии, конкурсы), отдельной информации (стажировки, конкурсы) без&nbsp;необходимости вмешательства разработчиков, автономно и&nbsp;оперативно только специалистами компании (HR, PR&nbsp;и&nbsp;т.д.)',
   },
 ];
 
@@ -201,7 +201,7 @@ const contentSoftwar = [softwarLogos.react, softwarLogos.nodejs, softwarLogos.fi
 const contentReviews = [
   {
     title: 'Отзыв клиента',
-    text: 'Работа с HR-порталом на сайте стала для меня и для HR-команды ещё одним способом привлечения кандидатов. Платформа интуитивно понятна и удобна в использовании, опубликовать вакансии на портале не занимает большого количества времени. Лично мне нравится функция размещения горящих вакансий на главной странице портала на сайте. Сайт MARKS GROUP посещает множество специалистов из сферы проектирования и цифровых технологий, поэтому классно, что они сразу могут ознакомиться с нашими вакансиями через сайт, откликнуться и их резюме или контакты сразу попадают к нам на hr-почту, это очень удобно!',
+    text: 'Работа с&nbsp;HR-порталом на&nbsp;сайте стала для&nbsp;меня и&nbsp;для&nbsp;HR-команды ещё одним способом привлечения кандидатов. Платформа интуитивно понятна и&nbsp;удобна в&nbsp;использовании, опубликовать вакансии на&nbsp;портале не&nbsp;занимает большого количества времени. Лично мне нравится функция размещения горящих вакансий на&nbsp;главной странице портала на&nbsp;сайте. Сайт MARKS GROUP посещает множество специалистов из&nbsp;сферы проектирования и&nbsp;цифровых технологий, поэтому классно, что они сразу могут ознакомиться с&nbsp;нашими вакансиями через сайт, откликнуться и&nbsp;их&nbsp;резюме или контакты сразу попадают к&nbsp;нам на&nbsp;hr-почту, это очень удобно!',
     name: 'Полина Журавлева <br> Ведущий специалист по подбору персонала',
     picture: [
       {

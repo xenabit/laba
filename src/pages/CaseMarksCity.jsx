@@ -11,22 +11,22 @@ import VideoHorizontal from '../components/VideoHorizontal/VideoHorizontal';
 
 import softwarLogos from '../constants/softwarLogos';
 
-// Импорты изображений для CasesIntro
+// Импорты изображений CasesIntro
 import case_intro_picture_jpg from '../assets/images/case-intro-markscity.jpg';
 import case_intro_picture_webp from '../assets/images/case-intro-markscity.webp';
 import case_intro_picture_avif from '../assets/images/case-intro-markscity.avif';
 
-// Импорты изображений для Picture
+// Импорты изображений Picture
 import picture_jpg from '../assets/images/picture-markscity.jpg';
 import picture_webp from '../assets/images/picture-markscity.webp';
 import picture_avif from '../assets/images/picture-markscity.avif';
 
-// Импорты изображений для CaseIframe
+// Импорты изображений CaseIframe
 import case_iframe_preview_image_jpg from '../assets/images/case-iframe-markcity.jpg';
 import case_iframe_preview_image_webp from '../assets/images/case-iframe-markcity.webp';
 import case_iframe_preview_image_avif from '../assets/images/case-iframe-markcity.avif';
 
-// Импорты изображений для ReviewsSlider
+// Импорты изображений ReviewsSlider
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
 import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-2.jpg';
 import reviews_slider_author_2_webp from '../assets/images/reviews-slider-2.webp';
@@ -36,7 +36,7 @@ import reviews_slider_author_2_avif from '../assets/images/reviews-slider-2.avif
 import case_slider_full_bg from '../assets/images/case-slider-full-bg-markscity-1.svg';
 import case_slider_full_bg_2 from '../assets/images/case-slider-full-bg-markscity-2.svg';
 
-// Импорты изображений для CasesSliderFull (первый набор)
+// Импорты изображений CasesSliderFull (первый набор)
 import case_slider_full_picture_1_jpg from '../assets/images/cases-slider-full-markscity-1.jpg';
 import case_slider_full_picture_1_webp from '../assets/images/cases-slider-full-markscity-1.webp';
 import case_slider_full_picture_1_avif from '../assets/images/cases-slider-full-markscity-1.avif';
@@ -50,7 +50,7 @@ import case_slider_full_picture_4_jpg from '../assets/images/cases-slider-full-m
 import case_slider_full_picture_4_webp from '../assets/images/cases-slider-full-markscity-4.webp';
 import case_slider_full_picture_4_avif from '../assets/images/cases-slider-full-markscity-4.avif';
 
-// Импорты изображений для CasesSliderFull (второй набор)
+// Импорты изображений CasesSliderFull (второй набор)
 import case_slider_full_picture_1_2_jpg from '../assets/images/cases-slider-full-markscity-1-2.jpg';
 import case_slider_full_picture_1_2_webp from '../assets/images/cases-slider-full-markscity-1-2.webp';
 import case_slider_full_picture_1_2_avif from '../assets/images/cases-slider-full-markscity-1-2.avif';
@@ -74,7 +74,7 @@ import video from '../assets/videos/vr.mp4';
 
 const contentCasesIntro = {
   title: 'MARKS-CITY',
-  subtitle: 'Десктоп игра для интерактивного стола &laquo;Зодчество 2023&raquo;',
+  subtitle: 'Десктоп игра для&nbsp;интерактивного стола &laquo;Зодчество 2023&raquo;',
   tags: ['Игровая разработка', '3D визуализация', '3D моделирование', 'UX/UI'],
   src: {},
   picture_intro: {
@@ -98,7 +98,7 @@ const contentCasesIntro = {
     },
     {
       topic: 'Что сделано',
-      desc: 'Десктоп игра для интерактивного стола',
+      desc: 'Десктоп игра для&nbsp;интерактивного стола',
     },
   ],
 };
@@ -106,11 +106,11 @@ const contentCasesIntro = {
 const contentText = [
   {
     title: 'Задача',
-    text: 'Разработать игру для интерактивного стола на&nbsp;выставку &laquo;Зодчество&nbsp;23&raquo;. Отразить ценности и&nbsp;продемонстрировать успехи компании MARKSGROUP.',
+    text: 'Разработать игру для&nbsp;интерактивного стола на&nbsp;выставку &laquo;Зодчество&nbsp;24&raquo;. Отразить ценности и&nbsp;продемонстрировать успехи компании MARKSGROUP.',
   },
   {
     title: 'Поиски образа',
-    text: 'Проведена большая работа по&nbsp;выбору и&nbsp;оформлению механики игры, визуализации образа города и&nbsp;формированию процесса игры и&nbsp;целей игрока. Ознакомиться с&nbsp;творческими поисками <a href="#caseiframe">можно ниже.</a>',
+    text: 'Проведена большая работа по&nbsp;выбору и&nbsp;оформлению механики игры, визуализации образа города и&nbsp;формированию процесса игры и&nbsp;целей игрока.<br>Ознакомиться с&nbsp;творческими поисками <a href="#caseiframe">можно ниже.</a>',
   },
   {
     title: 'Визуальный симбиоз',
@@ -118,7 +118,7 @@ const contentText = [
   },
   {
     title: 'Разработка',
-    text: 'Продумать и реализовать логику процесса, оптимизировать код под требования оборудования, разработать таблицу игроков и создать возможность сохранения результатов игровой сессии.',
+    text: 'Продумана и&nbsp;реализована игровая логика, проведена оптимизация кода под требования целевого оборудования. Разработана таблица игроков, система сохранения результатов игровых сессий и&nbsp;backend-инфраструктура для&nbsp;хранения ежедневных игровых данных с&nbsp;возможностью повторного запуска сессий для&nbsp;аналитики и&nbsp;тестирования. Дополнительно реализована система слотов сохранений.',
   },
 ];
 
@@ -308,6 +308,7 @@ export default function CaseMarksCity() {
       <CasesSliderFull items={case_slider_full_content_1} />
       <Text title={contentText[2].title} text={contentText[2].text} />
       <CasesSliderFull items={case_slider_full_content_2} />
+      <Text title={contentText[3].title} text={contentText[3].text} />
       <VideoHorizontal videoUrl={video} />
       <CasesItems type={['game', 'desktop']} excludeId="markscity" />
     </main>

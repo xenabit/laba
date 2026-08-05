@@ -11,22 +11,22 @@ import ReviewsSlider from '../components/ReviewsSlider/ReviewsSlider';
 import CasesItems from '../components/CasesItems/CasesItems';
 import softwarLogos from '../constants/softwarLogos';
 
-// Импорты изображений для CasesIntro
+// Импорты изображений CasesIntro
 import case_intro_picture_jpg from '../assets/images/case-intro-markstour.jpg';
 import case_intro_picture_webp from '../assets/images/case-intro-markstour.webp';
 import case_intro_picture_avif from '../assets/images/case-intro-markstour.avif';
 
-// Импорты изображений для Picture
+// Импорты изображений Picture
 import picture_jpg from '../assets/images/picture-markstour.jpg';
 import picture_webp from '../assets/images/picture-markstour.webp';
 import picture_avif from '../assets/images/picture-markstour.avif';
 
-// Импорты изображений для CaseIframe
+// Импорты изображений CaseIframe
 import case_iframe_preview_image_jpg from '../assets/images/case-iframe-markstour.jpg';
 import case_iframe_preview_image_webp from '../assets/images/case-iframe-markstour.webp';
 import case_iframe_preview_image_avif from '../assets/images/case-iframe-markstour.avif';
 
-// Импорты изображений для ReviewsSlider
+// Импорты изображений ReviewsSlider
 import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
 import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-4.jpg';
 import reviews_slider_author_2_webp from '../assets/images/reviews-slider-4.webp';
@@ -35,7 +35,7 @@ import reviews_slider_author_3_jpg from '../assets/images/reviews-slider-5.jpg';
 import reviews_slider_author_3_webp from '../assets/images/reviews-slider-5.webp';
 import reviews_slider_author_3_avif from '../assets/images/reviews-slider-5.avif';
 
-// Импорты изображений для CasesSliderFull
+// Импорты изображений CasesSliderFull
 import case_slider_full_picture_1_jpg from '../assets/images/cases-slider-full-markstour-1.jpg';
 import case_slider_full_picture_1_webp from '../assets/images/cases-slider-full-markstour-1.webp';
 import case_slider_full_picture_1_avif from '../assets/images/cases-slider-full-markstour-1.avif';
@@ -57,7 +57,7 @@ const text = [
     title: 'Задача',
     text: (
       <>
-        Разработать интерактивный 3D‑тур по&nbsp;объекту с&nbsp;пользовательским интерфейсом для демонстрации в&nbsp;офисах продаж: навигация по&nbsp;планировкам, просмотр 3D‑рендеров, режим{' '}
+        Разработать интерактивный 3D‑тур по&nbsp;объекту с&nbsp;пользовательским интерфейсом для&nbsp;демонстрации в&nbsp;офисах продаж: навигация по&nbsp;планировкам, просмотр 3D‑рендеров, режим{' '}
         <Link target="_blank" rel="noopener noreferrer" to="https://marks-tour.ru/">
           {' '}
           &laquo;Панорама 360&deg;&raquo;.
@@ -71,7 +71,7 @@ const text = [
   },
   {
     title: 'Интерфейс',
-    text: 'Спроектирован интерфейс с&nbsp;адаптивами для мобильных устройств и&nbsp;планшета. Переключение между тёмной и&nbsp;светлой темами. Перемещение по&nbsp;плану объекта, просмотр визуализаций и&nbsp;информации о&nbsp;мебели. Функционал перехода на&nbsp;сайты производителей.',
+    text: 'Спроектирован интерфейс с&nbsp;адаптивами для&nbsp;мобильных устройств и&nbsp;планшета. Переключение между тёмной и&nbsp;светлой темами. Перемещение по&nbsp;плану объекта, просмотр визуализаций и&nbsp;информации о&nbsp;мебели. Функционал перехода на&nbsp;сайты производителей.',
   },
   {
     title: 'VR',

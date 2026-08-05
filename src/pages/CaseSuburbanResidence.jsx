@@ -11,12 +11,12 @@ import CasesSliderFull from '../components/CasesSliderFull/CasesSliderFull';
 import softwarLogos from '../constants/softwarLogos';
 import CasesItems from '../components/CasesItems/CasesItems';
 
-// Импорты изображений для CasesIntro
+// Импорты изображений CasesIntro
 import case_intro_picture_jpg from '../assets/images/case-suburban-residence.jpg';
 import case_intro_picture_webp from '../assets/images/case-suburban-residence.webp';
 import case_intro_picture_avif from '../assets/images/case-suburban-residence.avif';
 
-// Импорты изображений для Picture
+// Импорты изображений Picture
 import picture_jpg from '../assets/images/picture-suburban-residence.jpg';
 import picture_webp from '../assets/images/picture-suburban-residence.webp';
 import picture_avif from '../assets/images/picture-suburban-residence.avif';
@@ -24,12 +24,12 @@ import picture_jpg_2 from '../assets/images/picture-suburban-residence-2.jpg';
 import picture_webp_2 from '../assets/images/picture-suburban-residence-2.webp';
 import picture_avif_2 from '../assets/images/picture-suburban-residence-2.avif';
 
-// Импорты изображений для CaseIframe
+// Импорты изображений CaseIframe
 import case_iframe_preview_image_jpg from '../assets/images/case-iframe-suburban.jpg';
 import case_iframe_preview_image_webp from '../assets/images/case-iframe-suburban.webp';
 import case_iframe_preview_image_avif from '../assets/images/case-iframe-suburban.avif';
 
-// Импорты изображений для CasesCompareSlider
+// Импорты изображений CasesCompareSlider
 import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-suburban-1.svg';
 import case_compare_slider_picture_left_1_jpg from '../assets/images/cases-compare-slider-suburban-left-1.jpg';
 import case_compare_slider_picture_left_1_webp from '../assets/images/cases-compare-slider-suburban-left-1.webp';
@@ -66,7 +66,7 @@ import case_compare_slider_picture_jpg_4 from '../assets/images/cases-compare-sl
 import case_compare_slider_picture_webp_4 from '../assets/images/cases-compare-slider-suburban-4.webp';
 import case_compare_slider_picture_avif_4 from '../assets/images/cases-compare-slider-suburban-4.avif';
 
-// Импорты изображений для CasesSliderFull
+// Импорты изображений CasesSliderFull
 import case_slider_full_picture_1_0_jpg from '../assets/images/cases-slider-full-residence-1-0.jpg';
 import case_slider_full_picture_1_0_webp from '../assets/images/cases-slider-full-residence-1-0.webp';
 import case_slider_full_picture_1_0_avif from '../assets/images/cases-slider-full-residence-1-0.avif';
@@ -141,11 +141,11 @@ import case_slider_full_picture_2_10_svg from '../assets/images/cases-slider-ful
 import case_slider_full_picture_2_10_webp from '../assets/images/cases-slider-full-residence-2-10.webp';
 import case_slider_full_picture_2_10_avif from '../assets/images/cases-slider-full-residence-2-10.avif';
 
-// Импорты для ReviewsSlider
-// import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
-// import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-3.jpg';
-// import reviews_slider_author_2_webp from '../assets/images/reviews-slider-3.webp';
-// import reviews_slider_author_2_avif from '../assets/images/reviews-slider-3.avif';
+// Импорты ReviewsSlider
+import reviews_slider_author_1 from '../assets/images/reviews-slider-1.svg';
+import reviews_slider_author_2_jpg from '../assets/images/reviews-slider-3.jpg';
+import reviews_slider_author_2_webp from '../assets/images/reviews-slider-3.webp';
+import reviews_slider_author_2_avif from '../assets/images/reviews-slider-3.avif';
 
 const contentCasesIntro = {
   title: 'Suburban Residence',
@@ -268,7 +268,7 @@ const contentText = [
   },
   {
     title: 'Подход',
-    text: 'Провели исследование, изучили объект заказчика, предложили варианты реализации исходя из&nbsp;возможностей &laquo;на&nbsp;месте&raquo;. Ознакомиться с&nbsp;творческими поисками <a href="#caseiframe">можно ниже.</a>',
+    text: 'Провели исследование, изучили объект заказчика, предложили варианты реализации исходя из&nbsp;возможностей &laquo;на&nbsp;месте&raquo;.<br><br> Ознакомиться с&nbsp;творческими поисками <a href="#caseiframe">можно ниже.</a>',
   },
 
   {
@@ -285,7 +285,7 @@ const contentText = [
   },
   {
     title: 'Поиск квартир',
-    text: '<p>Сценарии поиска квартир реализованы через две точки входа.</p><br><p>Первая начинается с&nbsp;интерактивной 3D-модели объекта, размещённой на&nbsp;главной странице. Пользователь визуально выбирает этаж, ориентируясь на&nbsp;генеральный план или вид из&nbsp;окон, после чего на&nbsp;плане этажа выбирает конкретную квартиру.</p><br><p>Второй осуществляется через функциональный агрегатор, где доступны ручные настройки всех ключевых параметров: площади помещения, ценовой категории, корпуса и&nbsp;т.д.</p>',
+    text: '<p>Сценарии поиска квартир реализованы через две точки входа.</p><br><p>Первая начинается с&nbsp;интерактивной 3D-модели объекта, размещённой на&nbsp;главной странице. Пользователь визуально выбирает этаж, ориентируясь на&nbsp;генеральный план или вид из&nbsp;окон, после чего на&nbsp;плане этажа выбирает конкретную квартиру.</p><br><p>Второй осуществляется через функциональный агрегатор, где&nbsp;доступны ручные настройки всех ключевых параметров: площади помещения, ценовой категории, корпуса и&nbsp;т.д.</p>',
   },
 ];
 
@@ -307,7 +307,7 @@ const contentPicture = [
 const contentReviews = [
   {
     title: 'Отзыв клиента',
-    text: 'Работа с HR-порталом на сайте стала для меня и для HR-команды ещё одним способом привлечения кандидатов. Платформа интуитивно понятна и удобна в использовании, опубликовать вакансии на портале не занимает большого количества времени. Лично мне нравится функция размещения горящих вакансий на главной странице портала на сайте. Сайт MARKS GROUP посещает множество специалистов из сферы проектирования и цифровых технологий, поэтому классно, что они сразу могут ознакомиться с нашими вакансиями через сайт, откликнуться и их резюме или контакты сразу попадают к нам на hr-почту, это очень удобно!',
+    text: 'Работа с HR-порталом на сайте стала для&nbsp;меня и для&nbsp;HR-команды ещё одним способом привлечения кандидатов. Платформа интуитивно понятна и удобна в использовании, опубликовать вакансии на портале не занимает большого количества времени. Лично мне нравится функция размещения горящих вакансий на главной странице портала на сайте. Сайт MARKS GROUP посещает множество специалистов из сферы проектирования и цифровых технологий, поэтому классно, что они сразу могут ознакомиться с нашими вакансиями через сайт, откликнуться и их резюме или контакты сразу попадают к нам на hr-почту, это очень удобно!',
     name: 'Полина Журавлева  Ведущий специалист по подбору персонала',
     picture: [
       {

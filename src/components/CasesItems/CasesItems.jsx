@@ -64,7 +64,7 @@ function CasesItems({ type, excludeId }) {
       <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>{preloads}</div>
       <ul className={styles.CasesItems__items}>
         {displayProjects.length === 0 ? (
-          <li>Нет доступных проектов для отображения</li>
+          <li>Нет доступных проектов для&nbsp;отображения</li>
         ) : (
           displayProjects.map((item, index) => {
             const videoProps =
