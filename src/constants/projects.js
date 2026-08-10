@@ -16,7 +16,7 @@ export const projects = [
     video: {
       mp4: getAsset('gallery-1.mp4'),
       webm: getAsset('gallery-1.webm'),
-      poster: getAsset('poster-1.jpg'),
+      poster: getAsset('gallery-1.jpg'),
     },
     src: '/portfolio/markssite',
     title: 'marksgroup.ru',
@@ -28,7 +28,7 @@ export const projects = [
     video: {
       mp4: getAsset('gallery-2.mp4'),
       webm: getAsset('gallery-2.webm'),
-      poster: getAsset('poster-2.jpg'),
+      poster: getAsset('gallery-2.jpg'),
     },
     src: '/portfolio/markssite-hr',
     title: 'HR портал',
@@ -40,7 +40,7 @@ export const projects = [
     video: {
       mp4: getAsset('gallery-3.mp4'),
       webm: getAsset('gallery-3.webm'),
-      poster: getAsset('poster-3.jpg'),
+      poster: getAsset('gallery-3.jpg'),
     },
     src: '/portfolio/markstour',
     title: 'Шоурум-тур',
@@ -52,7 +52,7 @@ export const projects = [
     video: {
       mp4: getAsset('gallery-4.mp4'),
       webm: getAsset('gallery-4.webm'),
-      poster: getAsset('poster-4.jpg'),
+      poster: getAsset('gallery-4.jpg'),
     },
     src: '/portfolio/canon-change',
     title: 'Канон перемен',
@@ -64,7 +64,7 @@ export const projects = [
     video: {
       mp4: getAsset('gallery-5.mp4'),
       webm: getAsset('gallery-5.webm'),
-      poster: getAsset('poster-5.jpg'),
+      poster: getAsset('gallery-5.jpg'),
     },
     src: '/portfolio/tamagotchi',
     title: 'Тамагочи',
@@ -76,7 +76,7 @@ export const projects = [
     video: {
       mp4: getAsset('gallery-6.mp4'),
       webm: getAsset('gallery-6.webm'),
-      poster: getAsset('poster-6.jpg'),
+      poster: getAsset('gallery-6.jpg'),
     },
     src: '/portfolio/markscity',
     title: 'MARKS-CITY',
@@ -88,7 +88,7 @@ export const projects = [
     video: {
       mp4: getAsset('gallery-11.mp4'),
       webm: getAsset('gallery-11.webm'),
-      poster: getAsset('poster-11.jpg'),
+      poster: getAsset('gallery-11.jpg'),
     },
     src: '/portfolio/suburban-residence',
     title: 'Suburban Residence',
@@ -100,7 +100,7 @@ export const projects = [
     video: {
       mp4: getAsset('gallery-9.mp4'),
       webm: getAsset('gallery-9.webm'),
-      poster: getAsset('poster-9.jpg'),
+      poster: getAsset('gallery-9.jpg'),
     },
     src: '/portfolio/case-marksjornal',
     title: 'Marks jornal',
