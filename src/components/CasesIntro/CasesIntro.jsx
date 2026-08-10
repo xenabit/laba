@@ -4,22 +4,58 @@ import { Link } from 'react-router-dom';
 function CasesIntro({ contentCasesIntro }) {
   const { title, subtitle, tags, src, picture_intro, about } = contentCasesIntro;
 
-  const getSrcSet = (pictureData) => {
+  const getSrcSet = (pictureData, isWide) => {
     if (!pictureData) return '';
 
-    // Если есть 2x версии - используем их
-    if (pictureData.webp2x) {
-      return `${pictureData.webp} 1x, ${pictureData.webp2x} 2x`;
+    if (isWide) {
+      // На широких экранах (2500+) всегда 2x
+      if (pictureData.webp2x) {
+        return `${pictureData.webp2x} 1x, ${pictureData.webp2x} 2x`;
+      }
+      return pictureData.webp || '';
+    } else {
+      // На обычных экранах 1x и 2x для ретины
+      if (pictureData.webp2x) {
+        return `${pictureData.webp} 1x, ${pictureData.webp2x} 2x`;
+      }
+      return pictureData.webp || '';
     }
-    return pictureData.webp || '';
   };
 
-  const getSrcSetAvif = (pictureData) => {
+  const getSrcSetAvif = (pictureData, isWide) => {
     if (!pictureData) return '';
-    if (pictureData.avif2x) {
-      return `${pictureData.avif} 1x, ${pictureData.avif2x} 2x`;
+
+    if (isWide) {
+      // На широких экранах (2500+) всегда 2x
+      if (pictureData.avif2x) {
+        return `${pictureData.avif2x} 1x, ${pictureData.avif2x} 2x`;
+      }
+      return pictureData.avif || '';
+    } else {
+      // На обычных экранах 1x и 2x для ретины
+      if (pictureData.avif2x) {
+        return `${pictureData.avif} 1x, ${pictureData.avif2x} 2x`;
+      }
+      return pictureData.avif || '';
     }
-    return pictureData.avif || '';
+  };
+
+  const getImgSrcSet = (pictureData, isWide) => {
+    if (!pictureData) return '';
+
+    if (isWide) {
+      // На широких экранах (2500+) всегда 2x
+      if (pictureData.img2x) {
+        return `${pictureData.img2x} 1x, ${pictureData.img2x} 2x`;
+      }
+      return pictureData.img || '';
+    } else {
+      // На обычных экранах 1x и 2x для ретины
+      if (pictureData.img2x && pictureData.img2x !== pictureData.img) {
+        return `${pictureData.img} 1x, ${pictureData.img2x} 2x`;
+      }
+      return pictureData.img || '';
+    }
   };
 
   return (
@@ -43,13 +79,23 @@ function CasesIntro({ contentCasesIntro }) {
       <div className={styles.CasesIntro__body}>
         <div className={styles.CasesIntro__picture}>
           <picture>
-            {picture_intro.avif && <source type="image/avif" srcSet={getSrcSetAvif(picture_intro)} />}
-            {picture_intro.webp && <source type="image/webp" srcSet={getSrcSet(picture_intro)} />}
+            {/* AVIF для широких экранов (2500+) */}
+            {picture_intro?.avif && <source type="image/avif" media="(min-width: 2500px)" srcSet={getSrcSetAvif(picture_intro, true)} />}
+            {/* AVIF для обычных экранов (< 2500) */}
+            {picture_intro?.avif && <source type="image/avif" media="(max-width: 2449px)" srcSet={getSrcSetAvif(picture_intro, false)} />}
+
+            {/* WEBP для широких экранов (2500+) */}
+            {picture_intro?.webp && <source type="image/webp" media="(min-width: 2500px)" srcSet={getSrcSet(picture_intro, true)} />}
+            {/* WEBP для обычных экранов (< 2500) */}
+            {picture_intro?.webp && <source type="image/webp" media="(max-width: 2449px)" srcSet={getSrcSet(picture_intro, false)} />}
+
+            {/* Fallback img */}
             <img
               style={{
-                objectPosition: picture_intro.position || 'center',
+                objectPosition: picture_intro?.position || 'center',
               }}
-              src={picture_intro.img}
+              src={picture_intro?.img || ''}
+              srcSet={getImgSrcSet(picture_intro, false)}
               loading="lazy"
               alt={title || 'Intro image'}
             />
