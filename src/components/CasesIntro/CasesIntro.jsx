@@ -3,6 +3,25 @@ import { Link } from 'react-router-dom';
 
 function CasesIntro({ contentCasesIntro }) {
   const { title, subtitle, tags, src, picture_intro, about } = contentCasesIntro;
+
+  const getSrcSet = (pictureData) => {
+    if (!pictureData) return '';
+
+    // Если есть 2x версии - используем их
+    if (pictureData.webp2x) {
+      return `${pictureData.webp} 1x, ${pictureData.webp2x} 2x`;
+    }
+    return pictureData.webp || '';
+  };
+
+  const getSrcSetAvif = (pictureData) => {
+    if (!pictureData) return '';
+    if (pictureData.avif2x) {
+      return `${pictureData.avif} 1x, ${pictureData.avif2x} 2x`;
+    }
+    return pictureData.avif || '';
+  };
+
   return (
     <section className={styles.CasesIntro}>
       <div className={styles.CasesIntro__header}>
@@ -24,14 +43,15 @@ function CasesIntro({ contentCasesIntro }) {
       <div className={styles.CasesIntro__body}>
         <div className={styles.CasesIntro__picture}>
           <picture>
-            <source type="image/avif" srcSet={picture_intro.avif} />
-            <source type="image/webp" srcSet={picture_intro.webp} />
+            {picture_intro.avif && <source type="image/avif" srcSet={getSrcSetAvif(picture_intro)} />}
+            {picture_intro.webp && <source type="image/webp" srcSet={getSrcSet(picture_intro)} />}
             <img
               style={{
-                objectPosition: `${picture_intro.position}`,
+                objectPosition: picture_intro.position || 'center',
               }}
               src={picture_intro.img}
               loading="lazy"
+              alt={title || 'Intro image'}
             />
           </picture>
         </div>
