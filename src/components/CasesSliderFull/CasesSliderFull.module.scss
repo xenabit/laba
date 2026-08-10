@@ -22,8 +22,10 @@
     position: relative;
     width: 100%;
 
+    picture,
     img {
       display: block;
+      width: 100%;
       height: auto;
       margin: 0 auto;
       object-fit: contain;

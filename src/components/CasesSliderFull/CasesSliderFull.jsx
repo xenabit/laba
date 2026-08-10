@@ -19,6 +19,13 @@ function CasesSliderFull({ items }) {
     }
   }, [items]);
 
+  /**
+   * Получает путь к изображению
+   */
+  const getImgSrc = (picture) => {
+    return picture.img || picture.avif || picture.webp || '';
+  };
+
   return (
     <section className={styles.CasesSliderFull}>
       <div className={styles.CasesSliderFull__container}>
@@ -53,20 +60,35 @@ function CasesSliderFull({ items }) {
             if (!item.picture) {
               return null;
             }
+
+            const picture = item.picture;
+
             return (
               <SwiperSlide className={styles.CasesSliderFull__slide} key={item.id}>
                 <div className={styles.CasesSliderFull__inner}>
                   <picture>
-                    <source type="image/avif" srcSet={item.picture.avif || ''} />
-                    <source type="image/webp" srcSet={item.picture.webp || ''} />
+                    {/* AVIF для десктопа (>=2500px) */}
+                    {picture.avif2x && <source type="image/avif" media="(min-width: 2500px)" srcSet={`${picture.avif2x} 1x, ${picture.avif2x} 2x`} />}
+
+                    {/* AVIF для мобильных (<2500px) */}
+                    {picture.avif && <source type="image/avif" media="(max-width: 2449px)" srcSet={`${picture.avif} 1x, ${picture.avif2x || picture.avif} 2x`} />}
+
+                    {/* WEBP для десктопа (>=2500px) */}
+                    {picture.webp2x && <source type="image/webp" media="(min-width: 2500px)" srcSet={`${picture.webp2x} 1x, ${picture.webp2x} 2x`} />}
+
+                    {/* WEBP для мобильных (<2500px) */}
+                    {picture.webp && <source type="image/webp" media="(max-width: 2449px)" srcSet={`${picture.webp} 1x, ${picture.webp2x || picture.webp} 2x`} />}
+
+                    {/* Fallback img */}
                     <img
-                      src={item.picture.img || ''}
+                      src={getImgSrc(picture)}
                       loading="lazy"
                       style={{
-                        width: item.sizes?.width || items.sizes.width,
-                        height: item.sizes?.height || 'auto',
-                        objectFit: item.sizes?.objectFit || 'contain',
+                        width: item.sizes?.width || items.sizes?.width || '100%',
+                        height: item.sizes?.height || items.sizes?.height || 'auto',
+                        objectFit: item.sizes?.objectFit || items.sizes?.objectFit || 'contain',
                       }}
+                      alt={item.alt || `Слайд ${item.id}`}
                     />
                   </picture>
                 </div>
