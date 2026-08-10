@@ -102,10 +102,22 @@ export const projects = [
       webm: getAsset('gallery-9.webm'),
       poster: getAsset('gallery-9.jpg'),
     },
-    src: '/portfolio/case-marksjornal',
+    src: '/portfolio/marksjornal',
     title: 'Marks jornal',
     desc: 'Научный журнал',
     type: ['desktop', 'web'],
+  },
+  {
+    id: 'case-colorpath',
+    video: {
+      mp4: getAsset('gallery-7.mp4'),
+      webm: getAsset('gallery-7.webm'),
+      poster: getAsset('gallery-7.jpg'),
+    },
+    src: '/portfolio/colorpath',
+    title: 'Путь цвета',
+    desc: 'Аркадный раннер (Color Path)',
+    type: ['game', 'mobile'],
   },
 ];
 
