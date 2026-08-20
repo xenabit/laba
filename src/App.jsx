@@ -22,7 +22,7 @@ const CaseMarksTour = lazy(() => import('./pages/CaseMarksTour.jsx'));
 const CaseMarkssite = lazy(() => import('./pages/CaseMarkssite.jsx'));
 const CaseMarkssiteHR = lazy(() => import('./pages/CaseMarkssiteHR.jsx'));
 const CaseCanonChange = lazy(() => import('./pages/CaseCanonChange.jsx'));
-const CaseTamagotchi = lazy(() => import('./pages/CaseTamagotchi.jsx'));
+const CaseTamagotchi = lazy(() => import('./pages/CaseTamagotchi/CaseTamagotchi.jsx'));
 const CaseMarksCity = lazy(() => import('./pages/CaseMarksCity.jsx'));
 const CaseColorPath = lazy(() => import('./pages/CaseColorPath/CaseColorPath.jsx'));
 const CaseSuburbanResidence = lazy(() => import('./pages/CaseSuburbanResidence.jsx'));

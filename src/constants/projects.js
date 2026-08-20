@@ -67,8 +67,8 @@ export const projects = [
       poster: getAsset('gallery-5.jpg'),
     },
     src: '/portfolio/tamagotchi',
-    title: 'Тамагочи',
-    desc: 'Гиперказуальная игра',
+    title: 'Там Там: <br> Мой милый питомец',
+    desc: 'Гиперказуальная игра тамагочи',
     type: ['game', 'mobile'],
   },
   {
