@@ -5,9 +5,11 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './CasesSliderScroll2.module.scss';
 
-function CasesSliderScroll2({ items }) {
+function CasesSliderScroll2({ items, background }) {
   const swiperRef = useRef(null);
   const paginationRef = useRef(null);
+
+  console.log('Background received:', background); // Проверка
 
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.swiper && paginationRef.current) {
@@ -25,7 +27,7 @@ function CasesSliderScroll2({ items }) {
         <Swiper
           ref={swiperRef}
           className={styles.CasesSliderScroll2__swiper}
-          style={{ background: `linear-gradient(294deg, #B8D45F -25.2%, #658305 105.29%)` }}
+          style={{ background: background }}
           modules={[Navigation, Pagination, FreeMode, Autoplay]}
           freeMode={{
             enabled: true,
