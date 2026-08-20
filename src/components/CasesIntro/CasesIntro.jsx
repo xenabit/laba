@@ -82,12 +82,12 @@ function CasesIntro({ contentCasesIntro }) {
             {/* AVIF для широких экранов (2500+) */}
             {picture_intro?.avif && <source type="image/avif" media="(min-width: 2500px)" srcSet={getSrcSetAvif(picture_intro, true)} />}
             {/* AVIF для обычных экранов (< 2500) */}
-            {picture_intro?.avif && <source type="image/avif" media="(max-width: 2449px)" srcSet={getSrcSetAvif(picture_intro, false)} />}
+            {picture_intro?.avif && <source type="image/avif" media="(max-width: 2499px)" srcSet={getSrcSetAvif(picture_intro, false)} />}
 
             {/* WEBP для широких экранов (2500+) */}
             {picture_intro?.webp && <source type="image/webp" media="(min-width: 2500px)" srcSet={getSrcSet(picture_intro, true)} />}
             {/* WEBP для обычных экранов (< 2500) */}
-            {picture_intro?.webp && <source type="image/webp" media="(max-width: 2449px)" srcSet={getSrcSet(picture_intro, false)} />}
+            {picture_intro?.webp && <source type="image/webp" media="(max-width: 2499px)" srcSet={getSrcSet(picture_intro, false)} />}
 
             {/* Fallback img */}
             <img
