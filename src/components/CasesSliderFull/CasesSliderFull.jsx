@@ -71,13 +71,13 @@ function CasesSliderFull({ items }) {
                     {picture.avif2x && <source type="image/avif" media="(min-width: 2500px)" srcSet={`${picture.avif2x} 1x, ${picture.avif2x} 2x`} />}
 
                     {/* AVIF для мобильных (<2500px) */}
-                    {picture.avif && <source type="image/avif" media="(max-width: 2449px)" srcSet={`${picture.avif} 1x, ${picture.avif2x || picture.avif} 2x`} />}
+                    {picture.avif && <source type="image/avif" media="(max-width: 2499px)" srcSet={`${picture.avif} 1x, ${picture.avif2x || picture.avif} 2x`} />}
 
                     {/* WEBP для десктопа (>=2500px) */}
                     {picture.webp2x && <source type="image/webp" media="(min-width: 2500px)" srcSet={`${picture.webp2x} 1x, ${picture.webp2x} 2x`} />}
 
                     {/* WEBP для мобильных (<2500px) */}
-                    {picture.webp && <source type="image/webp" media="(max-width: 2449px)" srcSet={`${picture.webp} 1x, ${picture.webp2x || picture.webp} 2x`} />}
+                    {picture.webp && <source type="image/webp" media="(max-width: 2499px)" srcSet={`${picture.webp} 1x, ${picture.webp2x || picture.webp} 2x`} />}
 
                     {/* Fallback img */}
                     <img
