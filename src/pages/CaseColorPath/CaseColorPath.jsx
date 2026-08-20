@@ -51,15 +51,15 @@ export default function CaseColorPath() {
       <Text title={contentText[3].title} text={contentText[3].text} />
       <CasesSliderFull items={case_slider_full_content_3} />
       <Text title={contentText[4].title} text={contentText[4].text} />
-      <CasesItems type={['game', 'mobile']} excludeId="case-colorpath" />
       <CasesCompareDrag items={case_compare_drag_pictures_1} />
       <Text title={contentText[5].title} text={contentText[5].text} />
       <CasesSliderFull items={case_slider_full_content_4} />
-      <CasesSliderScroll2 items={case_slider_scroll_content} />
       <Text title={contentText[6].title} text={contentText[6].text} />
+      <CasesSliderScroll2 items={case_slider_scroll_content} background="linear-gradient(294deg, #B8D45F -25.2%, #658305 105.29%)" />
+      <Text title={contentText[7].title} text={contentText[7].text} />
       <CaseVideo videoContent={videoContent} />
       <CasesSliderFull items={case_slider_full_content_5} />
-      <Text title={contentText[7].title} text={contentText[7].text} />
+      <Text title={contentText[8].title} text={contentText[8].text} />
       <CasesItems type={['game', 'mobile']} excludeId="case-colorpath" />
     </main>
   );
