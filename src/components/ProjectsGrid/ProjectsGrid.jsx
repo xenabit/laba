@@ -8,38 +8,48 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import video_1 from '../../assets/videos/gallery-1.mp4';
+import video_1_webm from '../../assets/videos/gallery-1.webm';
 import video_2 from '../../assets/videos/gallery-2.mp4';
+import video_2_webm from '../../assets/videos/gallery-2.webm';
 import video_3 from '../../assets/videos/gallery-3.mp4';
+import video_3_webm from '../../assets/videos/gallery-3.webm';
 import video_4 from '../../assets/videos/gallery-4.mp4';
+import video_4_webm from '../../assets/videos/gallery-4.webm';
 import video_5 from '../../assets/videos/gallery-5.mp4';
+import video_5_webm from '../../assets/videos/gallery-5.webm';
 
 const items = [
   {
     video: video_1,
+    videoWebm: video_1_webm,
     src: '#',
     title: '3D ВИЗУАЛИЗАЦ&shy;ИИ',
     id: 1,
   },
   {
     video: video_2,
+    videoWebm: video_2_webm,
     src: '#',
     title: 'WEB',
     id: 2,
   },
   {
     video: video_3,
+    videoWebm: video_3_webm,
     src: '#',
     title: 'MOBILE/ desktop',
     id: 3,
   },
   {
     video: video_4,
+    videoWebm: video_4_webm,
     src: '#',
     title: 'ВИДЕО',
     id: 4,
   },
   {
     video: video_5,
+    videoWebm: video_5_webm,
     src: '#',
     title: 'VR / AR',
     id: 5,
@@ -58,7 +68,6 @@ function ProjectsGrid() {
   const containerRef = useRef(null);
   const itemsRef = useRef([]);
 
-  // Отслеживание позиции курсора
   const handleMouseMove = (e) => {
     const containerRect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - containerRect.left;
@@ -66,7 +75,6 @@ function ProjectsGrid() {
 
     setMousePosition({ x, y });
 
-    // Остлеживание близости к границам элементов
     let nearBorder = false;
 
     itemsRef.current.forEach((item) => {
@@ -85,12 +93,10 @@ function ProjectsGrid() {
       }
     });
 
-    // Устанавливаем размер маски в зависимоти от близости к границам элементов, а так же увеличение размера при появлении курсора
     setMaskSize(isHovered ? (nearBorder ? 150 : screenWidth < 1600 ? 80 : 200) : 0);
   };
 
   useEffect(() => {
-    // Отслеживание видимости блока
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
@@ -150,7 +156,8 @@ function ProjectsGrid() {
                   slidesPerView: 1,
                   loop: true,
                 },
-              }}>
+              }}
+            >
               {items.map((item, index) => (
                 <SwiperSlide className={styles.ProjectsGrid__slide} key={item.id + '-slide'}>
                   <a href={item.src}>
@@ -161,8 +168,10 @@ function ProjectsGrid() {
                         onClick={(e) => {
                           e.preventDefault();
                           handlePlayClick(index);
-                        }}></button>
+                        }}
+                      ></button>
                       <video preload="auto" ref={(el) => (videoRefs.current[index] = el)} loop muted>
+                        <source src={item.videoWebm} type="video/webm" />
                         <source src={item.video} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
@@ -189,7 +198,8 @@ function ProjectsGrid() {
               maskPosition: `${mousePosition.x - maskSize / 2}px ${mousePosition.y - maskSize / 2}px`,
               WebkitMaskPosition: `${mousePosition.x - maskSize / 2}px ${mousePosition.y - maskSize / 2}px`,
               WebkitMaskSize: `${maskSize}px`,
-            }}>
+            }}
+          >
             <div className={`${styles.ProjectsGrid__items} `}>
               {items.map((item, index) => (
                 <div className={styles.ProjectsGrid__item} key={item.id + '-mask'} ref={(el) => (itemsRef.current[index] = el)}>
@@ -210,8 +220,10 @@ function ProjectsGrid() {
                     onClick={(e) => {
                       e.preventDefault();
                       handlePlayClick(index);
-                    }}></button>
+                    }}
+                  ></button>
                   <video preload="auto" ref={(el) => (videoRefs.current[index] = el)} autoPlay={!isTablet} loop muted>
+                    <source src={item.videoWebm} type="video/webm" />
                     <source src={item.video} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
