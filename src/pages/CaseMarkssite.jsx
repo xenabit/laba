@@ -15,12 +15,6 @@ import CaseVideo from '../components/CaseVideo/CaseVideo';
 import video from '../assets/videos/video-horizontal-markssite.mp4';
 import videoWebm from '../assets/videos/video-horizontal-markssite.webm';
 
-const videoUrl = {
-  url: null,
-  mp4: video,
-  webm: videoWebm,
-};
-
 import caseVideoPreview from '../assets/images/case-video-1.jpg';
 import caseVideoPreview_webp from '../assets/images/case-video-1.webp';
 import caseVideoPreview_avif from '../assets/images/case-video-1.avif';
@@ -402,6 +396,16 @@ const contentPicture = {
   avif: picture_avif,
 };
 
+const videoContent = {
+  url: null,
+  file: { mp4: video, webm: videoWebm },
+  preview: {
+    img: caseVideoPreview,
+    webp: caseVideoPreview_webp,
+    avif: caseVideoPreview_avif,
+  },
+};
+
 export default function CaseMarkssite() {
   return (
     <main>
@@ -416,14 +420,7 @@ export default function CaseMarkssite() {
       <Text title={contentText[3].title} text={contentText[3].text} />
       <CasesCompareSlider items={case_compare_slider_pictures_1} />
       <Text title={contentText[4].title} text={contentText[4].text} />
-      <CaseVideo
-        videoUrl={videoUrl}
-        previewSrc={{
-          img: caseVideoPreview,
-          webp: caseVideoPreview_webp,
-          avif: caseVideoPreview_avif,
-        }}
-      />
+      <CaseVideo videoContent={videoContent} />
       <ReviewsSlider items={contentReviews} />
       <CasesItems type="web" excludeId="markssite" />
     </main>

@@ -2,15 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import styles from './CaseVideo.module.scss';
 import VideoHorizontal from '../VideoHorizontal/VideoHorizontal';
 
-function CaseVideo({ videoUrl, previewSrc, mobilePreviewSrc }) {
+function CaseVideo({ videoContent }) {
   const [isActive, setIsActive] = useState(false);
   const [isPreviewVisible, setIsPreviewVisible] = useState(true);
   const videoRef = useRef(null);
 
   const handleButtonClick = () => {
     setIsActive(true);
-    // Запускаем воспроизведение видео, если это HTML5-видео
-    if (videoRef.current && videoUrl.mp4) {
+    if (videoRef.current && videoContent.file?.mp4) {
       videoRef.current.play().catch((e) => console.error('Error playing video:', e));
     }
   };
@@ -25,18 +24,33 @@ function CaseVideo({ videoUrl, previewSrc, mobilePreviewSrc }) {
     }
   }, [isActive]);
 
+  const getSrcSet = (pictureData) => {
+    if (!pictureData) return '';
+    if (pictureData.webp2x) {
+      return `${pictureData.webp} 1x, ${pictureData.webp2x} 2x`;
+    }
+    return pictureData.webp || '';
+  };
+
+  const getSrcSetAvif = (pictureData) => {
+    if (!pictureData) return '';
+    if (pictureData.avif2x) {
+      return `${pictureData.avif} 1x, ${pictureData.avif2x} 2x`;
+    }
+    return pictureData.avif || '';
+  };
+
   return (
     <section className={`${styles.CaseVideo} ${isActive ? styles.active : ''}`}>
       <div className={styles.CaseVideo__container} onClick={handleButtonClick}>
         {!isActive && <button className={styles.CaseVideo__button}>Запустить видео</button>}
 
-        {previewSrc && isPreviewVisible && (
+        {videoContent.preview && isPreviewVisible && (
           <picture>
-            {mobilePreviewSrc && <source media="(max-width: 768px)" srcSet={mobilePreviewSrc} />}
-            <source type="image/avif" srcSet={previewSrc.avif} />
-            <source type="image/webp" srcSet={previewSrc.webp} />
+            {videoContent.preview.avif && <source type="image/avif" srcSet={getSrcSetAvif(videoContent.preview)} />}
+            {videoContent.preview.webp && <source type="image/webp" srcSet={getSrcSet(videoContent.preview)} />}
             <img
-              src={previewSrc.img}
+              src={videoContent.preview.img}
               alt="Превью"
               className={styles.CaseVideo__preview}
               loading="lazy"
@@ -48,7 +62,7 @@ function CaseVideo({ videoUrl, previewSrc, mobilePreviewSrc }) {
           </picture>
         )}
 
-        <VideoHorizontal videoUrl={videoUrl} ref={videoRef} />
+        <VideoHorizontal videoUrl={videoContent.file} ref={videoRef} />
       </div>
     </section>
   );
