@@ -2,6 +2,7 @@ import styles from './CasesItems.module.scss';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { projects } from '../../constants/projects';
 import { useState, useEffect } from 'react';
+import ButtonBlobCase from './ButtonBlobCase/ButtonBlobCase';
 
 function CasesItems({ type, excludeId }) {
   const [loadedIds, setLoadedIds] = useState(new Set());
@@ -67,6 +68,7 @@ function CasesItems({ type, excludeId }) {
           <li>Нет доступных проектов для&nbsp;отображения</li>
         ) : (
           displayProjects.map((item, index) => {
+            const isLast = index === displayProjects.length - 1;
             const videoProps =
               index % 2 === 1
                 ? { autoPlay: true, muted: true, loop: true, playsInline: true }
@@ -78,7 +80,12 @@ function CasesItems({ type, excludeId }) {
                     onMouseLeave: (e) => handleMouseLeave(e.currentTarget.querySelector('video')),
                   };
 
-            return <GalleryItem key={item.id} video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />;
+            return (
+              <li key={item.id} className={`${styles.CasesItems__item} ${isLast ? styles.CasesItems__item_last : ''}`}>
+                <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
+                {isLast && <ButtonBlobCase to="/portfolio">Ещё кейсы</ButtonBlobCase>}
+              </li>
+            );
           })
         )}
       </ul>

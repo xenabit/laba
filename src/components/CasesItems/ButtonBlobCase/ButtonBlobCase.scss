@@ -1,0 +1,125 @@
+.ButtonBlobCase {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: clamp(rem(196), 12.25vw, 100vmin);
+  height: clamp(rem(196), 12.25vw, 100vmin);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: var(--fw-light);
+  font-family: var(--font-sec);
+  line-height: 1.25;
+  border-radius: 100%;
+  transition: 1s;
+  z-index: 10;
+
+  &::before {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--prime-3);
+    content: '';
+    transition: 1s;
+    border-radius: 100%;
+    animation: contacts-jelly 3s linear infinite alternate;
+  }
+
+  &:hover {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+
+    &::before {
+      width: 200%;
+      height: 200%;
+      background-color: var(--prime-3);
+      bottom: -50%;
+      right: -50%;
+    }
+
+    .ButtonBlobCase__box {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ButtonBlobCase__title {
+      font-size: clamp(rem(40), 3vw, 100vmax);
+      transform: translate(-100%, -100%);
+    }
+
+    .ButtonBlobCase__subtitle {
+      max-height: 500px;
+      opacity: 1;
+      transition:
+        max-height 0s linear 1s,
+        opacity 1s linear 1s;
+    }
+  }
+
+  &__box {
+    padding: clamp(rem(30), 1.87vw, 100px);
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    color: var(--prime-4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    transition: 1s;
+  }
+
+  &__text {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    transition: 1s;
+    position: relative;
+  }
+
+  &__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    transition: 1s;
+    font-size: clamp(rem(16), 1vw, 100vmax);
+    text-align: left;
+  }
+
+  &__subtitle {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    opacity: 0;
+    max-height: 0; // Вместо height
+    overflow: hidden;
+    margin-top: 10px;
+    font-size: clamp(rem(24), 1.5vw, 100vmax);
+    text-align: left;
+    transition:
+      max-height 1s linear 0s,
+      opacity 0s linear 0s;
+  }
+
+  // @media all and (min-width: $bp1) {
+  //   &__title {
+  //     font-size: clamp(rem(16), 1vw, 100vmax);
+  //   }
+  // }
+}
