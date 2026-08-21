@@ -331,7 +331,7 @@ import case_slider_video_right_1 from '../../assets/videos/gallery-2.mp4';
 import case_slider_video_left_2 from '../../assets/videos/gallery-3.mp4';
 import case_slider_video_right_2 from '../../assets/videos/gallery-4.mp4';
 import case_slider_video_left_3 from '../../assets/videos/gallery-5.mp4';
-import case_slider_video_right_3 from '../../assets/videos/gallery-7.mp4';
+import case_slider_video_right_3 from '../../assets/videos/gallery-12.mp4';
 
 export const contentCasesIntro = {
   title: 'Путь цвета',
@@ -344,7 +344,6 @@ export const contentCasesIntro = {
     webp2x: case_intro_picture_webp_2x,
     avif: case_intro_picture_avif,
     avif2x: case_intro_picture_avif_2x,
-    position: '92% 0',
   },
   about: [
     {

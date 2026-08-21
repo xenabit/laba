@@ -31,7 +31,7 @@ import {
 export default function CaseColorPath() {
   return (
     <main>
-      {/* <CasesIntro contentCasesIntro={contentCasesIntro} />
+      <CasesIntro contentCasesIntro={contentCasesIntro} />
       <Text title={contentText[0].title} text={contentText[0].text} />
       <Softwar items={contentSoftwar} />
       <CasesSliderVideo items={cases_slider_video_content} />
@@ -59,7 +59,7 @@ export default function CaseColorPath() {
       <Text title={contentText[7].title} text={contentText[7].text} />
       <CaseVideo videoContent={videoContent} />
       <CasesSliderFull items={case_slider_full_content_5} />
-      <Text title={contentText[8].title} text={contentText[8].text} /> */}
+      <Text title={contentText[8].title} text={contentText[8].text} />
       <CasesItems type={['game', 'mobile']} excludeId="case-colorpath" />
     </main>
   );

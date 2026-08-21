@@ -48,18 +48,6 @@ export const projects = [
     type: ['web'],
   },
   {
-    id: 'canon-change',
-    video: {
-      mp4: getAsset('gallery-4.mp4'),
-      webm: getAsset('gallery-4.webm'),
-      poster: getAsset('gallery-4.jpg'),
-    },
-    src: '/portfolio/canon-change',
-    title: 'Канон перемен',
-    desc: 'Приложение с игровой механикой',
-    type: ['game', 'mobile'],
-  },
-  {
     id: 'tamagotchi',
     video: {
       mp4: getAsset('gallery-5.mp4'),
@@ -69,6 +57,18 @@ export const projects = [
     src: '/portfolio/tamagotchi',
     title: 'Там Там: <br> Мой милый питомец',
     desc: 'Гиперказуальная игра тамагочи',
+    type: ['game', 'mobile'],
+  },
+  {
+    id: 'canon-change',
+    video: {
+      mp4: getAsset('gallery-4.mp4'),
+      webm: getAsset('gallery-4.webm'),
+      poster: getAsset('gallery-4.jpg'),
+    },
+    src: '/portfolio/canon-change',
+    title: 'Канон перемен',
+    desc: 'Приложение с игровой механикой',
     type: ['game', 'mobile'],
   },
   {
@@ -110,9 +110,9 @@ export const projects = [
   {
     id: 'case-colorpath',
     video: {
-      mp4: getAsset('gallery-7.mp4'),
-      webm: getAsset('gallery-7.webm'),
-      poster: getAsset('gallery-7.jpg'),
+      mp4: getAsset('gallery-12.mp4'),
+      webm: getAsset('gallery-12.webm'),
+      poster: getAsset('gallery-12.jpg'),
     },
     src: '/portfolio/colorpath',
     title: 'Путь цвета',
