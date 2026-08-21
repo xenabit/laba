@@ -1,5 +1,5 @@
 import './AboutIntro.scss';
-import ButtonCall from '../../ui/ButtonCall/ButtonCall';
+import ButtonBlob from '../../ui/ButtonBlob/ButtonBlob';
 import img from '../../../assets/images/about-intro-img.jpg';
 import imgWebp from '../../../assets/images/about-intro-img.webp';
 import imgAvif from '../../../assets/images/about-intro-img.avif';
@@ -36,7 +36,7 @@ function AboutIntro() {
             </picture>
           </div>
           <div className="AboutIntro__button">
-            <ButtonCall />
+            <ButtonBlob />
           </div>
         </div>
       </div>

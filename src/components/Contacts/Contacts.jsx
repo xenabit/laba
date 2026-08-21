@@ -1,7 +1,7 @@
 import styles from './Contacts.module.scss';
 import geoPoint from '../../assets/images/geo-point.svg';
 import YandexMap from './YandexMap';
-import ButtonCall from '../ui/ButtonCall/ButtonCall';
+import ButtonBlob from '../ui/ButtonBlob/ButtonBlob';
 
 // // Пример использования компонента
 const mapPoints = [
@@ -36,7 +36,7 @@ export default function Contacts() {
         </div>
 
         <div className={styles.Contacts__call}>
-          <ButtonCall />
+          <ButtonBlob />
         </div>
       </div>
       <div className={styles.Contacts__render}>
