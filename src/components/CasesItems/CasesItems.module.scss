@@ -1,6 +1,11 @@
 .CasesItems {
   $s: &;
 
+  &__item {
+    position: relative;
+    overflow: hidden;
+  }
+
   &__items {
     display: grid;
     grid-template-columns: 1fr;
