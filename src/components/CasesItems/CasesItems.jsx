@@ -3,9 +3,11 @@ import GalleryItem from '../GalleryItem/GalleryItem';
 import { projects } from '../../constants/projects';
 import { useState, useEffect } from 'react';
 import ButtonBlobCase from './ButtonBlobCase/ButtonBlobCase';
+import useIsMobile from '../../hooks/useIsMobile';
 
 function CasesItems({ type, excludeId }) {
   const [loadedIds, setLoadedIds] = useState(new Set());
+  const isMobile = useIsMobile();
   const handleMouseEnter = (video) => {
     if (video) {
       video.play().catch((error) => console.error('Ошибка воспроизведения видео:', error));
@@ -83,7 +85,7 @@ function CasesItems({ type, excludeId }) {
             return (
               <li key={item.id} className={`${styles.CasesItems__item} ${isLast ? styles.CasesItems__item_last : ''}`}>
                 <GalleryItem video={item.video} href={item.src} title={item.title} desc={item.desc} videoProps={videoProps} />
-                {isLast && <ButtonBlobCase to="/portfolio">Ещё кейсы</ButtonBlobCase>}
+                {isLast && !isMobile && <ButtonBlobCase to="/portfolio">Ещё кейсы</ButtonBlobCase>}
               </li>
             );
           })

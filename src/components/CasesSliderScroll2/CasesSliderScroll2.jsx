@@ -54,7 +54,7 @@ function CasesSliderScroll2({ items, background }) {
           breakpoints={{
             320: {
               slidesPerView: '3.8',
-              spaceBetween: 40,
+              spaceBetween: 12,
               loop: false,
             },
             1024: {
