@@ -175,8 +175,8 @@ const GalleryItem = forwardRef(function GalleryItem({ video, href, title, desc, 
           {mp4 && <source src={mp4} type="video/mp4" />}
         </video>
         <h2>
-          <span dangerouslySetInnerHTML={{ __html: desc }} />
-          <span dangerouslySetInnerHTML={{ __html: title }} />
+          <span className={styles.GalleryItem__title} dangerouslySetInnerHTML={{ __html: title }} />
+          <span className={styles.GalleryItem__subtitle} dangerouslySetInnerHTML={{ __html: desc }} />
         </h2>
       </Link>
     </div>
