@@ -198,6 +198,7 @@
 
   &__num {
     margin-bottom: rem(24);
+    margin-bottom: rem(16);
     font-weight: var(--fw-medium);
     font-size: rem(48);
     line-height: 1.16;
@@ -461,20 +462,6 @@
       display: grid;
       position: relative;
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      height: $slide-height;
-    }
-  }
-
-  @media all and (min-width: $bp1) {
-    $slide-height: rem(560);
-    height: $slide-height;
-
-    &__container,
-    &__layer,
-    &__items,
-    &__item,
-    &__image,
-    &__images {
       height: $slide-height;
     }
   }
