@@ -27,7 +27,7 @@
       display: flex;
       align-self: center;
       font-family: var(--font-prime);
-      font-size: clamp(rem(80), 5.5vw, rem(160));
+      font-size: clamp(rem(80), 8vw, rem(160));
       font-weight: var(--fw-medium);
       line-height: 1.1;
     }
@@ -90,7 +90,7 @@
   @media all and (min-width: $bp3) {
     &__items {
       height: rem(250);
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 32% 36% 32%;
       grid-template-rows: rem(250) rem(250);
       overflow: visible;
     }
