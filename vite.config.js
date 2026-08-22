@@ -41,28 +41,43 @@ export default defineConfig({
       srcDir: 'src',
       filename: 'sw.js',
 
-      injectManifest: {
-        globPatterns: [
-          '**/*.{js,css,html,ico}',
-          'assets/images/*.{svg,ico}',
-          // 'assets/fonts/*.{woff2,woff}',
-        ],
-        globIgnores: [
-          'sw.js',
-          '**/sw.js',
-          '**/assets/videos/**',
-          '**/assets/images/**/*.png',
-          '**/assets/images/**/*.jpg',
-          '**/assets/images/**/*.jpeg',
-          '**/assets/images/**/*.webp',
-          '**/assets/images/**/*.avif',
-          '**/assets/images/header-menu*.svg',
-          '**/assets/images/case-slider-*.svg',
-          '**/assets/images/case-iframe-*.{jpg,png}',
-          '**/assets/images/cases-slider-full-*.*',
+      manifest: {
+        name: 'LABA',
+        short_name: 'LABA',
+        description: 'Создаем уникальные цифровые продукты',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
+        display: 'standalone',
+        version: '1.0.1',
+        start_url: '/',
+        icons: [
+          {
+            src: '/icon/icon-dark.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icon/icon-dark.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
         ],
       },
-      devOptions: { enabled: true, type: 'module' },
+
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico}'],
+        globIgnores: ['**/sw.js', '**/assets/videos/**', '**/assets/images/**/*.png', '**/assets/images/**/*.jpg'],
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
+        navigateFallback: '/index.html',
+        cacheId: 'laba-v1',
+      },
+
+      devOptions: {
+        enabled: true,
+        type: 'module',
+      },
     }),
   ],
 
