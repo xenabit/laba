@@ -13,8 +13,8 @@
     flex-direction: column;
     gap: rem(10);
     transition: 0.3s;
-    margin-bottom: rem(50);
-    padding-top: rem(36);
+    margin-bottom: rem(40);
+    padding-top: rem(24);
     width: max-content;
     font-size: rem(15);
     line-height: 1.14;
@@ -108,8 +108,8 @@
 
   &__footer {
     background-color: white;
-    padding-top: rem(40);
-    padding-bottom: rem(40);
+    padding-top: rem(32);
+    padding-bottom: rem(32);
   }
 
   &__cols {
@@ -130,6 +130,10 @@
   }
 
   @media all and (min-width: $bp3) {
+    &__return {
+      padding-top: rem(36);
+    }
+
     &__title {
       font-size: rem(56);
     }
@@ -169,6 +173,11 @@
       @include containerDesk;
       display: grid;
       grid-template-columns: repeat(4, minmax(360px, auto));
+    }
+
+    &__footer {
+      padding-top: rem(40);
+      padding-bottom: rem(40);
     }
   }
 

@@ -61,6 +61,7 @@
   &__pictures {
     display: flex;
     flex-direction: row;
+    transform: translateX(rem(24));
   }
 
   &__picture {
@@ -181,13 +182,13 @@
 
     &__box {
       padding-top: clamp(rem(80), 5vw, rem(160));
-      padding-right: clamp(rem(80), 5vw, rem(160));
+      padding-right: clamp(rem(132), 5vw, rem(160));
       padding-bottom: clamp(rem(130), 8vw, rem(260));
-      padding-left: clamp(rem(130), 8vw, rem(260));
+      padding-left: clamp(rem(132), 8vw, rem(260));
     }
 
     &__title {
-      margin-bottom: clamp(rem(16), 1vw, rem(32));
+      margin-bottom: clamp(rem(24), 1.5vw, rem(32));
       font-size: clamp(rem(40), 2.5vw, rem(80));
     }
 
@@ -199,6 +200,7 @@
     &__name {
       font-size: clamp(rem(16), 1vw, rem(32));
       font-size: sizeVw(24); // Это приведет к clamp(1.5rem, 1.5vw, 3rem)
+      margin-bottom: 0;
     }
 
     &__bullet {
@@ -214,6 +216,7 @@
     &__footer {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: rem(40);
     }
   }

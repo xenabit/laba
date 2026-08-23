@@ -45,11 +45,8 @@ export default function GalleryTabs() {
 
   const filtered = useMemo(() => (activeFilter === 'all' ? projects : projects.filter((it) => (Array.isArray(it.type) ? it.type : [it.type]).includes(activeFilter))), [activeFilter]);
   const visibleCount = filtered.length;
-  
-  const isHoverPlayable = useCallback(
-    (idx) => (visibleCount === 1 ? false : idx % 2 === 0),
-    [visibleCount]
-  );
+
+  const isHoverPlayable = useCallback((idx) => (visibleCount === 1 ? false : idx % 2 === 0), [visibleCount]);
 
   const nodeRefs = useRef({});
   const transitionClassNames = {

@@ -15,10 +15,24 @@
     &__items {
       grid-template-columns: 1fr 1fr;
     }
+
+    &__item {
+      &:first-child {
+        display: none;
+      }
+    }
   }
 
   // Адаптация для desktop
   @media all and (min-width: $bp1) {
+    &__item {
+      &:first-child {
+        display: block;
+      }
+    }
+  }
+  @media all and (min-width: $bp1) {
+    margin-top: 200px;
     &__items {
       grid-template-columns: 1fr 1fr 1fr;
     }

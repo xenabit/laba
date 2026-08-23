@@ -18,7 +18,7 @@
 
   &__container {
     position: relative;
-    width: 70vw;
+    width: 70%;
     margin: auto;
     aspect-ratio: 1 / 1.87;
     border-radius: rem(16);
@@ -76,7 +76,7 @@
 
   @media all and (min-width: $bp4) {
     &__container {
-      width: 80vw;
+      width: 83.8%;
       border: 8px solid var(--prime-2);
       aspect-ratio: 1278/ 700;
       box-shadow: 0px 20.36px 30.1px 0px #0000004a;
