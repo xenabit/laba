@@ -1,7 +1,7 @@
 .Partners {
   $s: &;
-  --circle-1: 2.265rem;
-  --circle-2: 1.437rem;
+  --circle-1: 3rem;
+  --circle-2: 1.5rem;
   position: relative;
   margin: rem(32) 0 rem(80) 0;
 
@@ -12,8 +12,8 @@
     z-index: 10;
     margin: 0 auto;
     margin-bottom: rem(85);
-    padding: 0 rem(16);
-    width: max-content;
+    padding: 0 rem(22);
+    width: calc(100% - 32px);
     font-weight: var(--fw-medium);
     font-size: clamp(rem(48), 12.8vw, rem(84));
     line-height: 1;
@@ -41,7 +41,7 @@
         transform: translateX(80%);
 
         span {
-          transform: translateX(rem(20));
+          transform: translateX(rem(30));
         }
       }
     }
@@ -155,12 +155,12 @@
 
     &__icon {
       &:nth-child(1) {
-        top: 20%;
-        left: 72%;
+        top: 23%;
+        left: 75%;
       }
 
       &:nth-child(2) {
-        top: 61%;
+        top: 63%;
         left: 18%;
       }
     }

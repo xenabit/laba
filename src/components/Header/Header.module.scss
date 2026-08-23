@@ -358,10 +358,6 @@
     }
   }
 
-  &__address {
-    margin-top: 16px;
-  }
-
   &__contacts {
     order: 4;
     display: flex;
@@ -474,12 +470,7 @@
 
       &:hover {
         span {
-          &:first-child {
-            transform: translateY(-50%) rotate(30deg);
-          }
-          &:last-child {
-            transform: translateY(-50%) rotate(-30deg);
-          }
+          background-color: var(--prime-3);
         }
       }
 
@@ -537,7 +528,6 @@
 
     &__inner {
       padding: 0 rem(32) rem(32) rem(32);
-      min-height: 100vh;
     }
 
     &__bg {

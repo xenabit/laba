@@ -113,14 +113,20 @@ export default function App() {
   }, [location.pathname, loadingStage]);
 
   useEffect(() => {
-    if (loadingStage === 'complete' && smootherRef.current) {
-      smootherRef.current.scrollTo(0, true);
-    } else {
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    }
-    ScrollTrigger.refresh();
-  }, [location.pathname, loadingStage]);
+    const resetScroll = () => {
+      if (smootherRef.current) {
+        smootherRef.current.scrollTo(0, false);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+    };
 
+    resetScroll();
+
+    const rafId = requestAnimationFrame(resetScroll);
+
+    return () => cancelAnimationFrame(rafId);
+  }, [location.pathname]);
   useEffect(() => {
     const root = document.getElementById('smooth-content');
     if (!root) return;

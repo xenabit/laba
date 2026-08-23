@@ -2,15 +2,26 @@
   display: flex;
   flex-direction: column;
   background-color: var(--prime-2);
-  padding: rem(16) rem(16) rem(16) rem(16);
-  color: var(--prime-1);
-  font-weight: var(--fw-light);
-  line-height: rem(24);
-  font-family: var(--font-sec);
+  padding: rem(16) rem(16) rem(24) rem(16);
+
+  &__container,
+  &__right {
+    font-family: var(--font-sec);
+    font-weight: var(--fw-light);
+    font-size: rem(16);
+    line-height: 1.5;
+
+    span {
+      color: var(--sec-5);
+      opacity: 0.9;
+    }
+  }
 
   a {
     transition: 0.3s;
     text-decoration: none;
+    color: var(--prime-1);
+    opacity: 1;
 
     &:hover {
       transition: 0.5s;
@@ -22,15 +33,15 @@
     display: block;
     margin-bottom: rem(24);
     font-size: rem(32);
-    line-height: rem(48);
+    line-height: 1.25;
     font-family: var(--font-prime);
+    color: var(--prime-1);
   }
 
   &__requisites {
-    font-size: rem(16);
-    line-height: 1.5;
     color: var(--sec-4);
-    margin-top: rem(22);
+    opacity: 0.9;
+    width: 90%;
 
     ul li {
       margin-bottom: 8px;
@@ -41,12 +52,14 @@
     display: flex;
     flex-direction: column;
     gap: rem(24);
-    margin-bottom: rem(48);
+    margin-bottom: rem(24);
+    color: var(--sec-5);
   }
 
   &__contact {
     display: flex;
     flex-direction: column;
+    gap: rem(4);
   }
 
   &__privacy {
@@ -61,25 +74,36 @@
 
   @media all and (min-width: $bp4) {
     &__mail {
-      display: block;
       margin-bottom: rem(32);
       font-weight: var(--fw-medium);
       font-size: rem(56);
       line-height: rem(64);
-      font-family: var(--font-prime);
     }
 
     &__contacts {
-      display: flex;
-      flex-direction: row;
-      gap: rem(124);
+      gap: rem(22);
     }
   }
 
   @media all and (min-width: $bp3) {
-    padding: rem(16) rem(32) rem(32) rem(32);
-    justify-content: space-between;
+    padding: rem(122) rem(32) rem(32) rem(32);
     flex-direction: row;
+    position: relative;
+    gap: rem(120);
+
+    &__contacts {
+      margin-bottom: rem(0);
+    }
+
+    &__mail {
+      position: absolute;
+      top: 16px;
+    }
+
+    &__requisites {
+      margin-top: rem(0);
+      width: 100%;
+    }
 
     &__privacy {
       div {
@@ -92,9 +116,28 @@
     }
   }
 
+  @media all and (min-width: $bp2) {
+    padding: rem(32);
+    justify-content: space-between;
+
+    &__mail {
+      position: static;
+    }
+
+    &__contacts {
+      margin-bottom: rem(48);
+      flex-direction: row;
+      gap: rem(296);
+    }
+
+    &__requisites {
+      margin-top: rem(22);
+    }
+  }
+
   @media all and (min-width: $bp1) {
     &__mail {
-      margin-bottom: rem(40);
+      margin-bottom: rem(22);
       font-size: rem(88);
       line-height: rem(96);
     }
@@ -108,6 +151,11 @@
 
     &__contacts {
       margin: 0;
+    }
+
+    &__right {
+      display: flex;
+      flex-direction: column;
     }
   }
 }

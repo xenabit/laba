@@ -223,7 +223,7 @@
     --circle-3-big: 40px;
 
     &__wrapper {
-      margin: rem(156) 0 rem(150) 0;
+      margin: rem(140) 0 rem(140) 0;
     }
 
     &__text {
@@ -243,9 +243,29 @@
         --mask: radial-gradient(circle at var(--x) var(--y), transparent 13vw, black 0);
       }
     }
+
+    &.animate {
+      #{$s}__icon {
+        &:nth-child(1) {
+          top: -5%;
+        }
+
+        &:nth-child(2) {
+          top: 40%;
+        }
+
+        &:nth-child(3) {
+          left: 25vw;
+        }
+      }
+    }
   }
 
   @media all and (min-width: $bp2) {
+    &__wrapper {
+      margin: rem(156) 0 rem(150) 0;
+    }
+
     &__text {
       div:nth-child(1) span,
       div:nth-child(2) span {
@@ -254,6 +274,25 @@
 
       div:nth-child(3) span {
         transform: translateX(rem(45));
+      }
+    }
+
+    &.animate {
+      #{$s}__icon {
+        &:nth-child(1) {
+          top: -5%;
+          left: 84vw;
+        }
+
+        &:nth-child(2) {
+          top: 45%;
+          left: 10vw;
+        }
+
+        &:nth-child(3) {
+          top: 90%;
+          left: 27vw;
+        }
       }
     }
   }
@@ -288,25 +327,6 @@
     &__icon {
       &:nth-child(3) {
         top: 100%;
-      }
-    }
-
-    &.animate {
-      #{$s}__icon {
-        &:nth-child(1) {
-          top: -5%;
-          left: 84vw;
-        }
-
-        &:nth-child(2) {
-          top: 45%;
-          left: 10vw;
-        }
-
-        &:nth-child(3) {
-          top: 87%;
-          left: 27vw;
-        }
       }
     }
   }

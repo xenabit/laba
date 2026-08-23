@@ -9,7 +9,6 @@ function CasesSliderScroll2({ items, background }) {
   const swiperRef = useRef(null);
   const paginationRef = useRef(null);
 
-  console.log('Background received:', background); // Проверка
 
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.swiper && paginationRef.current) {

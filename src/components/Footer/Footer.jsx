@@ -11,12 +11,12 @@ function Footer() {
         <div className={styles.Footer__container}>
           <div className={styles.Footer__contacts}>
             <div className={styles.Footer__contact}>
-              Номер телефона: <a href="tel:+79161958226">+7&nbsp;(916)&nbsp;195-82-26</a>
+              <span>Номер телефона:</span> <a href="tel:+79161958226">+7&nbsp;(916)&nbsp;195-82-26</a>
               <a href="tel:+79690639323">+7&nbsp;(969)&nbsp;063-93-23</a>
             </div>
 
             <div className={styles.Footer__contact}>
-              Юридический/фактический адрес:
+              <span>Юридический/фактический адрес:</span>
               <a href="https://yandex.ru/maps/-/CHcqeR7U" target="_black">
                 125124, город Москва, ул 3-я<br></br> Ямского Поля, д.&nbsp;2 к.&nbsp;13
               </a>

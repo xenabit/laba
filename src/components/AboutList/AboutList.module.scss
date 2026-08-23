@@ -3,7 +3,7 @@
   margin-bottom: rem(135);
 
   &__title {
-    padding: rem(80) rem(16) rem(24) rem(24);
+    padding: rem(80) rem(16) rem(24) rem(16);
     font-size: rem(40);
     line-height: rem(48);
   }
@@ -122,7 +122,7 @@
 
   @media all and (min-width: $bp4) {
     &__title {
-      padding: rem(80) rem(32) rem(48) rem(32);
+      padding: rem(140) rem(32) rem(48) rem(32);
       font-size: rem(56);
       line-height: rem(64);
     }
@@ -141,6 +141,7 @@
       &:first-child {
         #{$s}__text {
           border-top: 1px solid var(--sec-5);
+          padding: rem(36) rem(32) rem(36) rem(50);
         }
       }
 
@@ -204,8 +205,8 @@
     }
 
     &__text {
-      width: 67%;
-      padding: rem(32);
+      width: 79%;
+      padding: rem(36) rem(50);
     }
 
     &__desc {
@@ -221,14 +222,14 @@
     }
 
     &__title {
-      padding: rem(154) rem(48) rem(64) rem(48);
+      padding: rem(154) rem(30) rem(64) rem(30);
       font-size: rem(88);
       line-height: rem(96);
     }
 
     &__text {
       width: 50%;
-      padding: rem(64);
+      padding: rem(56);
     }
 
     &__subtitle {

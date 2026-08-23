@@ -235,7 +235,6 @@ const Header = forwardRef(function Header({ loadingStage, onBalloonsToCenterComp
       return;
     }
     if (!balloonRef.current || !logoRef.current || !containerRef.current) {
-      console.warn('Balloon, logo, or container ref is not ready');
       return;
     }
 
