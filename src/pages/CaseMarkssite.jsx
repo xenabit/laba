@@ -27,6 +27,9 @@ import case_intro_picture_jpg from '../assets/images/case-intro-markssite.jpg';
 import case_intro_picture_webp from '../assets/images/case-intro-markssite.webp';
 import case_intro_picture_avif from '../assets/images/case-intro-markssite.avif';
 
+import case_intro_picture_webp_2x from '../assets/images/case-intro-markssite-2x.webp';
+import case_intro_picture_avif_2x from '../assets/images/case-intro-markssite-2x.avif';
+
 import case_slider_full_picture_1_1_jpg from '../assets/images/cases-slider-full-markssite-1-1.jpg';
 import case_slider_full_picture_1_1_webp from '../assets/images/cases-slider-full-markssite-1-1.webp';
 import case_slider_full_picture_1_1_avif from '../assets/images/cases-slider-full-markssite-1-1.avif';
@@ -109,7 +112,9 @@ const contentCasesIntro = {
   picture_intro: {
     img: case_intro_picture_jpg,
     webp: case_intro_picture_webp,
+    webp2x: case_intro_picture_webp_2x,
     avif: case_intro_picture_avif,
+    avif2x: case_intro_picture_avif_2x,
   },
   about: [
     {
