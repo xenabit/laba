@@ -22,7 +22,6 @@ function CasesCompareSlider({ items }) {
       swiperInstance.pagination.update();
     }
 
-    // Обрабатываем только слайды с divider (для сравнения)
     dividerRefs.current.forEach((divider, index) => {
       if (!divider) return;
 
@@ -95,6 +94,10 @@ function CasesCompareSlider({ items }) {
     };
   }, [items.pictures]);
 
+  const getImgSrc = (picture) => {
+    return picture.img || picture.avif || picture.webp || '';
+  };
+
   return (
     <section className={styles.CasesCompareSlider}>
       <div className={styles.CasesCompareSlider__container}>
@@ -130,26 +133,51 @@ function CasesCompareSlider({ items }) {
                     // Одиночная картинка
                     <div className={styles.CasesCompareSlider__single}>
                       <picture>
-                        <source type="image/avif" srcSet={item.picture.avif} />
-                        <source type="image/webp" srcSet={item.picture.webp} />
-                        <img loading="lazy" src={item.picture.img} alt="Slide image" />
+                        {item.picture.avif2x && <source type="image/avif" media="(min-width: 2500px)" srcSet={`${item.picture.avif2x} 1x, ${item.picture.avif2x} 2x`} />}
+
+                        {item.picture.avif && <source type="image/avif" media="(max-width: 2499px)" srcSet={`${item.picture.avif} 1x, ${item.picture.avif2x || item.picture.avif} 2x`} />}
+
+                        {item.picture.webp2x && <source type="image/webp" media="(min-width: 2500px)" srcSet={`${item.picture.webp2x} 1x, ${item.picture.webp2x} 2x`} />}
+
+                        {item.picture.webp && <source type="image/webp" media="(max-width: 2499px)" srcSet={`${item.picture.webp} 1x, ${item.picture.webp2x || item.picture.webp} 2x`} />}
+
+                        <img loading="lazy" src={getImgSrc(item.picture)} alt="Slide image" />
                       </picture>
                     </div>
                   ) : (
-                    // Сравнение (две картинки)
                     <div className={styles.CasesCompareSlider__pictures}>
                       <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_left}`}>
                         <picture>
-                          <source type="image/avif" srcSet={item.picture_left.avif} />
-                          <source type="image/webp" srcSet={item.picture_left.webp} />
-                          <img loading="lazy" src={item.picture_left.img} alt="Left image" />
+                          {item.picture_left.avif2x && <source type="image/avif" media="(min-width: 2500px)" srcSet={`${item.picture_left.avif2x} 1x, ${item.picture_left.avif2x} 2x`} />}
+
+                          {item.picture_left.avif && (
+                            <source type="image/avif" media="(max-width: 2499px)" srcSet={`${item.picture_left.avif} 1x, ${item.picture_left.avif2x || item.picture_left.avif} 2x`} />
+                          )}
+
+                          {item.picture_left.webp2x && <source type="image/webp" media="(min-width: 2500px)" srcSet={`${item.picture_left.webp2x} 1x, ${item.picture_left.webp2x} 2x`} />}
+
+                          {item.picture_left.webp && (
+                            <source type="image/webp" media="(max-width: 2499px)" srcSet={`${item.picture_left.webp} 1x, ${item.picture_left.webp2x || item.picture_left.webp} 2x`} />
+                          )}
+
+                          <img loading="lazy" src={getImgSrc(item.picture_left)} alt="Left image" />
                         </picture>
                       </div>
                       <div className={`${styles.CasesCompareSlider__half} ${styles.CasesCompareSlider__half_right}`}>
                         <picture>
-                          <source type="image/avif" srcSet={item.picture_right.avif} />
-                          <source type="image/webp" srcSet={item.picture_right.webp} />
-                          <img loading="lazy" src={item.picture_right.img} alt="Right image" />
+                          {item.picture_right.avif2x && <source type="image/avif" media="(min-width: 2500px)" srcSet={`${item.picture_right.avif2x} 1x, ${item.picture_right.avif2x} 2x`} />}
+
+                          {item.picture_right.avif && (
+                            <source type="image/avif" media="(max-width: 2499px)" srcSet={`${item.picture_right.avif} 1x, ${item.picture_right.avif2x || item.picture_right.avif} 2x`} />
+                          )}
+
+                          {item.picture_right.webp2x && <source type="image/webp" media="(min-width: 2500px)" srcSet={`${item.picture_right.webp2x} 1x, ${item.picture_right.webp2x} 2x`} />}
+
+                          {item.picture_right.webp && (
+                            <source type="image/webp" media="(max-width: 2499px)" srcSet={`${item.picture_right.webp} 1x, ${item.picture_right.webp2x || item.picture_right.webp} 2x`} />
+                          )}
+
+                          <img loading="lazy" src={getImgSrc(item.picture_right)} alt="Right image" />
                         </picture>
                       </div>
                       <div className={styles.CasesCompareSlider__divider} ref={(el) => (dividerRefs.current[index] = el)}>

@@ -17,30 +17,76 @@ import case_intro_picture_avif from '../assets/images/case-intro-markssite-hr.av
 
 // Импорты изображений CasesCompareSlider
 import case_compare_slider_bg from '../assets/images/case-compare-slider-bg-hr-1.svg';
+
 import case_compare_slider_picture_left_1_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-1.jpg';
 import case_compare_slider_picture_left_1_webp from '../assets/images/cases-compare-slider-markssite-hr-left-1.webp';
 import case_compare_slider_picture_left_1_avif from '../assets/images/cases-compare-slider-markssite-hr-left-1.avif';
+
 import case_compare_slider_picture_right_1_jpg from '../assets/images/cases-compare-slider-markssite-hr-right-1.jpg';
 import case_compare_slider_picture_right_1_webp from '../assets/images/cases-compare-slider-markssite-hr-right-1.webp';
 import case_compare_slider_picture_right_1_avif from '../assets/images/cases-compare-slider-markssite-hr-right-1.avif';
+
 import case_compare_slider_picture_left_2_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-2.jpg';
 import case_compare_slider_picture_left_2_webp from '../assets/images/cases-compare-slider-markssite-hr-left-2.webp';
 import case_compare_slider_picture_left_2_avif from '../assets/images/cases-compare-slider-markssite-hr-left-2.avif';
+
 import case_compare_slider_picture_right_2_jpg from '../assets/images/cases-compare-slider-markssite-hr-right-2.jpg';
 import case_compare_slider_picture_right_2_webp from '../assets/images/cases-compare-slider-markssite-hr-right-2.webp';
 import case_compare_slider_picture_right_2_avif from '../assets/images/cases-compare-slider-markssite-hr-right-2.avif';
+
 import case_compare_slider_picture_left_3_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-3.jpg';
 import case_compare_slider_picture_left_3_webp from '../assets/images/cases-compare-slider-markssite-hr-left-3.webp';
 import case_compare_slider_picture_left_3_avif from '../assets/images/cases-compare-slider-markssite-hr-left-3.avif';
+
 import case_compare_slider_picture_right_3_jpg from '../assets/images/cases-compare-slider-markssite-hr-right-3.jpg';
 import case_compare_slider_picture_right_3_webp from '../assets/images/cases-compare-slider-markssite-hr-right-3.webp';
 import case_compare_slider_picture_right_3_avif from '../assets/images/cases-compare-slider-markssite-hr-right-3.avif';
+
 import case_compare_slider_picture_left_4_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-4.jpg';
 import case_compare_slider_picture_left_4_webp from '../assets/images/cases-compare-slider-markssite-hr-left-4.webp';
 import case_compare_slider_picture_left_4_avif from '../assets/images/cases-compare-slider-markssite-hr-left-4.avif';
+
 import case_compare_slider_picture_right_4_jpg from '../assets/images/cases-compare-slider-markssite-hr-right-4.jpg';
 import case_compare_slider_picture_right_4_webp from '../assets/images/cases-compare-slider-markssite-hr-right-4.webp';
 import case_compare_slider_picture_right_4_avif from '../assets/images/cases-compare-slider-markssite-hr-right-4.avif';
+
+import case_compare_slider_picture_left_5_jpg from '../assets/images/cases-compare-slider-markssite-hr-left-5.jpg';
+import case_compare_slider_picture_left_5_webp from '../assets/images/cases-compare-slider-markssite-hr-left-5.webp';
+import case_compare_slider_picture_left_5_avif from '../assets/images/cases-compare-slider-markssite-hr-left-5.avif';
+
+import case_compare_slider_picture_right_5_jpg from '../assets/images/cases-compare-slider-markssite-hr-right-5.jpg';
+import case_compare_slider_picture_right_5_webp from '../assets/images/cases-compare-slider-markssite-hr-right-5.webp';
+import case_compare_slider_picture_right_5_avif from '../assets/images/cases-compare-slider-markssite-hr-right-5.avif';
+
+import case_compare_slider_picture_left_1_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-left-1-2x.webp';
+import case_compare_slider_picture_left_1_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-left-1-2x.avif';
+
+import case_compare_slider_picture_left_2_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-left-2-2x.webp';
+import case_compare_slider_picture_left_2_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-left-2-2x.avif';
+
+import case_compare_slider_picture_left_3_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-left-3-2x.webp';
+import case_compare_slider_picture_left_3_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-left-3-2x.avif';
+
+import case_compare_slider_picture_left_4_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-left-4-2x.webp';
+import case_compare_slider_picture_left_4_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-left-4-2x.avif';
+
+import case_compare_slider_picture_left_5_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-left-5-2x.webp';
+import case_compare_slider_picture_left_5_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-left-5-2x.avif';
+
+import case_compare_slider_picture_right_1_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-right-1-2x.webp';
+import case_compare_slider_picture_right_1_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-right-1-2x.avif';
+
+import case_compare_slider_picture_right_2_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-right-2-2x.webp';
+import case_compare_slider_picture_right_2_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-right-2-2x.avif';
+
+import case_compare_slider_picture_right_3_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-right-3-2x.webp';
+import case_compare_slider_picture_right_3_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-right-3-2x.avif';
+
+import case_compare_slider_picture_right_4_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-right-4-2x.webp';
+import case_compare_slider_picture_right_4_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-right-4-2x.avif';
+
+import case_compare_slider_picture_right_5_webp_2x from '../assets/images/cases-compare-slider-markssite-hr-right-5-2x.webp';
+import case_compare_slider_picture_right_5_avif_2x from '../assets/images/cases-compare-slider-markssite-hr-right-5-2x.avif';
 
 // Импорты изображений CasesSliderFull
 import case_slider_full_picture_1_0_jpg from '../assets/images/cases-slider-full-markssite-hr-1-0.jpg';
@@ -115,12 +161,16 @@ const case_compare_slider_pictures_1 = {
       picture_left: {
         img: case_compare_slider_picture_left_1_jpg,
         webp: case_compare_slider_picture_left_1_webp,
+        webp2x: case_compare_slider_picture_left_1_webp_2x,
         avif: case_compare_slider_picture_left_1_avif,
+        avif2x: case_compare_slider_picture_left_1_avif_2x,
       },
       picture_right: {
         img: case_compare_slider_picture_right_1_jpg,
         webp: case_compare_slider_picture_right_1_webp,
+        webp2x: case_compare_slider_picture_right_1_webp_2x,
         avif: case_compare_slider_picture_right_1_avif,
+        avif2x: case_compare_slider_picture_right_1_avif_2x,
       },
     },
     {
@@ -128,12 +178,16 @@ const case_compare_slider_pictures_1 = {
       picture_left: {
         img: case_compare_slider_picture_left_2_jpg,
         webp: case_compare_slider_picture_left_2_webp,
+        webp2x: case_compare_slider_picture_left_2_webp_2x,
         avif: case_compare_slider_picture_left_2_avif,
+        avif2x: case_compare_slider_picture_left_2_avif_2x,
       },
       picture_right: {
         img: case_compare_slider_picture_right_2_jpg,
         webp: case_compare_slider_picture_right_2_webp,
+        webp2x: case_compare_slider_picture_right_2_webp_2x,
         avif: case_compare_slider_picture_right_2_avif,
+        avif2x: case_compare_slider_picture_right_2_avif_2x,
       },
     },
     {
@@ -141,12 +195,16 @@ const case_compare_slider_pictures_1 = {
       picture_left: {
         img: case_compare_slider_picture_left_3_jpg,
         webp: case_compare_slider_picture_left_3_webp,
+        webp2x: case_compare_slider_picture_left_3_webp_2x,
         avif: case_compare_slider_picture_left_3_avif,
+        avif2x: case_compare_slider_picture_left_3_avif_2x,
       },
       picture_right: {
         img: case_compare_slider_picture_right_3_jpg,
         webp: case_compare_slider_picture_right_3_webp,
+        webp2x: case_compare_slider_picture_right_3_webp_2x,
         avif: case_compare_slider_picture_right_3_avif,
+        avif2x: case_compare_slider_picture_right_3_avif_2x,
       },
     },
     {
@@ -154,12 +212,33 @@ const case_compare_slider_pictures_1 = {
       picture_left: {
         img: case_compare_slider_picture_left_4_jpg,
         webp: case_compare_slider_picture_left_4_webp,
+        webp2x: case_compare_slider_picture_left_4_webp_2x,
         avif: case_compare_slider_picture_left_4_avif,
+        avif2x: case_compare_slider_picture_left_4_avif_2x,
       },
       picture_right: {
         img: case_compare_slider_picture_right_4_jpg,
         webp: case_compare_slider_picture_right_4_webp,
+        webp2x: case_compare_slider_picture_right_4_webp_2x,
         avif: case_compare_slider_picture_right_4_avif,
+        avif2x: case_compare_slider_picture_right_4_avif_2x,
+      },
+    },
+    {
+      id: '1_5',
+      picture_left: {
+        img: case_compare_slider_picture_left_5_jpg,
+        webp: case_compare_slider_picture_left_5_webp,
+        webp2x: case_compare_slider_picture_left_5_webp_2x,
+        avif: case_compare_slider_picture_left_5_avif,
+        avif2x: case_compare_slider_picture_left_5_avif_2x,
+      },
+      picture_right: {
+        img: case_compare_slider_picture_right_5_jpg,
+        webp: case_compare_slider_picture_right_5_webp,
+        webp2x: case_compare_slider_picture_right_5_webp_2x,
+        avif: case_compare_slider_picture_right_5_avif,
+        avif2x: case_compare_slider_picture_right_5_avif_2x,
       },
     },
   ],

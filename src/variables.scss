@@ -30,8 +30,8 @@ $bp6: rem(377);
 }
 
 @mixin containerDesk {
-  margin-right: clamp(rem(32), 2vw, rem(100));
-  margin-left: clamp(rem(32), 2vw, rem(100));
+  margin-right: clamp(rem(30), 1.875vw, rem(100));
+  margin-left: clamp(rem(30), 1.875vw, rem(100));
 }
 
 @mixin sectionMarginMob {

@@ -54,6 +54,8 @@
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    z-index: 5;
   }
 
   &__border {
@@ -61,20 +63,23 @@
     z-index: 10;
     box-sizing: border-box;
     border: 4px solid var(--prime-2);
-    border-radius: 14px;
+    border-radius: clamp(16px, 1vw, 30%);
     width: calc(100% + 8px); // Учитываем бордер (4px * 2)
     height: calc(100% + 8px);
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
 
   &__half {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    right: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -196,7 +201,6 @@
 
     &__border {
       border: 10px solid var(--prime-2);
-      border-radius: 14px;
       width: calc(100% + 20px);
       height: calc(100% + 20px);
     }
