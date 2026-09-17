@@ -326,8 +326,8 @@ import softwarLogos from '../../constants/softwarLogos';
 import case_slider_bg from '../../assets/images/case-slider-bg-colorpath-1.svg';
 
 // Импорты видео для CasesSliderVideo
-import case_slider_video_left_1 from '../../assets/videos/gallery-1.mp4';
-import case_slider_video_right_1 from '../../assets/videos/gallery-2.mp4';
+import case_slider_video_left_1 from '../../assets/videos/cases-slider-video-color-path-right-1.webm';
+import case_slider_video_right_1 from '../../assets/videos/cases-slider-video-color-path-left-1.webm';
 import case_slider_video_left_2 from '../../assets/videos/gallery-3.mp4';
 import case_slider_video_right_2 from '../../assets/videos/gallery-4.mp4';
 import case_slider_video_left_3 from '../../assets/videos/gallery-5.mp4';
@@ -337,7 +337,10 @@ export const contentCasesIntro = {
   title: 'Путь цвета',
   subtitle: 'Аркадный раннер (Color Path)',
   tags: ['Android, IOS', 'Unreal Engine', 'UX/UI', '3D'],
-  src: {},
+  src: {
+    url: 'https://colorpath.ru/',
+    title: 'Перейти на сайт',
+  },
   picture_intro: {
     img: case_intro_picture_jpg,
     webp: case_intro_picture_webp,
@@ -411,18 +414,8 @@ export const cases_slider_video_content = {
   videos: [
     {
       id: '1_1',
-      video_left: case_slider_video_left_2,
-      video_right: case_slider_video_right_2,
-    },
-    {
-      id: '1_2',
       video_left: case_slider_video_left_1,
       video_right: case_slider_video_right_1,
-    },
-    {
-      id: '1_3',
-      video_left: case_slider_video_left_3,
-      video_right: case_slider_video_right_3,
     },
   ],
 };

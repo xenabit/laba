@@ -30,8 +30,8 @@ export const contentCasesIntro = {
   subtitle: 'Гиперказуальная игра тамагочи',
   tags: ['Android, IOS', 'Unreal Engine', 'UX/UI', '3D'],
   src: {
-    url: 'https://www.rustore.ru/catalog/app/ru.laba.tamtam',
-    title: 'Перейти на stor',
+    url: 'https://tamtam-tamagochi.ru/',
+    title: 'Перейти на сайт',
   },
   picture_intro: {
     img: case_intro_picture_jpg,
