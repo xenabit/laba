@@ -334,7 +334,7 @@ const case_slider_scroll_content = {
   ],
 };
 
-export default function CaseMarkssite() {
+export default function CaseCanonChange() {
   return (
     <main>
       <CasesIntro contentCasesIntro={contentCasesIntro} />
