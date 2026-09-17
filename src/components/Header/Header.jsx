@@ -9,7 +9,7 @@ import { magnetEffect } from '../../utils/magnetEffect';
 import Baloon_c from '../../assets/images/loading-main-baloon-c.svg';
 import logoImg from '/src/assets/images/header-logo.svg';
 import headerMenuImg from '/src/assets/images/header-menu.svg';
-import presentationPdf from '/src/assets/docs/presentation.pdf';
+import presentationPdf from '/src/assets/docs/laba.pdf';
 import NavLinks from './NavLinks';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -477,7 +477,7 @@ const Header = forwardRef(function Header({ loadingStage, onBalloonsToCenterComp
 
             <ul className={styles.Header__links}>
               <li>
-                <a href={presentationPdf} target="_blank" rel="noopener noreferrer">
+                <a href={presentationPdf} download="laba.pdf" rel="noopener noreferrer">
                   Презентация
                 </a>
               </li>
