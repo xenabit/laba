@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -8,7 +8,10 @@ import styles from './CasesSliderFull.module.scss';
 function CasesSliderFull({ items }) {
   const swiperRef = useRef(null);
   const paginationRef = useRef(null);
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
+  // Инициализация пагинации
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.swiper && paginationRef.current) {
       const swiper = swiperRef.current.swiper;
@@ -19,15 +22,42 @@ function CasesSliderFull({ items }) {
     }
   }, [items]);
 
-  /**
-   * Получает путь к изображению
-   */
+  // Отслеживаем видимость секции
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.3,
+      }
+    );
+
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const swiper = swiperRef.current?.swiper;
+    if (!swiper) return;
+
+    if (isVisible) {
+      swiper.autoplay?.start();
+    } else {
+      swiper.autoplay?.stop();
+    }
+  }, [isVisible]);
+
   const getImgSrc = (picture) => {
     return picture.img || picture.avif || picture.webp || '';
   };
 
   return (
-    <section className={styles.CasesSliderFull}>
+    <section ref={sectionRef} className={styles.CasesSliderFull}>
       <div className={styles.CasesSliderFull__container}>
         <Swiper
           ref={swiperRef}
@@ -44,7 +74,7 @@ function CasesSliderFull({ items }) {
           }}
           autoplay={{
             delay: 2500,
-            disableOnInteraction: true,
+            disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
           breakpoints={{
@@ -57,9 +87,7 @@ function CasesSliderFull({ items }) {
           aria-label="Карусель изображений"
         >
           {items.pictures?.map((item) => {
-            if (!item.picture) {
-              return null;
-            }
+            if (!item.picture) return null;
 
             const picture = item.picture;
 
@@ -67,19 +95,10 @@ function CasesSliderFull({ items }) {
               <SwiperSlide className={styles.CasesSliderFull__slide} key={item.id}>
                 <div className={styles.CasesSliderFull__inner}>
                   <picture>
-                    {/* AVIF для десктопа (>=2500px) */}
                     {picture.avif2x && <source type="image/avif" media="(min-width: 2500px)" srcSet={`${picture.avif2x} 1x, ${picture.avif2x} 2x`} />}
-
-                    {/* AVIF для мобильных (<2500px) */}
                     {picture.avif && <source type="image/avif" media="(max-width: 2499px)" srcSet={`${picture.avif} 1x, ${picture.avif2x || picture.avif} 2x`} />}
-
-                    {/* WEBP для десктопа (>=2500px) */}
                     {picture.webp2x && <source type="image/webp" media="(min-width: 2500px)" srcSet={`${picture.webp2x} 1x, ${picture.webp2x} 2x`} />}
-
-                    {/* WEBP для мобильных (<2500px) */}
                     {picture.webp && <source type="image/webp" media="(max-width: 2499px)" srcSet={`${picture.webp} 1x, ${picture.webp2x || picture.webp} 2x`} />}
-
-                    {/* Fallback img */}
                     <img
                       src={getImgSrc(picture)}
                       loading="lazy"
