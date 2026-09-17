@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, FreeMode, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -8,7 +8,8 @@ import styles from './CasesSliderScroll2.module.scss';
 function CasesSliderScroll2({ items, background }) {
   const swiperRef = useRef(null);
   const paginationRef = useRef(null);
-
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.swiper && paginationRef.current) {
@@ -20,8 +21,31 @@ function CasesSliderScroll2({ items, background }) {
     }
   }, [items]);
 
+  // Отслеживаем видимость секции
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.3 });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Запускаем/останавливаем autoplay в зависимости от видимости
+  useEffect(() => {
+    const swiper = swiperRef.current?.swiper;
+    if (!swiper || !swiper.autoplay) return;
+
+    if (isVisible) {
+      swiper.autoplay.start();
+    } else {
+      swiper.autoplay.stop();
+    }
+  }, [isVisible]);
+
   return (
-    <section className={styles.CasesSliderScroll2}>
+    <section ref={sectionRef} className={styles.CasesSliderScroll2}>
       <div className={styles.CasesSliderScroll2__container}>
         <Swiper
           ref={swiperRef}
@@ -48,6 +72,7 @@ function CasesSliderScroll2({ items, background }) {
             delay: 2500,
             disableOnInteraction: true,
             pauseOnMouseEnter: true,
+            enabled: false,
           }}
           slidesPerGroup={6}
           breakpoints={{
