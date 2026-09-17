@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -8,6 +8,8 @@ import styles from './CasesSliderVideo.module.scss';
 function CasesSliderVideo({ items }) {
   const swiperRef = useRef(null);
   const paginationRef = useRef(null);
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   const leftVideoRefs = useRef([]);
   const rightVideoRefs = useRef([]);
@@ -50,6 +52,29 @@ function CasesSliderVideo({ items }) {
     playCurrentVideos(swiper);
   }, [items, playCurrentVideos]);
 
+  // Отслеживаем видимость секции
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.3 });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Запускаем/останавливаем autoplay в зависимости от видимости
+  useEffect(() => {
+    const swiper = swiperRef.current?.swiper;
+    if (!swiper || !swiper.autoplay) return;
+
+    if (isVisible) {
+      swiper.autoplay.start();
+    } else {
+      swiper.autoplay.stop();
+    }
+  }, [isVisible]);
+
   const handleSlide = (direction) => {
     const swiper = swiperRef.current?.swiper;
     if (!swiper) return;
@@ -66,7 +91,7 @@ function CasesSliderVideo({ items }) {
   );
 
   return (
-    <section className={styles.CasesSliderVideo}>
+    <section ref={sectionRef} className={styles.CasesSliderVideo}>
       <div className={styles.CasesSliderVideo__container}>
         <Swiper
           ref={swiperRef}
@@ -85,6 +110,7 @@ function CasesSliderVideo({ items }) {
             delay: 2500,
             disableOnInteraction: true,
             pauseOnMouseEnter: true,
+            enabled: false,
           }}
           onSlideChangeTransitionEnd={handleSlideChangeTransitionEnd}
           breakpoints={{
