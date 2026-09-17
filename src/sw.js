@@ -13,25 +13,23 @@ clientsClaim();
 precacheAndRoute(self.__WB_MANIFEST ?? []);
 cleanupOutdatedCaches();
 
-// Добавьте перед другими registerRoute
 registerRoute(
-  ({ url }) => url.pathname.endsWith('.pdf'),
-  new NetworkFirst({
-    cacheName: 'pdfs-cache',
-    plugins: [new CacheableResponsePlugin({ statuses: [200] }), new ExpirationPlugin({ maxEntries: 5, maxAgeSeconds: 60 * 60 * 24 * 7 })],
-  })
-);
-
-registerRoute(
-  ({ request, url }) => url.origin === self.location.origin && (request.destination === 'video' || /\/assets\/videos\/.*\.(mp4|webm)(?:\?.*)?$/i.test(url.pathname)),
+  ({ request, url }) =>
+    url.origin === self.location.origin &&
+    (request.destination === 'video' || /\/assets\/videos\/.*\.(mp4|webm)(?:\?.*)?$/i.test(url.pathname)),
   new CacheFirst({
     cacheName: 'videos-cache-v3',
-    plugins: [new CacheableResponsePlugin({ statuses: [200] }), new ExpirationPlugin({ maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 30, purgeOnQuotaError: true }), new RangeRequestsPlugin()],
+    plugins: [
+      new CacheableResponsePlugin({ statuses: [200] }),
+      new ExpirationPlugin({ maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 30, purgeOnQuotaError: true }),
+      new RangeRequestsPlugin(),
+    ],
   })
 );
 
 registerRoute(
-  ({ request, url }) => url.origin === self.location.origin && request.destination === 'image',
+  ({ request, url }) =>
+    url.origin === self.location.origin && request.destination === 'image',
   new StaleWhileRevalidate({
     cacheName: 'images-cache-v2',
     plugins: [new ExpirationPlugin({ maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 30 })],
